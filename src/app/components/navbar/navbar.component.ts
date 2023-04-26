@@ -1,5 +1,5 @@
 import { StorageService } from './../../services/storage.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -7,6 +7,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit, OnDestroy {
+  @Input() colapse: 'vertical' | 'horizontal' = 'vertical';
+
   constructor(private storage: StorageService) {}
 
   loading = false;

@@ -12,7 +12,7 @@
       </button>
     </div>
 
-    <div class="menu" [ngClass]="{ hidden: navbarHidden }">
+    <div class="menu {{colapse}}" [ngClass]="{ hidden: navbarHidden }">
       <a mat-button routerLink="/">Início</a>
       <a mat-button routerLink="/about">Sobre</a>
       <a mat-button routerLink="/contact">Contato</a>
