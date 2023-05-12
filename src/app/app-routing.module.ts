@@ -3,7 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 const SPR = false;
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./pages/login/login.module').then((m) => m.LoginModule),
+  },
+];
 
 @NgModule({
   imports: [

@@ -24,6 +24,7 @@ import { PaginationComponent } from './components/shared/pagination/pagination.c
 import { IconDirective } from './directives/icon.directive';
 import { InputFileDirective } from './directives/input-file.directive';
 import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './pages/login/login.component';
 
 registerLocaleData(localePt);
 
