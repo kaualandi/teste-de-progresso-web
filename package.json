@@ -8,6 +8,7 @@
     "build:prod": "ng lint && ng build --configuration production",
     "watch": "ng lint && ng build --watch --configuration development",
     "prepare": "husky install",
+    "commit": "git-cz",
     "test": "ng test",
     "tree": "tree -l 100 --ignore node_modules --ignore .angular --ignore dist -o directory-tree.txt",
     "lint": "ng lint",
@@ -48,6 +49,8 @@
     "@types/jasmine": "~4.0.0",
     "@typescript-eslint/eslint-plugin": "5.43.0",
     "@typescript-eslint/parser": "5.43.0",
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.28.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-config-standard": "^17.0.0",
@@ -61,5 +64,10 @@
     "karma-jasmine-html-reporter": "~2.0.0",
     "prettier": "^2.8.4",
     "typescript": "~4.7.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
