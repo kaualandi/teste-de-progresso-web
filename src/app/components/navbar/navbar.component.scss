@@ -1,9 +1,30 @@
 @import 'src/styles/media';
 
+/*
+  ! Navbar
+  ! Se for usar configurações de CSS simples
+  ? ex: padding, bg e color
+  ! Use as variáveis de ambiente no arquivo:
+  * src/styles/_variables.scss
+
+  ! Obrigado :) - Noclaf Tech
+*/
+
 nav {
+  --navbar_padding: var(--navbar_top_padding);
+  --navbar_bg: var(--navbar_top_bg);
+  --navbar_color: var(--navbar_top_color);
+
+  &.scroll {
+    --navbar_padding: var(--navbar_scroll_padding, --navbar_top_padding);
+    --navbar_bg: var(--navbar_scroll_bg, --navbar_top_bg);
+    --navbar_color: var(--navbar_scroll_color, --navbar_top_color);
+  }
+
+  transition: var(--ts);
   width: 100%;
-  padding: var(--navbar_top_padding);
-  background-color: var(--navbar_top_bg);
+  padding: var(--navbar_padding);
+  background-color: var(--navbar_bg);
   position: var(--navbar_position, auto);
   .content {
     max-width: var(--navbar_max_width);
@@ -25,13 +46,13 @@ nav {
       display: flex;
       gap: 10px;
       align-items: center;
-      color: var(--navbar_top_color);
+      color: var(--navbar_color);
       text-decoration: none;
       font-weight: 500;
       font-size: 1.2rem !important;
 
       img {
-        width: var(--navbar_logo_width);
+        height: var(--navbar_logo_height);
       }
     }
 
@@ -51,11 +72,11 @@ nav {
         flex-wrap: wrap;
         position: absolute;
         width: 100%;
-        background-color: var(--navbar_top_bg);
+        background-color: var(--navbar_bg);
         z-index: -1;
         opacity: 1;
         &.vertical {
-          top: 90px;
+          top: var(--navbar-height, 0);
           left: 0;
           &.hidden {
             top: -50vh;
@@ -65,7 +86,7 @@ nav {
         &.horizontal {
           justify-content: flex-start;
           align-items: flex-start;
-          padding-top: 90px;
+          padding-top: var(--navbar-height, 0);
           height: 100vh;
           top: 0;
           left: 0;
@@ -81,7 +102,7 @@ nav {
       }
       a,
       button {
-        color: var(--navbar_top_color);
+        color: var(--navbar_color);
       }
     }
   }
@@ -97,7 +118,7 @@ nav {
   button {
     background-color: transparent;
     .line {
-      background-color: var(--navbar_top_color);
+      background-color: var(--navbar_color);
       width: 25px;
       height: 3px;
       border-radius: 5px;
@@ -114,7 +135,7 @@ nav {
         width: 25px;
         height: 3px;
         border-radius: 10px;
-        background-color: var(--navbar_top_color);
+        background-color: var(--navbar_color);
         transition: var(--ts);
       }
       &::before {
@@ -133,7 +154,7 @@ nav {
         transform: rotate(180deg);
         &::before,
         &::after {
-          background-color: var(--navbar_top_color);
+          background-color: var(--navbar_color);
           width: 25px;
         }
         &::before {

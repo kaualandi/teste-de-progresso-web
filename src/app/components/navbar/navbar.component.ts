@@ -1,5 +1,13 @@
 import { StorageService } from './../../services/storage.service';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -8,16 +16,20 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   @Input() colapse: 'vertical' | 'horizontal' = 'vertical';
+  @ViewChild('navbar') navbar: ElementRef<HTMLElement> | undefined;
 
   constructor(private storage: StorageService) {}
 
   loading = false;
 
   navbarHidden = true;
+  scroll = false;
+  navbarHeight = 0;
 
   ngOnInit(): void {
-    this.getMe();
+    this.onWindowScroll();
 
+    this.getMe();
     this.storage.watchUser().subscribe({
       next: () => {
         this.getMe();
@@ -34,5 +46,17 @@ export class NavbarComponent implements OnInit, OnDestroy {
     // if (error?.status === 401) {
     //   this.storageService.logout();
     // }
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll() {
+    const scroll = window.scrollY;
+    this.scroll = scroll > 200;
+
+    setTimeout(() => {
+      if (this.navbar) {
+        this.navbarHeight = this.navbar.nativeElement.offsetHeight;
+      }
+    }, 300);
   }
 }

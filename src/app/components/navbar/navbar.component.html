@@ -1,4 +1,4 @@
-<nav>
+<nav #navbar [ngClass]="{ scroll }" [ngStyle]="{ '--navbar-height': navbarHeight + 'px' }">
   <div class="content">
 
     <a class="logo" routerLink="/">

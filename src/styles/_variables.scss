@@ -10,12 +10,12 @@
 
   // ? Navbar variables
   --navbar_max_width: 1024px;
-  --navbar_logo_width: 50px;
+  --navbar_logo_height: 50px;
   --navbar_position: fixed;
-  --navbar_top_bg: #fff0; // transparent
+  --navbar_top_bg: #fff; // transparent
   --navbar_top_color: #000000;
   --navbar_top_padding: 20px 10px;
-  --navbar_scroll_bg: #fff;
-  --navbar_scroll_color: #000000;
+  --navbar_scroll_bg: #f00;
+  --navbar_scroll_color: #fff;
   --navbar_scroll_padding: 0 10px;
 }
