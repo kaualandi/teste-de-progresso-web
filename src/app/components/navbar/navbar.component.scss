@@ -36,9 +36,7 @@ nav {
     justify-content: space-between;
 
     @include media('<=navbar-collapse') {
-      // flex: 1;
       flex-wrap: wrap;
-      // width: 100%;
     }
 
     .logo {

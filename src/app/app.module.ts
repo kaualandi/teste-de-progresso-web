@@ -47,8 +47,8 @@ registerLocaleData(localePt);
     MatSnackBarModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
+      // ? Registra o ServiceWorker após build em produção
+      // ? ou após 30 segundos (o que ocorrer primeiro).
       registrationStrategy: 'registerWhenStable:30000',
     }),
   ],

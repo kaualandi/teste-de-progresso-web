@@ -42,7 +42,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   getMe() {
-    // Requisição para pegar o usuário logado
+    // ? Requisição para pegar o usuário logado
+    // * Adicione o código abaixo no tratamento de erro da requisição
     // if (error?.status === 401) {
     //   this.storageService.logout();
     // }

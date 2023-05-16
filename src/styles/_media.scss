@@ -7,33 +7,26 @@
 //    | | | | | (__| | |_| | (_| |  __/ | | | | | |  __/ (_| | | (_| |
 //    |_|_| |_|\___|_|\__,_|\__,_|\___| |_| |_| |_|\___|\__,_|_|\__,_|
 //
-//      Simple, elegant and maintainable media queries in Sass
+//      Media queries de forma simples, elegante e de fácil manutenção com Sass
 //                        v1.4.9
 //
 //        https://eduardoboucas.github.io/include-media
 //
-//         Authors: Eduardo Boucas (@eduardoboucas)
-//                  Kitty Giraudel (@kittygiraudel)
+//         Aturores: Eduardo Boucas (@eduardoboucas)
+//                   Kitty Giraudel (@kittygiraudel)
 //
-//      This project is licensed under the terms of the MIT license
-////
-/// include-media library public configuration
-/// @author Eduardo Boucas
-/// @access public
-////
+//      Este projeto está licenciado sob os termos da licença MIT
 
-///
-/// Creates a list of global breakpoints
-///
-/// @example scss - Creates a single breakpoint with the label `phone`
-///  $breakpoints: ('phone': 320px);
-///
+// ! Adicione seus breakpoints abaixo !
+
 $breakpoints: (
   'navbar-collapse': 992px,
   'phone': 320px,
   'tablet': 768px,
   'desktop': 1024px,
 ) !default;
+
+// ! Adicione seus breakpoints acima !
 
 ///
 /// Creates a list of static expressions or media types
