@@ -41,7 +41,9 @@ export class StorageService {
    * Função para setar o token no cookie
    * @param token Token que vem da API
    * @param keep Se true, o cookie expira em 60 dias, se false, o cookie expira quando o browser é fechado
-   * @returns void
+   * @return void
+   *
+   * @author Kauã Landi
    */
   setToken(token: string, keep = false): void {
     this.cookieService.set(
