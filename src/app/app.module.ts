@@ -24,7 +24,6 @@ import { PaginationComponent } from './components/shared/pagination/pagination.c
 import { IconDirective } from './directives/icon.directive';
 import { InputFileDirective } from './directives/input-file.directive';
 import { HomeComponent } from './pages/home/home.component';
-import { LoginComponent } from './pages/login/login.component';
 
 registerLocaleData(localePt);
 
@@ -44,14 +43,8 @@ registerLocaleData(localePt);
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatInputModule,
     HttpClientModule,
     MatSnackBarModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatCheckboxModule,
-    NgxMaskModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the application is stable

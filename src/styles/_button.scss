@@ -1,0 +1,7 @@
+.mat-button {
+  &.primary {
+    background-color: var(--main_color);
+    color: var(--primary_bg);
+    border-radius: 50px;
+  }
+}
