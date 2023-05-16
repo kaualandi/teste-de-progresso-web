@@ -4,4 +4,10 @@
     color: var(--primary_bg);
     border-radius: 50px;
   }
+
+  &.mat-button-disabled,
+  &:disabled {
+    color: var(--primary_bg) !important;
+    opacity: 0.5;
+  }
 }

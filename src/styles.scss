@@ -14,7 +14,6 @@ $my-theme: mat.define-light-theme(
 );
 @include mat.all-component-themes($my-theme);
 
-@import 'styles/bootstrap/bootstrap-grid.scss';
 @import 'styles/animations';
 @import 'styles/button';
 @import 'styles/input';

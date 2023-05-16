@@ -1,24 +1,24 @@
 <main id="login">
   <div class="row">
-    <div class="col-12 col-md-6">
+    <div class="col">
       <div class="logo">
         <img src="assets/images/logo.png" alt="Logo">
       </div>
     </div>
-    <div class="col-12 col-md-6">
+    <div class="col">
       <div class="form">
-        <form>
+        <form (ngSubmit)="loginSubmitHandler()" [formGroup]="loginForm">
           <h1>Login</h1>
           <div class="card_input">
             <label for="email">Email</label>
-            <input type="text" id="email" placeholder="Digite seu email">
+            <input type="text" id="email" placeholder="Digite seu email" formControlName="email">
           </div>
           <div class="card_input">
             <label for="password">Senha</label>
-            <input type="password" id="password" placeholder="Digite sua senha">
+            <input type="password" id="password" placeholder="Digite sua senha" formControlName="password">
           </div>
           <div class="card_input">
-            <button mat-button type="submit" class="primary">Entrar</button>
+            <button mat-button type="submit" class="primary" [disabled]="loginForm.invalid">Entrar</button>
           </div>
         </form>
       </div>
