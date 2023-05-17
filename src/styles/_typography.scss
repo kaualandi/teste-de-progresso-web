@@ -3,7 +3,7 @@ $min-font-size: 10;
 $max-font-size: 52;
 
 @for $i from $min-font-size through $max-font-size {
-  $class-name: '.f-#{$i}';
+  $class-name: '.fd-#{$i}';
 
   #{$class-name} {
     font-size: $i / $base-font-size * 1rem;
@@ -12,39 +12,47 @@ $max-font-size: 52;
 
 .mat-typography {
   h1 {
-    @extend .f-24;
+    @extend .fd-24;
   }
   h2 {
-    @extend .f-18;
+    @extend .fd-18;
   }
   h3 {
-    @extend .f-16;
+    @extend .fd-16;
   }
   h4 {
-    @extend .f-14;
+    @extend .fd-14;
   }
   h5 {
-    @extend .f-12;
+    @extend .fd-12;
   }
   h6 {
-    @extend .f-10;
+    @extend .fd-10;
   }
   p {
-    @extend .f-14;
+    @extend .fd-14;
   }
   a {
-    @extend .f-14;
+    @extend .fd-14;
   }
   button {
-    @extend .f-14;
+    @extend .fd-14;
   }
   span {
-    @extend .f-14;
+    @extend .fd-14;
   }
   label {
-    @extend .f-12;
+    @extend .fd-14;
   }
   .mat-button {
-    @extend .f-14;
+    @extend .fd-14;
+  }
+}
+
+@for $i from $min-font-size through $max-font-size {
+  $class-name: '.f-#{$i}';
+
+  #{$class-name} {
+    font-size: $i / $base-font-size * 1rem !important;
   }
 }

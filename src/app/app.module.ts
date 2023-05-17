@@ -2,21 +2,18 @@ import { DatePipe, registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import localePt from '@angular/common/locales/pt';
 import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
-import { MatInputModule } from '@angular/material/input';
-import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { NgxMaskModule } from 'ngx-mask';
 import { environment } from './../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { InputNumberDirective } from './directives/input-number.directive';
 
 import { AppComponent } from './app.component';
+import { CookiesLoginComponent } from './components/modals/cookies-login/cookies-login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoadingComponent } from './components/shared/loading/loading.component';
 import { PageLoadingComponent } from './components/shared/page-loading/page-loading.component';
@@ -45,6 +42,7 @@ registerLocaleData(localePt);
     BrowserAnimationsModule,
     HttpClientModule,
     MatSnackBarModule,
+    MatDialogModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // ? Registra o ServiceWorker após build em produção
@@ -59,6 +57,10 @@ registerLocaleData(localePt);
     {
       provide: DEFAULT_CURRENCY_CODE,
       useValue: 'BRL',
+    },
+    {
+      provide: MatDialogRef,
+      useValue: {},
     },
   ],
   bootstrap: [AppComponent],

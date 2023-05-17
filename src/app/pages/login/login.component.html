@@ -17,22 +17,17 @@
             <label for="password">Senha</label>
             <input type="password" id="password" placeholder="Digite sua senha" formControlName="password">
             <span class="forgot-password">
-              <a class="f-10" routerLink="/forgot-password">Esqueceu sua senha?</a>
+              <a class="f-12" routerLink="/forgot-password">Esqueceu sua senha?</a>
             </span>
           </div>
           <div class="card_input">
-            <mat-checkbox formControlName="remember"><span class="f-12">Lembrar-me</span></mat-checkbox>
+            <mat-checkbox formControlName="remember"><span class="f-14">Lembrar-me</span></mat-checkbox>
           </div>
           <div class="card_input">
             <button mat-button type="submit" class="primary" [disabled]="loginForm.invalid">
               Entrar
             </button>
           </div>
-
-          <span class="cookies f-10">
-            Ao entrar, você concorda com o uso de cookies. Você pode alterar suas
-            preferências nas configurações do seu navegador.
-          </span>
         </form>
       </div>
     </div>

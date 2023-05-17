@@ -57,6 +57,14 @@ export class StorageService {
     );
   }
 
+  get cookies() {
+    return localStorage.getItem('cookies') === 'true';
+  }
+
+  set cookies(value: boolean) {
+    localStorage.setItem('cookies', value.toString());
+  }
+
   logout() {
     this.cookieService.delete('token');
     this.router.navigate(['/login']);
