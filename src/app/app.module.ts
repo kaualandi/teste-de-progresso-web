@@ -25,17 +25,7 @@ import { HomeComponent } from './pages/home/home.component';
 registerLocaleData(localePt);
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoadingComponent,
-    PageLoadingComponent,
-    InputFileDirective,
-    IconDirective,
-    PaginationComponent,
-    NavbarComponent,
-    InputNumberDirective,
-    HomeComponent,
-  ],
+  declarations: [AppComponent, NavbarComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -15,7 +15,14 @@
           </div>
           <div class="card_input">
             <label for="password">Senha</label>
-            <input type="password" id="password" placeholder="Digite sua senha" formControlName="password">
+            <span class="input_icon">
+              <input [type]="viewPass ? 'text' : 'password'" id="password" placeholder="Digite sua senha"
+                formControlName="password">
+              <button type="button" mat-icon-button aria-label="Ver senha" (click)="viewPass = !viewPass">
+                <i icon="view_pass" *ngIf="!viewPass"></i>
+                <i icon="hide_pass" *ngIf="viewPass"></i>
+              </button>
+            </span>
             <span class="forgot-password">
               <a class="f-12" routerLink="/forgot-password">Esqueceu sua senha?</a>
             </span>
@@ -24,8 +31,9 @@
             <mat-checkbox formControlName="remember"><span class="f-14">Lembrar-me</span></mat-checkbox>
           </div>
           <div class="card_input">
-            <button mat-button type="submit" class="primary" [disabled]="loginForm.invalid">
+            <button mat-button type="submit" class="primary" [disabled]="loginForm.invalid || loading">
               Entrar
+              <loading *ngIf="loading"></loading>
             </button>
           </div>
         </form>

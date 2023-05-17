@@ -11,6 +11,23 @@
     padding-left: 5px;
   }
 
+  .input_icon {
+    position: relative;
+    width: 100%;
+    input {
+      width: 100%;
+      padding-right: 2rem;
+    }
+    button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 0px;
+      color: var(--main_color);
+      cursor: pointer;
+    }
+  }
+
   input,
   textarea,
   select {

@@ -6,7 +6,7 @@ $max-font-size: 52;
   $class-name: '.fd-#{$i}';
 
   #{$class-name} {
-    font-size: $i / $base-font-size * 1rem;
+    font-size: calc($i / $base-font-size * 1rem);
   }
 }
 

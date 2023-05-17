@@ -9,6 +9,7 @@ import { LoginRoutingModule } from './login-routing.module';
 
 import { CookiesLoginComponent } from 'src/app/components/modals/cookies-login/cookies-login.component';
 import { LoginComponent } from './login.component';
+import { SharedModule } from 'src/app/components/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { LoginComponent } from './login.component';
     MatCheckboxModule,
     ReactiveFormsModule,
     MatDialogModule,
+    SharedModule,
   ],
   declarations: [LoginComponent, CookiesLoginComponent],
 })

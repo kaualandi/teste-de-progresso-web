@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { CookiesLoginComponent } from 'src/app/components/modals/cookies-login/cookies-login.component';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -16,6 +16,9 @@ export class LoginComponent implements OnInit {
     private storage: StorageService
   ) {}
 
+  loading = false;
+  viewPass = false;
+
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
@@ -27,7 +30,9 @@ export class LoginComponent implements OnInit {
   }
 
   loginSubmitHandler() {
-    console.log(this.loginForm.value);
+    if (this.loginForm.invalid) return;
+
+    this.loading = true;
   }
 
   awaitRemember() {
