@@ -11,15 +11,28 @@
           <h1>Login</h1>
           <div class="card_input">
             <label for="email">Email</label>
-            <input type="text" id="email" placeholder="Digite seu email" formControlName="email">
+            <input type="text" id="email" placeholder="Digite seu email" mask="(00) 00000-0000" formControlName="email">
           </div>
           <div class="card_input">
             <label for="password">Senha</label>
             <input type="password" id="password" placeholder="Digite sua senha" formControlName="password">
+            <span class="forgot-password">
+              <a class="f-10" routerLink="/forgot-password">Esqueceu sua senha?</a>
+            </span>
           </div>
           <div class="card_input">
-            <button mat-button type="submit" class="primary" [disabled]="loginForm.invalid">Entrar</button>
+            <mat-checkbox formControlName="remember"><span class="f-12">Lembrar-me</span></mat-checkbox>
           </div>
+          <div class="card_input">
+            <button mat-button type="submit" class="primary" [disabled]="loginForm.invalid">
+              Entrar
+            </button>
+          </div>
+
+          <span class="cookies f-10">
+            Ao entrar, você concorda com o uso de cookies. Você pode alterar suas
+            preferências nas configurações do seu navegador.
+          </span>
         </form>
       </div>
     </div>

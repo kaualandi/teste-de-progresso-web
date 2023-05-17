@@ -53,6 +53,25 @@
           h1 {
             text-align: center;
           }
+
+          .cookies {
+            margin-top: 1rem;
+            display: inline-block;
+            font-style: italic;
+            line-height: 1;
+            text-align: center;
+          }
+          .forgot-password {
+            display: inline-block;
+            text-align: end;
+            a {
+              color: var(--main_color);
+              text-decoration: none;
+              &:hover {
+                text-decoration: underline;
+              }
+            }
+          }
         }
       }
     }
