@@ -10,22 +10,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from './../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
-import { InputNumberDirective } from './directives/input-number.directive';
 
 import { AppComponent } from './app.component';
-import { CookiesLoginComponent } from './components/modals/cookies-login/cookies-login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { LoadingComponent } from './components/shared/loading/loading.component';
-import { PageLoadingComponent } from './components/shared/page-loading/page-loading.component';
-import { PaginationComponent } from './components/shared/pagination/pagination.component';
-import { IconDirective } from './directives/icon.directive';
-import { InputFileDirective } from './directives/input-file.directive';
-import { HomeComponent } from './pages/home/home.component';
 
 registerLocaleData(localePt);
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, HomeComponent],
+  declarations: [AppComponent, NavbarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
