@@ -34,7 +34,11 @@ export class StorageService {
   }
 
   get token() {
-    return this.cookieService.get('token');
+    if (this.cookies) {
+      return this.cookieService.get('token');
+    } else {
+      return sessionStorage.getItem('token');
+    }
   }
 
   /**
@@ -46,15 +50,19 @@ export class StorageService {
    * @author Kauã Landi
    */
   setToken(token: string, keep = false): void {
-    this.cookieService.set(
-      'token',
-      token,
-      keep ? 60 : undefined,
-      '/',
-      undefined,
-      true,
-      'Strict'
-    );
+    if (this.cookies) {
+      this.cookieService.set(
+        'token',
+        token,
+        keep ? 60 : undefined,
+        '/',
+        undefined,
+        true,
+        'Strict'
+      );
+    } else {
+      sessionStorage.setItem('token', token);
+    }
   }
 
   get cookies() {
