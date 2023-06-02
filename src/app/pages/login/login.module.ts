@@ -5,16 +5,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
-import { LoginRoutingModule } from './login-routing.module';
+import { LOGIN_ROUTES } from './login.routes';
 
 import { CookiesLoginComponent } from 'src/app/components/modals/cookies-login/cookies-login.component';
 import { LoginComponent } from './login.component';
 import { SharedModule } from 'src/app/components/shared/shared.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
-    LoginRoutingModule,
     MatButtonModule,
     MatInputModule,
     FormsModule,
@@ -22,6 +22,7 @@ import { SharedModule } from 'src/app/components/shared/shared.module';
     ReactiveFormsModule,
     MatDialogModule,
     SharedModule,
+    RouterModule.forChild(LOGIN_ROUTES),
   ],
   declarations: [LoginComponent, CookiesLoginComponent],
 })
