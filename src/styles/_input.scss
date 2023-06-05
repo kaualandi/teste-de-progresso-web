@@ -36,6 +36,7 @@
     border: 1px solid var(--secondary_bg);
     background-color: var(--secondary_bg);
     outline: none;
+    color: var(--text_color);
 
     &[type='number'] {
       -webkit-appearance: textfield;
