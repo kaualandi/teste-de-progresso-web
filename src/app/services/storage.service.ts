@@ -57,7 +57,7 @@ export class StorageService {
         keep ? 60 : undefined,
         '/',
         undefined,
-        true,
+        this.ssl,
         'Strict'
       );
     } else {
@@ -76,5 +76,9 @@ export class StorageService {
   logout() {
     this.cookieService.delete('token');
     this.router.navigate(['/login']);
+  }
+
+  get ssl() {
+    return location.protocol === 'https:';
   }
 }
