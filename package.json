@@ -10,6 +10,7 @@
     "prepare": "husky install",
     "commit": "git-cz",
     "test": "ng test",
+    "e2e": "ng e2e",
     "tree": "tree -l 100 --ignore node_modules --ignore .angular --ignore dist -o directory-tree.txt",
     "lint": "ng lint",
     "clear": "rm -rf node_modules && rm package-lock.json && rm -rf .angular && npm install"
