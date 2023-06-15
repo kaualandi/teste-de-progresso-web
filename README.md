@@ -35,10 +35,18 @@ Os arquivos serão gerados na pasta `dist/`.
 ## Gerando componentes
 
 ```bash
-ng generate component component-name
+ng generate component nome-do-componente
 ```
 
 Para gerar um novo componente. Você também pode usar `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+## Gerando componentes com lazy loading
+
+```bash
+ng generate module pages/nome-do-componente --routing=true && ng generate component pages/nome-do-componente --module=pages/nome-do-componente
+```
+
+Para gerar um novo componente com lazy loading
 
 ## Libs instaladas
 
@@ -124,12 +132,7 @@ Diretivas são utilizadas para criar componentes reutilizáveis.
 > O evento do `(upload)` retorna o base64 do arquivo selecionado, quando se trata de uma imagem, ela já é compressada com o service `compressor`.
 
 ```html
-<input
-  type="file"
-  name="logo"
-  appInputFile
-  (upload)="handleInputChange($event)"
-/>
+<input type="file" name="logo" appInputFile (upload)="handleInputChange($event)" />
 ```
 
 ### Icones
@@ -209,7 +212,7 @@ ng lint
 - Todas as variáveis devem ser escritas em inglês.
 - Descritivas, porém não muito extensas.
 - Tipar sempre que possível.
-- Utilizar camelCase.
+- Utilizar snake_case.
 
 ### Interfaces
 
@@ -251,8 +254,9 @@ ng lint
 - chore: add commitlint and husky
 - chore(eslint): require semicolon
 - refactor: typed variables
-  -feat: add axios / search and check data
+- feat: add axios / search and check data
 - feat(page/home): created route for home page
+- fix: NH-3 button color in login
 
 ## Estrutura dos diretórios
 
