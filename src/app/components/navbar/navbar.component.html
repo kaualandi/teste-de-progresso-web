@@ -1,4 +1,4 @@
-<nav #navbar [ngClass]="{ scroll }" [ngStyle]="{ '--navbar-height': navbarHeight + 'px' }">
+<nav #navbar [ngClass]="{ scroll }" [ngStyle]="{ '--navbar-height': navbar_height + 'px' }">
   <div class="content">
 
     <a class="logo" routerLink="/">
@@ -6,13 +6,13 @@
       Boilerplate
     </a>
 
-    <div class="hamburger" [ngClass]="{ active: !navbarHidden }">
-      <button aria-label="menu" mat-icon-button (click)="navbarHidden = !navbarHidden">
+    <div class="hamburger" [ngClass]="{ active: !navbar_hidden }">
+      <button aria-label="menu" mat-icon-button (click)="navbar_hidden = !navbar_hidden">
         <span class="line"></span>
       </button>
     </div>
 
-    <div class="menu {{colapse}}" [ngClass]="{ hidden: navbarHidden }">
+    <div class="menu {{colapse}}" [ngClass]="{ hidden: navbar_hidden }">
       <a mat-button routerLink="/">Início</a>
       <a mat-button routerLink="/about">Sobre</a>
       <a mat-button routerLink="/contact">Contato</a>

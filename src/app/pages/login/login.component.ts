@@ -17,9 +17,9 @@ export class LoginComponent implements OnInit {
   ) {}
 
   loading = false;
-  viewPass = false;
+  view_pass = false;
 
-  loginForm = this.fb.group({
+  login_form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
     remember: [false],
@@ -30,13 +30,13 @@ export class LoginComponent implements OnInit {
   }
 
   loginSubmitHandler() {
-    if (this.loginForm.invalid) return;
+    if (this.login_form.invalid) return;
 
     this.loading = true;
   }
 
   awaitRemember() {
-    this.loginForm.get('remember')?.valueChanges.subscribe((value) => {
+    this.login_form.get('remember')?.valueChanges.subscribe((value) => {
       if (!value) return;
 
       if (!this.storage.cookies) {
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
       if (result) {
         this.storage.cookies = true;
       } else {
-        this.loginForm.get('remember')?.setValue(false);
+        this.login_form.get('remember')?.setValue(false);
       }
     });
   }

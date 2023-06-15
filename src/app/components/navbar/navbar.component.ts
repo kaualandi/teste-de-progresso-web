@@ -22,9 +22,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   loading = false;
 
-  navbarHidden = true;
+  navbar_hidden = true;
   scroll = false;
-  navbarHeight = 0;
+  navbar_height = 0;
 
   ngOnInit(): void {
     this.onWindowScroll();
@@ -56,7 +56,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     setTimeout(() => {
       if (this.navbar) {
-        this.navbarHeight = this.navbar.nativeElement.offsetHeight;
+        this.navbar_height = this.navbar.nativeElement.offsetHeight;
       }
     }, 300);
   }

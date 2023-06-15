@@ -7,7 +7,7 @@
     </div>
     <div class="col">
       <div class="form">
-        <form (ngSubmit)="loginSubmitHandler()" [formGroup]="loginForm">
+        <form (ngSubmit)="loginSubmitHandler()" [formGroup]="login_form">
           <h1>Login</h1>
           <div class="card-input">
             <label for="email">Email</label>
@@ -16,11 +16,11 @@
           <div class="card-input">
             <label for="password">Senha</label>
             <span class="input-icon">
-              <input [type]="viewPass ? 'text' : 'password'" id="password" placeholder="Digite sua senha"
+              <input [type]="view_pass ? 'text' : 'password'" id="password" placeholder="Digite sua senha"
                 formControlName="password">
-              <button type="button" mat-icon-button aria-label="Ver senha" (click)="viewPass = !viewPass">
-                <i icon="view_pass" *ngIf="!viewPass"></i>
-                <i icon="hide_pass" *ngIf="viewPass"></i>
+              <button type="button" mat-icon-button aria-label="Ver senha" (click)="view_pass = !view_pass">
+                <i icon="view_pass" *ngIf="!view_pass"></i>
+                <i icon="hide_pass" *ngIf="view_pass"></i>
               </button>
             </span>
             <span class="forgot-password">
@@ -31,7 +31,7 @@
             <mat-checkbox formControlName="remember"><span class="f-14">Lembrar-me</span></mat-checkbox>
           </div>
           <div class="card-input">
-            <button mat-button type="submit" class="primary" [disabled]="loginForm.invalid || loading">
+            <button mat-button type="submit" class="primary" [disabled]="login_form.invalid || loading">
               Entrar
               <loading *ngIf="loading"></loading>
             </button>
