@@ -3,7 +3,7 @@ import { IconDirective } from './icon.directive';
 import { DomSanitizer } from '@angular/platform-browser';
 
 describe('IconDirective', () => {
-  it('should create an instance', () => {
+  it('Deve ser criado uma instância', () => {
     const directive = new IconDirective(
       Renderer2 as any,
       ElementRef as any,
