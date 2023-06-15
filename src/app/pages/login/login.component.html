@@ -9,13 +9,13 @@
       <div class="form">
         <form (ngSubmit)="loginSubmitHandler()" [formGroup]="loginForm">
           <h1>Login</h1>
-          <div class="card_input">
+          <div class="card-input">
             <label for="email">Email</label>
             <input type="text" id="email" placeholder="Digite seu email" mask="(00) 00000-0000" formControlName="email">
           </div>
-          <div class="card_input">
+          <div class="card-input">
             <label for="password">Senha</label>
-            <span class="input_icon">
+            <span class="input-icon">
               <input [type]="viewPass ? 'text' : 'password'" id="password" placeholder="Digite sua senha"
                 formControlName="password">
               <button type="button" mat-icon-button aria-label="Ver senha" (click)="viewPass = !viewPass">
@@ -27,10 +27,10 @@
               <a class="f-12" routerLink="/forgot-password">Esqueceu sua senha?</a>
             </span>
           </div>
-          <div class="card_input">
+          <div class="card-input">
             <mat-checkbox formControlName="remember"><span class="f-14">Lembrar-me</span></mat-checkbox>
           </div>
-          <div class="card_input">
+          <div class="card-input">
             <button mat-button type="submit" class="primary" [disabled]="loginForm.invalid || loading">
               Entrar
               <loading *ngIf="loading"></loading>

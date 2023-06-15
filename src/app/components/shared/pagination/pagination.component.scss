@@ -5,20 +5,20 @@
   gap: 10px;
   width: max-content;
   .arrow {
-    color: var(--text_color);
+    color: var(--text-color);
     transition: var(--ts);
     cursor: auto;
     &.active {
       opacity: 1;
-      color: var(--main_color);
+      color: var(--main-color);
       cursor: pointer;
       &:hover {
-        color: var(--text_color);
+        color: var(--text-color);
       }
     }
   }
   .page {
-    color: var(--text_color);
+    color: var(--text-color);
     font-size: 13px;
     font-weight: 300;
     flex: none;

@@ -11,23 +11,23 @@
 */
 
 nav {
-  --navbar_padding: var(--navbar_top_padding);
-  --navbar_bg: var(--navbar_top_bg);
-  --navbar_color: var(--navbar_top_color);
+  --navbar_padding: var(--navbar-top-padding);
+  --navbar_bg: var(--navbar-top-bg);
+  --navbar_color: var(--navbar-top-color);
 
   &.scroll {
-    --navbar_padding: var(--navbar_scroll_padding, --navbar_top_padding);
-    --navbar_bg: var(--navbar_scroll_bg, --navbar_top_bg);
-    --navbar_color: var(--navbar_scroll_color, --navbar_top_color);
+    --navbar_padding: var(--navbar-scroll-padding, --navbar-top-padding);
+    --navbar_bg: var(--navbar-scroll-bg, --navbar-top-bg);
+    --navbar_color: var(--navbar-scroll-color, --navbar-top-color);
   }
 
   transition: var(--ts);
   width: 100%;
   padding: var(--navbar_padding);
   background-color: var(--navbar_bg);
-  position: var(--navbar_position, auto);
+  position: var(--navbar-position, auto);
   .content {
-    max-width: var(--navbar_max_width);
+    max-width: var(--navbar-max-width);
     margin: 0 auto;
     width: 100%;
     display: flex;
@@ -50,7 +50,7 @@ nav {
       font-size: 1.2rem !important;
 
       img {
-        height: var(--navbar_logo_height);
+        height: var(--navbar-logo-height);
       }
     }
 

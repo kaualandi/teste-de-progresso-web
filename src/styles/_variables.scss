@@ -2,25 +2,25 @@
   font-size: calc(16px + 0.3125vw);
   --ts: all 0.3s ease-in-out;
   --br: 0.5rem;
-  --time_c_b: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --time-c-b: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
-  --text_color: #000000;
-  --main_color: #302b2b;
-  --primary_bg: #fff;
-  --secondary_bg: #e9e9e9;
+  --text-color: #000000;
+  --main-color: #302b2b;
+  --primary-bg: #fff;
+  --secondary-bg: #e9e9e9;
 
-  --yellow_color: #f2af4c;
-  --green_color: #5dc983;
-  --red_color: #eb5769;
+  --yellow-color: #f2af4c;
+  --green-color: #5dc983;
+  --red-color: #eb5769;
 
   // ? Navbar variables
-  --navbar_max_width: 1024px;
-  --navbar_logo_height: 50px;
-  --navbar_position: fixed;
-  --navbar_top_bg: #fff; // transparent
-  --navbar_top_color: #000000;
-  --navbar_top_padding: 20px 10px;
-  --navbar_scroll_bg: #f00;
-  --navbar_scroll_color: #fff;
-  --navbar_scroll_padding: 0 10px;
+  --navbar-max-width: 1024px;
+  --navbar-logo-height: 50px;
+  --navbar-position: fixed;
+  --navbar-top-bg: #fff; // transparent
+  --navbar-top-color: #000000;
+  --navbar-top-padding: 20px 10px;
+  --navbar-scroll-bg: #f00;
+  --navbar-scroll-color: #fff;
+  --navbar-scroll-padding: 0 10px;
 }
