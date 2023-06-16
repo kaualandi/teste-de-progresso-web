@@ -6,14 +6,13 @@ import {
   MatDialogModule,
   MatDialogRef,
 } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { CookiesLoginComponent } from 'src/app/components/modals/cookies-login/cookies-login.component';
+import { AuthService } from 'src/app/services/auth.service';
+import { HttpService } from 'src/app/services/http.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { LoginComponent } from './login.component';
-import { HttpService } from 'src/app/services/http.service';
-import { AuthService } from 'src/app/services/auth.service';
-import { Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -31,10 +30,6 @@ describe('LoginComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [LoginComponent, CookiesLoginComponent],
       providers: [
-        {
-          provide: MAT_DIALOG_DATA,
-          useValue: {},
-        },
         { provide: HttpService, useValue: httpServiceMock },
         StorageService,
       ],
@@ -109,7 +104,7 @@ describe('LoginComponent', () => {
     expect(component.login_form.controls.remember.value).toBeTrue();
   });
 
-  it('deve fazer login sem lembrar e redirecionar para a página principal', () => {
+  it('Deve fazer login sem lembrar e redirecionar para a página principal', () => {
     spyOn(router, 'navigate');
     spyOn(authService, 'login').and.returnValue(of({ token: 'fake-token' }));
 
@@ -129,7 +124,7 @@ describe('LoginComponent', () => {
     expect(router.navigate).toHaveBeenCalledWith(['/']);
   });
 
-  it('não deve fazer login se o formulário for inválido', () => {
+  it('Não deve fazer login se o formulário for inválido', () => {
     spyOn(authService, 'login');
 
     component.login_form.patchValue({
