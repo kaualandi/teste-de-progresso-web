@@ -10,7 +10,7 @@ describe('CustomValidatorsService', () => {
     service = TestBed.inject(CustomValidatorsService);
   });
 
-  it('Deve ser criado', () => {
+  it('should be created', () => {
     expect(service).toBeTruthy();
   });
 });

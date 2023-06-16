@@ -44,11 +44,11 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
   });
 
-  it('Deve ser criado', () => {
+  it('should be created', () => {
     expect(component).toBeTruthy();
   });
 
-  it('Deve desabilitar o botão de login se o formulário for inválido', () => {
+  it('should be disable the login button if the form is invalid', () => {
     const submitButton = fixture.nativeElement.querySelector(
       'button[type="submit"]'
     );
@@ -58,7 +58,7 @@ describe('LoginComponent', () => {
     expect(submitButton.disabled).toBeTrue();
   });
 
-  it('Deve habilitar o botão de login se o formulário for válido', () => {
+  it('should be enable the login button if the form is valid', () => {
     const submitButton = fixture.nativeElement.querySelector(
       'button[type="submit"]'
     );
@@ -68,7 +68,8 @@ describe('LoginComponent', () => {
     expect(submitButton.disabled).toBeFalse();
   });
 
-  it('Deve exibir a caixa de diálogo de cookies quando "Lembrar-me" é ativado e não foi permitido o uso de cookies', () => {
+  // ? Deve ser exibido a caixa de diálogo de cookies quando "Lembrar-me" é ativado e não foi permitido o uso de cookies
+  it('should be displayed the cookie dialog when "Remember Me" is enabled and cookies have not been enabled', () => {
     spyOn(component.dialog, 'open').and.returnValue({
       afterClosed: () => of(false),
     } as MatDialogRef<CookiesLoginComponent>);
@@ -82,7 +83,8 @@ describe('LoginComponent', () => {
     });
   });
 
-  it('Deve armazenar os cookies se a caixa de diálogo de cookies for confirmada', () => {
+  // ? Deve ser armazenado os cookies se a caixa de diálogo de cookies for confirmada
+  it('should be stored cookies if the cookie dialog is confirmed', () => {
     spyOn(component.dialog, 'open').and.returnValue({
       afterClosed: () => of(true),
     } as MatDialogRef<CookiesLoginComponent>);
@@ -90,7 +92,8 @@ describe('LoginComponent', () => {
     expect(storageService.cookies).toBeTrue();
   });
 
-  it('Deve desmarcar a opção "Lembrar-me" se a caixa de diálogo de cookies for cancelada', () => {
+  // ? Deve ser desmarcada a opção "Lembrar-me" se a caixa de diálogo de cookies for cancelada
+  it('should be uncheck the "Remember me" option if the cookie dialog is canceled', () => {
     spyOn(component.dialog, 'open').and.returnValue({
       afterClosed: () => of(false),
     } as MatDialogRef<CookiesLoginComponent>);
@@ -98,13 +101,15 @@ describe('LoginComponent', () => {
     expect(component.login_form.controls.remember.value).toBeFalse();
   });
 
-  it('Deve apenas permitir que a opção "Lembrar-me" seja marcada se os cookies estiverem habilitados', () => {
+  // ? Deve apenas permitir que a opção "Lembrar-me" seja marcada se os cookies estiverem habilitados
+  it('should only allow the "Remember me" option to be checked if cookies are enabled', () => {
     storageService.cookies = true;
     component.login_form.controls.remember.setValue(true);
     expect(component.login_form.controls.remember.value).toBeTrue();
   });
 
-  it('Deve fazer login sem lembrar e redirecionar para a página principal', () => {
+  // ? Deve ser feito login sem lembrar e redirecionar para a página principal
+  it('Should be logged in without remembering and redirecting to the main page', () => {
     spyOn(router, 'navigate');
     spyOn(authService, 'login').and.returnValue(of({ token: 'fake-token' }));
 
@@ -124,7 +129,8 @@ describe('LoginComponent', () => {
     expect(router.navigate).toHaveBeenCalledWith(['/']);
   });
 
-  it('Não deve fazer login se o formulário for inválido', () => {
+  // ? Não deve ser feito login se o formulário for inválido
+  it('Should not be logged in if the form is invalid', () => {
     spyOn(authService, 'login');
 
     component.login_form.patchValue({

@@ -18,11 +18,12 @@ describe('AuthService', () => {
     authService = TestBed.inject(AuthService);
   });
 
-  it('Deve ser criado', () => {
+  it('should be created', () => {
     expect(authService).toBeTruthy();
   });
 
-  it('Deve chamar uma requisição post com os parâmetros corretos', () => {
+  // ? Deve ser chamada uma requisição post com os parâmetros corretos
+  it('should be called a post request with the correct parameters', () => {
     const email = 'example@example.com';
     const password = 'password';
 
