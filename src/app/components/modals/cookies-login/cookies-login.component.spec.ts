@@ -18,7 +18,7 @@ describe('CookiesLoginComponent', () => {
         { provide: MAT_DIALOG_DATA, useValue: {} },
         {
           provide: MatDialogRef,
-          useValue: {}, // Pode deixar em branco ou fornecer um objeto mock do MatDialogRef se necessário
+          useValue: {},
         },
       ],
       imports: [MatDialogModule],
