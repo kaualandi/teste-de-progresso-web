@@ -1,6 +1,8 @@
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { CookiesLoginComponent } from 'src/app/components/modals/cookies-login/cookies-login.component';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -13,7 +15,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
-    private storage: StorageService
+    public storage: StorageService,
+    private authService: AuthService,
+    public router: Router
   ) {}
 
   loading = false;
@@ -33,6 +37,18 @@ export class LoginComponent implements OnInit {
     if (this.login_form.invalid) return;
 
     this.loading = true;
+
+    const email: string = this.login_form.value.email as string;
+    const password: string = this.login_form.value.password as string;
+    const remember: boolean = this.login_form.value.remember as boolean;
+
+    this.authService.login(email, password).subscribe({
+      next: (response) => {
+        this.loading = false;
+        this.storage.setToken(response.token, remember);
+        this.router.navigate(['/']);
+      },
+    });
   }
 
   awaitRemember() {

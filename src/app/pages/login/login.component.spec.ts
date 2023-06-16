@@ -3,22 +3,31 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {
   MAT_DIALOG_DATA,
-  MatDialog,
   MatDialogModule,
   MatDialogRef,
 } from '@angular/material/dialog';
-import { LoginComponent } from './login.component';
+import { of } from 'rxjs';
 import { CookiesLoginComponent } from 'src/app/components/modals/cookies-login/cookies-login.component';
 import { StorageService } from 'src/app/services/storage.service';
-import { of } from 'rxjs';
+import { LoginComponent } from './login.component';
+import { HttpService } from 'src/app/services/http.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let storageService: StorageService;
-  let matDialog: MatDialog;
+  let httpServiceMock: Partial<HttpService>;
+  let authService: AuthService;
+  let router: Router;
 
   beforeEach(async () => {
+    httpServiceMock = {
+      post: jasmine.createSpy('post'),
+    };
+
     await TestBed.configureTestingModule({
       declarations: [LoginComponent, CookiesLoginComponent],
       providers: [
@@ -26,6 +35,7 @@ describe('LoginComponent', () => {
           provide: MAT_DIALOG_DATA,
           useValue: {},
         },
+        { provide: HttpService, useValue: httpServiceMock },
         StorageService,
       ],
       imports: [MatDialogModule, ReactiveFormsModule, MatCheckboxModule],
@@ -33,8 +43,9 @@ describe('LoginComponent', () => {
 
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
-    matDialog = TestBed.inject(MatDialog);
     storageService = TestBed.inject(StorageService);
+    router = TestBed.inject(Router);
+    authService = TestBed.inject(AuthService);
     fixture.detectChanges();
   });
 
@@ -63,13 +74,14 @@ describe('LoginComponent', () => {
   });
 
   it('Deve exibir a caixa de diálogo de cookies quando "Lembrar-me" é ativado e não foi permitido o uso de cookies', () => {
-    component.login_form.controls.remember.setValue(true);
-    storageService.cookies = false;
-    spyOn(matDialog, 'open').and.returnValue({
-      afterClosed: () => of(true),
+    spyOn(component.dialog, 'open').and.returnValue({
+      afterClosed: () => of(false),
     } as MatDialogRef<CookiesLoginComponent>);
+    spyOnProperty(component.storage, 'cookies', 'get').and.returnValue(false);
+    component.login_form.get('remember')?.setValue(true);
     component.openCookieDialog();
-    expect(matDialog.open).toHaveBeenCalledWith(CookiesLoginComponent, {
+    fixture.detectChanges();
+    expect(component.dialog.open).toHaveBeenCalledWith(CookiesLoginComponent, {
       panelClass: 'cookies-dialog',
       disableClose: true,
     });
@@ -95,5 +107,40 @@ describe('LoginComponent', () => {
     storageService.cookies = true;
     component.login_form.controls.remember.setValue(true);
     expect(component.login_form.controls.remember.value).toBeTrue();
+  });
+
+  it('deve fazer login sem lembrar e redirecionar para a página principal', () => {
+    spyOn(router, 'navigate');
+    spyOn(authService, 'login').and.returnValue(of({ token: 'fake-token' }));
+
+    component.login_form.patchValue({
+      email: 'test@example.com',
+      password: 'password',
+      remember: false,
+    });
+
+    component.loginSubmitHandler();
+
+    expect(component.loading).toBe(false);
+    expect(authService.login).toHaveBeenCalledWith(
+      'test@example.com',
+      'password'
+    );
+    expect(router.navigate).toHaveBeenCalledWith(['/']);
+  });
+
+  it('não deve fazer login se o formulário for inválido', () => {
+    spyOn(authService, 'login');
+
+    component.login_form.patchValue({
+      email: '',
+      password: 'password',
+      remember: true,
+    });
+
+    component.loginSubmitHandler();
+
+    expect(component.loading).toBe(false);
+    expect(authService.login).not.toHaveBeenCalled();
   });
 });
