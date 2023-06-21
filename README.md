@@ -258,6 +258,25 @@ ng lint
 - feat(page/home): created route for home page
 - fix: NH-3 button color in login
 
+## Branchs
+
+> Prerencialmente feitos em inglês.
+
+- _bugfix/_: Responsável por corrigir bugs pequenos em ambiente de desenvolvimento.
+
+- _feature/_: O nome já diz, uma nova feature que será adicionada ao projeto, componente e afins.
+
+- _hotfix/_: Responsável por corrigir algum erro critico que impeça o cliente de executar alguma função em ambiente de produção.
+
+- _improvement/_: Em si é uma melhoria para uma feature já existente, seja de performance, de escrita, de layout, etc.
+
+### Exemplos de Branchs:
+
+- _bugfix/login-submit-form_: Correção de bug ao submeter o formulário de login
+- _feature/login-page-form_: Adição de formulário na página de login
+- _hotfix/login-page-submit-button_: Correção de bug no botão de submeter o formulário de login já em produção
+- _improvement/login-page-section_: Melhoria na seção de login
+
 ## Estrutura dos diretórios
 
 Gere um arquivo de texto com a estrutura de diretórios
