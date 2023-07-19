@@ -40,8 +40,12 @@ export class HttpService {
   private getHeaders(application: ApplicationsTypes = 'json') {
     const headers = {
       'Content-Type': `application/${application}`,
-      Authorization: 'token ' + this.storage.token,
+      Authorization: '',
     };
+    if (this.storage.token) {
+      headers.Authorization = 'token ' + this.storage.token;
+    }
+
     return headers;
   }
 
