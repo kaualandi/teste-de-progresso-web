@@ -26,6 +26,7 @@ export class HttpService {
   ) {}
 
   public base_url = environment.base_url;
+  private repeat = 1;
 
   private getBodyType(body: BodyJson | HttpParams): ApplicationsTypes {
     return body instanceof HttpParams ? 'x-www-form-urlencoded' : 'json';
@@ -72,7 +73,7 @@ export class HttpService {
     const headers = this.getHeaders();
     return this.http
       .get<T>(this.getUrl(url), { headers, params })
-      .pipe(retry(2), catchError(this.handleError));
+      .pipe(retry(this.repeat), catchError(this.handleError));
   }
 
   /**
@@ -96,7 +97,7 @@ export class HttpService {
         headers,
         params,
       })
-      .pipe(retry(2), catchError(this.handleError));
+      .pipe(retry(this.repeat), catchError(this.handleError));
   }
 
   /**
@@ -117,7 +118,7 @@ export class HttpService {
 
     return this.http
       .patch<T>(this.getUrl(url), _body, { headers, params })
-      .pipe(retry(2), catchError(this.handleError));
+      .pipe(retry(this.repeat), catchError(this.handleError));
   }
 
   /**
@@ -134,6 +135,6 @@ export class HttpService {
     const headers = this.getHeaders();
     return this.http
       .delete<T>(this.getUrl(url), { headers, params })
-      .pipe(retry(2), catchError(this.handleError));
+      .pipe(retry(this.repeat), catchError(this.handleError));
   }
 }
