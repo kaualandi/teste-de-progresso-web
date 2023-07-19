@@ -34,7 +34,10 @@ export class LoginComponent implements OnInit {
   }
 
   loginSubmitHandler() {
-    if (this.login_form.invalid) return;
+    if (this.login_form.invalid) {
+      this.login_form.markAllAsTouched();
+      return;
+    }
 
     this.loading = true;
 

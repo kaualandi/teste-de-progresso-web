@@ -31,7 +31,7 @@
             <mat-checkbox formControlName="remember"><span class="f-14">Lembrar-me</span></mat-checkbox>
           </div>
           <div class="card-input">
-            <button mat-button type="submit" class="primary" [disabled]="login_form.invalid || loading">
+            <button mat-button type="submit" class="primary" [disabled]="loading">
               Entrar
               <loading *ngIf="loading"></loading>
             </button>
