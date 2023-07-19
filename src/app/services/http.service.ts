@@ -130,7 +130,7 @@ export class HttpService {
    * @param params *opicinal* - Query parametros da requisição (itens depois do **?** na url)
    * @returns Retorna um Observable de sua requisição
    */
-  delete<T>(url: string, params?: HttpParams | BodyJson) {
+  delete<T>(url: string, params?: HttpParams) {
     const headers = this.getHeaders();
     return this.http
       .delete<T>(this.getUrl(url), { headers, params })
