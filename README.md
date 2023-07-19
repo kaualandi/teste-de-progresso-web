@@ -78,22 +78,63 @@ Para gerar um novo componente com lazy loading
 
 ## Componentes compartilhados
 
-Loading
+### Loading
 
 ```html
 <loading></loading>
 ```
 
-Loading da página
+### Loading da página
 
 ```html
 <page-loading></page-loading>
 ```
 
-Paginação de tabela
+### Paginação de tabela
 
 ```html
 <pagination (pageChange) [back] [next] [current] [total]></pagination>
+```
+
+### Modal de confirmação
+
+Esse padrão de modal e callback do mesmo, como também a estrutura do componente, deve ser seguido para todos os modais de confirmação.
+
+```ts
+constructor(private dialog: MatDialog) {}
+
+confirm() {
+  const dialogRef = this.dialog.open(ConfirmModalComponent, {
+    data: {
+      title: 'Título',
+      message: 'Mensagem',
+    },
+  });
+
+  dialogRef.afterClosed().subscribe((result) => {
+    if (result) {
+      // Confirmação
+    } else {
+      // Cancelamento
+    }
+  });
+}
+```
+
+### Navbar
+
+A navbar já possui padrãos e a configuração de estilo pode ser feita no arquivo `src/styles/variables.scss`, editando de acordo com a necessidade as variaveis reservadas.
+
+## Modulo compartilhado
+
+Cada componente, modulo, pipe, diretiva etc, compartilhados devem ser importados e exportados no `SharedModule`, como também suas devidas dependências.
+
+## Serviço HTTP
+
+O serviço HTTP já possui um interceptor para adicionar o token de acesso em todas as requisições, caso o mesmo exista, trata erros de requisição, adiciona o content-type correto automaticamente, repete a requisição caso a mesma falhe, e aceita caminhos de url relativos com base na _base_url_ configurada no environments, Foi adicionada uma documentação DocJS para te auxiliar na utilização de cada método. Para seu uso, basta importa-lo ao invés do cliente.
+
+```ts
+constructor(private http: HttpService) {}
 ```
 
 ## Estilização
@@ -137,9 +178,17 @@ Diretivas são utilizadas para criar componentes reutilizáveis.
 
 ### Icones
 
+Basta adicionar o nome do icone no atributo `icon` da tag `<i>`, como por exemplo:
+
 ```html
 <i icon="icon-name"></i>
 ```
+
+Você pode adicionar novos icones na pasta `src/app/directives/icon.directive.ts`.
+
+Recomendamos usar o [FontAwesome](https://fontawesome.com/icons/) para os icones, usando o [fw2svg](https://fw2svg.kaualf.com) para transformar da tag HTML para SVG, porém, você pode usar qualquer outro.
+
+> Se usar o FontAwesome junto ao fw2svg, você conseguirá usar propriedades do css como font-size e color para estilizar o icone.
 
 ## Serviços
 
