@@ -13,7 +13,8 @@
     "e2e": "ng e2e",
     "tree": "tree -l 100 --ignore node_modules --ignore .angular --ignore dist -o directory-tree.txt",
     "lint": "ng lint",
-    "clear": "rm -rf node_modules && rm package-lock.json && rm -rf .angular && npm install"
+    "clear": "rm -rf node_modules && rm package-lock.json && rm -rf .angular && npm install",
+    "delete-spec": "python3 delete-spec.py"
   },
   "private": true,
   "dependencies": {
