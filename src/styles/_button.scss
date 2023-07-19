@@ -1,9 +1,9 @@
 .mat-button-base {
   &.mat-button {
+    border-radius: 50px;
     &.primary {
       background-color: var(--main-color);
       color: var(--primary-bg);
-      border-radius: 50px;
     }
 
     &.mat-button-disabled,

@@ -9,6 +9,7 @@ import { PageLoadingComponent } from './page-loading/page-loading.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmModalComponent } from '../modals/confirm-modal/confirm-modal.component';
 
 @NgModule({
   imports: [CommonModule, MatButtonModule, MatDialogModule],
@@ -19,6 +20,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     IconDirective,
     InputFileDirective,
     InputNumberDirective,
+    ConfirmModalComponent,
   ],
   exports: [
     LoadingComponent,
@@ -28,6 +30,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     InputFileDirective,
     InputNumberDirective,
     MatButtonModule,
+    ConfirmModalComponent,
   ],
 })
 export class SharedModule {}
