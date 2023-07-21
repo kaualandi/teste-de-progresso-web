@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { zoomInAnimation } from 'src/app/animations/route-animation';
 import { CookiesLoginComponent } from 'src/app/components/modals/cookies-login/cookies-login.component';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -10,6 +11,7 @@ import { StorageService } from 'src/app/services/storage.service';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
+  animations: [zoomInAnimation],
 })
 export class LoginComponent implements OnInit {
   constructor(

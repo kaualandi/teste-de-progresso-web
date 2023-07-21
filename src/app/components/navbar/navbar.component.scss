@@ -14,6 +14,7 @@ nav {
   --navbar_padding: var(--navbar-top-padding);
   --navbar_bg: var(--navbar-top-bg);
   --navbar_color: var(--navbar-top-color);
+  z-index: 2;
 
   &.scroll {
     --navbar_padding: var(--navbar-scroll-padding, --navbar-top-padding);

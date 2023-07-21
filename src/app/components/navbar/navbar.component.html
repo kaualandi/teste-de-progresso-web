@@ -1,4 +1,4 @@
-<nav #navbar [ngClass]="{ scroll }" [ngStyle]="{ '--navbar-height': navbar_height + 'px' }">
+<nav [@offcanvasTopAnimation] #navbar [ngClass]="{ scroll }" [ngStyle]="{ '--navbar-height': navbar_height + 'px' }">
   <div class="content">
 
     <a class="logo" routerLink="/">
@@ -20,4 +20,6 @@
   </div>
 </nav>
 
-<router-outlet></router-outlet>
+<div [@routeAnimations]="outlet && outlet.activatedRouteData">
+  <router-outlet #outlet="outlet"></router-outlet>
+</div>

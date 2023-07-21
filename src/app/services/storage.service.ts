@@ -74,7 +74,7 @@ export class StorageService {
   }
 
   logout() {
-    this.cookieService.delete('token');
+    this.setToken('', false);
     this.router.navigate(['/login']);
   }
 

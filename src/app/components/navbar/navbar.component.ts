@@ -1,3 +1,7 @@
+import {
+  offcanvasTopAnimation,
+  slideInAnimation,
+} from 'src/app/animations/route-animation';
 import { StorageService } from './../../services/storage.service';
 import {
   Component,
@@ -13,6 +17,7 @@ import {
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
+  animations: [slideInAnimation, offcanvasTopAnimation],
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   @Input() colapse: 'vertical' | 'horizontal' = 'vertical';
@@ -47,6 +52,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
     // if (error?.status === 401) {
     //   this.storageService.logout();
     // }
+  }
+
+  logout() {
+    this.storage.unwatchUser();
+    this.storage.logout();
   }
 
   @HostListener('window:scroll', ['$event'])
