@@ -10,6 +10,7 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmModalComponent } from '../modals/confirm-modal/confirm-modal.component';
+import { SkeletonLoadingComponent } from './skeleton-loading/skeleton-loading.component';
 
 @NgModule({
   imports: [CommonModule, MatButtonModule, MatDialogModule],
@@ -21,6 +22,7 @@ import { ConfirmModalComponent } from '../modals/confirm-modal/confirm-modal.com
     InputFileDirective,
     InputNumberDirective,
     ConfirmModalComponent,
+    SkeletonLoadingComponent,
   ],
   exports: [
     LoadingComponent,
@@ -31,6 +33,7 @@ import { ConfirmModalComponent } from '../modals/confirm-modal/confirm-modal.com
     InputNumberDirective,
     MatButtonModule,
     ConfirmModalComponent,
+    SkeletonLoadingComponent,
   ],
 })
 export class SharedModule {}
