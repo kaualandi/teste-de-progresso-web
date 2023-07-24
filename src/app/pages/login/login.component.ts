@@ -53,6 +53,9 @@ export class LoginComponent implements OnInit {
         this.storage.setToken(response.token, remember);
         this.router.navigate(['/']);
       },
+      error: () => {
+        this.loading = false;
+      },
     });
   }
 
