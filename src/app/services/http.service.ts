@@ -9,7 +9,7 @@ import { StorageService } from 'src/app/services/storage.service';
 import { SnackbarService } from './snackbar.service';
 import { environment } from 'src/environments/environment';
 
-interface BodyJson {
+export interface BodyJson {
   [key: string]: string | number | boolean | BodyJson | BodyJson[];
 }
 
