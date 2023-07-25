@@ -17,7 +17,7 @@ export const slideInAnimation = trigger('routeAnimations', [
         ':enter',
         [
           style({
-            transform: 'translateX(-100%) scale(0.8)',
+            transform: 'translateX(100%) scale(0.8)',
           }),
           animate(
             '0.5s ease-in-out',
@@ -32,12 +32,12 @@ export const slideInAnimation = trigger('routeAnimations', [
         ':leave',
         [
           style({
-            transform: 'translateX(0%) scale(1)',
+            transform: 'scale(1)',
           }),
           animate(
             '0.5s ease-in-out',
             style({
-              transform: 'translateX(100%) scale(0.8)',
+              transform: 'scale(0.8)',
             })
           ),
         ],
