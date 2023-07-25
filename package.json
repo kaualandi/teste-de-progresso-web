@@ -14,7 +14,9 @@
     "tree": "tree -l 100 --ignore node_modules --ignore .angular --ignore dist -o directory-tree.txt",
     "lint": "ng lint",
     "clear": "rm -rf node_modules && rm package-lock.json && rm -rf .angular && npm install",
-    "delete-spec": "python3 delete-spec.py"
+    "delete-spec": "python3 delete-spec.py",
+    "s3": "aws s3 cp dist s3://........... --recursive",
+    "build:s3": "ng build && npm run s3"
   },
   "private": true,
   "dependencies": {
