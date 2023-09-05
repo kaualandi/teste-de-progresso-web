@@ -52,15 +52,13 @@ export class HttpService {
   private handleError = (error: HttpErrorResponse) => {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
-      // Erro ocorreu no lado do client
       errorMessage = error.error.message;
     } else {
-      // Erro ocorreu no lado do servidor
-      errorMessage = `${error.error.detail}`;
+      errorMessage = error.error.detail;
     }
     this.snackbar.error(errorMessage);
 
-    return throwError(() => errorMessage);
+    return throwError(() => error);
   };
 
   /**
