@@ -205,16 +205,38 @@ cpfInput = new FormControl('', [
 ]);
 ```
 
-### Snackbar
+### Angular Notifier (angular-notifier)
 
 > Serviço para exibir mensagens na tela.
 
-```ts
-constructor(private snackbar: SnackbarService) {}
 
-this.snackbar.success('Mensagem');
-this.snackbar.error('Mensagem');
-this.snackbar.info('Mensagem');
+```html geral (app.component.html)
+<notifier-container></notifier-container>
+```
+
+```scss geral (syles.scss)
+@import "node_modules/angular-notifier/styles";
+```
+
+```ts
+constructor(private notifier: NotifierService) {}
+
+// Tipos de mensagens
+this.notifier.notify('default', 'Mensagem'); // Sem contexto
+this.notifier.notify('info', 'Mensagem'); // Informativas 
+this.notifier.notify('warning', 'Mensagem'); // Avisos
+this.notifier.notify('success', 'Mensagem'); // Sucesso
+this.notifier.notify('error', 'Mensagem'); // Erro
+
+// Limpar todas as mensagens
+this.notifier.hideAll();
+
+// Limpar a última mensagem que apareceu
+this.notifier.hideNewest();
+
+// Limpar a primeira mensagem que apareceu
+this.notifier.hideNewest();
+
 ```
 
 ### Storage

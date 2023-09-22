@@ -4,9 +4,9 @@ import {
   HttpParams,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { NotifierService } from 'angular-notifier';
 import { catchError, retry, throwError } from 'rxjs';
 import { StorageService } from 'src/app/services/storage.service';
-import { SnackbarService } from './snackbar.service';
 import { environment } from 'src/environments/environment';
 
 export interface BodyJson {
@@ -22,7 +22,7 @@ export class HttpService {
   constructor(
     private http: HttpClient,
     private storage: StorageService,
-    private snackbar: SnackbarService
+    private notifier: NotifierService
   ) {}
 
   public base_url = environment.base_url;
@@ -56,8 +56,8 @@ export class HttpService {
     } else {
       errorMessage = error.error.detail;
     }
-    this.snackbar.error(errorMessage);
 
+    this.notifier.notify('error', errorMessage)
     return throwError(() => error);
   };
 

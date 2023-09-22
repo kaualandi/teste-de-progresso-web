@@ -14,6 +14,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SharedModule } from './components/shared/shared.module';
+import { NotifierModule } from 'angular-notifier';
+import { configNotifier } from './models/utils';
 
 registerLocaleData(localePt);
 
@@ -24,7 +26,6 @@ registerLocaleData(localePt);
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatSnackBarModule,
     MatDialogModule,
     SharedModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
@@ -33,6 +34,7 @@ registerLocaleData(localePt);
       // ? ou após 30 segundos (o que ocorrer primeiro).
       registrationStrategy: 'registerWhenStable:30000',
     }),
+    NotifierModule.withConfig(configNotifier),
   ],
   providers: [
     DatePipe,
