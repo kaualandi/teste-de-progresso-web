@@ -13,6 +13,7 @@ import { PageLoadingComponent } from './page-loading/page-loading.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { SkeletonLoadingComponent } from './skeleton-loading/skeleton-loading.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SafePipe } from '../../pipes/safe.pipe';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ConfirmModalComponent,
     SkeletonLoadingComponent,
     AutocompleteComponent,
+    SafePipe,
   ],
   exports: [
     LoadingComponent,
@@ -42,6 +44,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ConfirmModalComponent,
     SkeletonLoadingComponent,
     AutocompleteComponent,
+    SafePipe,
   ],
 })
 export class SharedModule {}
