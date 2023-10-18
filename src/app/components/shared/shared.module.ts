@@ -6,7 +6,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 import { IconDirective } from 'src/app/directives/icon.directive';
 import { InputFileDirective } from 'src/app/directives/input-file.directive';
-import { InputNumberDirective } from 'src/app/directives/input-number.directive';
 import { ConfirmModalComponent } from '../modals/confirm-modal/confirm-modal.component';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 import { LoadingComponent } from './loading/loading.component';
@@ -29,7 +28,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     PaginationComponent,
     IconDirective,
     InputFileDirective,
-    InputNumberDirective,
     ConfirmModalComponent,
     SkeletonLoadingComponent,
     AutocompleteComponent,
@@ -40,7 +38,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     PaginationComponent,
     IconDirective,
     InputFileDirective,
-    InputNumberDirective,
     MatButtonModule,
     ConfirmModalComponent,
     SkeletonLoadingComponent,
