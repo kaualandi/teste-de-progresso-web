@@ -16,11 +16,12 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { SharedModule } from './components/shared/shared.module';
 import { NotifierModule } from 'angular-notifier';
 import { configNotifier } from './models/utils';
+import { SafeDirective } from './directives/safe.directive';
 
 registerLocaleData(localePt);
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent],
+  declarations: [AppComponent, NavbarComponent, SafeDirective],
   imports: [
     BrowserModule,
     AppRoutingModule,
