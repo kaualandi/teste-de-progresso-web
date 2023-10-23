@@ -4,16 +4,18 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 
+import { ReactiveFormsModule } from '@angular/forms';
 import { IconDirective } from 'src/app/directives/icon.directive';
+import { InitialLettersDirective } from 'src/app/directives/initial-letters.directive';
 import { InputFileDirective } from 'src/app/directives/input-file.directive';
+import { SafePipe } from '../../pipes/safe.pipe';
 import { ConfirmModalComponent } from '../modals/confirm-modal/confirm-modal.component';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 import { LoadingComponent } from './loading/loading.component';
 import { PageLoadingComponent } from './page-loading/page-loading.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { SkeletonLoadingComponent } from './skeleton-loading/skeleton-loading.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { SafePipe } from '../../pipes/safe.pipe';
+import { AvatarComponent } from './avatar/avatar.component';
 
 @NgModule({
   imports: [
@@ -29,10 +31,12 @@ import { SafePipe } from '../../pipes/safe.pipe';
     PaginationComponent,
     IconDirective,
     InputFileDirective,
+    InitialLettersDirective,
     ConfirmModalComponent,
     SkeletonLoadingComponent,
     AutocompleteComponent,
     SafePipe,
+    AvatarComponent,
   ],
   exports: [
     LoadingComponent,
@@ -45,6 +49,8 @@ import { SafePipe } from '../../pipes/safe.pipe';
     SkeletonLoadingComponent,
     AutocompleteComponent,
     SafePipe,
+    InitialLettersDirective,
+    AvatarComponent,
   ],
 })
 export class SharedModule {}

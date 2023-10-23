@@ -1,3 +1,15 @@
 main {
   background-color: #fff;
+
+  .avatars {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 5rem;
+    font-size: 1rem;
+    & > * {
+      width: 100px;
+    }
+  }
 }
