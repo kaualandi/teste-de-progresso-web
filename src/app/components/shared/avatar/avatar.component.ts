@@ -14,13 +14,11 @@ export class AvatarComponent implements OnInit {
   @Input() color: 'dark' | 'light' | '' = '';
 
   gradients = GRADIENTS;
-
   gradient = this.gradients[0];
 
   ngOnInit(): void {
     this.gradient =
       this.gradients[Math.floor(Math.random() * this.gradients.length)];
-    console.log(this.gradient);
 
     this.color = this.color || this.gradient.color;
     this.bg = this.bg || this.gradient.bg;

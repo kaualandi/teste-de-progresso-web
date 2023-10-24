@@ -23,7 +23,7 @@ export class InitialLettersDirective implements OnInit {
   removeLinkingPrepositions() {
     this.initialLetters = this.initialLetters
       .split(' ')
-      .filter((word) => !this.linkingPrepositions.includes(word))
+      .filter((word) => !this.linkingPrepositions.includes(word.toLowerCase()))
       .join(' ');
   }
 }
