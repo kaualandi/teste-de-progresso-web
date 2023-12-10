@@ -16,6 +16,7 @@ import { LoadingComponent } from './loading/loading.component';
 import { PageLoadingComponent } from './page-loading/page-loading.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { SkeletonLoadingComponent } from './skeleton-loading/skeleton-loading.component';
+import { PrevPageDirective } from '../../directives/prev-page.directive';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { SkeletonLoadingComponent } from './skeleton-loading/skeleton-loading.co
     AutocompleteComponent,
     SafePipe,
     AvatarComponent,
+    PrevPageDirective,
   ],
   exports: [
     LoadingComponent,
