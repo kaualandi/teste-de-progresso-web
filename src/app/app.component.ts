@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as AOS from 'aos';
+import { FullpageLoadingService } from './services/fullpage-loading.service';
 import { ThemeService } from './services/theme.service';
 
 @Component({
@@ -8,7 +9,12 @@ import { ThemeService } from './services/theme.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(private theme: ThemeService) {}
+  constructor(
+    private theme: ThemeService,
+    private fullpageLoading: FullpageLoadingService
+  ) {}
+
+  loading = this.fullpageLoading.loading;
 
   ngOnInit() {
     this.theme.loadCurrentTheme();

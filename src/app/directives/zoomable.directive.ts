@@ -6,6 +6,6 @@ import mediumZoom from 'medium-zoom';
 })
 export class ZoomableDirective {
   constructor(private el: ElementRef) {
-    mediumZoom(el.nativeElement);
+    mediumZoom(this.el.nativeElement);
   }
 }

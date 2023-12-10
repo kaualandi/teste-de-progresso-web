@@ -4,17 +4,6 @@
   &.mdc-button {
     border-radius: var(--br);
     padding: 0 1rem;
-    &.orange {
-      background-color: var(--accent-orange);
-      color: var(--primary-black);
-    }
-    &.alt {
-      border: 1px solid var(--line-color);
-      color: var(--white);
-    }
-    &.gray {
-      background-color: var(--accent-gray);
-    }
 
     &.mat-button-disabled,
     &:disabled {
