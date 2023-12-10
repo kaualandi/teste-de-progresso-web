@@ -1,6 +1,6 @@
 {
-  "name": "v16",
-  "short_name": "v16",
+  "name": "web-boilerplate",
+  "short_name": "web-boilerplate",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
