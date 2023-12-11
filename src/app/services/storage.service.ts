@@ -8,7 +8,10 @@ import { IUser } from '../models/user';
   providedIn: 'root',
 })
 export class StorageService {
-  constructor(private cookieService: CookieService, private router: Router) {}
+  constructor(
+    private cookieService: CookieService,
+    private router: Router
+  ) {}
 
   UserSubject = new Subject<void>();
   myUser: IUser = {} as IUser;
@@ -23,10 +26,6 @@ export class StorageService {
 
   watchUser() {
     return this.UserSubject.asObservable();
-  }
-
-  unwatchUser() {
-    this.UserSubject.unsubscribe();
   }
 
   changeUser(): void {

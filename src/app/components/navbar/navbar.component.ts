@@ -1,17 +1,17 @@
 import {
-  offcanvasTopAnimation,
-  slideInAnimation,
-} from 'src/app/animations/route-animation';
-import { StorageService } from './../../services/storage.service';
-import {
   Component,
   ElementRef,
   HostListener,
   Input,
-  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {
+  offcanvasTopAnimation,
+  slideInAnimation,
+} from 'src/app/animations/route-animation';
+import { StorageService } from './../../services/storage.service';
 
 @Component({
   selector: 'app-navbar',
@@ -19,7 +19,7 @@ import {
   styleUrls: ['./navbar.component.scss'],
   animations: [slideInAnimation, offcanvasTopAnimation],
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements OnInit {
   @Input() colapse: 'vertical' | 'horizontal' = 'vertical';
   @ViewChild('navbar') navbar: ElementRef<HTMLElement> | undefined;
 
@@ -35,15 +35,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.onWindowScroll();
 
     this.getMe();
-    this.storage.watchUser().subscribe({
-      next: () => {
-        this.getMe();
-      },
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.storage.unwatchUser();
+    this.storage
+      .watchUser()
+      .pipe(takeUntilDestroyed())
+      .subscribe({
+        next: () => {
+          this.getMe();
+        },
+      });
   }
 
   getMe() {
@@ -55,7 +54,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    this.storage.unwatchUser();
     this.storage.logout();
   }
 

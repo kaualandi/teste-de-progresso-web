@@ -1,4 +1,3 @@
-import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -6,6 +5,7 @@ import { Router } from '@angular/router';
 import { zoomInAnimation } from 'src/app/animations/route-animation';
 import { CookiesLoginComponent } from 'src/app/components/modals/cookies-login/cookies-login.component';
 import { StorageService } from 'src/app/services/storage.service';
+import { AuthService } from './../../services/auth.service';
 
 @Component({
   selector: 'app-login',
