@@ -17,6 +17,7 @@ import { PageLoadingComponent } from './page-loading/page-loading.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { SkeletonLoadingComponent } from './skeleton-loading/skeleton-loading.component';
 import { PrevPageDirective } from '../../directives/prev-page.directive';
+import { PasswordStregthComponent } from './password-stregth/password-stregth.component';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { PrevPageDirective } from '../../directives/prev-page.directive';
     SafePipe,
     AvatarComponent,
     PrevPageDirective,
+    PasswordStregthComponent,
   ],
   exports: [
     LoadingComponent,
@@ -53,6 +55,7 @@ import { PrevPageDirective } from '../../directives/prev-page.directive';
     SafePipe,
     InitialLettersDirective,
     AvatarComponent,
+    PasswordStregthComponent,
   ],
 })
 export class SharedModule {}

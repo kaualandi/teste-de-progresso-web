@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-
-import { SharedModule } from 'src/app/components/shared/shared.module';
-import { HomeComponent } from './home.component';
-import { HomeRoutingModule } from './home-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { SharedModule } from 'src/app/components/shared/shared.module';
 import { ZoomableDirective } from 'src/app/directives/zoomable.directive';
+import { HomeRoutingModule } from './home-routing.module';
+import { HomeComponent } from './home.component';
 
 @NgModule({
   imports: [
@@ -15,6 +14,8 @@ import { ZoomableDirective } from 'src/app/directives/zoomable.directive';
     HomeRoutingModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   declarations: [HomeComponent, ZoomableDirective],
 })
