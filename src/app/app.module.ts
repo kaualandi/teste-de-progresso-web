@@ -2,7 +2,7 @@ import { DatePipe, registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import localePt from '@angular/common/locales/pt';
 import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -28,6 +28,7 @@ registerLocaleData(localePt);
     HttpClientModule,
     MatDialogModule,
     SharedModule,
+    MatNativeDateModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // ? Registra o ServiceWorker após build em produção

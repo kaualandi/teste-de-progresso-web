@@ -35,6 +35,10 @@ $max-font-size: 52;
   a {
     @extend .fd-14;
   }
+  ul,
+  ol {
+    padding-left: 1rem;
+  }
   li {
     @extend .fd-14;
   }
@@ -45,6 +49,9 @@ $max-font-size: 52;
     @extend .fd-14;
   }
   label {
+    @extend .fd-14;
+  }
+  input {
     @extend .fd-14;
   }
   .mat-mdc-button {

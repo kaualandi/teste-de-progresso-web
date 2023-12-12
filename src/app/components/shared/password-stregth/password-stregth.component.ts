@@ -41,8 +41,7 @@ export class PasswordStregthComponent implements OnChanges {
     };
     zxcvbnOptions.setOptions(options);
     const passwordStatus = zxcvbn(password);
-    this.password_warning =
-      passwordStatus.score + (passwordStatus.feedback.warning || '');
+    this.password_warning = passwordStatus.feedback.warning || '';
     this.password_suggestions = passwordStatus.feedback.suggestions;
     this.score.emit(passwordStatus.score);
   }

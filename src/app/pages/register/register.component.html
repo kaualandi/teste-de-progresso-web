@@ -1,0 +1,76 @@
+<main id="register">
+  <div [@zoomInAnimation] class="row">
+    <div class="col">
+      <div class="logo">
+        <img src="assets/images/logo.png" alt="Logo">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form">
+        <form (ngSubmit)="loginSubmitHandler()" [formGroup]="register_form">
+          <h1>Cadastro</h1>
+          <p>Já possui conta? <a routerLink="/login">login</a></p>
+
+          <div class="card-input">
+            <label for="name">Nome</label>
+            <input type="text" id="name" placeholder="Digite seu nome" formControlName="name">
+          </div>
+
+          <div class="card-input">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" placeholder="Digite seu e-mail" formControlName="email">
+          </div>
+
+          <div class="card-input">
+            <label for="phone">Celular</label>
+            <input type="text" id="phone" placeholder="Digite seu celular" mask="(00) 00000-0000"
+              formControlName="phone">
+          </div>
+
+          <div class="card-input">
+            <label for="birth_date">Data de nascimento</label>
+            <div class="input-icon">
+              <input type="text" id="birth_date" [matDatepicker]="picker" placeholder="Digite seu nascimento"
+                formControlName="birth_date">
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </div>
+          </div>
+
+          <div class="card-input">
+            <label for="password">Senha</label>
+            <span class="input-icon">
+              <input [type]="view_pass ? 'text' : 'password'" id="password" placeholder="Digite sua senha"
+                formControlName="password">
+              <button type="button" mat-icon-button aria-label="Ver senha" (click)="view_pass = !view_pass">
+                <i icon="view_pass" *ngIf="!view_pass"></i>
+                <i icon="hide_pass" *ngIf="view_pass"></i>
+              </button>
+            </span>
+            <app-password-stregth *ngIf="password" [password]="password"
+              (score)="score = $event"></app-password-stregth>
+          </div>
+
+          <div class="card-input">
+            <label for="re_password">Repetir senha</label>
+            <span class="input-icon">
+              <input [type]="view_repass ? 'text' : 'password'" id="re_password" placeholder="Repita a senha"
+                formControlName="re_password">
+              <button type="button" mat-icon-button aria-label="Ver senha" (click)="view_repass = !view_repass">
+                <i icon="view_pass" *ngIf="!view_repass"></i>
+                <i icon="hide_pass" *ngIf="view_repass"></i>
+              </button>
+            </span>
+          </div>
+
+          <div class="card-input">
+            <button mat-button type="submit" class="primary" [disabled]="loading">
+              Cadastrar-se
+              <loading *ngIf="loading"></loading>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>

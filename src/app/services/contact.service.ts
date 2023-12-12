@@ -9,9 +9,6 @@ export class ContactService {
   constructor(private http: HttpService) {}
 
   sendEmail(data: IContactData) {
-    return this.http.post(
-      `https://formsubmit.kaualf.com/send-mail/eu@kaualf.com`,
-      data as unknown as BodyJson
-    );
+    return this.http.post(``, data as unknown as BodyJson);
   }
 }
