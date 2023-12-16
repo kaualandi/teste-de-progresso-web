@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 
@@ -10,6 +9,7 @@ import { IconDirective } from 'src/app/directives/icon.directive';
 import { InitialLettersDirective } from 'src/app/directives/initial-letters.directive';
 import { InputFileDirective } from 'src/app/directives/input-file.directive';
 import { PrevPageDirective } from '../../directives/prev-page.directive';
+import { StopPropagDirective } from '../../directives/stop-propag.directive';
 import { SafePipe } from '../../pipes/safe.pipe';
 import { ConfirmModalComponent } from '../modals/confirm-modal/confirm-modal.component';
 import { AvatarComponent } from './avatar/avatar.component';
@@ -24,7 +24,6 @@ import { SkeletonLoadingComponent } from './skeleton-loading/skeleton-loading.co
     CommonModule,
     MatButtonModule,
     MatDialogModule,
-    MatAutocompleteModule,
     ReactiveFormsModule,
     NgxMaskDirective,
     NgxMaskPipe,
@@ -42,6 +41,7 @@ import { SkeletonLoadingComponent } from './skeleton-loading/skeleton-loading.co
     AvatarComponent,
     PrevPageDirective,
     PasswordStregthComponent,
+    StopPropagDirective,
   ],
   exports: [
     LoadingComponent,
@@ -58,6 +58,7 @@ import { SkeletonLoadingComponent } from './skeleton-loading/skeleton-loading.co
     PasswordStregthComponent,
     NgxMaskDirective,
     NgxMaskPipe,
+    StopPropagDirective,
   ],
 })
 export class SharedModule {}
