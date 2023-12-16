@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
+import { interval, map } from 'rxjs';
 import { GeolocationService } from './../../services/geolocation.service';
 
 @Component({
@@ -20,6 +21,12 @@ export class HomeComponent {
     'Lucas dos Santos',
     'Ana e Luiz',
   ];
+
+  now$ = interval(1000).pipe(
+    map(() => {
+      return new Date();
+    })
+  );
 
   showNotification() {
     this.notifier.notify('success', 'Hello world!');
