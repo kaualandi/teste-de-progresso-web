@@ -50,14 +50,12 @@ export class HttpService {
   }
 
   private handleError = (error: HttpErrorResponse) => {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = error.error.message;
-    } else {
-      errorMessage = error.error.detail || 'Não foi possível completar a ação';
-    }
-
-    this.notifier.notify('error', errorMessage);
+    this.notifier.notify(
+      'error',
+      error.error.detail ||
+        error.error.message ||
+        'Não foi possível completar a ação'
+    );
     return throwError(() => error);
   };
 

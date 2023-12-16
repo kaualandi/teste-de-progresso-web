@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -14,6 +14,7 @@ import { Genre } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { BodyJson } from 'src/app/services/http.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { cpfValidator } from 'src/app/utils/validators';
 
 @Component({
   selector: 'app-register',
@@ -21,7 +22,7 @@ import { StorageService } from 'src/app/services/storage.service';
   styleUrls: ['./register.component.scss'],
   animations: [zoomInAnimation],
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
@@ -42,10 +43,15 @@ export class RegisterComponent {
     email: ['', [Validators.required, Validators.email]],
     phone: ['', [Validators.required]],
     birth_date: [this.now, [Validators.required]],
+    cpf: ['', [Validators.required, cpfValidator]],
     genre: [new FormControl<Genre>('M'), [Validators.required]],
     password: ['', [Validators.required, this.validScore]],
     re_password: ['', [Validators.required, this.samePassword()]],
   });
+
+  ngOnInit(): void {
+    this.register_form.get('birth_date')?.reset();
+  }
 
   loginSubmitHandler() {
     if (this.register_form.invalid) {
