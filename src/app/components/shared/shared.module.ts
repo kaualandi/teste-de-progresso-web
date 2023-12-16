@@ -12,7 +12,6 @@ import { InputFileDirective } from 'src/app/directives/input-file.directive';
 import { PrevPageDirective } from '../../directives/prev-page.directive';
 import { SafePipe } from '../../pipes/safe.pipe';
 import { ConfirmModalComponent } from '../modals/confirm-modal/confirm-modal.component';
-import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 import { AvatarComponent } from './avatar/avatar.component';
 import { LoadingComponent } from './loading/loading.component';
 import { PageLoadingComponent } from './page-loading/page-loading.component';
@@ -39,7 +38,6 @@ import { SkeletonLoadingComponent } from './skeleton-loading/skeleton-loading.co
     InitialLettersDirective,
     ConfirmModalComponent,
     SkeletonLoadingComponent,
-    AutocompleteComponent,
     SafePipe,
     AvatarComponent,
     PrevPageDirective,
@@ -54,7 +52,6 @@ import { SkeletonLoadingComponent } from './skeleton-loading/skeleton-loading.co
     MatButtonModule,
     ConfirmModalComponent,
     SkeletonLoadingComponent,
-    AutocompleteComponent,
     SafePipe,
     InitialLettersDirective,
     AvatarComponent,

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +6,6 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  form = new FormControl('');
   names = [
     'João da Silva',
     'Maria de Fátima',

@@ -1,13 +1,7 @@
 <main>
-  <div class="card-input">
-    <input type="text" [formControl]="form">
-    <app-password-stregth [password]="form.value || ''"></app-password-stregth>
-  </div>
-
   <app-skeleton-loading></app-skeleton-loading>
 
   <img zoomable src="../../../assets/images/logo.png" alt="" />
-
 
   <ul>
     <li *ngFor="let name of names">
@@ -20,5 +14,4 @@
     <avatar *ngFor="let name of names" [name]="name" src=""></avatar>
     <avatar name="Kauã Landi" src="" color="light" bg="#000"></avatar>
   </div>
-
 </main>
