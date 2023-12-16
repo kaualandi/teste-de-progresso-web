@@ -51,7 +51,10 @@ $max-font-size: 52;
   label {
     @extend .fd-14;
   }
-  input {
+  input,
+  .mat-mdc-select-value,
+  .mat-mdc-select-placeholder,
+  .mat-mdc-option .mdc-list-item__primary-text {
     @extend .fd-14;
   }
   .mat-mdc-button {

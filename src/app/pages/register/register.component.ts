@@ -1,10 +1,16 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Score } from '@zxcvbn-ts/core';
 import { NotifierService } from 'angular-notifier';
 import { zoomInAnimation } from 'src/app/animations/route-animation';
+import { Genre } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { BodyJson } from 'src/app/services/http.service';
 import { StorageService } from 'src/app/services/storage.service';
@@ -36,6 +42,7 @@ export class RegisterComponent {
     email: ['', [Validators.required, Validators.email]],
     phone: ['', [Validators.required]],
     birth_date: [this.now, [Validators.required]],
+    genre: [new FormControl<Genre>('M'), [Validators.required]],
     password: ['', [Validators.required, this.validScore]],
     re_password: ['', [Validators.required, this.samePassword()]],
   });

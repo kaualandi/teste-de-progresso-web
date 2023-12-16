@@ -6,7 +6,7 @@
   width: 100%;
   flex-direction: column;
 
-  label {
+  & > label {
     font-size: 1rem;
     padding-left: 5px;
     color: var(--secondary-gray);
@@ -32,7 +32,7 @@
 
   input,
   textarea,
-  select {
+  .mat-mdc-select {
     padding: 12px 16px;
     border-radius: var(--br);
     border: 1px solid var(--secondary-bg);
@@ -42,6 +42,7 @@
     resize: none;
     transition: var(--ts);
     box-shadow: 0px 0px 0px 0px #607b964d;
+    resize: none;
 
     &:focus {
       box-shadow: 0px 0px 0px 2px #607b964d;
@@ -62,6 +63,9 @@
     }
     &[type='file'] {
       display: none;
+    }
+    &.mat-mdc-select {
+      padding: 7.63px 16px;
     }
   }
 
