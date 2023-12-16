@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Subject } from 'rxjs';
 import { IUser } from '../models/user';
@@ -10,7 +10,7 @@ import { IUser } from '../models/user';
 export class StorageService {
   constructor(
     private cookieService: CookieService,
-    private router: Router
+    private translate: TranslateService
   ) {}
 
   UserSubject = new Subject<void>();
@@ -40,30 +40,6 @@ export class StorageService {
     }
   }
 
-  /**
-   * Função para setar o token no cookie
-   * @param token Token que vem da API
-   * @param keep Se true, o cookie expira em 60 dias, se false, o cookie expira quando o browser é fechado
-   * @return void
-   *
-   * @author Kauã Landi
-   */
-  setToken(token: string, keep = false): void {
-    if (this.cookies) {
-      this.cookieService.set(
-        'token',
-        token,
-        keep ? 60 : undefined,
-        '/',
-        undefined,
-        this.ssl,
-        'Strict'
-      );
-    } else {
-      sessionStorage.setItem('token', token);
-    }
-  }
-
   get cookies() {
     return localStorage.getItem('cookies') === 'true';
   }
@@ -72,12 +48,16 @@ export class StorageService {
     localStorage.setItem('cookies', value.toString());
   }
 
-  logout() {
-    this.setToken('', false);
-    this.router.navigate(['/login']);
+  get language() {
+    return (
+      this.translate.currentLang ||
+      localStorage.getItem('language') ||
+      this.translate.getBrowserLang() ||
+      'pt-br'
+    );
   }
 
-  get ssl() {
-    return location.protocol === 'https:';
+  set language(value: string) {
+    localStorage.setItem('language', value);
   }
 }

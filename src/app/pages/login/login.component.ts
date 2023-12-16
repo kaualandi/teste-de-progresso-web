@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(body).subscribe({
       next: (response) => {
         this.loading = false;
-        this.storage.setToken(response.token, body['remember'] as boolean);
+        this.authService.setToken(response.token, body['remember'] as boolean);
         this.router.navigate(['/']);
       },
       error: () => {

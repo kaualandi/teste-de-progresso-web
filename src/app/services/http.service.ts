@@ -45,6 +45,7 @@ export class HttpService {
   private getHeaders(application: ApplicationsTypes = 'json') {
     const headers = {
       'Content-Type': `application/${application}`,
+      'Accept-Language': this.storage.language,
       Authorization: '',
     };
     if (this.storage.token) {

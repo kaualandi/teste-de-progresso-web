@@ -11,6 +11,7 @@ import {
   offcanvasTopAnimation,
   slideInAnimation,
 } from 'src/app/animations/route-animation';
+import { AuthService } from 'src/app/services/auth.service';
 import { StorageService } from './../../services/storage.service';
 
 @Component({
@@ -23,7 +24,10 @@ export class NavbarComponent implements OnInit {
   @Input() colapse: 'vertical' | 'horizontal' = 'vertical';
   @ViewChild('navbar') navbar: ElementRef<HTMLElement> | undefined;
 
-  constructor(private storage: StorageService) {}
+  constructor(
+    private storage: StorageService,
+    private authService: AuthService
+  ) {}
 
   loading = false;
 
@@ -54,7 +58,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    this.storage.logout();
+    this.authService.logout();
   }
 
   @HostListener('window:scroll', ['$event'])
