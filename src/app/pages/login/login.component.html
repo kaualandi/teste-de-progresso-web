@@ -2,7 +2,7 @@
   <div [@zoomInAnimation] class="row">
     <div class="col">
       <div class="logo">
-        <img src="assets/images/logo.png" alt="Logo">
+        <img src="assets/images/logo.png" alt="Logo" />
       </div>
     </div>
     <div class="col">
@@ -11,28 +11,53 @@
           <h1>Login</h1>
           <p>Não possui conta? <a routerLink="/register">cadastre-se</a></p>
           <div class="card-input">
-            <label for="email">E-mail</label>
-            <input type="text" id="email" placeholder="Digite seu e-mail" formControlName="email">
+            <label for="username">E-mail</label>
+            <input
+              type="email"
+              id="username"
+              placeholder="Digite seu e-mail"
+              formControlName="email"
+              autocomplete="username"
+            />
           </div>
           <div class="card-input">
-            <label for="password">Senha</label>
+            <label for="current-password">Senha</label>
             <span class="input-icon">
-              <input [type]="view_pass ? 'text' : 'password'" id="password" placeholder="Digite sua senha"
-                formControlName="password">
-              <button type="button" mat-icon-button aria-label="Ver senha" (click)="view_pass = !view_pass">
+              <input
+                [type]="view_pass ? 'text' : 'password'"
+                id="current-password"
+                autocomplete="current-password"
+                placeholder="Digite sua senha"
+                formControlName="password"
+              />
+              <button
+                type="button"
+                mat-icon-button
+                aria-label="Ver senha"
+                (click)="view_pass = !view_pass"
+              >
                 <i icon="view_pass" *ngIf="!view_pass"></i>
                 <i icon="hide_pass" *ngIf="view_pass"></i>
               </button>
             </span>
             <span class="forgot-password">
-              <a class="f-12" routerLink="/forgot-password">Esqueceu sua senha?</a>
+              <a class="f-12" routerLink="/forgot-password"
+                >Esqueceu sua senha?</a
+              >
             </span>
           </div>
           <div class="card-input">
-            <mat-checkbox formControlName="remember"><span class="f-14">Lembrar-me</span></mat-checkbox>
+            <mat-checkbox formControlName="remember"
+              ><span class="f-14">Lembrar-me</span></mat-checkbox
+            >
           </div>
           <div class="card-input">
-            <button mat-button type="submit" class="primary" [disabled]="loading">
+            <button
+              mat-button
+              type="submit"
+              class="primary"
+              [disabled]="loading"
+            >
               Entrar
               <loading *ngIf="loading"></loading>
             </button>

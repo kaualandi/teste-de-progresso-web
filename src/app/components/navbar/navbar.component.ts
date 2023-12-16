@@ -27,6 +27,8 @@ export class NavbarComponent implements OnInit {
 
   loading = false;
 
+  user$ = this.storage.watchUser().pipe(takeUntilDestroyed());
+
   navbar_hidden = true;
   scroll = false;
   navbar_height = 0;
@@ -35,14 +37,12 @@ export class NavbarComponent implements OnInit {
     this.onWindowScroll();
 
     this.getMe();
-    this.storage
-      .watchUser()
-      .pipe(takeUntilDestroyed())
-      .subscribe({
-        next: () => {
-          this.getMe();
-        },
-      });
+
+    this.user$.subscribe({
+      next: () => {
+        this.getMe();
+      },
+    });
   }
 
   getMe() {

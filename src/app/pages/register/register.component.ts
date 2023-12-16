@@ -75,7 +75,7 @@ export class RegisterComponent {
   validScore(control: AbstractControl) {
     const password = control.value;
     if (password) {
-      if (this.score < 3) {
+      if (this?.score < 3) {
         return { invalidPassword: true };
       }
     }
