@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
+import { GeolocationService } from './../../services/geolocation.service';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,10 @@ import { NotifierService } from 'angular-notifier';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  constructor(private notifier: NotifierService) {}
+  constructor(
+    private notifier: NotifierService,
+    private geolocation: GeolocationService
+  ) {}
 
   names = [
     'João da Silva',
@@ -19,5 +23,11 @@ export class HomeComponent {
 
   showNotification() {
     this.notifier.notify('success', 'Hello world!');
+  }
+
+  getLocation() {
+    this.geolocation.getCurrentPosition().subscribe((data) => {
+      console.log(data);
+    });
   }
 }
