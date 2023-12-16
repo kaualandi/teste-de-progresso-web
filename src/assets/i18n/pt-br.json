@@ -1,4 +1,9 @@
 {
+  "navbar": {
+    "home": "Início",
+    "about": "Sobre",
+    "contact": "Contato"
+  },
   "login-register": {
     "login-title": "Entrar",
     "register-title": "Cadastro",
@@ -20,6 +25,15 @@
       "male": "Masculino",
       "famale": "Feminino",
       "do-not-inform": "Não informar"
+    },
+    "placeholders": {
+      "name": "Digite seu nome",
+      "email": "Digite seu e-mail",
+      "password": "Digite sua senha",
+      "re-password": "Repita sua senha",
+      "cellphone": "Digite seu celular",
+      "cpf": "Digite seu CPF",
+      "birth-date": "Digite sua data de nascimento"
     }
   },
   "languages": {

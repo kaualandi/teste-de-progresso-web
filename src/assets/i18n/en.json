@@ -1,4 +1,9 @@
 {
+  "navbar": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact"
+  },
   "login-register": {
     "login-title": "Login",
     "register-title": "Register",
@@ -20,6 +25,15 @@
       "male": "Male",
       "famale": "Female",
       "do-not-inform": "Do not inform"
+    },
+    "placeholders": {
+      "name": "Enter your name",
+      "email": "Enter your email",
+      "password": "Enter your password",
+      "re-password": "Repeat your password",
+      "cellphone": "Enter your cellphone",
+      "cpf": "Enter your CPF",
+      "birth-date": "Enter your birth date"
     }
   },
   "languages": {

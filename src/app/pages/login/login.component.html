@@ -25,7 +25,9 @@
             <input
               type="email"
               id="username"
-              placeholder="Digite seu e-mail"
+              placeholder="{{
+                'login-register.placeholders.email' | translate
+              }}"
               formControlName="email"
               autocomplete="username"
             />
@@ -39,7 +41,9 @@
                 [type]="view_pass ? 'text' : 'password'"
                 id="current-password"
                 autocomplete="current-password"
-                placeholder="Digite sua senha"
+                placeholder="{{
+                  'login-register.placeholders.password' | translate
+                }}"
                 formControlName="password"
               />
               <button

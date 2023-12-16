@@ -21,9 +21,10 @@
     </div>
 
     <div class="menu {{ colapse }}" [ngClass]="{ hidden: navbar_hidden }">
-      <a mat-button routerLink="/">Início</a>
-      <a mat-button routerLink="/about">Sobre</a>
-      <a mat-button routerLink="/contact">Contato</a>
+      <a mat-button routerLink="/">{{ 'navbar.home' | translate }}</a>
+      <a mat-button routerLink="/about">{{ 'navbar.about' | translate }}</a>
+      <a mat-button routerLink="/contact">{{ 'navbar.contact' | translate }}</a>
+      <lang-select></lang-select>
     </div>
   </div>
 </nav>

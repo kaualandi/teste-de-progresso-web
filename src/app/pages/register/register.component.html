@@ -24,7 +24,7 @@
             <input
               type="text"
               id="name"
-              placeholder="Digite seu nome"
+              placeholder="{{ 'login-register.placeholders.name' | translate }}"
               formControlName="name"
             />
           </div>
@@ -34,7 +34,9 @@
             <input
               type="email"
               id="email"
-              placeholder="Digite seu e-mail"
+              placeholder="{{
+                'login-register.placeholders.email' | translate
+              }}"
               autocomplete="username"
               formControlName="email"
             />
@@ -47,7 +49,9 @@
             <input
               type="text"
               id="phone"
-              placeholder="Digite seu celular"
+              placeholder="{{
+                'login-register.placeholders.cellphone' | translate
+              }}"
               mask="(00) 00000-0000"
               formControlName="phone"
             />
@@ -58,7 +62,7 @@
             <input
               type="text"
               id="cpf"
-              placeholder="Digite seu CPF"
+              placeholder="{{ 'login-register.placeholders.cpf' | translate }}"
               mask="000.000.000-00"
               formControlName="cpf"
             />
@@ -73,7 +77,9 @@
                 type="text"
                 id="birth_date"
                 [matDatepicker]="picker"
-                placeholder="Digite seu nascimento"
+                placeholder="{{
+                  'login-register.placeholders.birth-date' | translate
+                }}"
                 formControlName="birth_date"
                 [max]="now"
               />
@@ -110,7 +116,9 @@
               <input
                 [type]="view_pass ? 'text' : 'password'"
                 id="new-password"
-                placeholder="Digite sua senha"
+                placeholder="{{
+                  'login-register.placeholders.password' | translate
+                }}"
                 autocomplete="new-password"
                 formControlName="password"
               />
@@ -139,7 +147,9 @@
               <input
                 [type]="view_repass ? 'text' : 'password'"
                 id="repeat-password"
-                placeholder="Repita a senha"
+                placeholder="{{
+                  'login-register.placeholders.re-password' | translate
+                }}"
                 autocomplete="new-password"
                 formControlName="re_password"
               />
