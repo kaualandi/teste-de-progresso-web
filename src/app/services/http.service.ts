@@ -8,9 +8,10 @@ import { NotifierService } from 'angular-notifier';
 import { catchError, retry, throwError } from 'rxjs';
 import { StorageService } from 'src/app/services/storage.service';
 import { environment } from 'src/environments/environment';
+import { ObjectService } from './object.service';
 
 export interface BodyJson {
-  [key: string]: string | number | boolean | BodyJson | BodyJson[];
+  [key: string]: unknown;
 }
 
 type ApplicationsTypes = 'json' | 'x-www-form-urlencoded';
@@ -22,13 +23,17 @@ export class HttpService {
   constructor(
     private http: HttpClient,
     private storage: StorageService,
-    private notifier: NotifierService
+    private notifier: NotifierService,
+    private objectService: ObjectService
   ) {}
 
   public base_url = environment.base_url;
   private repeat = 1;
 
   private getBodyType(body: BodyJson | HttpParams): ApplicationsTypes {
+    if (!(body instanceof HttpParams)) {
+      this.objectService.removeEmptyValues(body);
+    }
     return body instanceof HttpParams ? 'x-www-form-urlencoded' : 'json';
   }
 

@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { zoomInAnimation } from 'src/app/animations/route-animation';
 import { CookiesLoginComponent } from 'src/app/components/modals/cookies-login/cookies-login.component';
+import { BodyJson } from 'src/app/services/http.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { AuthService } from './../../services/auth.service';
 
@@ -43,14 +44,11 @@ export class LoginComponent implements OnInit {
 
     this.loading = true;
 
-    const email: string = this.login_form.value.email as string;
-    const password: string = this.login_form.value.password as string;
-    const remember: boolean = this.login_form.value.remember as boolean;
-
-    this.authService.login(email, password).subscribe({
+    const body = this.login_form.value as BodyJson;
+    this.authService.login(body).subscribe({
       next: (response) => {
         this.loading = false;
-        this.storage.setToken(response.token, remember);
+        this.storage.setToken(response.token, body['remember'] as boolean);
         this.router.navigate(['/']);
       },
       error: () => {
