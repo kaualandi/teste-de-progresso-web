@@ -1,0 +1,29 @@
+{
+  "login-register": {
+    "login-title": "Login",
+    "register-title": "Register",
+    "not-registered": "Don't have an account?",
+    "already-registered": "Already have an account?",
+    "go-register": "register",
+    "go-login": "log in",
+    "forgot-password": "Forgot your password?",
+    "remember-me": "Remember me",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "re-password": "Repeat password",
+    "cellphone": "Cellphone",
+    "cpf": "CPF",
+    "birth-date": "Date of birth",
+    "genre": "Sex",
+    "genres": {
+      "male": "Male",
+      "famale": "Female",
+      "do-not-inform": "Do not inform"
+    }
+  },
+  "languages": {
+    "pt-br": "Portuguese",
+    "en": "English"
+  }
+}

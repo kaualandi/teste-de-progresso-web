@@ -1,5 +1,8 @@
 <main id="login">
   <div [@zoomInAnimation] class="row">
+    <div class="lang">
+      <lang-select></lang-select>
+    </div>
     <div class="col">
       <div class="logo">
         <img src="assets/images/logo.png" alt="Logo" />
@@ -8,10 +11,17 @@
     <div class="col">
       <div class="form">
         <form (ngSubmit)="loginSubmitHandler()" [formGroup]="login_form">
-          <h1>Login</h1>
-          <p>Não possui conta? <a routerLink="/register">cadastre-se</a></p>
+          <h1>{{ 'login-register.login-title' | translate }}</h1>
+          <p>
+            {{ 'login-register.not-registered' | translate }}
+            <a routerLink="/register">{{
+              'login-register.go-register' | translate
+            }}</a>
+          </p>
           <div class="card-input">
-            <label for="username">E-mail</label>
+            <label for="username">
+              {{ 'login-register.email' | translate }}
+            </label>
             <input
               type="email"
               id="username"
@@ -21,7 +31,9 @@
             />
           </div>
           <div class="card-input">
-            <label for="current-password">Senha</label>
+            <label for="current-password">{{
+              'login-register.password' | translate
+            }}</label>
             <span class="input-icon">
               <input
                 [type]="view_pass ? 'text' : 'password'"
@@ -41,13 +53,15 @@
               </button>
             </span>
             <span class="forgot-password">
-              <a class="f-12" routerLink="/forgot-password"
-                >Esqueceu sua senha?</a
-              >
+              <a class="f-12" routerLink="/forgot-password">
+                {{ 'login-register.forgot-password' | translate }}
+              </a>
             </span>
           </div>
           <div class="card-input">
-            <mat-checkbox formControlName="remember">Lembrar-me</mat-checkbox>
+            <mat-checkbox formControlName="remember">
+              {{ 'login-register.remember-me' | translate }}
+            </mat-checkbox>
           </div>
           <div class="card-input">
             <button
@@ -56,7 +70,7 @@
               class="primary"
               [disabled]="loading"
             >
-              Entrar
+              {{ 'login-register.login-title' | translate }}
               <loading *ngIf="loading"></loading>
             </button>
           </div>

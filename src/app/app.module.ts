@@ -1,5 +1,5 @@
 import { DatePipe, registerLocaleData } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import localePt from '@angular/common/locales/pt';
 import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import {
@@ -16,6 +16,8 @@ import { environment } from './../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NotifierModule } from 'angular-notifier';
 import { provideEnvironmentNgxMask } from 'ngx-mask';
 import { AppComponent } from './app.component';
@@ -23,6 +25,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { SharedModule } from './components/shared/shared.module';
 import { CONFIG_NOTIFIER } from './constants/notifier';
 
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 registerLocaleData(localePt);
 
 const MY_DATE_FORMAT = {
@@ -54,6 +59,14 @@ const MY_DATE_FORMAT = {
       registrationStrategy: 'registerWhenStable:30000',
     }),
     NotifierModule.withConfig(CONFIG_NOTIFIER),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+      defaultLanguage: 'pt-br',
+    }),
   ],
   providers: [
     DatePipe,

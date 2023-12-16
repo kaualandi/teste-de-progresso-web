@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import * as AOS from 'aos';
 import { FullpageLoadingService } from './services/fullpage-loading.service';
 import { ThemeService } from './services/theme.service';
@@ -11,8 +12,12 @@ import { ThemeService } from './services/theme.service';
 export class AppComponent implements OnInit {
   constructor(
     private theme: ThemeService,
-    private fullpageLoading: FullpageLoadingService
-  ) {}
+    private fullpageLoading: FullpageLoadingService,
+    translate: TranslateService
+  ) {
+    translate.setDefaultLang('pt-br');
+    translate.use('pt-br');
+  }
 
   loading = this.fullpageLoading.loading;
 

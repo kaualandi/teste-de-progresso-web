@@ -10,9 +10,16 @@
     min-height: 100vh;
     display: flex;
     justify-content: center;
+    position: relative;
     @include media('<=tablet') {
       gap: 2rem;
       flex-direction: column;
+    }
+
+    .lang {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
     }
 
     .col {
