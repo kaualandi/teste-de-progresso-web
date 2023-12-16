@@ -3,18 +3,18 @@ import { NotifierOptions } from 'angular-notifier';
 export const CONFIG_NOTIFIER: NotifierOptions = {
   position: {
     horizontal: {
-      position: 'left',
+      position: 'right',
       distance: 12,
     },
     vertical: {
-      position: 'bottom',
+      position: 'top',
       distance: 12,
       gap: 10,
     },
   },
   theme: 'material',
   behaviour: {
-    autoHide: 5000,
+    autoHide: 3000,
     onClick: 'hide',
     onMouseover: 'pauseAutoHide',
     showDismissButton: true,

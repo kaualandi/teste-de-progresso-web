@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-home',
@@ -6,6 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
+  constructor(private notifier: NotifierService) {}
+
   names = [
     'João da Silva',
     'Maria de Fátima',
@@ -13,4 +16,8 @@ export class HomeComponent {
     'Lucas dos Santos',
     'Ana e Luiz',
   ];
+
+  showNotification() {
+    this.notifier.notify('success', 'Hello world!');
+  }
 }
