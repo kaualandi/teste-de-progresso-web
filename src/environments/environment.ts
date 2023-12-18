@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   base_url: '',
+  version: '0.1.2',
 };
 
 /*
