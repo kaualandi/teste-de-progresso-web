@@ -1,6 +1,6 @@
 {
   "name": "web-boilerplate",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open",
@@ -14,7 +14,7 @@
     "clear": "rm -rf node_modules && rm package-lock.json && rm -rf .angular && npm install",
     "s3": "aws s3 cp dist s3://........... --recursive",
     "build:s3": "ng build && npm run s3",
-    "release": "standard-version --major"
+    "release": "standard-version"
   },
   "private": true,
   "dependencies": {
