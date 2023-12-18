@@ -42,7 +42,7 @@
     "en": "English"
   },
   "errors": {
-    "error": "Erro",
+    "error": "Error",
     "500": "Internal error on our servers",
     "404": "This page you are trying to access does not exist, has been removed, or is temporarily unavailable",
     "403": "You do not have permission to access this page",
