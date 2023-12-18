@@ -6,6 +6,7 @@ import { zoomInAnimation } from 'src/app/animations/route-animation';
 import { CookiesLoginComponent } from 'src/app/components/modals/cookies-login/cookies-login.component';
 import { BodyJson } from 'src/app/services/http.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { environment } from 'src/environments/environment';
 import { AuthService } from './../../services/auth.service';
 
 @Component({
@@ -25,6 +26,8 @@ export class LoginComponent implements OnInit {
 
   loading = false;
   view_pass = false;
+
+  version = environment.version;
 
   login_form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],

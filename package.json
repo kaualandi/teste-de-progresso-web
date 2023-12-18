@@ -14,7 +14,10 @@
     "clear": "rm -rf node_modules && rm package-lock.json && rm -rf .angular && npm install",
     "s3": "aws s3 cp dist s3://........... --recursive",
     "build:s3": "ng build && npm run s3",
-    "release": "standard-version && ts-node ./version.ts && git c \"chore(env): update enviroment versions\""
+    "post-release": "ts-node ./version.ts && git c \"chore(env): update enviroment versions\" && git push --tags",
+    "release:ma": "standard-version --release-as major && npm run post-release",
+    "release:mi": "standard-version --release-as minor && npm run post-release",
+    "release:p": "standard-version --release-as patch && npm run post-release"
   },
   "private": true,
   "dependencies": {

@@ -24,6 +24,13 @@
       left: 1rem;
     }
 
+    .version {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      color: var(--primary-bg);
+    }
+
     .col {
       width: 100%;
 
