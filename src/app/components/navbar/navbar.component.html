@@ -29,6 +29,11 @@
   </div>
 </nav>
 
-<div [@routeAnimations]="outlet && outlet.activatedRouteData">
+<div
+  [@routeAnimations]="outlet && outlet.activatedRouteData"
+  *ngIf="!loading && !error"
+>
   <router-outlet #outlet="outlet"></router-outlet>
 </div>
+
+<page-error [code]="error"></page-error>

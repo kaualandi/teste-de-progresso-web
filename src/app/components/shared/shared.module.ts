@@ -18,57 +18,47 @@ import { ConfirmModalComponent } from '../modals/confirm-modal/confirm-modal.com
 import { AvatarComponent } from './avatar/avatar.component';
 import { LangSelectComponent } from './lang-select/lang-select.component';
 import { LoadingComponent } from './loading/loading.component';
+import { PageErrorComponent } from './page-error/page-error.component';
 import { PageLoadingComponent } from './page-loading/page-loading.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { PasswordStregthComponent } from './password-stregth/password-stregth.component';
 import { SkeletonLoadingComponent } from './skeleton-loading/skeleton-loading.component';
 
+const IMPORTS = [
+  MatButtonModule,
+  NgxMaskDirective,
+  NgxMaskPipe,
+  TranslateModule,
+];
+
+const DECLARATIONS = [
+  LoadingComponent,
+  PageLoadingComponent,
+  PaginationComponent,
+  IconDirective,
+  InputFileDirective,
+  InitialLettersDirective,
+  ConfirmModalComponent,
+  SkeletonLoadingComponent,
+  SafePipe,
+  AvatarComponent,
+  PrevPageDirective,
+  PasswordStregthComponent,
+  StopPropagDirective,
+  LangSelectComponent,
+  PageErrorComponent,
+];
+
 @NgModule({
   imports: [
+    ...IMPORTS,
     CommonModule,
-    MatButtonModule,
     MatDialogModule,
     ReactiveFormsModule,
-    NgxMaskDirective,
-    NgxMaskPipe,
     MatMenuModule,
     MatTooltipModule,
-    TranslateModule,
   ],
-  declarations: [
-    LoadingComponent,
-    PageLoadingComponent,
-    PaginationComponent,
-    IconDirective,
-    InputFileDirective,
-    InitialLettersDirective,
-    ConfirmModalComponent,
-    SkeletonLoadingComponent,
-    SafePipe,
-    AvatarComponent,
-    PrevPageDirective,
-    PasswordStregthComponent,
-    StopPropagDirective,
-    LangSelectComponent,
-  ],
-  exports: [
-    LoadingComponent,
-    PageLoadingComponent,
-    PaginationComponent,
-    IconDirective,
-    InputFileDirective,
-    MatButtonModule,
-    ConfirmModalComponent,
-    SkeletonLoadingComponent,
-    SafePipe,
-    InitialLettersDirective,
-    AvatarComponent,
-    PasswordStregthComponent,
-    NgxMaskDirective,
-    NgxMaskPipe,
-    StopPropagDirective,
-    TranslateModule,
-    LangSelectComponent,
-  ],
+  declarations: [...DECLARATIONS],
+  exports: [...IMPORTS, ...DECLARATIONS],
 })
 export class SharedModule {}

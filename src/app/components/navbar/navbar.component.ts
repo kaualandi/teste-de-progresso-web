@@ -30,6 +30,7 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   loading = false;
+  error = 0;
 
   user$ = this.storage.watchUser().pipe(takeUntilDestroyed());
 
@@ -39,7 +40,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.onWindowScroll();
-
+    this.loading = true;
     this.getMe();
 
     this.user$.subscribe({
@@ -50,6 +51,18 @@ export class NavbarComponent implements OnInit {
   }
 
   getMe() {
+    this.error = 0;
+    this.authService.getMe().subscribe({
+      next: () => {
+        this.loading = false;
+      },
+      error: (error) => {
+        console.log(error.status);
+
+        this.error = error.status;
+        this.loading = false;
+      },
+    });
     // ? Requisição para pegar o usuário logado
     // * Adicione o código abaixo no tratamento de erro da requisição
     // if (error?.status === 401) {

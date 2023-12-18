@@ -2,7 +2,8 @@
   "navbar": {
     "home": "Início",
     "about": "Sobre",
-    "contact": "Contato"
+    "contact": "Contato",
+    "help": "Ajuda"
   },
   "login-register": {
     "login-title": "Entrar",
@@ -39,5 +40,14 @@
   "languages": {
     "pt-br": "Português",
     "en": "Inglês"
+  },
+  "errors": {
+    "error": "Erro",
+    "500": "Erro interno em nossos servidores",
+    "404": "Está pagina que está tentando acessar não existe, foi removida ou está temporariamente indisponível",
+    "403": "Você não tem permissão para acessar esta pagina",
+    "401": "Você não está autenticado",
+    "400": "Seu pedido não pode ser processado",
+    "default": "Um erro inesperado aconteceu"
   }
 }
