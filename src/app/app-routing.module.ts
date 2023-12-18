@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { PageErrorComponent } from './components/shared/page-error/page-error.component';
 
 const SPR = false;
 
@@ -27,7 +28,8 @@ const routes: Routes = [
       },
       {
         path: '**',
-        redirectTo: '',
+        component: PageErrorComponent,
+        data: { code: 404 },
       },
     ],
   },

@@ -36,4 +36,4 @@
   <router-outlet #outlet="outlet"></router-outlet>
 </div>
 
-<page-error [code]="error"></page-error>
+<page-error [code]="error" *ngIf="error && !loading"></page-error>
