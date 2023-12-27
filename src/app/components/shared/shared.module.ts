@@ -13,6 +13,7 @@ import { InitialLettersDirective } from 'src/app/directives/initial-letters.dire
 import { InputFileDirective } from 'src/app/directives/input-file.directive';
 import { PrevPageDirective } from '../../directives/prev-page.directive';
 import { StopPropagDirective } from '../../directives/stop-propag.directive';
+import { FilterDataPipe } from '../../pipes/filter-data.pipe';
 import { SafePipe } from '../../pipes/safe.pipe';
 import { ConfirmModalComponent } from '../modals/confirm-modal/confirm-modal.component';
 import { AvatarComponent } from './avatar/avatar.component';
@@ -47,6 +48,7 @@ const DECLARATIONS = [
   StopPropagDirective,
   LangSelectComponent,
   PageErrorComponent,
+  FilterDataPipe,
 ];
 
 @NgModule({

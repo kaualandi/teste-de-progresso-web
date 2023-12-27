@@ -56,8 +56,9 @@ export class NavbarComponent implements OnInit {
       next: () => {
         this.loading = false;
       },
-      error: (error) => {
-        this.error = error.status;
+      error: () => {
+        // ! ⬆ Adicione o parametro error aqui para que o erro seja capturado
+        // this.error = error.status; // ! Descomente esta linha para que o erro seja exibido
         this.loading = false;
       },
     });

@@ -72,7 +72,7 @@ export class HttpService {
    * *O Content-Type é application/json*
    *
    * @param url URL da requisição (a falta do http acarretará na concatenação com o base_url)
-   * @param params *opicinal* - Query parametros da requisição (itens depois do **?** na url)
+   * @param params *opcinal* - Query parametros da requisição (itens depois do **?** na url)
    * @returns Retorna um Observable de sua requisição
    */
   get<T>(url: string, params?: HttpParams) {
@@ -90,7 +90,7 @@ export class HttpService {
    *
    * @param url URL da requisição (a falta do http acarretará na concatenação com o base_url)
    * @param body Corpo da requisição
-   * @param params *opicinal* - Query parametros da requisição (itens depois do **?** na url)
+   * @param params *opcinal* - Query parametros da requisição (itens depois do **?** na url)
    * @returns Retorna um Observable de sua requisição
    */
   post<T>(url: string, body: HttpParams | BodyJson, params?: HttpParams) {
@@ -114,7 +114,7 @@ export class HttpService {
    *
    * @param url URL da requisição (a falta do http acarretará na concatenação com o base_url)
    * @param body Corpo da requisição
-   * @param params *opicinal* - Query parametros da requisição (itens depois do **?** na url)
+   * @param params *opcinal* - Query parametros da requisição (itens depois do **?** na url)
    * @returns Retorna um Observable de sua requisição
    */
   patch<T>(url: string, body: HttpParams | BodyJson, params?: HttpParams) {
@@ -134,7 +134,7 @@ export class HttpService {
    * *O Content-Type é application/json*
    *
    * @param url URL da requisição (a falta do http acarretará na concatenação com o base_url)
-   * @param params *opicinal* - Query parametros da requisição (itens depois do **?** na url)
+   * @param params *opcinal* - Query parametros da requisição (itens depois do **?** na url)
    * @returns Retorna um Observable de sua requisição
    */
   delete<T>(url: string, params?: HttpParams) {
