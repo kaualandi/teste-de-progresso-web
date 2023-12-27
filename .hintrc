@@ -14,7 +14,8 @@
         ]
       }
     ],
-    "compat-api/css": "off"
+    "compat-api/css": "off",
+    "axe/forms": "off"
   },
   "browserslist": [
     "defaults",

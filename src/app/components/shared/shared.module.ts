@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
@@ -14,6 +15,7 @@ import { InputFileDirective } from 'src/app/directives/input-file.directive';
 import { PrevPageDirective } from '../../directives/prev-page.directive';
 import { StopPropagDirective } from '../../directives/stop-propag.directive';
 import { FilterDataPipe } from '../../pipes/filter-data.pipe';
+import { FormErrorPipe } from '../../pipes/form-error.pipe';
 import { SafePipe } from '../../pipes/safe.pipe';
 import { ConfirmModalComponent } from '../modals/confirm-modal/confirm-modal.component';
 import { AvatarComponent } from './avatar/avatar.component';
@@ -30,6 +32,9 @@ const IMPORTS = [
   NgxMaskDirective,
   NgxMaskPipe,
   TranslateModule,
+  FormsModule,
+  ReactiveFormsModule,
+  MatInputModule,
 ];
 
 const DECLARATIONS = [
@@ -49,6 +54,7 @@ const DECLARATIONS = [
   LangSelectComponent,
   PageErrorComponent,
   FilterDataPipe,
+  FormErrorPipe,
 ];
 
 @NgModule({
@@ -56,7 +62,6 @@ const DECLARATIONS = [
     ...IMPORTS,
     CommonModule,
     MatDialogModule,
-    ReactiveFormsModule,
     MatMenuModule,
     MatTooltipModule,
   ],

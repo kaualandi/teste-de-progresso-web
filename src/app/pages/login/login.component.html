@@ -18,56 +18,59 @@
               'login-register.go-register' | translate
             }}</a>
           </p>
-          <div class="card-input">
-            <label for="username">
+
+          <mat-form-field>
+            <mat-label>
               {{ 'login-register.email' | translate }}
-            </label>
+            </mat-label>
             <input
+              matInput
               type="email"
-              id="username"
-              placeholder="{{
-                'login-register.placeholders.email' | translate
-              }}"
               formControlName="email"
               autocomplete="username"
             />
-          </div>
-          <div class="card-input">
-            <label for="current-password">
+            <mat-error>
+              {{ login_form.controls.email.errors | formError | translate }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>
               {{ 'login-register.password' | translate }}
-            </label>
-            <span class="input-icon">
-              <input
-                [type]="view_pass ? 'text' : 'password'"
-                id="current-password"
-                autocomplete="current-password"
-                placeholder="{{
-                  'login-register.placeholders.password' | translate
-                }}"
-                formControlName="password"
-              />
-              <button
-                type="button"
-                mat-icon-button
-                aria-label="Ver senha"
-                (click)="view_pass = !view_pass"
-              >
-                <i icon="view_pass" *ngIf="!view_pass"></i>
-                <i icon="hide_pass" *ngIf="view_pass"></i>
-              </button>
-            </span>
-            <span class="forgot-password">
-              <a class="f-12" routerLink="/forgot-password">
-                {{ 'login-register.forgot-password' | translate }}
-              </a>
-            </span>
+            </mat-label>
+            <input
+              matInput
+              [type]="view_pass ? 'text' : 'password'"
+              formControlName="password"
+              autocomplete="current-password"
+            />
+
+            <button
+              type="button"
+              mat-icon-button
+              matSuffix
+              aria-label="Ver senha"
+              (click)="view_pass = !view_pass"
+            >
+              <i icon="view_pass" *ngIf="!view_pass"></i>
+              <i icon="hide_pass" *ngIf="view_pass"></i>
+            </button>
+
+            <mat-error>
+              {{ login_form.controls.password.errors | formError | translate }}
+            </mat-error>
+          </mat-form-field>
+
+          <div class="forgot-password">
+            <a class="f-12" routerLink="/forgot-password">
+              {{ 'login-register.forgot-password' | translate }}
+            </a>
           </div>
-          <div class="card-input">
-            <mat-checkbox formControlName="remember">
-              {{ 'login-register.remember-me' | translate }}
-            </mat-checkbox>
-          </div>
-          <div class="card-input">
+
+          <mat-checkbox formControlName="remember">
+            {{ 'login-register.remember-me' | translate }}
+          </mat-checkbox>
+
+          <div class="buttons full">
             <button
               mat-button
               type="submit"

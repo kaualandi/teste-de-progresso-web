@@ -26,15 +26,6 @@
       "male": "Male",
       "famale": "Female",
       "do-not-inform": "Do not inform"
-    },
-    "placeholders": {
-      "name": "Enter your name",
-      "email": "Enter your email",
-      "password": "Enter your password",
-      "re-password": "Repeat your password",
-      "cellphone": "Enter your cellphone",
-      "cpf": "Enter your CPF",
-      "birth-date": "Enter your birth date"
     }
   },
   "languages": {
@@ -48,6 +39,10 @@
     "403": "You do not have permission to access this page",
     "401": "You are not logged in",
     "400": "Your request cannot be processed",
-    "default": "An unexpected error occurred"
+    "default": "An unexpected error occurred",
+    "form": {
+      "required": "Campo obrigatório",
+      "email": "E-mail inválido"
+    }
   }
 }

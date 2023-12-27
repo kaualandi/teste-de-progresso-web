@@ -19,83 +19,91 @@
             </a>
           </p>
 
-          <div class="card-input">
-            <label for="name">{{ 'login-register.name' | translate }}</label>
-            <input
-              type="text"
-              id="name"
-              placeholder="{{ 'login-register.placeholders.name' | translate }}"
-              formControlName="name"
-            />
-          </div>
+          <mat-form-field>
+            <mat-label>
+              {{ 'login-register.name' | translate }}
+            </mat-label>
+            <input matInput type="text" formControlName="name" />
+            <mat-error>
+              {{ register_form.controls.name.errors | formError | translate }}
+            </mat-error>
+          </mat-form-field>
 
-          <div class="card-input">
-            <label for="email">{{ 'login-register.email' | translate }}</label>
+          <mat-form-field>
+            <mat-label>
+              {{ 'login-register.email' | translate }}
+            </mat-label>
             <input
+              matInput
               type="email"
-              id="email"
-              placeholder="{{
-                'login-register.placeholders.email' | translate
-              }}"
               autocomplete="username"
               formControlName="email"
             />
-          </div>
 
-          <div class="card-input">
-            <label for="phone">
+            <mat-error>
+              {{ register_form.controls.email.errors | formError | translate }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>
               {{ 'login-register.cellphone' | translate }}
-            </label>
+            </mat-label>
             <input
+              matInput
               type="text"
-              id="phone"
-              placeholder="{{
-                'login-register.placeholders.cellphone' | translate
-              }}"
               mask="(00) 00000-0000"
               formControlName="phone"
             />
-          </div>
+            <mat-error>
+              {{ register_form.controls.phone.errors | formError | translate }}
+            </mat-error>
+          </mat-form-field>
 
-          <div class="card-input">
-            <label for="cpf">{{ 'login-register.cpf' | translate }}</label>
+          <mat-form-field>
+            <mat-label>
+              {{ 'login-register.cpf' | translate }}
+            </mat-label>
             <input
+              matInput
               type="text"
-              id="cpf"
-              placeholder="{{ 'login-register.placeholders.cpf' | translate }}"
               mask="000.000.000-00"
               formControlName="cpf"
             />
-          </div>
+            <mat-error>
+              {{ register_form.controls.cpf.errors | formError | translate }}
+            </mat-error>
+          </mat-form-field>
 
-          <div class="card-input">
-            <label for="birth_date">
+          <mat-form-field>
+            <mat-label>
               {{ 'login-register.birth-date' | translate }}
-            </label>
-            <div class="input-icon">
-              <input
-                type="text"
-                id="birth_date"
-                [matDatepicker]="picker"
-                placeholder="{{
-                  'login-register.placeholders.birth-date' | translate
-                }}"
-                formControlName="birth_date"
-                [max]="now"
-              />
-              <mat-datepicker-toggle
-                matIconSuffix
-                [for]="picker"
-              ></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </div>
-          </div>
+            </mat-label>
+            <input
+              matInput
+              type="text"
+              [matDatepicker]="picker"
+              formControlName="birth_date"
+              [max]="now"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker matSuffix #picker></mat-datepicker>
 
-          <div class="card-input">
-            <label for="genre">
+            <mat-error>
+              {{
+                register_form.controls.birth_date.errors | formError | translate
+              }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>
               {{ 'login-register.genre' | translate }}
-            </label>
-            <mat-select formControlName="genre" id="genre">
+            </mat-label>
+            <mat-select matInput formControlName="genre">
               <mat-option value="M">
                 {{ 'login-register.genres.male' | translate }}
               </mat-option>
@@ -106,66 +114,75 @@
                 {{ 'login-register.genres.do-not-inform' | translate }}
               </mat-option>
             </mat-select>
-          </div>
 
-          <div class="card-input">
-            <label for="new-password">{{
-              'login-register.password' | translate
-            }}</label>
-            <span class="input-icon">
-              <input
-                [type]="view_pass ? 'text' : 'password'"
-                id="new-password"
-                placeholder="{{
-                  'login-register.placeholders.password' | translate
-                }}"
-                autocomplete="new-password"
-                formControlName="password"
-              />
-              <button
-                type="button"
-                mat-icon-button
-                aria-label="Ver senha"
-                (click)="view_pass = !view_pass"
-              >
-                <i icon="view_pass" *ngIf="!view_pass"></i>
-                <i icon="hide_pass" *ngIf="view_pass"></i>
-              </button>
-            </span>
+            <mat-error>
+              {{ register_form.controls.genre.errors | formError | translate }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>
+              {{ 'login-register.password' | translate }}
+            </mat-label>
+            <input
+              matInput
+              [type]="view_pass ? 'text' : 'password'"
+              autocomplete="new-password"
+              formControlName="password"
+            />
+            <button
+              type="button"
+              mat-icon-button
+              matSuffix
+              aria-label="Ver senha"
+              (click)="view_pass = !view_pass"
+            >
+              <i icon="view_pass" *ngIf="!view_pass"></i>
+              <i icon="hide_pass" *ngIf="view_pass"></i>
+            </button>
             <app-password-stregth
               *ngIf="password"
               [password]="password"
               (score)="score = $event"
             ></app-password-stregth>
-          </div>
+            <mat-error>
+              {{
+                register_form.controls.password.errors | formError | translate
+              }}
+            </mat-error>
+          </mat-form-field>
 
-          <div class="card-input">
-            <label for="repeat-password">
+          <mat-form-field>
+            <mat-label>
               {{ 'login-register.re-password' | translate }}
-            </label>
-            <span class="input-icon">
-              <input
-                [type]="view_repass ? 'text' : 'password'"
-                id="repeat-password"
-                placeholder="{{
-                  'login-register.placeholders.re-password' | translate
-                }}"
-                autocomplete="new-password"
-                formControlName="re_password"
-              />
-              <button
-                type="button"
-                mat-icon-button
-                aria-label="Ver senha"
-                (click)="view_repass = !view_repass"
-              >
-                <i icon="view_pass" *ngIf="!view_repass"></i>
-                <i icon="hide_pass" *ngIf="view_repass"></i>
-              </button>
-            </span>
-          </div>
+            </mat-label>
+            <input
+              matInput
+              [type]="view_repass ? 'text' : 'password'"
+              autocomplete="new-password"
+              formControlName="re_password"
+            />
+            <button
+              type="button"
+              mat-icon-button
+              matSuffix
+              aria-label="Ver senha"
+              (click)="view_repass = !view_repass"
+            >
+              <i icon="view_pass" *ngIf="!view_repass"></i>
+              <i icon="hide_pass" *ngIf="view_repass"></i>
+            </button>
 
-          <div class="card-input">
+            <mat-error>
+              {{
+                register_form.controls.re_password.errors
+                  | formError
+                  | translate
+              }}
+            </mat-error>
+          </mat-form-field>
+
+          <div class="buttons full">
             <button
               mat-button
               type="submit"

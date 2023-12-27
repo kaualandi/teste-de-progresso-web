@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
     birth_date: [this.now, [Validators.required]],
     cpf: ['', [Validators.required, cpfValidator]],
     genre: [new FormControl<Genre>('M'), [Validators.required]],
-    password: ['', [Validators.required, this.validScore]],
+    password: ['', [Validators.required, this.validScore()]],
     re_password: ['', [Validators.required, this.samePassword()]],
   });
 
@@ -78,21 +78,23 @@ export class RegisterComponent implements OnInit {
       const password = control.value;
       if (password) {
         if (password !== this.register_form.value.password) {
-          return { invalidPassword: true };
+          return { diff_password: true };
         }
       }
       return null;
     };
   }
 
-  validScore(control: AbstractControl) {
-    const password = control.value;
-    if (password) {
-      if (this?.score < 3) {
-        return { invalidPassword: true };
+  validScore() {
+    return (control: AbstractControl) => {
+      const password = control.value;
+      if (password) {
+        if (this?.score < 3) {
+          return { poor_password: true };
+        }
       }
-    }
-    return null;
+      return null;
+    };
   }
 
   get password() {

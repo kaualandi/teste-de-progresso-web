@@ -5,7 +5,7 @@ export function cnpjValidator(control: AbstractControl) {
   if (cnpj) {
     const cnpjWithoutMask = cnpj.replace(/[^\d]+/g, '');
     if (cnpjWithoutMask.length !== 14) {
-      return { invalidCnpj: true };
+      return { cnpj: true };
     }
     let size = cnpjWithoutMask.length - 2;
     let numbers = cnpjWithoutMask.substring(0, size);
@@ -20,13 +20,13 @@ export function cnpjValidator(control: AbstractControl) {
     }
     let result = sum % 11 < 2 ? 0 : 11 - (sum % 11);
     if (result !== Number(digits.charAt(0))) {
-      return { invalidCnpj: true };
+      return { cnpj: true };
     }
     const digitsEquals = cnpjWithoutMask
       .split('')
       .every((val: number, i: number, arr: number[]) => val === arr[0]);
     if (digitsEquals) {
-      return { invalidCnpj: true };
+      return { cnpj: true };
     }
     size = size + 1;
     numbers = cnpjWithoutMask.substring(0, size);
@@ -40,7 +40,7 @@ export function cnpjValidator(control: AbstractControl) {
     }
     result = sum % 11 < 2 ? 0 : 11 - (sum % 11);
     if (result !== Number(digits.charAt(1))) {
-      return { invalidCnpj: true };
+      return { cnpj: true };
     }
   }
   return null;
@@ -51,7 +51,7 @@ export function cpfValidator(control: AbstractControl) {
   if (cpf) {
     const cpfWithoutMask = cpf.replace(/[^\d]+/g, '');
     if (cpfWithoutMask.length !== 11) {
-      return { invalidCpf: true };
+      return { cpf: true };
     }
     let sum = 0;
     let rest;
@@ -63,7 +63,7 @@ export function cpfValidator(control: AbstractControl) {
       rest = 0;
     }
     if (rest !== parseInt(cpfWithoutMask.substring(9, 10))) {
-      return { invalidCpf: true };
+      return { cpf: true };
     }
     sum = 0;
     for (let i = 1; i <= 10; i++) {
@@ -74,13 +74,13 @@ export function cpfValidator(control: AbstractControl) {
       rest = 0;
     }
     if (rest !== parseInt(cpfWithoutMask.substring(10, 11))) {
-      return { invalidCpf: true };
+      return { cpf: true };
     }
     const digitsEquals = cpfWithoutMask
       .split('')
       .every((val: number, i: number, arr: number[]) => val === arr[0]);
     if (digitsEquals) {
-      return { invalidCpf: true };
+      return { cpf: true };
     }
   }
   return null;

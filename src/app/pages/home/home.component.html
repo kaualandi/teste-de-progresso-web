@@ -3,21 +3,16 @@
 
   <img zoomable src="../../../assets/images/logo.png" alt="logo" />
 
-  <div class="card-input">
-    <label for="search">busca</label>
-    <input
-      type="text"
-      id="search"
-      placeholder="Digite algo"
-      [formControl]="search"
-    />
+  <mat-form-field>
+    <mat-label>busca</mat-label>
+    <input matInput type="text" [formControl]="search" />
+  </mat-form-field>
 
-    <ul>
-      <li *ngFor="let item of namesObj | filterData: search.value">
-        {{ item['name'] }}
-      </li>
-    </ul>
-  </div>
+  <ul>
+    <li *ngFor="let item of namesObj | filterData: search.value">
+      {{ item['name'] }}
+    </li>
+  </ul>
 
   <mat-form-field>
     <mat-label>Enter a date range</mat-label>

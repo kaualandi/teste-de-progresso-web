@@ -4,7 +4,7 @@
   </div>
   <h2>{{ 'errors.error' | translate }} {{ code || '' }}</h2>
   <p>{{ 'errors.' + translated | translate }}</p>
-  <div class="buttons">
+  <div class="buttons center">
     <a mat-button class="primary" routerLink="/" *ngIf="code !== 401">
       {{ 'navbar.home' | translate }}
     </a>

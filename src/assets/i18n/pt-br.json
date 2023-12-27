@@ -26,15 +26,6 @@
       "male": "Masculino",
       "famale": "Feminino",
       "do-not-inform": "Não informar"
-    },
-    "placeholders": {
-      "name": "Digite seu nome",
-      "email": "Digite seu e-mail",
-      "password": "Digite sua senha",
-      "re-password": "Repita sua senha",
-      "cellphone": "Digite seu celular",
-      "cpf": "Digite seu CPF",
-      "birth-date": "Digite sua data de nascimento"
     }
   },
   "languages": {
@@ -48,6 +39,15 @@
     "403": "Você não tem permissão para acessar esta pagina",
     "401": "Você não está autenticado",
     "400": "Seu pedido não pode ser processado",
-    "default": "Um erro inesperado aconteceu"
+    "default": "Um erro inesperado aconteceu",
+    "form": {
+      "required": "Campo obrigatório",
+      "email": "E-mail inválido",
+      "mask": "Valor inválido",
+      "cpf": "CPF inválido",
+      "cnpj": "CNPJ inválido",
+      "diff_password": "As senhas não conferem",
+      "poor_password": "Senha fraca"
+    }
   }
 }
