@@ -61,11 +61,6 @@ export class NavbarComponent implements OnInit {
         this.loading = false;
       },
     });
-    // ? Requisição para pegar o usuário logado
-    // * Adicione o código abaixo no tratamento de erro da requisição
-    // if (error?.status === 401) {
-    //   this.storageService.logout();
-    // }
   }
 
   logout() {
