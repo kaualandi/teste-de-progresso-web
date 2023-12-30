@@ -32,7 +32,8 @@
           }
         ],
         "no-useless-constructor": "off",
-        "dot-notation": "off"
+        "dot-notation": "off",
+        "camelcase": "off"
       }
     },
     {
