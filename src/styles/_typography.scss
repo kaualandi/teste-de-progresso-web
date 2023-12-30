@@ -1,3 +1,13 @@
+@function calc-responsive($value1, $width1, $value2, $width2) {
+  $x1: $width1;
+  $x2: $width2;
+  $y1: $value1;
+  $y2: $value2;
+  $a: calc(($y2 - $y1) / ($x2 - $x1));
+  $b: calc(($x2 * $y1 - $x1 * $y2) / ($x2 - $x1));
+  @return calc(#{$a * 100vw} + #{$b * 1px});
+}
+
 $base-font-size: 19;
 $min-font-size: 10;
 $max-font-size: 52;
@@ -6,7 +16,7 @@ $max-font-size: 52;
   $class-name: '.fd-#{$i}';
 
   #{$class-name} {
-    font-size: calc($i / $base-font-size * 1rem);
+    font-size: calc-responsive($i, 320, $i + 4, 1920);
   }
 }
 
@@ -29,35 +39,22 @@ $max-font-size: 52;
   h6 {
     @extend .fd-10;
   }
-  p {
-    @extend .fd-14;
-  }
-  a {
-    @extend .fd-14;
-  }
   ul,
   ol {
     padding-left: 1rem;
   }
-  li {
-    @extend .fd-14;
-  }
-  button {
-    @extend .fd-14;
-  }
-  span {
-    @extend .fd-14;
-  }
-  label {
-    @extend .fd-14;
-  }
+
+  p,
+  a,
+  li,
+  button,
+  span,
+  label,
   input,
+  .mat-mdc-button,
   .mat-mdc-select-value,
   .mat-mdc-select-placeholder,
   .mat-mdc-option .mdc-list-item__primary-text {
-    @extend .fd-14;
-  }
-  .mat-mdc-button {
     @extend .fd-14;
   }
 }
@@ -66,6 +63,6 @@ $max-font-size: 52;
   $class-name: '.f-#{$i}';
 
   #{$class-name} {
-    font-size: calc($i / $base-font-size * 1rem) !important;
+    font-size: calc-responsive(16, 320, 30, 1920) !important;
   }
 }
