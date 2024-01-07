@@ -1,12 +1,11 @@
 {
   "explorer.compactFolders": false,
   "editor.formatOnSave": true,
-  "[javascript]": {
-    "editor.codeActionsOnSave": { "source.fixAll.eslint": true },
-    "editor.defaultFormatter": "vscode.typescript-language-features"
-  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[typescript]": {
-    "editor.codeActionsOnSave": { "source.fixAll.eslint": true },
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+    },
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[json]": {
@@ -35,10 +34,7 @@
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "explicit"
   },
-  "eslint.validate": [
-    "javascript",
-    "typescript"
-  ],
+  "eslint.validate": ["javascript", "typescript"],
   "[javascript][typescript]": {
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": "explicit"

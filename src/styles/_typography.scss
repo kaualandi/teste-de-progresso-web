@@ -63,6 +63,6 @@ $max-font-size: 52;
   $class-name: '.f-#{$i}';
 
   #{$class-name} {
-    font-size: calc-responsive(16, 320, 30, 1920) !important;
+    font-size: calc-responsive($i, 320, $i + 4, 1920) !important;
   }
 }
