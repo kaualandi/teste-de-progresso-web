@@ -8,6 +8,7 @@ import { NotifierService } from 'angular-notifier';
 import { catchError, retry, throwError } from 'rxjs';
 import { StorageService } from 'src/app/services/storage.service';
 import { environment } from 'src/environments/environment';
+import { LanguageService } from './language.service';
 import { ObjectService } from './object.service';
 
 export interface BodyJson {
@@ -24,7 +25,8 @@ export class HttpService {
     private http: HttpClient,
     private storage: StorageService,
     private notifier: NotifierService,
-    private objectService: ObjectService
+    private objectService: ObjectService,
+    private language: LanguageService
   ) {}
 
   public base_url = environment.base_url;
@@ -45,7 +47,7 @@ export class HttpService {
   private getHeaders(application: ApplicationsTypes = 'json') {
     const headers = {
       'Content-Type': `application/${application}`,
-      'Accept-Language': this.storage.language,
+      'Accept-Language': this.language.current,
       Authorization: '',
     };
     if (this.storage.token) {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import * as AOS from 'aos';
 import { FullpageLoadingService } from './services/fullpage-loading.service';
-import { StorageService } from './services/storage.service';
+import { LanguageService } from './services/language.service';
 import { ThemeService } from './services/theme.service';
 
 @Component({
@@ -14,11 +14,11 @@ export class AppComponent implements OnInit {
   constructor(
     private theme: ThemeService,
     private fullpageLoading: FullpageLoadingService,
-    translate: TranslateService,
-    private storage: StorageService
+    public translate: TranslateService,
+    public language: LanguageService
   ) {
-    translate.setDefaultLang(storage.language);
-    translate.use(storage.language);
+    translate.setDefaultLang(language.current);
+    translate.use(language.current);
   }
 
   loading = this.fullpageLoading.loading;

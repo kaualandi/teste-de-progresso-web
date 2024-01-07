@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { StorageService } from 'src/app/services/storage.service';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'lang-select',
@@ -10,19 +10,19 @@ import { StorageService } from 'src/app/services/storage.service';
 export class LangSelectComponent implements OnInit {
   constructor(
     private translate: TranslateService,
-    private storage: StorageService
+    private language: LanguageService
   ) {}
 
   langs = ['pt-br', 'en'];
   selected = this.langs[0];
 
   ngOnInit(): void {
-    this.selected = this.storage.language;
+    this.selected = this.language.current;
   }
 
   selectLang(lang: string) {
     this.translate.use(lang);
-    this.storage.language = lang;
+    this.language.current = lang;
     this.selected = lang;
   }
 }

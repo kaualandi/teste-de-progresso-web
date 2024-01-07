@@ -47,17 +47,4 @@ export class StorageService {
   set cookies(value: boolean) {
     localStorage.setItem('cookies', value.toString());
   }
-
-  get language() {
-    return (
-      this.translate.currentLang ||
-      localStorage.getItem('language') ||
-      this.translate.getBrowserLang() ||
-      'pt-br'
-    );
-  }
-
-  set language(value: string) {
-    localStorage.setItem('language', value);
-  }
 }
