@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import * as AOS from 'aos';
+import { environment } from 'src/environments/environment';
 import { FullpageLoadingService } from './services/fullpage-loading.service';
 import { LanguageService } from './services/language.service';
 import { ThemeService } from './services/theme.service';
@@ -32,6 +33,7 @@ export class AppComponent implements OnInit {
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
+    if (environment.production) return;
     if (!(event.ctrlKey && event.shiftKey && event.key === 'D')) return;
 
     if (document.designMode === 'on') {
