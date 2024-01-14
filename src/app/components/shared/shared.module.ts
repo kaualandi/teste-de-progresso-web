@@ -13,6 +13,7 @@ import { IconDirective } from 'src/app/directives/icon.directive';
 import { InitialLettersDirective } from 'src/app/directives/initial-letters.directive';
 import { InputFileDirective } from 'src/app/directives/input-file.directive';
 import { PrevPageDirective } from '../../directives/prev-page.directive';
+import { ScrollToDirective } from '../../directives/scroll-to.directive';
 import { StopPropagDirective } from '../../directives/stop-propag.directive';
 import { FilterDataPipe } from '../../pipes/filter-data.pipe';
 import { FormErrorPipe } from '../../pipes/form-error.pipe';
@@ -55,6 +56,7 @@ const DECLARATIONS = [
   PageErrorComponent,
   FilterDataPipe,
   FormErrorPipe,
+  ScrollToDirective,
 ];
 
 @NgModule({
