@@ -7,7 +7,9 @@ import {
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Score } from '@zxcvbn-ts/core';
+import { Score, zxcvbn, zxcvbnOptions } from '@zxcvbn-ts/core';
+import * as zxcvbnCommonPackage from '@zxcvbn-ts/language-common';
+import * as zxcvbnBrPackage from '@zxcvbn-ts/language-pt-br';
 import { NotifierService } from 'angular-notifier';
 import { zoomInAnimation } from 'src/app/animations/route-animation';
 import { Genre } from 'src/app/models/user';
@@ -37,6 +39,8 @@ export class RegisterComponent implements OnInit {
   view_repass = false;
   score: Score = 0;
   now = new Date();
+  password_warning = '';
+  password_suggestions: string[] = [];
 
   register_form = this.fb.group({
     name: ['', [Validators.required]],
@@ -51,6 +55,10 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.register_form.get('birth_date')?.reset();
+
+    this.register_form.get('password')?.valueChanges.subscribe((value) => {
+      this.strengthPassword(value || '');
+    });
   }
 
   loginSubmitHandler() {
@@ -99,5 +107,20 @@ export class RegisterComponent implements OnInit {
 
   get password() {
     return this.register_form.get('password')?.value as string;
+  }
+
+  strengthPassword(password: string) {
+    const options = {
+      translations: zxcvbnBrPackage.translations,
+      graphs: zxcvbnCommonPackage.adjacencyGraphs,
+      dictionary: {
+        ...zxcvbnCommonPackage.dictionary,
+        ...zxcvbnBrPackage.dictionary,
+      },
+    };
+    zxcvbnOptions.setOptions(options);
+    const passwordStatus = zxcvbn(password);
+    this.password_warning = passwordStatus.feedback.warning || '';
+    this.password_suggestions = passwordStatus.feedback.suggestions;
   }
 }

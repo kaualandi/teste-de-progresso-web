@@ -3,7 +3,7 @@
 
   <img zoomable src="../../../assets/images/logo.png" alt="logo" />
 
-  <mat-form-field>
+  <mat-form-field appearance="outline">
     <mat-label>busca</mat-label>
     <input matInput type="text" [formControl]="search" />
   </mat-form-field>
@@ -14,7 +14,7 @@
     </li>
   </ul>
 
-  <mat-form-field>
+  <mat-form-field appearance="outline">
     <mat-label>Enter a date range</mat-label>
     <mat-date-range-input [rangePicker]="picker">
       <input matStartDate placeholder="Start date" />
@@ -39,6 +39,6 @@
 
   <div class="avatars">
     <avatar *ngFor="let name of names" [name]="name" src=""></avatar>
-    <avatar name="Kauã Landi" src="" color="light" bg="#000"></avatar>
+    <avatar name="Noclaf Tech" src="" color="light" bg="#000"> </avatar>
   </div>
 </main>

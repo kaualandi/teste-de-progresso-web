@@ -19,7 +19,7 @@
             </a>
           </p>
 
-          <mat-form-field>
+          <mat-form-field appearance="outline">
             <mat-label>
               {{ 'login-register.name' | translate }}
             </mat-label>
@@ -29,7 +29,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field appearance="outline">
             <mat-label>
               {{ 'login-register.email' | translate }}
             </mat-label>
@@ -45,7 +45,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field appearance="outline">
             <mat-label>
               {{ 'login-register.cellphone' | translate }}
             </mat-label>
@@ -60,7 +60,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field appearance="outline">
             <mat-label>
               {{ 'login-register.cpf' | translate }}
             </mat-label>
@@ -75,7 +75,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field appearance="outline">
             <mat-label>
               {{ 'login-register.birth-date' | translate }}
             </mat-label>
@@ -99,7 +99,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field appearance="outline">
             <mat-label>
               {{ 'login-register.genre' | translate }}
             </mat-label>
@@ -120,7 +120,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field appearance="outline">
             <mat-label>
               {{ 'login-register.password' | translate }}
             </mat-label>
@@ -140,19 +140,19 @@
               <i icon="view_pass" *ngIf="!view_pass"></i>
               <i icon="hide_pass" *ngIf="view_pass"></i>
             </button>
-            <app-password-stregth
-              *ngIf="password"
-              [password]="password"
-              (score)="score = $event"
-            ></app-password-stregth>
-            <mat-error>
+
+            <mat-error [matTooltip]="this.password_warning">
               {{
-                register_form.controls.password.errors | formError | translate
+                this.password_warning ||
+                  this.password_suggestions[0] ||
+                  (register_form.controls.password.errors
+                    | formError
+                    | translate)
               }}
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field appearance="outline">
             <mat-label>
               {{ 'login-register.re-password' | translate }}
             </mat-label>
