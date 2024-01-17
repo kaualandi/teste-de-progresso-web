@@ -18,7 +18,7 @@ export class ScrollToDirective {
           if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
           }
-        }, 350);
+        }, 650);
       });
       return;
     }
