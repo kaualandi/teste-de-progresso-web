@@ -23,7 +23,7 @@ export class AuthService {
   }
 
   register(data: BodyJson) {
-    return this.http.post<IToken>('core/register', data);
+    return this.http.post<IToken>('core/register/', data);
   }
 
   getMe() {
