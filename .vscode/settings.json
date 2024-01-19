@@ -32,7 +32,8 @@
   "git.enableSmartCommit": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
-    "source.organizeImports": "explicit"
+    "source.organizeImports": "explicit",
+    "source.addMissingImports": "explicit"
   },
   "eslint.validate": ["javascript", "typescript"],
   "[javascript][typescript]": {
