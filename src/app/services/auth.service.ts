@@ -62,4 +62,13 @@ export class AuthService {
     this.setToken('', false);
     this.router.navigate(['/login']);
   }
+
+  forgotPassword(email: string) {
+    return this.http.post('core/forgot-password/', { email });
+  }
+
+  rescurePassword(body: BodyJson) {
+    body['new_password'] = Md5.init(body['new_password']).toUpperCase();
+    return this.http.post('core/change-password-forgot-password/', body);
+  }
 }

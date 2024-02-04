@@ -61,7 +61,7 @@
           </mat-form-field>
 
           <div class="forgot-password">
-            <a class="f-12" routerLink="/forgot-password">
+            <a class="f-12" (click)="handleOpenForgotPasswordModal()">
               {{ 'login-register.forgot-password' | translate }}
             </a>
           </div>

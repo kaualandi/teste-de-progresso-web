@@ -1,4 +1,13 @@
 {
+  "global": {
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "add": "Adicionar",
+    "search": "Pesquisar",
+    "confirm": "Confirmar"
+  },
   "navbar": {
     "home": "Início",
     "about": "Sobre",
@@ -27,6 +36,12 @@
       "famale": "Feminino",
       "do-not-inform": "Não informar"
     }
+  },
+  "forgot-password": {
+    "title": "Recuperar senha",
+    "subtitle": "Informe seu e-mail para recuperar sua senha.",
+    "email": "E-mail",
+    "change-password": "Alterar senha"
   },
   "languages": {
     "pt-br": "Português",

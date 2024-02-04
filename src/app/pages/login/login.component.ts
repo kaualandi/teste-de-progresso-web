@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { zoomInAnimation } from '@animations/route-animation';
+import { ForgotPasswordComponent } from '@app/components/modals/forgot-password/forgot-password.component';
 import { CookiesLoginComponent } from '@components/modals/cookies-login/cookies-login.component';
 import { environment } from '@env';
 import { AuthService } from '@services/auth.service';
@@ -67,6 +68,12 @@ export class LoginComponent implements OnInit {
       if (!this.storage.cookies) {
         this.openCookieDialog();
       }
+    });
+  }
+
+  handleOpenForgotPasswordModal() {
+    this.dialog.open(ForgotPasswordComponent, {
+      data: { email: this.login_form.get('email')?.value },
     });
   }
 

@@ -17,6 +17,13 @@ const routes: Routes = [
       import('@pages/register/register.module').then((m) => m.RegisterModule),
   },
   {
+    path: 'rescure-password',
+    loadChildren: () =>
+      import('@pages/rescure-password/rescure-password.module').then(
+        (m) => m.RescurePasswordModule
+      ),
+  },
+  {
     path: '',
     component: NavbarComponent,
     // canActivate: [authGuard], // ? Remover caso queira que mais rotas sejam acessadas sem autenticação

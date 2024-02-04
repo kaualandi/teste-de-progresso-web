@@ -1,79 +1,78 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormControl,
-  Validators,
-} from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { zoomInAnimation } from '@animations/route-animation';
-import { Genre } from '@models/user';
-import { AuthService } from '@services/auth.service';
-import { BodyJson } from '@services/http.service';
-import { StorageService } from '@services/storage.service';
-import { cpfValidator } from '@utils/validators';
-import { Score, zxcvbn, zxcvbnOptions } from '@zxcvbn-ts/core';
+import { AuthService } from '@app/services/auth.service';
+import { zxcvbn, zxcvbnOptions } from '@zxcvbn-ts/core';
 import * as zxcvbnCommonPackage from '@zxcvbn-ts/language-common';
 import * as zxcvbnBrPackage from '@zxcvbn-ts/language-pt-br';
 import { NotifierService } from 'angular-notifier';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  selector: 'app-rescure-password',
+  templateUrl: './rescure-password.component.html',
+  styleUrls: ['./rescure-password.component.scss'],
   animations: [zoomInAnimation],
 })
-export class RegisterComponent implements OnInit {
+export class RescurePasswordComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
-    public dialog: MatDialog,
-    public storage: StorageService,
+    private route: ActivatedRoute,
+    private router: Router,
     private authService: AuthService,
-    public router: Router,
     private notifier: NotifierService
   ) {}
+
+  email = '';
+  hash = '';
 
   loading = false;
   view_pass = false;
   view_repass = false;
-  score: Score = 0;
-  now = new Date();
-  password_warning = '';
-  password_suggestions: string[] = [];
 
-  register_form = this.fb.group({
-    name: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
-    phone: ['', [Validators.required]],
-    birth_date: [this.now, [Validators.required]],
-    cpf: ['', [Validators.required, cpfValidator]],
-    genre: [new FormControl<Genre>('M'), [Validators.required]],
+  form = this.fb.group({
     password: ['', [Validators.required, this.validScore()]],
     re_password: ['', [Validators.required, this.samePassword()]],
   });
 
-  ngOnInit(): void {
-    this.register_form.get('birth_date')?.reset();
+  score = 0;
+  password_warning = '';
+  password_suggestions: string[] = [];
 
-    this.register_form.get('password')?.valueChanges.subscribe((value) => {
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      this.email = params['email'];
+      this.hash = params['hash'];
+
+      if (!this.email || !this.hash) {
+        this.router.navigate(['/']);
+      }
+    });
+
+    this.form.get('password')?.valueChanges.subscribe((value) => {
       this.strengthPassword(value || '');
     });
   }
 
-  loginSubmitHandler() {
-    if (this.register_form.invalid) {
-      this.register_form.markAllAsTouched();
+  handleFormSubmit() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
       return;
     }
 
     this.loading = true;
 
-    this.authService.register(this.register_form.value as BodyJson).subscribe({
+    const body = {
+      email: this.email,
+      forgot_password_hash: this.hash,
+      new_password: this.form.value.password,
+    };
+
+    this.authService.rescurePassword(body).subscribe({
       next: () => {
         this.loading = false;
+        this.notifier.notify('success', 'Senha alterada com sucesso!');
         this.router.navigate(['/login']);
-        this.notifier.notify('success', 'Registrado com sucesso!');
       },
       error: () => {
         this.loading = false;
@@ -85,7 +84,7 @@ export class RegisterComponent implements OnInit {
     return (control: AbstractControl) => {
       const password = control.value;
       if (password) {
-        if (password !== this.register_form.value.password) {
+        if (password !== this.form.value.password) {
           return { diff_password: true };
         }
       }
@@ -103,10 +102,6 @@ export class RegisterComponent implements OnInit {
       }
       return null;
     };
-  }
-
-  get password() {
-    return this.register_form.get('password')?.value as string;
   }
 
   strengthPassword(password: string) {
