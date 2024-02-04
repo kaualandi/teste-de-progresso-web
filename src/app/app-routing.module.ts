@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { PageErrorComponent } from './components/shared/page-error/page-error.component';
+import { NavbarComponent } from '@components/navbar/navbar.component';
+import { PageErrorComponent } from '@components/shared/page-error/page-error.component';
 
 const SPR = false;
 
@@ -9,12 +9,12 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () =>
-      import('./pages/login/login.module').then((m) => m.LoginModule),
+      import('@pages/login/login.module').then((m) => m.LoginModule),
   },
   {
     path: 'register',
     loadChildren: () =>
-      import('./pages/register/register.module').then((m) => m.RegisterModule),
+      import('@pages/register/register.module').then((m) => m.RegisterModule),
   },
   {
     path: '',
@@ -24,7 +24,7 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () =>
-          import('./pages/home/home.module').then((m) => m.HomeModule),
+          import('@pages/home/home.module').then((m) => m.HomeModule),
       },
       {
         path: '**',

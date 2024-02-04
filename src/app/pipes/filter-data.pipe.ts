@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { BodyJson } from '../services/http.service';
+import { BodyJson } from '@services/http.service';
 
 @Pipe({
   name: 'filterData',

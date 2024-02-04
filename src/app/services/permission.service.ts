@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { ILevelAccess } from './../models/user';
+import { ILevelAccess } from '@models/user';
 import { StorageService } from './storage.service';
 
 type Key = keyof ILevelAccess;

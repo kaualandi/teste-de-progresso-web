@@ -4,10 +4,10 @@ import {
   HttpParams,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '@env';
+import { StorageService } from '@services/storage.service';
 import { NotifierService } from 'angular-notifier';
 import { catchError, retry, throwError } from 'rxjs';
-import { StorageService } from 'src/app/services/storage.service';
-import { environment } from 'src/environments/environment';
 import { LanguageService } from './language.service';
 import { ObjectService } from './object.service';
 

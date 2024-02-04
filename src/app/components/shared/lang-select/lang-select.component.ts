@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { LanguageService } from 'src/app/services/language.service';
+import { LanguageService } from '@services/language.service';
 
 @Component({
   selector: 'lang-select',

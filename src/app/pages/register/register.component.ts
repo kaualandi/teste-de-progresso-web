@@ -7,16 +7,16 @@ import {
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { zoomInAnimation } from '@animations/route-animation';
+import { Genre } from '@models/user';
+import { AuthService } from '@services/auth.service';
+import { BodyJson } from '@services/http.service';
+import { StorageService } from '@services/storage.service';
+import { cpfValidator } from '@utils/validators';
 import { Score, zxcvbn, zxcvbnOptions } from '@zxcvbn-ts/core';
 import * as zxcvbnCommonPackage from '@zxcvbn-ts/language-common';
 import * as zxcvbnBrPackage from '@zxcvbn-ts/language-pt-br';
 import { NotifierService } from 'angular-notifier';
-import { zoomInAnimation } from 'src/app/animations/route-animation';
-import { Genre } from 'src/app/models/user';
-import { AuthService } from 'src/app/services/auth.service';
-import { BodyJson } from 'src/app/services/http.service';
-import { StorageService } from 'src/app/services/storage.service';
-import { cpfValidator } from 'src/app/utils/validators';
 
 @Component({
   selector: 'app-register',

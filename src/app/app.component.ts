@@ -1,11 +1,11 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { environment } from '@env';
 import { TranslateService } from '@ngx-translate/core';
+import { FullpageLoadingService } from '@services/fullpage-loading.service';
+import { LanguageService } from '@services/language.service';
+import { ThemeService } from '@services/theme.service';
 import { NotifierService } from 'angular-notifier';
 import * as AOS from 'aos';
-import { environment } from 'src/environments/environment';
-import { FullpageLoadingService } from './services/fullpage-loading.service';
-import { LanguageService } from './services/language.service';
-import { ThemeService } from './services/theme.service';
 
 @Component({
   selector: 'app-root',

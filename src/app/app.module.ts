@@ -2,6 +2,7 @@ import { DatePipe, registerLocaleData } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import localePt from '@angular/common/locales/pt';
 import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import {
   DateAdapter,
   MAT_DATE_FORMATS,
@@ -12,18 +13,16 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from './../environments/environment';
-import { AppRoutingModule } from './app-routing.module';
-
-import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { NavbarComponent } from '@components/navbar/navbar.component';
+import { SharedModule } from '@components/shared/shared.module';
+import { CONFIG_NOTIFIER } from '@constants/notifier';
+import { environment } from '@env';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NotifierModule } from 'angular-notifier';
 import { provideEnvironmentNgxMask } from 'ngx-mask';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { SharedModule } from './components/shared/shared.module';
-import { CONFIG_NOTIFIER } from './constants/notifier';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);

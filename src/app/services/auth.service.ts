@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { IToken, IUser } from '@models/user';
 import { Md5 } from 'md5-typescript';
 import { CookieService } from 'ngx-cookie-service';
-import { IToken, IUser } from '../models/user';
 import { BodyJson, HttpService } from './http.service';
 import { StorageService } from './storage.service';
 

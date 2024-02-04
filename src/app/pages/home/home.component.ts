@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { GeolocationService } from '@services/geolocation.service';
 import { NotifierService } from 'angular-notifier';
 import { interval, map } from 'rxjs';
-import { GeolocationService } from './../../services/geolocation.service';
 
 @Component({
   selector: 'app-home',

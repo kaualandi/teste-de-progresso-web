@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { zoomInAnimation } from 'src/app/animations/route-animation';
-import { CookiesLoginComponent } from 'src/app/components/modals/cookies-login/cookies-login.component';
-import { BodyJson } from 'src/app/services/http.service';
-import { StorageService } from 'src/app/services/storage.service';
-import { environment } from 'src/environments/environment';
-import { AuthService } from './../../services/auth.service';
+import { zoomInAnimation } from '@animations/route-animation';
+import { CookiesLoginComponent } from '@components/modals/cookies-login/cookies-login.component';
+import { environment } from '@env';
+import { AuthService } from '@services/auth.service';
+import { BodyJson } from '@services/http.service';
+import { StorageService } from '@services/storage.service';
 
 @Component({
   selector: 'app-login',

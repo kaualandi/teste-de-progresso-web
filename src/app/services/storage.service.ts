@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
+import { IUser } from '@models/user';
 import { TranslateService } from '@ngx-translate/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Subject } from 'rxjs';
-import { IUser } from '../models/user';
 
 @Injectable({
   providedIn: 'root',

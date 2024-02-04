@@ -10,9 +10,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   offcanvasTopAnimation,
   slideInAnimation,
-} from 'src/app/animations/route-animation';
-import { AuthService } from 'src/app/services/auth.service';
-import { StorageService } from './../../services/storage.service';
+} from '@animations/route-animation';
+import { AuthService } from '@services/auth.service';
+import { StorageService } from '@services/storage.service';
 
 @Component({
   selector: 'app-navbar',
