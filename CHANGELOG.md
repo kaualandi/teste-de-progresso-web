@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://bitbucket.org/noclaftech/boilerplate-web-angular/compare/v0.2.0...v1.0.0) (2024-02-04)
+
+
+### Features
+
+* add design mode toggle ([f63e02b](https://bitbucket.org/noclaftech/boilerplate-web-angular/commit/f63e02be1e8ad662106683254748c4b4082d9e3d))
+* add language service ([e0c8890](https://bitbucket.org/noclaftech/boilerplate-web-angular/commit/e0c889065d215a75c22f4d5c814476759c53e62f))
+* add links to color resources in theming.scss ([3246239](https://bitbucket.org/noclaftech/boilerplate-web-angular/commit/3246239fd22cf289ba5ecc45f52f0a6f38f38440))
+* add passwords suggestions in register ([b3ad12e](https://bitbucket.org/noclaftech/boilerplate-web-angular/commit/b3ad12eee83781dae9f6b0c458cc87766e501f3f))
+* add readme ([03b8da1](https://bitbucket.org/noclaftech/boilerplate-web-angular/commit/03b8da16befec8fb0b526af865cf4bd831ca42fa))
+* add rescure password modal ([8dcd19d](https://bitbucket.org/noclaftech/boilerplate-web-angular/commit/8dcd19d02b82c94076784db438413b62c13de16f))
+* add scroll to directive ([ce15566](https://bitbucket.org/noclaftech/boilerplate-web-angular/commit/ce15566d39f225cbf0230f391207062859f94077))
+* add select page in paginator ([69e5e68](https://bitbucket.org/noclaftech/boilerplate-web-angular/commit/69e5e687890938ef80057291ce3950f742043a54))
+* added datepicker example ([8616f39](https://bitbucket.org/noclaftech/boilerplate-web-angular/commit/8616f39682b7d3b6b79090320c243d9c50652c12))
+* added filter-data pipe ([6e3549a](https://bitbucket.org/noclaftech/boilerplate-web-angular/commit/6e3549a322f99f5021f4c74f259c124c3e3338d7))
+* added new form inputs ([a0d5edf](https://bitbucket.org/noclaftech/boilerplate-web-angular/commit/a0d5edffcc863110e2732b4abf247e3a22079e9a))
+* added responsive fonts ([d99ac55](https://bitbucket.org/noclaftech/boilerplate-web-angular/commit/d99ac552c0e6000a7b767d70432b31849b65f281))
+* create relative paths ([7b482a6](https://bitbucket.org/noclaftech/boilerplate-web-angular/commit/7b482a65a804de14724c488c3892883f5b3b2e5b))
+* disable design mode in production ([621fba4](https://bitbucket.org/noclaftech/boilerplate-web-angular/commit/621fba4f78a290e92a76c9774cd9eb4a4d4663ad))
+* increase scroll delay for smoother scrolling ([15867d6](https://bitbucket.org/noclaftech/boilerplate-web-angular/commit/15867d63fc93c6d560341425a1b429ce824be039))
+* removed ide scss file ([011c9e0](https://bitbucket.org/noclaftech/boilerplate-web-angular/commit/011c9e04566c0fa3b975914787067283a1f5c717))
+
+
+### Bug Fixes
+
+* 404 page error and fix: module cli generator ([dab8ef2](https://bitbucket.org/noclaftech/boilerplate-web-angular/commit/dab8ef2e6d2a5b5261ed72732b781acc8816016b))
+* auth guard, prettier and typograph ([c38bae2](https://bitbucket.org/noclaftech/boilerplate-web-angular/commit/c38bae2b2b6932d573a69f9b957d76a458b69d84))
+* authGuard retirect login ([01db710](https://bitbucket.org/noclaftech/boilerplate-web-angular/commit/01db710d622194062949585061be630784b39b3b))
+* font-size in passowrd-stregth ([afac114](https://bitbucket.org/noclaftech/boilerplate-web-angular/commit/afac11406358f8ad47941374b485c681ddf2908d))
+* register API endpoint ([ebb03dd](https://bitbucket.org/noclaftech/boilerplate-web-angular/commit/ebb03ddc06e32e7b2f07bb88b02532b0128d983e))
+
 ## [0.2.0](https://bitbucket.org/noclaftech/boilerplate-web-angular/compare/v0.1.3...v0.2.0) (2023-12-18)
 
 
