@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   base_url: '',
-  version: '0.2.0',
+  version: '1.0.0',
 };
 
 /*
