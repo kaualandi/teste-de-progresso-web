@@ -1,0 +1,48 @@
+{
+  "navbar": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "help": "Help"
+  },
+  "login-register": {
+    "login-title": "Login",
+    "register-title": "Register",
+    "not-registered": "Don't have an account?",
+    "already-registered": "Already have an account?",
+    "go-register": "register",
+    "go-login": "log in",
+    "forgot-password": "Forgot your password?",
+    "remember-me": "Remember me",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "re-password": "Repeat password",
+    "cellphone": "Cellphone",
+    "cpf": "CPF",
+    "birth-date": "Date of birth",
+    "genre": "Sex",
+    "genres": {
+      "male": "Male",
+      "famale": "Female",
+      "do-not-inform": "Do not inform"
+    }
+  },
+  "languages": {
+    "pt-br": "Portuguese",
+    "en": "English"
+  },
+  "errors": {
+    "error": "Error",
+    "500": "Internal error on our servers",
+    "404": "This page you are trying to access does not exist, has been removed, or is temporarily unavailable",
+    "403": "You do not have permission to access this page",
+    "401": "You are not logged in",
+    "400": "Your request cannot be processed",
+    "default": "An unexpected error occurred",
+    "form": {
+      "required": "Campo obrigatório",
+      "email": "E-mail inválido"
+    }
+  }
+}

@@ -17,10 +17,6 @@ export class ThemeService {
     return this.ThemeSubject.asObservable();
   }
 
-  unwatchTheme() {
-    this.ThemeSubject.unsubscribe();
-  }
-
   toggleUserTheme() {
     if (this.userTheme === 'light') {
       this.setTheme('dark');

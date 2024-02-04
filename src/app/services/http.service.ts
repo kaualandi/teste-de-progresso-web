@@ -4,13 +4,15 @@ import {
   HttpParams,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '@env';
+import { StorageService } from '@services/storage.service';
 import { NotifierService } from 'angular-notifier';
 import { catchError, retry, throwError } from 'rxjs';
-import { StorageService } from 'src/app/services/storage.service';
-import { environment } from 'src/environments/environment';
+import { LanguageService } from './language.service';
+import { ObjectService } from './object.service';
 
 export interface BodyJson {
-  [key: string]: string | number | boolean | BodyJson | BodyJson[];
+  [key: string]: unknown;
 }
 
 type ApplicationsTypes = 'json' | 'x-www-form-urlencoded';
@@ -22,13 +24,18 @@ export class HttpService {
   constructor(
     private http: HttpClient,
     private storage: StorageService,
-    private notifier: NotifierService
+    private notifier: NotifierService,
+    private objectService: ObjectService,
+    private language: LanguageService
   ) {}
 
   public base_url = environment.base_url;
   private repeat = 1;
 
   private getBodyType(body: BodyJson | HttpParams): ApplicationsTypes {
+    if (!(body instanceof HttpParams)) {
+      this.objectService.removeEmptyValues(body);
+    }
     return body instanceof HttpParams ? 'x-www-form-urlencoded' : 'json';
   }
 
@@ -40,6 +47,7 @@ export class HttpService {
   private getHeaders(application: ApplicationsTypes = 'json') {
     const headers = {
       'Content-Type': `application/${application}`,
+      'Accept-Language': this.language.current,
       Authorization: '',
     };
     if (this.storage.token) {
@@ -50,14 +58,12 @@ export class HttpService {
   }
 
   private handleError = (error: HttpErrorResponse) => {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = error.error.message;
-    } else {
-      errorMessage = error.error.detail;
-    }
-
-    this.notifier.notify('error', errorMessage)
+    this.notifier.notify(
+      'error',
+      error.error.detail ||
+        error.error.message ||
+        'Não foi possível completar a ação'
+    );
     return throwError(() => error);
   };
 
@@ -68,7 +74,7 @@ export class HttpService {
    * *O Content-Type é application/json*
    *
    * @param url URL da requisição (a falta do http acarretará na concatenação com o base_url)
-   * @param params *opicinal* - Query parametros da requisição (itens depois do **?** na url)
+   * @param params *opcinal* - Query parametros da requisição (itens depois do **?** na url)
    * @returns Retorna um Observable de sua requisição
    */
   get<T>(url: string, params?: HttpParams) {
@@ -86,7 +92,7 @@ export class HttpService {
    *
    * @param url URL da requisição (a falta do http acarretará na concatenação com o base_url)
    * @param body Corpo da requisição
-   * @param params *opicinal* - Query parametros da requisição (itens depois do **?** na url)
+   * @param params *opcinal* - Query parametros da requisição (itens depois do **?** na url)
    * @returns Retorna um Observable de sua requisição
    */
   post<T>(url: string, body: HttpParams | BodyJson, params?: HttpParams) {
@@ -110,7 +116,7 @@ export class HttpService {
    *
    * @param url URL da requisição (a falta do http acarretará na concatenação com o base_url)
    * @param body Corpo da requisição
-   * @param params *opicinal* - Query parametros da requisição (itens depois do **?** na url)
+   * @param params *opcinal* - Query parametros da requisição (itens depois do **?** na url)
    * @returns Retorna um Observable de sua requisição
    */
   patch<T>(url: string, body: HttpParams | BodyJson, params?: HttpParams) {
@@ -130,7 +136,7 @@ export class HttpService {
    * *O Content-Type é application/json*
    *
    * @param url URL da requisição (a falta do http acarretará na concatenação com o base_url)
-   * @param params *opicinal* - Query parametros da requisição (itens depois do **?** na url)
+   * @param params *opcinal* - Query parametros da requisição (itens depois do **?** na url)
    * @returns Retorna um Observable de sua requisição
    */
   delete<T>(url: string, params?: HttpParams) {

@@ -1,11 +1,13 @@
-import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { zoomInAnimation } from 'src/app/animations/route-animation';
-import { CookiesLoginComponent } from 'src/app/components/modals/cookies-login/cookies-login.component';
-import { StorageService } from 'src/app/services/storage.service';
+import { zoomInAnimation } from '@animations/route-animation';
+import { CookiesLoginComponent } from '@components/modals/cookies-login/cookies-login.component';
+import { environment } from '@env';
+import { AuthService } from '@services/auth.service';
+import { BodyJson } from '@services/http.service';
+import { StorageService } from '@services/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +27,8 @@ export class LoginComponent implements OnInit {
   loading = false;
   view_pass = false;
 
+  version = environment.version;
+
   login_form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
@@ -43,14 +47,11 @@ export class LoginComponent implements OnInit {
 
     this.loading = true;
 
-    const email: string = this.login_form.value.email as string;
-    const password: string = this.login_form.value.password as string;
-    const remember: boolean = this.login_form.value.remember as boolean;
-
-    this.authService.login(email, password).subscribe({
+    const body = this.login_form.value as BodyJson;
+    this.authService.login(body).subscribe({
       next: (response) => {
         this.loading = false;
-        this.storage.setToken(response.token, remember);
+        this.authService.setToken(response.token, body['remember'] as boolean);
         this.router.navigate(['/']);
       },
       error: () => {

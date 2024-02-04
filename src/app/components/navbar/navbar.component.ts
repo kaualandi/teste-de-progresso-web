@@ -1,17 +1,18 @@
 import {
-  offcanvasTopAnimation,
-  slideInAnimation,
-} from 'src/app/animations/route-animation';
-import { StorageService } from './../../services/storage.service';
-import {
   Component,
   ElementRef,
   HostListener,
   Input,
-  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {
+  offcanvasTopAnimation,
+  slideInAnimation,
+} from '@animations/route-animation';
+import { AuthService } from '@services/auth.service';
+import { StorageService } from '@services/storage.service';
 
 @Component({
   selector: 'app-navbar',
@@ -19,13 +20,19 @@ import {
   styleUrls: ['./navbar.component.scss'],
   animations: [slideInAnimation, offcanvasTopAnimation],
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements OnInit {
   @Input() colapse: 'vertical' | 'horizontal' = 'vertical';
   @ViewChild('navbar') navbar: ElementRef<HTMLElement> | undefined;
 
-  constructor(private storage: StorageService) {}
+  constructor(
+    private storage: StorageService,
+    private authService: AuthService
+  ) {}
 
   loading = false;
+  error = 0;
+
+  user$ = this.storage.watchUser().pipe(takeUntilDestroyed());
 
   navbar_hidden = true;
   scroll = false;
@@ -33,30 +40,32 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.onWindowScroll();
-
+    this.loading = true;
     this.getMe();
-    this.storage.watchUser().subscribe({
+
+    this.user$.subscribe({
       next: () => {
         this.getMe();
       },
     });
   }
 
-  ngOnDestroy(): void {
-    this.storage.unwatchUser();
-  }
-
   getMe() {
-    // ? Requisição para pegar o usuário logado
-    // * Adicione o código abaixo no tratamento de erro da requisição
-    // if (error?.status === 401) {
-    //   this.storageService.logout();
-    // }
+    this.error = 0;
+    this.authService.getMe().subscribe({
+      next: () => {
+        this.loading = false;
+      },
+      error: () => {
+        // ! ⬆ Adicione o parametro error aqui para que o erro seja capturado
+        // this.error = error.status; // ! Descomente esta linha para que o erro seja exibido
+        this.loading = false;
+      },
+    });
   }
 
   logout() {
-    this.storage.unwatchUser();
-    this.storage.logout();
+    this.authService.logout();
   }
 
   @HostListener('window:scroll', ['$event'])

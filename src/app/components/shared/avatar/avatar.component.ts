@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { GRADIENTS } from 'src/app/constants/gradients';
+import { GRADIENTS } from '@constants/gradients';
 
 @Component({
   selector: 'avatar',

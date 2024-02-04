@@ -3,7 +3,7 @@
 }
 
 @mixin move-left-to-right() {
-  animation: move-left-to-right 1s var(--time-c-b);
+  animation: move-left-to-right 1s var(--elastic);
 
   @keyframes move-left-to-right {
     0% {
@@ -13,7 +13,7 @@
 }
 
 @mixin shake() {
-  animation: shake 0.2s var(--time-c-b);
+  animation: shake 0.2s var(--elastic);
 
   @keyframes shake {
     0% {
@@ -34,6 +34,16 @@
 
     100% {
       transform: translateX(0);
+    }
+  }
+}
+
+@mixin fade-in() {
+  opacity: 0;
+  animation: fade-in 0.5s ease-in-out forwards;
+  @keyframes fade-in {
+    100% {
+      opacity: 1;
     }
   }
 }

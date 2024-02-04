@@ -12,9 +12,23 @@
     height: 100vh;
     display: flex;
     justify-content: center;
+    position: relative;
     @include media('<=tablet') {
       gap: 2rem;
       flex-direction: column;
+    }
+
+    .lang {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+    }
+
+    .version {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      color: var(--primary-bg);
     }
 
     .col {
@@ -54,9 +68,15 @@
           h1 {
             text-align: center;
           }
+          p {
+            margin: 0.2rem 0 0.5rem;
+            text-align: center;
+            a {
+              color: var(--text-color);
+            }
+          }
 
           .forgot-password {
-            display: inline-block;
             text-align: end;
             a {
               color: var(--main-color);

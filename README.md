@@ -52,12 +52,18 @@ Para gerar um novo componente com lazy loading
 
 - Angular Material
   - `ng add @angular/material`
-- ngx-mask
+- NgxMask
   - `npm i ngx-mask`
-- md5-typescript
+- MD5 Typescript
   - `npm i md5-typescript`
-- ngx-cookie-service
+- Ngx Cookie Service
   - `npm i ngx-cookie-service`
+- Zxcvbn
+  - `npm i @zxcvbn-ts`
+- AOS
+  - `npm i aos`
+- Medium Zoom
+  - `npm i medium-zoom`
 
 ## Links úteis
 
@@ -66,6 +72,7 @@ Para gerar um novo componente com lazy loading
 - [Angular](https://angular.io/)
 - [Angular Material](https://material.angular.io/)
 - [ngx-mask](https://github.com/JsDaddy/ngx-mask)
+- [Scroll animado (AOS)](https://michalsnik.github.io/aos/)
 
 ### Outros
 
@@ -73,7 +80,6 @@ Para gerar um novo componente com lazy loading
 - [Carrosel/Slides](https://swiperjs.com/angular)
 - [Captcha](https://github.com/leNicDev/ng-hcaptcha#readme)
 - [Scroll animado (ngx-scrollreveal)](https://tinesoft.github.io/ngx-scrollreveal/doc/index.html)
-- [Scroll animado (AOS)](https://michalsnik.github.io/aos/)
 - [Icones](https://fw2svg.kaualf.com/)
 
 ## Componentes compartilhados
@@ -173,7 +179,12 @@ Diretivas são utilizadas para criar componentes reutilizáveis.
 > O evento do `(upload)` retorna o base64 do arquivo selecionado, quando se trata de uma imagem, ela já é compressada com o service `compressor`.
 
 ```html
-<input type="file" name="logo" appInputFile (upload)="handleInputChange($event)" />
+<input
+  type="file"
+  name="logo"
+  appInputFile
+  (upload)="handleInputChange($event)"
+/>
 ```
 
 ### Icones
@@ -209,13 +220,12 @@ cpfInput = new FormControl('', [
 
 > Serviço para exibir mensagens na tela.
 
-
 ```html geral (app.component.html)
 <notifier-container></notifier-container>
 ```
 
 ```scss geral (syles.scss)
-@import "node_modules/angular-notifier/styles";
+@import 'node_modules/angular-notifier/styles';
 ```
 
 ```ts
@@ -223,7 +233,7 @@ constructor(private notifier: NotifierService) {}
 
 // Tipos de mensagens
 this.notifier.notify('default', 'Mensagem'); // Sem contexto
-this.notifier.notify('info', 'Mensagem'); // Informativas 
+this.notifier.notify('info', 'Mensagem'); // Informativas
 this.notifier.notify('warning', 'Mensagem'); // Avisos
 this.notifier.notify('success', 'Mensagem'); // Sucesso
 this.notifier.notify('error', 'Mensagem'); // Erro

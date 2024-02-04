@@ -2,7 +2,7 @@
   font-size: calc(16px + 0.3125vw);
   --ts: all 0.3s ease-in-out;
   --br: 0.5rem;
-  --time-c-b: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --elastic: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
   --text-color: #000000;
   --main-color: #302b2b;
@@ -20,6 +20,12 @@
   --avatar-light-color: #ffffff;
   --avatar-br: 50%;
   --avatar-ratio: 1/1;
+
+  --fullpage-loading-bg: #fff5;
+
+  // ? Scrollbar
+  --scroll-track: var(--secondary-bg);
+  --scroll-thumb: var(--text-color);
 
   // ? Navbar variables
   --navbar-max-width: 1024px;

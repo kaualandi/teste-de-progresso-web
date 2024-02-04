@@ -59,6 +59,8 @@ nav {
       transition: all 0.2s;
       grid-area: menu;
       overflow: hidden;
+      display: flex;
+      align-items: center;
       @include media('<=navbar-collapse') {
         transition: var(--ts);
         transition-duration: 0.5s;
@@ -125,7 +127,6 @@ nav {
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      margin-left: 7.2px;
       transition: var(--ts);
       &::before,
       &::after {

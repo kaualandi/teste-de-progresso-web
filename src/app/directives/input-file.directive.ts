@@ -1,6 +1,6 @@
 import { Directive, EventEmitter, HostListener, Output } from '@angular/core';
+import { CompressorService } from '@services/compressor.service';
 import { EMPTY, expand, map } from 'rxjs';
-import { CompressorService } from '../services/compressor.service';
 
 @Directive({
   selector: '[inputFile]',

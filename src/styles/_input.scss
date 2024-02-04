@@ -1,70 +1,69 @@
 @import './animations';
 
-.card-input {
-  position: relative;
-  display: flex;
+mat-form-field {
   width: 100%;
-  flex-direction: column;
-
-  label {
-    font-size: 1rem;
-    padding-left: 5px;
+  .mat-mdc-text-field-wrapper {
+    .mat-mdc-form-field-flex .mat-mdc-floating-label {
+      top: 21px;
+    }
+    .mat-mdc-form-field-infix {
+      min-height: 44px;
+      padding: 10px 0px !important;
+    }
+    &.mdc-text-field--outlined
+      .mdc-notched-outline--upgraded
+      .mdc-floating-label--float-above {
+      --mat-mdc-form-field-label-transform: translateY(-28px)
+        scale(var(--mat-mdc-form-field-floating-label-scale, 0.75));
+    }
+  }
+  .mat-mdc-form-field-error {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
-  .input-icon {
-    position: relative;
-    width: 100%;
-    input {
-      width: 100%;
-      padding-right: 2rem;
+  .mat-mdc-icon-button.mat-mdc-button-base {
+    --mdc-icon-button-state-layer-size: 44px;
+    .mat-mdc-button-touch-target {
+      width: 44px;
+      height: 44px;
     }
+  }
+
+  &.mat-focused {
     button {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      right: 0px;
-      color: var(--main-color);
-      cursor: pointer;
+      color: var(--mdc-outlined-text-field-focus-label-text-color);
     }
   }
 
-  input,
-  textarea,
-  select {
-    padding: 12px 16px;
-    border-radius: 50px;
-    border: 1px solid var(--secondary-bg);
-    background-color: var(--secondary-bg);
-    outline: none;
-    color: var(--text-color);
-
-    &[type='number'] {
-      -webkit-appearance: textfield;
-      -moz-appearance: textfield;
-      appearance: textfield;
-    }
-    &[type='number']::-webkit-inner-spin-button,
-    &[type='number']::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-    }
-    &.ng-touched.ng-invalid {
-      border-color: var(--red-color);
-      @include shake;
-    }
-    &[type='file'] {
-      display: none;
+  &.mat-form-field-invalid {
+    button {
+      color: var(--mdc-outlined-text-field-error-label-text-color);
     }
   }
 
-  .mat-button {
-    height: 41px;
+  input[type='file'] {
+    display: none;
   }
 
-  & + .card-input {
-    margin-top: 1rem;
+  .image-preview {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 0.5rem;
+    img {
+      height: 100%;
+      max-height: 35px;
+    }
+  }
+  & + mat-form-field {
+    margin-top: 0.5rem;
   }
 }
 
-.mat-form-field-infix {
-  display: flex;
+form {
+  .buttons {
+    margin-top: 1rem;
+  }
 }
