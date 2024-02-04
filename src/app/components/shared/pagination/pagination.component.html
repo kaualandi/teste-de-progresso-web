@@ -6,7 +6,10 @@
   >
     <i icon="angle_left"></i>
   </div>
-  <span class="page"> {{ current }} de {{ total }} </span>
+  <div class="page">
+    <input mat-input type="text" [formControl]="currentControl" mask="0*" />
+  </div>
+  <span class="page"> de {{ total }} </span>
   <div
     (click)="next && handlePageChange(current + 1)"
     class="next arrow"
