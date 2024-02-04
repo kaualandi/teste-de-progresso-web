@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.1](https://bitbucket.org/noclaftech/boilerplate-web-angular/compare/v1.0.0...v1.0.1) (2024-02-04)
+
+
+### Bug Fixes
+
+* en translations ([d8996f2](https://bitbucket.org/noclaftech/boilerplate-web-angular/commit/d8996f28be230116e5f7b3fbf2b77f5e126d0800))
+
 ## [1.0.0](https://bitbucket.org/noclaftech/boilerplate-web-angular/compare/v0.2.0...v1.0.0) (2024-02-04)
 
 
