@@ -1,6 +1,6 @@
 import { Directive, EventEmitter, HostListener, Output } from '@angular/core';
-import { CompressorService } from '@services/compressor.service';
-import { EMPTY, expand, map } from 'rxjs';
+import { Observable, from, map, mergeMap } from 'rxjs';
+import { CompressorService } from '../services/compressor.service';
 
 @Directive({
   selector: '[inputFile]',
@@ -14,9 +14,9 @@ export class InputFileDirective {
     evt.preventDefault();
     evt.stopPropagation();
     const files = (evt.target as HTMLInputElement).files;
-    if (!files) return;
+    if (!files || !files.length) return;
 
-    if (files[0].type.startsWith('image')) {
+    if (this.allImages(files)) {
       this.onImage(files);
       console.log('image');
     } else {
@@ -25,30 +25,40 @@ export class InputFileDirective {
     }
   }
 
+  allImages = (files: FileList) => {
+    return Array.from(files).every((file) => file.type.startsWith('image'));
+  };
+
   async onPdf(files: FileList) {
-    const reader = new FileReader();
-    reader.readAsDataURL(files[0]);
-    reader.onloadend = () => {
-      this.upload.emit(reader.result as string);
-    };
+    const pdfs = from(files).pipe(mergeMap((file) => this.readPdf(file)));
+
+    pdfs.subscribe((result: string) => {
+      this.upload.emit(result);
+    });
   }
 
+  readPdf = (file: File) => {
+    const reader = new FileReader();
+    const observable = new Observable<string>((ob) => {
+      reader.onload = () => {
+        ob.next(reader.result as string);
+        ob.complete();
+      };
+    });
+
+    reader.readAsDataURL(file);
+
+    return observable;
+  };
+
   async onImage(files: FileList) {
-    if (files && files[0]) {
-      const target = files;
-      const compress = this.recursiveCompress(target[0], 0, target).pipe(
-        expand((res) => {
-          return res.index > res.array.length - 1
-            ? EMPTY
-            : this.recursiveCompress(target[res.index], res.index, target);
-        })
-      );
-      compress.subscribe((res) => {
-        if (res.index > res.array.length - 1) {
-          this.upload.emit(res.data);
-        }
-      });
-    }
+    const compress = from(files).pipe(
+      mergeMap((file, index) => this.recursiveCompress(file, index, files))
+    );
+
+    compress.subscribe((res) => {
+      this.upload.emit(res.data);
+    });
   }
 
   recursiveCompress = (image: File, index: number, array: FileList) => {
@@ -56,7 +66,7 @@ export class InputFileDirective {
       map((response) => {
         return {
           data: response,
-          index: index + 1,
+          index,
           array,
         };
       })
