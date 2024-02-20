@@ -15,6 +15,10 @@ export interface BodyJson {
   [key: string]: unknown;
 }
 
+export interface HttpConfig {
+  token: boolean;
+}
+
 type ApplicationsTypes = 'json' | 'x-www-form-urlencoded';
 
 @Injectable({
@@ -44,13 +48,16 @@ export class HttpService {
     return this.base_url + url;
   }
 
-  private getHeaders(application: ApplicationsTypes = 'json') {
+  private getHeaders(
+    application: ApplicationsTypes = 'json',
+    config: HttpConfig
+  ) {
     const headers = {
       'Content-Type': `application/${application}`,
       'Accept-Language': this.language.current,
       Authorization: '',
     };
-    if (this.storage.token) {
+    if (this.storage.token && config.token) {
       headers.Authorization = 'token ' + this.storage.token;
     }
 
@@ -67,6 +74,12 @@ export class HttpService {
     return throwError(() => error);
   };
 
+  private validateConfig(config?: HttpConfig) {
+    if (!config) config = {} as HttpConfig;
+    if (typeof config.token !== 'boolean') config.token = true;
+    return config;
+  }
+
   /**
    * ### Método GET
    * Espera receber um parametro de tipo sendo o tipo de retorno da requisição
@@ -75,10 +88,12 @@ export class HttpService {
    *
    * @param url URL da requisição (a falta do http acarretará na concatenação com o base_url)
    * @param params *opcinal* - Query parametros da requisição (itens depois do **?** na url)
+   * @param config *opcional* - Configurações da requisição (veja a interface HttpConfig)
    * @returns Retorna um Observable de sua requisição
    */
-  get<T>(url: string, params?: HttpParams) {
-    const headers = this.getHeaders();
+  get<T>(url: string, params?: HttpParams, config?: HttpConfig) {
+    config = this.validateConfig(config);
+    const headers = this.getHeaders('json', config);
     return this.http
       .get<T>(this.getUrl(url), { headers, params })
       .pipe(retry(this.repeat), catchError(this.handleError));
@@ -93,11 +108,18 @@ export class HttpService {
    * @param url URL da requisição (a falta do http acarretará na concatenação com o base_url)
    * @param body Corpo da requisição
    * @param params *opcinal* - Query parametros da requisição (itens depois do **?** na url)
+   * @param config *opcional* - Configurações da requisição (veja a interface HttpConfig)
    * @returns Retorna um Observable de sua requisição
    */
-  post<T>(url: string, body: HttpParams | BodyJson, params?: HttpParams) {
+  post<T>(
+    url: string,
+    body: HttpParams | BodyJson,
+    params?: HttpParams,
+    config?: HttpConfig
+  ) {
     const application = this.getBodyType(body);
-    const headers = this.getHeaders(application);
+    config = this.validateConfig(config);
+    const headers = this.getHeaders(application, config);
     const _body = application === 'json' ? JSON.stringify(body) : body;
 
     return this.http
@@ -117,11 +139,18 @@ export class HttpService {
    * @param url URL da requisição (a falta do http acarretará na concatenação com o base_url)
    * @param body Corpo da requisição
    * @param params *opcinal* - Query parametros da requisição (itens depois do **?** na url)
+   * @param config *opcional* - Configurações da requisição (veja a interface HttpConfig)
    * @returns Retorna um Observable de sua requisição
    */
-  patch<T>(url: string, body: HttpParams | BodyJson, params?: HttpParams) {
+  patch<T>(
+    url: string,
+    body: HttpParams | BodyJson,
+    params?: HttpParams,
+    config?: HttpConfig
+  ) {
     const application = this.getBodyType(body);
-    const headers = this.getHeaders(application);
+    config = this.validateConfig(config);
+    const headers = this.getHeaders(application, config);
     const _body = application === 'json' ? JSON.stringify(body) : body;
 
     return this.http
@@ -137,10 +166,12 @@ export class HttpService {
    *
    * @param url URL da requisição (a falta do http acarretará na concatenação com o base_url)
    * @param params *opcinal* - Query parametros da requisição (itens depois do **?** na url)
+   * @param config *opcional* - Configurações da requisição (veja a interface HttpConfig)
    * @returns Retorna um Observable de sua requisição
    */
-  delete<T>(url: string, params?: HttpParams) {
-    const headers = this.getHeaders();
+  delete<T>(url: string, params?: HttpParams, config?: HttpConfig) {
+    config = this.validateConfig(config);
+    const headers = this.getHeaders('json', config);
     return this.http
       .delete<T>(this.getUrl(url), { headers, params })
       .pipe(retry(this.repeat), catchError(this.handleError));
