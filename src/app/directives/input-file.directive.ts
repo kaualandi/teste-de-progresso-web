@@ -1,12 +1,16 @@
 import { Directive, EventEmitter, HostListener, Output } from '@angular/core';
+import { CompressorService } from '@services/compressor.service';
 import { Observable, from, map, mergeMap } from 'rxjs';
-import { CompressorService } from '../services/compressor.service';
 
+export interface IInputFileEvent {
+  name: string;
+  base64: string;
+}
 @Directive({
   selector: '[inputFile]',
 })
 export class InputFileDirective {
-  @Output() upload = new EventEmitter<string>();
+  @Output() upload = new EventEmitter<IInputFileEvent>();
 
   constructor(private compressor: CompressorService) {}
 
@@ -32,16 +36,19 @@ export class InputFileDirective {
   async onPdf(files: FileList) {
     const pdfs = from(files).pipe(mergeMap((file) => this.readPdf(file)));
 
-    pdfs.subscribe((result: string) => {
+    pdfs.subscribe((result: IInputFileEvent) => {
       this.upload.emit(result);
     });
   }
 
   readPdf = (file: File) => {
     const reader = new FileReader();
-    const observable = new Observable<string>((ob) => {
+    const observable = new Observable<IInputFileEvent>((ob) => {
       reader.onload = () => {
-        ob.next(reader.result as string);
+        ob.next({
+          name: file.name,
+          base64: reader.result as string,
+        });
         ob.complete();
       };
     });
@@ -57,7 +64,10 @@ export class InputFileDirective {
     );
 
     compress.subscribe((res) => {
-      this.upload.emit(res.data);
+      this.upload.emit({
+        name: res.array[res.index].name,
+        base64: res.data,
+      });
     });
   }
 
