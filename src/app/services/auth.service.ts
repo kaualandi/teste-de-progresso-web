@@ -18,8 +18,10 @@ export class AuthService {
   ) {}
 
   login(body: BodyJson) {
-    body['password'] = Md5.init(body['password']).toUpperCase();
-    return this.http.post<IToken>('core/auth/', body);
+    return this.http.post<IToken>('core/auth/', {
+      ...body,
+      password: Md5.init(body['password']).toUpperCase(),
+    });
   }
 
   register(data: BodyJson) {
