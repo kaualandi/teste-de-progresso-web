@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.2](https://bitbucket.org/noclaftech/boilerplate-web-angular/compare/v1.0.1...v1.0.2) (2024-05-23)
+
+
+### Features
+
+* add httpConfig in http service ([7efc434](https://bitbucket.org/noclaftech/boilerplate-web-angular/commit/7efc434f226f396aad6d1c75edfdffda21031e98))
+* update input file for add multiple and file name ([72c7c29](https://bitbucket.org/noclaftech/boilerplate-web-angular/commit/72c7c29ccba800e7c06537dbc9d20450bd6147e9))
+
+
+### Bug Fixes
+
+* login md5 ([6f423f5](https://bitbucket.org/noclaftech/boilerplate-web-angular/commit/6f423f5668e6bbafdf6de7b61959313268d80cfe))
+
 ### [1.0.1](https://bitbucket.org/noclaftech/boilerplate-web-angular/compare/v1.0.0...v1.0.1) (2024-02-04)
 
 
