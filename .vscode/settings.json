@@ -42,5 +42,7 @@
     }
   },
   "i18n-ally.localesPaths": ["src/assets/i18n"],
-  "i18n-ally.displayLanguage": "pt-br"
+  "i18n-ally.displayLanguage": "pt-br",
+  "i18n-ally.keystyle": "nested",
+  "cSpell.language": "pt-BR,en-US"
 }
