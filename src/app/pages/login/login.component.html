@@ -12,12 +12,6 @@
       <div class="form">
         <form (ngSubmit)="loginSubmitHandler()" [formGroup]="login_form">
           <h1>{{ 'login-register.login-title' | translate }}</h1>
-          <p>
-            {{ 'login-register.not-registered' | translate }}
-            <a routerLink="/register">{{
-              'login-register.go-register' | translate
-            }}</a>
-          </p>
 
           <mat-form-field appearance="outline">
             <mat-label>
@@ -72,9 +66,9 @@
 
           <div class="buttons full">
             <button
-              mat-button
+              mat-flat-button
+              color="primary"
               type="submit"
-              class="primary"
               [disabled]="loading"
             >
               {{ 'login-register.login-title' | translate }}
