@@ -10,6 +10,8 @@ import {
   MatNativeDateModule,
 } from '@angular/material/core';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -23,6 +25,7 @@ import { NotifierModule } from 'angular-notifier';
 import { provideEnvironmentNgxMask } from 'ngx-mask';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ConfirmExitComponent } from './components/modals/confirm-exit/confirm-exit.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -42,7 +45,7 @@ const MY_DATE_FORMAT = {
 };
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent],
+  declarations: [AppComponent, NavbarComponent, ConfirmExitComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -51,6 +54,8 @@ const MY_DATE_FORMAT = {
     MatDialogModule,
     SharedModule,
     MatNativeDateModule,
+    MatMenuModule,
+    MatSidenavModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // ? Registra o ServiceWorker após build em produção

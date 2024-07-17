@@ -12,7 +12,9 @@
     "home": "Início",
     "about": "Sobre",
     "contact": "Contato",
-    "help": "Ajuda"
+    "help": "Ajuda",
+    "notification": "Notificações",
+    "login": "Login"
   },
   "login-register": {
     "login-title": "Entrar",
@@ -48,12 +50,12 @@
     "en": "Inglês"
   },
   "errors": {
-    "error": "Erro",
-    "500": "Erro interno em nossos servidores",
-    "404": "Está pagina que está tentando acessar não existe, foi removida ou está temporariamente indisponível",
-    "403": "Você não tem permissão para acessar esta pagina",
-    "401": "Você não está autenticado",
     "400": "Seu pedido não pode ser processado",
+    "401": "Você não está autenticado",
+    "403": "Você não tem permissão para acessar esta pagina",
+    "404": "Está pagina que está tentando acessar não existe, foi removida ou está temporariamente indisponível",
+    "500": "Erro interno em nossos servidores",
+    "error": "Erro",
     "default": "Um erro inesperado aconteceu",
     "form": {
       "required": "Campo obrigatório",

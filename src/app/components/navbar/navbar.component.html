@@ -1,39 +1,95 @@
-<nav
-  [@offcanvasTopAnimation]
-  #navbar
-  [ngClass]="{ scroll }"
-  [ngStyle]="{ '--navbar-height': navbar_height + 'px' }"
->
-  <div class="content">
-    <a class="logo" routerLink="/">
-      <img src="../../../assets/images/logo.png" alt="logo" />
-      Boilerplate
-    </a>
+<nav [@offcanvasTopAnimation]>
+  <div class="container">
+    <div class="content">
+      <div class="col">
+        <button
+          title="Encolher menu"
+          class="btn-drawer"
+          type="button"
+          mat-icon-button
+          (click)="drawerToggle()"
+          [ngClass]="{ close: !drawer.opened }"
+        >
+          <i icon="sidebar"></i>
+        </button>
+        <div class="logo">
+          <img src="assets/images/logo.png" alt="logo" />
+          <i *ngIf="!production" icon="gear_code"></i>
+        </div>
+      </div>
+      <div class="col">
+        <div class="menu">
+          <div class="quick-actions">
+            <button
+              class="notification"
+              mat-icon-button
+              title="{{ 'navbar.notification' | translate }}"
+            >
+              <i icon="bell"></i>
+              <span class="badge" [ngClass]="{ show: unreadNotifications }">
+              </span>
+            </button>
+          </div>
 
-    <div class="hamburger" [ngClass]="{ active: !navbar_hidden }">
-      <button
-        aria-label="menu"
-        mat-icon-button
-        (click)="navbar_hidden = !navbar_hidden"
-      >
-        <span class="line"></span>
-      </button>
-    </div>
-
-    <div class="menu {{ colapse }}" [ngClass]="{ hidden: navbar_hidden }">
-      <a mat-button routerLink="/">{{ 'navbar.home' | translate }}</a>
-      <a mat-button routerLink="/about">{{ 'navbar.about' | translate }}</a>
-      <a mat-button routerLink="/contact">{{ 'navbar.contact' | translate }}</a>
-      <lang-select></lang-select>
+          <a class="profile" mat-button routerLink="/profile">
+            <div class="image">
+              <img
+                *ngIf="user?.profile_image"
+                [src]="user.profile_image"
+                alt="avatar"
+              />
+              <i *ngIf="!user?.profile_image" icon="user" class="bg"></i>
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
 
-<div
-  [@routeAnimations]="outlet && outlet.activatedRouteData"
-  *ngIf="!loading && !error"
->
-  <router-outlet #outlet="outlet"></router-outlet>
-</div>
+<mat-drawer-container autosize>
+  <mat-drawer #drawer [mode]="isMobile ? 'over' : 'side'" [opened]="!isMobile">
+    <ul class="list loading" *ngIf="loading">
+      <li class="skeleton dark" *ngFor="let item of [1, 2, 3, 4, 5]">
+        <button [disableRipple]="true" mat-button class="s">&rlm;</button>
+      </li>
+    </ul>
+    <ul class="list" *ngIf="!loading" (click)="isMobile && drawerToggle()">
+      <li *ngFor="let item of navbarPages">
+        <a
+          mat-button
+          [routerLink]="item.link"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{
+            exact: true
+          }"
+        >
+          <i [icon]="item.icon"></i>
+          <span class="one-line">{{ item.label }}</span>
+        </a>
+      </li>
+      <li class="logout">
+        <button title="Sair" mat-button (click)="logout()">
+          <i icon="logout"></i>
+          <span class="one-line">Sair</span>
+        </button>
+      </li>
+    </ul>
+    <div class="version">
+      <span class="f-10">{{ version }}</span>
+    </div>
+  </mat-drawer>
 
-<page-error [code]="error" *ngIf="error && !loading"></page-error>
+  <mat-drawer-content>
+    <div
+      [@routeAnimations]="outlet && outlet.activatedRouteData"
+      *ngIf="!loading && !error"
+    >
+      <router-outlet #outlet="outlet"></router-outlet>
+    </div>
+
+    <page-error [code]="error" *ngIf="error && !loading"></page-error>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+<div id="canvas"></div>

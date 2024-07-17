@@ -3,7 +3,6 @@
 
   &.mdc-button {
     border-radius: var(--br);
-    padding: 21.5px 1rem;
   }
 
   i[icon] {
@@ -45,4 +44,11 @@ html {
     align-items: center;
     justify-content: center;
   }
+}
+
+.mat-mdc-button.mat-mdc-button-base,
+.mat-mdc-raised-button.mat-mdc-button-base,
+.mat-mdc-unelevated-button.mat-mdc-button-base,
+.mat-mdc-outlined-button.mat-mdc-button-base {
+  height: 44px !important;
 }
