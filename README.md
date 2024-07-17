@@ -5,7 +5,7 @@ Projeto gerado com [Angular CLI](https://github.com/angular/angular-cli) versão
 ## Clonando para um novo projeto
 
 ```bash
-git clone https://bitbucket.org/noclaftech/boilerplate-web-angular <nome-do-projeto>
+git clone https://github.com/teste-de-progresso/web.git teste-de-progresso-web
 ```
 
 ## Servidor de dev
