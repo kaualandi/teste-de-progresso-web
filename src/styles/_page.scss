@@ -1,7 +1,6 @@
 main.page {
-  min-height: calc(100vh - 4rem - 48px);
+  min-height: calc(100vh - 1rem - 48px);
   background-color: var(--primary-bg);
-  border: 1px solid var(--line-color);
   padding: 1rem 0;
 
   header {

@@ -41,6 +41,7 @@ export class NavbarComponent implements OnInit {
   user$ = this.storage.watchUser().pipe(takeUntilDestroyed());
   user = {} as IUser;
   isMobile = window.innerWidth < 1024;
+  isWide = window.innerWidth > 1865;
 
   navbarPages = NAVBAR_PAGES;
   unreadNotifications = false;
@@ -98,5 +99,6 @@ export class NavbarComponent implements OnInit {
   onResize(event: Event) {
     if (!event.target) return;
     this.isMobile = (event.target as Window).innerWidth <= 1024;
+    this.isWide = (event.target as Window).innerWidth >= 1865;
   }
 }
