@@ -1,0 +1,56 @@
+.page {
+  .container {
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .content {
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        li {
+          padding: 1rem;
+          border: 1px solid var(--line-color);
+          border-radius: var(--br);
+
+          .title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            a {
+              width: 100%;
+              color: var(--text-color);
+              text-decoration: none;
+            }
+          }
+
+          .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            .col {
+              p {
+                margin: 0;
+                & + p {
+                  margin-top: 0.2rem;
+                }
+              }
+
+              &:last-child {
+                text-align: right;
+              }
+            }
+          }
+
+          & + li {
+            margin-top: 1rem;
+          }
+        }
+      }
+    }
+  }
+}

@@ -29,6 +29,13 @@ const routes: Routes = [
           import('@pages/home/home.module').then((m) => m.HomeModule),
       },
       {
+        path: 'questions',
+        loadChildren: () =>
+          import('@pages/questions/questions.module').then(
+            (m) => m.QuestionsModule
+          ),
+      },
+      {
         path: '**',
         component: PageErrorComponent,
         data: { code: 404 },

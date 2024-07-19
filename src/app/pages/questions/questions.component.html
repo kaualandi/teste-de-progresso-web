@@ -1,0 +1,40 @@
+<main class="page">
+  <div class="container">
+    <header>
+      <div class="col">
+        <h1>Questões</h1>
+        <p>Visualize e gerencie todas as questões cadastradas.</p>
+      </div>
+      <div class="col">
+        <a mat-flat-button color="primary" routerLink="new">
+          <i icon="plus"></i> Adicionar Questão
+        </a>
+      </div>
+    </header>
+    <div class="content">
+      <ul class="list">
+        <li *ngFor="let question of questions">
+          <div class="title">
+            <a class="f-16 one-line" routerLink="{{ question.id }}">
+              #{{ question.id }} {{ question.statement }}
+            </a>
+            <span class="difficulty-badge {{ question.difficulty }}">
+              {{ question.difficulty | dificulty }}
+            </span>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p>Assunto: {{ question.subject }}</p>
+              <p>Criador: {{ question.created_by }}</p>
+              <p>Revisor: {{ question.reviewer }}</p>
+            </div>
+            <div class="col">
+              <p>Criado em: {{ question.created_at | date: 'medium' }}</p>
+              <p>Atualizado em: {{ question.updated_at | date: 'medium' }}</p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</main>

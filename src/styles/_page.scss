@@ -34,3 +34,21 @@ main.page {
   padding-left: 1rem;
   padding-right: 1rem;
 }
+
+.difficulty-badge {
+  padding: 0 0.5rem;
+  border-radius: 1rem;
+  font-size: 0.6rem !important;
+  display: inline-block;
+  border: 1px solid var(--line-color);
+  color: var(--primary-bg);
+  &.easy {
+    background-color: var(--green-color);
+  }
+  &.medium {
+    background-color: var(--yellow-color);
+  }
+  &.hard {
+    background-color: var(--red-color);
+  }
+}
