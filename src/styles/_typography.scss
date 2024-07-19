@@ -59,6 +59,22 @@ $max-font-size: 52;
   .mat-mdc-option .mdc-list-item__primary-text {
     @extend .fd-14;
   }
+
+  .one-line {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .two-line {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }
 
 @for $i from $min-font-size through $max-font-size {

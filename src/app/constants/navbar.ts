@@ -20,8 +20,14 @@ export const NAVBAR_PAGES: {
   },
   {
     label: 'Questões',
-    icon: 'file_pen',
+    icon: 'file',
     link: '/questions',
+    roles: ['ADMIN', 'TEACHER'],
+  },
+  {
+    label: 'Revisões',
+    icon: 'list_check',
+    link: '/reviews',
     roles: ['ADMIN', 'TEACHER'],
   },
   {

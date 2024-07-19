@@ -1,8 +1,4 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { GeolocationService } from '@services/geolocation.service';
-import { NotifierService } from 'angular-notifier';
-import { interval, map } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -10,42 +6,21 @@ import { interval, map } from 'rxjs';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  constructor(
-    private notifier: NotifierService,
-    private geolocation: GeolocationService
-  ) {}
-
-  search = new FormControl('');
-
-  namesObj = [
-    { name: 'João da Silva' },
-    { name: 'Maria de Fátima' },
-    { name: 'Carol do Santos' },
-    { name: 'Lucas dos Santos' },
-    { name: 'Ana e Luiz' },
+  questions = [
+    {
+      id: 1,
+      question: 'What is the capital of France?',
+      dificulty: 'easy',
+    },
+    {
+      id: 2,
+      question: 'What is the largest ocean in the world?',
+      dificulty: 'medium',
+    },
+    {
+      id: 3,
+      question: 'What is the formula for the area of a circle?',
+      dificulty: 'hard',
+    },
   ];
-
-  names = [
-    'João da Silva',
-    'Maria de Fátima',
-    'Carol do Santos',
-    'Lucas dos Santos',
-    'Ana e Luiz',
-  ];
-
-  now$ = interval(1000).pipe(
-    map(() => {
-      return new Date();
-    })
-  );
-
-  showNotification() {
-    this.notifier.notify('success', 'Hello world!');
-  }
-
-  getLocation() {
-    this.geolocation.getCurrentPosition().subscribe((data) => {
-      console.log(data);
-    });
-  }
 }

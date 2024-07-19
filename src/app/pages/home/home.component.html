@@ -1,1 +1,108 @@
-<main></main>
+<main class="page">
+  <div class="container">
+    <div class="content">
+      <div class="roadmap">
+        <h2>Olá, John Doe!</h2>
+        <p>Você tem 5 questões para revisar e 2 provas para completar.</p>
+      </div>
+
+      <div class="mini-pages">
+        <div class="mini-page">
+          <h3>Acesso rápido</h3>
+          <div class="navigation">
+            <a mat-button href="/dashboard">
+              <i icon="dashboard"></i>
+              <span>Dashboard</span>
+            </a>
+            <a mat-button href="/questions">
+              <i icon="file"></i>
+              <span>Questões</span>
+            </a>
+            <a mat-button href="/reviews">
+              <i icon="list_check"></i>
+              <span>Revisões</span>
+            </a>
+            <a mat-button href="/exams">
+              <i icon="book"></i>
+              <span>Provas</span>
+            </a>
+          </div>
+        </div>
+        <div class="mini-page">
+          <h3>
+            Questões
+            <a href="/questions">ver todas</a>
+          </h3>
+          <div class="page-content">
+            <div class="difficulty-avg">
+              <div class="progress-bar">
+                <div class="easy-bar" [style.width]="'15%'"></div>
+                <div class="medium-bar" [style.width]="'47%'"></div>
+                <div class="hard-bar" [style.width]="'38%'"></div>
+              </div>
+            </div>
+            <ul class="list">
+              <li *ngFor="let question of questions">
+                <i icon="file"></i>
+                <a class="title one-line" href="/questions/{{ question.id }}">
+                  {{ question.question }}
+                </a>
+                <span class="difficulty {{ question.dificulty }}">
+                  {{ question.dificulty | dificulty }}
+                </span>
+              </li>
+            </ul>
+            <div class="new">
+              <a mat-flat-button color="primary" href="/questions/new">
+                Nova Questão
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="mini-page">
+          <h3>
+            Revisar questões
+            <a href="/reviews">ver todas</a>
+          </h3>
+          <div class="page-content">
+            <ul class="list">
+              <li *ngFor="let question of questions">
+                <i icon="file"></i>
+                <a class="title one-line" href="/reviews/{{ question.id }}">
+                  {{ question.question }}
+                </a>
+                <span class="difficulty {{ question.dificulty }}">
+                  {{ question.dificulty | dificulty }}
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="mini-page">
+          <h3>
+            Provas
+            <a href="/questions">ver todas</a>
+          </h3>
+          <div class="page-content">
+            <ul class="list">
+              <li *ngFor="let question of questions">
+                <i icon="book"></i>
+                <a class="title one-line" href="/questions/{{ question.id }}">
+                  {{ question.question }}
+                </a>
+                <span class="difficulty {{ question.dificulty }}">
+                  {{ question.dificulty | dificulty }}
+                </span>
+              </li>
+            </ul>
+            <div class="new">
+              <a mat-flat-button color="primary" href="/questions/new">
+                Nova Prova
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
