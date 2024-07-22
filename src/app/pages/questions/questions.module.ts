@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { MatStepperModule } from '@angular/material/stepper';
 import { SharedModule } from '@app/components/shared/shared.module';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { QuestionsDetailComponent } from './questions-detail/questions-detail.component';
 import { QuestionsRoutingModule } from './questions-routing.module';
 import { QuestionsComponent } from './questions.component';
@@ -14,6 +15,8 @@ import { QuestionsComponent } from './questions.component';
     QuestionsRoutingModule,
     SharedModule,
     MatStepperModule,
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot(),
   ],
 })
 export class QuestionsModule {}

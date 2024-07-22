@@ -1,1 +1,43 @@
-<p>questions-detail works!</p>
+<main class="page">
+  <div class="container">
+    <header>
+      <h1 class="one-line">{{ form.value.statement }}</h1>
+    </header>
+
+    <div class="content">
+      <mat-stepper>
+        <mat-step [stepControl]="form" label="Corpo da questão">
+          <form [formGroup]="form">
+            <div [froalaEditor]>Hello, Froala!</div>
+
+            <div class="buttons end">
+              <button
+                type="submit"
+                mat-flat-button
+                color="primary"
+                matStepperNext
+              >
+                Próximo
+              </button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="form" label="Fill out your address">
+          <form [formGroup]="form">
+            <div>
+              <button type="button" mat-button matStepperPrevious>Back</button>
+              <button type="submit" mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          <p>You are now done.</p>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+          </div>
+        </mat-step>
+      </mat-stepper>
+    </div>
+  </div>
+</main>
