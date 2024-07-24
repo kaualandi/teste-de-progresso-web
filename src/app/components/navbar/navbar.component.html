@@ -31,15 +31,13 @@
             </button>
           </div>
 
-          <a class="profile" mat-button routerLink="/profile">
-            <div class="image">
-              <img
-                *ngIf="user?.profile_image"
-                [src]="user.profile_image"
-                alt="avatar"
-              />
-              <i *ngIf="!user?.profile_image" icon="user" class="bg"></i>
-            </div>
+          <a mat-icon-button routerLink="/profile" class="profile">
+            <img
+              *ngIf="user?.profile_image"
+              [src]="user.profile_image"
+              alt="avatar"
+            />
+            <i *ngIf="!user?.profile_image" icon="user" class="bg"></i>
           </a>
         </div>
       </div>
