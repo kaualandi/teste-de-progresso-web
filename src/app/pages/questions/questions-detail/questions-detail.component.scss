@@ -1,0 +1,41 @@
+@import 'src/styles/media';
+
+#question-detail {
+  ::ng-deep {
+    .mat-horizontal-content-container,
+    .mat-vertical-content {
+      padding-top: 0.3rem;
+    }
+    .mat-mdc-radio-button ~ .mat-mdc-radio-button {
+      margin-left: 1rem;
+    }
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    @include media('<=tablet') {
+      grid-template-columns: 1fr;
+    }
+    .col {
+      width: 100%;
+      &.source-year {
+        display: flex;
+        gap: 1rem;
+        .source {
+          flex: 1;
+        }
+        .year {
+          width: 5rem;
+        }
+        mat-form-field {
+          & + mat-form-field {
+            margin-top: 0;
+          }
+        }
+      }
+    }
+  }
+}

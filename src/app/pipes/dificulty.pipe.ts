@@ -1,13 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'dificulty',
+  name: 'difficulty',
 })
-export class DificultyPipe implements PipeTransform {
+export class Difficulty implements PipeTransform {
   transform(value: string) {
-    if (value === 'easy') return 'Fácil';
-    if (value === 'medium') return 'Médio';
-    if (value === 'hard') return 'Difícil';
+    if (value === 'EASY') return 'Fácil';
+    if (value === 'MEDIUM') return 'Médio';
+    if (value === 'HARD') return 'Difícil';
     return '';
   }
 }

@@ -36,9 +36,9 @@
           <div class="page-content">
             <div class="difficulty-avg">
               <div class="progress-bar">
-                <div class="easy-bar" [style.width]="'15%'"></div>
-                <div class="medium-bar" [style.width]="'47%'"></div>
-                <div class="hard-bar" [style.width]="'38%'"></div>
+                <div class="EASY-bar" [style.width]="'15%'"></div>
+                <div class="MEDIUM-bar" [style.width]="'47%'"></div>
+                <div class="HARD-bar" [style.width]="'38%'"></div>
               </div>
             </div>
             <ul class="list">
@@ -47,8 +47,8 @@
                 <a class="title one-line" href="/questions/{{ question.id }}">
                   {{ question.question }}
                 </a>
-                <span class="difficulty {{ question.dificulty }}">
-                  {{ question.dificulty | dificulty }}
+                <span class="difficulty {{ question.difficulty }}">
+                  {{ question.difficulty | difficulty }}
                 </span>
               </li>
             </ul>
@@ -71,8 +71,8 @@
                 <a class="title one-line" href="/reviews/{{ question.id }}">
                   {{ question.question }}
                 </a>
-                <span class="difficulty-badge {{ question.dificulty }}">
-                  {{ question.dificulty | dificulty }}
+                <span class="difficulty-badge {{ question.difficulty }}">
+                  {{ question.difficulty | difficulty }}
                 </span>
               </li>
             </ul>
@@ -90,8 +90,8 @@
                 <a class="title one-line" href="/questions/{{ question.id }}">
                   {{ question.question }}
                 </a>
-                <span class="difficulty {{ question.dificulty }}">
-                  {{ question.dificulty | dificulty }}
+                <span class="difficulty {{ question.difficulty }}">
+                  {{ question.difficulty | difficulty }}
                 </span>
               </li>
             </ul>

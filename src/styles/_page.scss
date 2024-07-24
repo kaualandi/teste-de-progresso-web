@@ -42,13 +42,13 @@ main.page {
   display: inline-block;
   border: 1px solid var(--line-color);
   color: var(--primary-bg);
-  &.easy {
+  &.EASY {
     background-color: var(--green-color);
   }
-  &.medium {
+  &.MEDIUM {
     background-color: var(--yellow-color);
   }
-  &.hard {
+  &.HARD {
     background-color: var(--red-color);
   }
 }

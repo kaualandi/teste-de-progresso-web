@@ -1,16 +1,56 @@
-<main class="page">
+<main class="page" id="question-detail">
   <div class="container">
     <header>
-      <h1 class="one-line">{{ form.value.statement }}</h1>
+      <h1
+        class="one-line"
+        [innerHTML]="(formBody.value.statement | plaintext) || '&nbsp;'"
+      ></h1>
     </header>
 
     <div class="content">
-      <mat-stepper>
-        <mat-step [stepControl]="form" label="Corpo da questão">
-          <form [formGroup]="form">
-            <div [froalaEditor]>Hello, Froala!</div>
+      <mat-stepper [orientation]="isTablet ? 'vertical' : 'horizontal'">
+        <mat-step [stepControl]="formBody" label="Corpo da questão">
+          <form [formGroup]="formBody">
+            <mat-form-field appearance="outline" class="froala">
+              <mat-label>Instrução</mat-label>
+              <textarea
+                matInput
+                [froalaEditor]="froalaOptions"
+                formControlName="instruction"
+              ></textarea>
+              <mat-error>
+                {{
+                  formBody.controls.instruction.errors | formError | translate
+                }}
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="froala">
+              <mat-label>Suporte</mat-label>
+              <textarea
+                matInput
+                [froalaEditor]="froalaOptions"
+                formControlName="support"
+              ></textarea>
+              <mat-error>
+                {{ formBody.controls.support.errors | formError | translate }}
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="froala">
+              <mat-label>Enunciado</mat-label>
+              <textarea
+                matInput
+                [froalaEditor]="froalaOptions"
+                formControlName="statement"
+              ></textarea>
+              <mat-error>
+                {{ formBody.controls.statement.errors | formError | translate }}
+              </mat-error>
+            </mat-form-field>
 
             <div class="buttons end">
+              <a mat-flat-button routerLink="..">Cancelar</a>
               <button
                 type="submit"
                 mat-flat-button
@@ -22,20 +62,300 @@
             </div>
           </form>
         </mat-step>
-        <mat-step [stepControl]="form" label="Fill out your address">
-          <form [formGroup]="form">
-            <div>
-              <button type="button" mat-button matStepperPrevious>Back</button>
-              <button type="submit" mat-button matStepperNext>Next</button>
+
+        <mat-step [stepControl]="formCorrectOption" label="Resposta correta">
+          <form [formGroup]="formCorrectOption">
+            <mat-form-field appearance="outline" class="froala">
+              <mat-label>Opção correta</mat-label>
+              <textarea
+                matInput
+                [froalaEditor]="froalaOptions"
+                formControlName="correct_option"
+              ></textarea>
+              <mat-error>
+                {{
+                  formCorrectOption.controls.correct_option.errors
+                    | formError
+                    | translate
+                }}
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="froala">
+              <mat-label>Explicação</mat-label>
+              <textarea
+                matInput
+                [froalaEditor]="froalaOptions"
+                formControlName="explanation"
+              ></textarea>
+              <mat-error>
+                {{
+                  formCorrectOption.controls.explanation.errors
+                    | formError
+                    | translate
+                }}
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="froala">
+              <mat-label>Referência</mat-label>
+              <textarea
+                matInput
+                [froalaEditor]="froalaOptions"
+                formControlName="reference"
+              ></textarea>
+              <mat-error>
+                {{
+                  formCorrectOption.controls.reference.errors
+                    | formError
+                    | translate
+                }}
+              </mat-error>
+            </mat-form-field>
+
+            <div class="buttons end">
+              <button type="button" mat-flat-button matStepperPrevious>
+                Voltar
+              </button>
+              <button
+                type="submit"
+                mat-flat-button
+                matStepperNext
+                color="primary"
+                >Próximo</button
+              >
             </div>
           </form>
         </mat-step>
-        <mat-step>
-          <ng-template matStepLabel>Done</ng-template>
-          <p>You are now done.</p>
-          <div>
-            <button mat-button matStepperPrevious>Back</button>
-          </div>
+
+        <mat-step [stepControl]="formDistractor" label="Distratores">
+          <form [formGroup]="formDistractor">
+            <mat-form-field appearance="outline" class="froala">
+              <mat-label>Distrator 1</mat-label>
+              <textarea
+                matInput
+                [froalaEditor]="froalaOptions"
+                formControlName="distractor_one"
+              ></textarea>
+              <mat-error>
+                {{
+                  formDistractor.controls.distractor_one.errors
+                    | formError
+                    | translate
+                }}
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="froala">
+              <mat-label>Distrator 2</mat-label>
+              <textarea
+                matInput
+                [froalaEditor]="froalaOptions"
+                formControlName="distractor_two"
+              ></textarea>
+              <mat-error>
+                {{
+                  formDistractor.controls.distractor_two.errors
+                    | formError
+                    | translate
+                }}
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="froala">
+              <mat-label>Distrator 3</mat-label>
+              <textarea
+                matInput
+                [froalaEditor]="froalaOptions"
+                formControlName="distractor_three"
+              ></textarea>
+              <mat-error>
+                {{
+                  formDistractor.controls.distractor_three.errors
+                    | formError
+                    | translate
+                }}
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="froala">
+              <mat-label>Distrator 4</mat-label>
+              <textarea
+                matInput
+                [froalaEditor]="froalaOptions"
+                formControlName="distractor_four"
+              ></textarea>
+              <mat-error>
+                {{
+                  formDistractor.controls.distractor_four.errors
+                    | formError
+                    | translate
+                }}
+              </mat-error>
+            </mat-form-field>
+
+            <div class="buttons end">
+              <button type="button" mat-flat-button matStepperPrevious>
+                Voltar
+              </button>
+              <button
+                type="submit"
+                mat-flat-button
+                matStepperNext
+                color="primary"
+              >
+                Próximo
+              </button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="formFeatures" label="Características">
+          <form [formGroup]="formFeatures">
+            <div class="row">
+              <div class="col">
+                <mat-radio-group formControlName="author">
+                  <mat-radio-button value="OWN">Autoral</mat-radio-button>
+                  <mat-radio-button value="OTHER">Não autoral</mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <div class="col source-year">
+                <mat-form-field appearance="outline" class="source">
+                  <mat-label>Fonte</mat-label>
+                  <input matInput formControlName="source" />
+                  <mat-error>
+                    {{
+                      formFeatures.controls.source.errors
+                        | formError
+                        | translate
+                    }}
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="year">
+                  <mat-label>Ano</mat-label>
+                  <input
+                    matInput
+                    formControlName="year"
+                    mask="0000"
+                    placeholder="2024"
+                  />
+                  <mat-error>
+                    {{
+                      formFeatures.controls.year.errors | formError | translate
+                    }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <mat-form-field appearance="outline">
+                  <mat-label>Dificuldade</mat-label>
+                  <mat-select formControlName="difficulty">
+                    <mat-option value="EASY">Fácil</mat-option>
+                    <mat-option value="MEDIUM">Médio</mat-option>
+                    <mat-option value="HARD">Difícil</mat-option>
+                  </mat-select>
+                  <mat-error>
+                    {{
+                      formFeatures.controls.difficulty.errors
+                        | formError
+                        | translate
+                    }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field appearance="outline">
+                  <mat-label>Assunto</mat-label>
+                  <mat-select formControlName="subject">
+                    <mat-option [value]="1">Conhecimentos gerais</mat-option>
+                  </mat-select>
+                  <mat-error>
+                    {{
+                      formFeatures.controls.subject.errors
+                        | formError
+                        | translate
+                    }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <mat-form-field appearance="outline">
+                  <mat-label>Tipo</mat-label>
+                  <mat-select formControlName="type">
+                    <mat-option [value]="1">Resposta única</mat-option>
+                  </mat-select>
+                  <mat-error>
+                    {{
+                      formFeatures.controls.type.errors | formError | translate
+                    }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field appearance="outline">
+                  <mat-label>Eixo de formação</mat-label>
+                  <input matInput formControlName="training_axis" readonly />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <mat-form-field appearance="outline">
+                  <mat-label>Habilidade cognitiva</mat-label>
+                  <mat-select formControlName="cognitive_ability">
+                    <mat-option [value]="1">Recordar</mat-option>
+                  </mat-select>
+                  <mat-error>
+                    {{
+                      formFeatures.controls.cognitive_ability.errors
+                        | formError
+                        | translate
+                    }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field appearance="outline">
+                  <mat-label>Revisor</mat-label>
+                  <mat-select formControlName="reviewer">
+                    <mat-option [value]="1">Maria Oliveira</mat-option>
+                  </mat-select>
+                  <mat-error>
+                    {{
+                      formFeatures.controls.reviewer.errors
+                        | formError
+                        | translate
+                    }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <mat-form-field appearance="outline">
+              <mat-label>Intenção</mat-label>
+              <textarea
+                matInput
+                rows="3"
+                formControlName="intention"
+              ></textarea>
+              <mat-error>
+                {{
+                  formFeatures.controls.intention.errors | formError | translate
+                }}
+              </mat-error>
+            </mat-form-field>
+            <div class="buttons end">
+              <button type="button" mat-flat-button matStepperPrevious>
+                Voltar
+              </button>
+              <button type="submit" mat-flat-button color="primary">
+                Finalizar
+              </button>
+            </div>
+          </form>
         </mat-step>
       </mat-stepper>
     </div>

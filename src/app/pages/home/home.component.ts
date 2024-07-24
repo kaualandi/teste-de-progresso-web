@@ -10,17 +10,17 @@ export class HomeComponent {
     {
       id: 1,
       question: 'What is the capital of France?',
-      dificulty: 'easy',
+      difficulty: 'EASY',
     },
     {
       id: 2,
       question: 'What is the largest ocean in the world?',
-      dificulty: 'medium',
+      difficulty: 'MEDIUM',
     },
     {
       id: 3,
       question: 'What is the formula for the area of a circle?',
-      dificulty: 'hard',
+      difficulty: 'HARD',
     },
   ];
 }

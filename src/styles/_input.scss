@@ -67,3 +67,21 @@ form {
     margin-top: 1rem;
   }
 }
+
+mat-form-field {
+  &.froala {
+    .mdc-text-field--outlined {
+      padding-left: 1px;
+      padding-right: 1px;
+    }
+  }
+}
+
+.fr-second-toolbar {
+  display: none;
+}
+
+.fr-toolbar.fr-top,
+.fr-box.fr-basic.fr-top .fr-wrapper {
+  border: none;
+}

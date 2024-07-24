@@ -17,7 +17,8 @@ import { FilterDataPipe } from '@pipes/filter-data.pipe';
 import { FormErrorPipe } from '@pipes/form-error.pipe';
 import { SafePipe } from '@pipes/safe.pipe';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
-import { DificultyPipe } from '../../pipes/dificulty.pipe';
+import { Difficulty } from '../../pipes/dificulty.pipe';
+import { PlaintextPipe } from '../../pipes/plaintext.pipe';
 import { ConfirmModalComponent } from '../modals/confirm-modal/confirm-modal.component';
 import { ForgotPasswordComponent } from '../modals/forgot-password/forgot-password.component';
 import { AvatarComponent } from './avatar/avatar.component';
@@ -59,7 +60,8 @@ const DECLARATIONS = [
   FormErrorPipe,
   ScrollToDirective,
   ForgotPasswordComponent,
-  DificultyPipe,
+  Difficulty,
+  PlaintextPipe,
 ];
 
 @NgModule({

@@ -10,7 +10,7 @@ export class QuestionsComponent {
     {
       id: 1,
       statement: 'Qual é a capital do Brasil?',
-      difficulty: 'medium',
+      difficulty: 'MEDIUM',
       subject: 'Geografia',
       created_by: 'João Silva',
       reviewer: 'Maria Oliveira',
@@ -20,7 +20,7 @@ export class QuestionsComponent {
     {
       id: 2,
       statement: 'Qual é a fórmula da água?',
-      difficulty: 'hard',
+      difficulty: 'HARD',
       subject: 'Química',
       created_by: 'Ana Souza',
       reviewer: 'Pedro Almeida',
@@ -30,7 +30,7 @@ export class QuestionsComponent {
     {
       id: 3,
       statement: 'Qual é a cor do céu?',
-      difficulty: 'easy',
+      difficulty: 'EASY',
       subject: 'Física',
       created_by: 'Lucas Ferreira',
       reviewer: 'Fernanda Rodrigues',
@@ -40,7 +40,7 @@ export class QuestionsComponent {
     {
       id: 4,
       statement: 'Qual é a moeda oficial do Brasil?',
-      difficulty: 'medium',
+      difficulty: 'MEDIUM',
       subject: 'Economia',
       created_by: 'Isabela Gomes',
       reviewer: 'Gustavo Pereira',

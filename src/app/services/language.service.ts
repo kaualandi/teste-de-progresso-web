@@ -8,6 +8,7 @@ export class LanguageService {
   constructor(private translate: TranslateService) {}
 
   get current() {
+    return 'pt-br';
     const allLangs = this.translate.getLangs();
     const browserLang = allLangs.includes(this.translate.getBrowserLang() || '')
       ? this.translate.getBrowserLang()

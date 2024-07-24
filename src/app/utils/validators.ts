@@ -85,3 +85,9 @@ export function cpfValidator(control: AbstractControl) {
   }
   return null;
 }
+
+export function requiredRichTextValidator(control: AbstractControl) {
+  const value = control.value as string;
+  if (!value) return { required: true };
+  return value.replace(/<[^>]*>/g, '') ? null : { required: true };
+}
