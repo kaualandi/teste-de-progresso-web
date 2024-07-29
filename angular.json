@@ -53,7 +53,7 @@
               "./node_modules/froala-editor/css/froala_editor.pkgd.min.css",
               "./node_modules/froala-editor/css/froala_style.min.css"
             ],
-            "scripts": [],
+            "scripts": ["node_modules/apexcharts/dist/apexcharts.min.js"],
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json",
             "allowedCommonJsDependencies": ["lodash"],

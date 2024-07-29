@@ -13,21 +13,9 @@ export const NAVBAR_PAGES: {
     roles: ['ADMIN', 'TEACHER'],
   },
   {
-    label: 'Dashboard',
-    icon: 'dashboard',
-    link: '/dashboard',
-    roles: ['ADMIN', 'TEACHER'],
-  },
-  {
     label: 'Questões',
     icon: 'file',
     link: '/questions',
-    roles: ['ADMIN', 'TEACHER'],
-  },
-  {
-    label: 'Revisões',
-    icon: 'list_check',
-    link: '/reviews',
     roles: ['ADMIN', 'TEACHER'],
   },
   {
