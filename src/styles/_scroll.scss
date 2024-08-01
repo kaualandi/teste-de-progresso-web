@@ -12,3 +12,41 @@
   background: var(--scroll-track);
   border-radius: 6px;
 }
+
+.shadow-scroll {
+  transition: var(--ts);
+  overflow-x: auto;
+  background-color: white;
+  background-image: /* Shadows */
+    linear-gradient(to right, white 0%, white 50%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(to left, white 0%, white 50%, rgba(255, 255, 255, 0) 100%),
+    /* Shadow covers */
+      linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.2) 0%,
+        rgba(255, 255, 255, 0) 50%,
+        rgba(255, 255, 255, 0) 100%
+      ),
+    linear-gradient(
+      to left,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(255, 255, 255, 0) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  background-repeat: no-repeat;
+
+  background-position:
+    left center,
+    right center,
+    left center,
+    right center;
+  background-size:
+    1rem 100%,
+    1rem 100%,
+    1rem 100%,
+    1rem 100%;
+
+  /* Opera doesn't support this in the shorthand */
+  background-attachment: local, local, scroll, scroll;
+  -webkit-overflow-scrolling: touch;
+}

@@ -5,49 +5,67 @@
       justify-content: space-between;
       align-items: center;
     }
+  }
+  .content {
+    padding: 0 2rem;
+    .kanban-container {
+      display: flex;
+      gap: 1rem;
+      overflow: auto;
+      padding-bottom: 0.5rem;
+      .kanban-column {
+        flex: 1;
+        padding: 0.5rem;
+        border: 1px solid var(--line-color);
+        border-radius: var(--br);
+        min-width: 320px;
 
-    .content {
-      ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        li {
-          padding: 1rem;
-          border: 1px solid var(--line-color);
-          border-radius: var(--br);
+        ul {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+          width: 100%;
+          li {
+            padding: 0.5rem;
+            border: 1px solid var(--line-color);
+            border-radius: calc(var(--br) - 0.2rem);
 
-          .title {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
-            a {
-              width: 100%;
-              color: var(--text-color);
-              text-decoration: none;
+            .title {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 0.5rem;
+              a {
+                width: 100%;
+                color: var(--text-color);
+                text-decoration: none;
+              }
             }
-          }
 
-          .row {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            .col {
+            .list-body {
               p {
                 margin: 0;
+                &.statement {
+                  display: -webkit-box;
+                  display: box;
+                  -webkit-line-clamp: 3;
+                  line-clamp: 3;
+                  -webkit-box-orient: vertical;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                }
+                &:not(.statement) {
+                  opacity: 0.7;
+                }
                 & + p {
-                  margin-top: 0.2rem;
+                  margin-top: 0.1rem;
                 }
               }
-
-              &:last-child {
-                text-align: right;
-              }
             }
-          }
 
-          & + li {
-            margin-top: 1rem;
+            & + li {
+              margin-top: 1rem;
+            }
           }
         }
       }

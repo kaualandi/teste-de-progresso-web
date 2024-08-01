@@ -1,4 +1,4 @@
-# WebBoilerplate
+# Teste de Progresso
 
 Projeto gerado com [Angular CLI](https://github.com/angular/angular-cli) versão 16.2.10.
 
@@ -351,7 +351,7 @@ ng lint
 
 - _improvement/_: Em si é uma melhoria para uma feature já existente, seja de performance, de escrita, de layout, etc.
 
-### Exemplos de Branchs:
+### Exemplos de Branches:
 
 - _bugfix/login-submit-form_: Correção de bug ao submeter o formulário de login
 - _feature/login-page-form_: Adição de formulário na página de login
