@@ -1,20 +1,26 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatTabsModule } from '@angular/material/tabs';
 import { SharedModule } from '@app/components/shared/shared.module';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import 'froala-editor/js/languages/pt_br.js';
 import { QuestionsDetailComponent } from './questions-detail/questions-detail.component';
+import { QuestionsListComponent } from './questions-list/questions-list.component';
 import { QuestionsRoutingModule } from './questions-routing.module';
 import { QuestionsComponent } from './questions.component';
 
-import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import 'froala-editor/js/languages/pt_br.js';
-
 @NgModule({
-  declarations: [QuestionsComponent, QuestionsDetailComponent],
+  declarations: [
+    QuestionsComponent,
+    QuestionsDetailComponent,
+    QuestionsListComponent,
+  ],
   imports: [
     CommonModule,
     QuestionsRoutingModule,
@@ -22,6 +28,8 @@ import 'froala-editor/js/languages/pt_br.js';
     MatStepperModule,
     MatRadioModule,
     MatSelectModule,
+    MatTabsModule,
+    MatBadgeModule,
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
   ],

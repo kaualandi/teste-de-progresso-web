@@ -1,0 +1,17 @@
+<div class="questions-list">
+  <ul class="list">
+    <li *ngFor="let question of questions">
+      <div class="title">
+        <a class="f-16" routerLink="{{ question.id }}"> #{{ question.id }} </a>
+        <span class="difficulty-badge {{ question.difficulty }}">
+          {{ question.difficulty | difficulty }}
+        </span>
+      </div>
+
+      <div class="list-body">
+        <p class="statement"> {{ question.body }} </p>
+        <p class="f-12">Assunto: {{ question.subject }}</p>
+      </div>
+    </li>
+  </ul>
+</div>

@@ -11,32 +11,25 @@
         </a>
       </div>
     </header>
-  </div>
 
-  <div class="content">
-    <div class="kanban-container shadow-scroll">
-      <div class="kanban-column" *ngFor="let key of questionsKeys">
-        <h3>{{ getQuestionsTitlesByKey(key) }}</h3>
-        <ul class="list">
-          <li *ngFor="let question of getQuestionBySection(key)">
-            <div class="title">
-              <a class="f-16" routerLink="{{ question.id }}">
-                #{{ question.id }}
-              </a>
-              <span class="difficulty-badge {{ question.difficulty }}">
-                {{ question.difficulty | difficulty }}
-              </span>
-            </div>
-
-            <div class="list-body">
-              <p class="statement"> {{ question.statement }} </p>
-              <p class="f-12 one-line">Assunto: {{ question.subject }}</p>
-              <p class="f-12 one-line">Criador: {{ question.created_by }}</p>
-              <p class="f-12 one-line">Revisor: {{ question.reviewer }}</p>
-            </div>
-          </li>
-        </ul>
-      </div>
+    <div class="content" *ngIf="!loading && !error">
+      <mat-tab-group #tabGroup dynamicHeight>
+        <mat-tab *ngFor="let key of questionsKeys; let i = index">
+          <ng-template mat-tab-label>
+            <span
+              class="tab-label"
+              [matBadge]="getBadgeCountByKey(key, i, tabGroup.selectedIndex)"
+              matBadgeOverlap="false"
+            >
+              {{ getQuestionsTitlesByKey(key) }}
+            </span>
+          </ng-template>
+          <app-questions-list [questions]="getQuestionBySection(key)" />
+        </mat-tab>
+      </mat-tab-group>
     </div>
+
+    <page-error *ngIf="error" [code]="error"></page-error>
+    <page-loading *ngIf="loading"></page-loading>
   </div>
 </main>
