@@ -1,27 +1,57 @@
 <main class="page">
   <div class="container">
     <div class="content">
-      <form class="filters">
+      <form class="filters" [formGroup]="form">
         <div class="row">
           <mat-form-field appearance="outline" class="year">
             <mat-label>Ano inicial</mat-label>
-            <input matInput type="text" mask="0000" />
+            <input
+              matInput
+              [matDatepicker]="dp"
+              formControlName="start_year"
+              [max]="now"
+            />
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="dp"
+            ></mat-datepicker-toggle>
+            <mat-datepicker
+              #dp
+              startView="multi-year"
+              (yearSelected)="setYear($event, dp, 'start_year')"
+            >
+            </mat-datepicker>
           </mat-form-field>
+
           <mat-form-field appearance="outline" class="year">
             <mat-label>Ano final</mat-label>
-            <input matInput type="text" mask="0000" />
+            <input
+              matInput
+              [matDatepicker]="dp"
+              formControlName="end_year"
+              [max]="now"
+            />
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="dp"
+            ></mat-datepicker-toggle>
+            <mat-datepicker
+              #dp
+              startView="multi-year"
+              (yearSelected)="setYear($event, dp, 'end_year')"
+            >
+            </mat-datepicker>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Autoria</mat-label>
-            <mat-select>
-              <mat-option value="">Todos</mat-option>
-              <mat-option value="own">Apenas autorais</mat-option>
-              <mat-option value="other">Apenas não autorais</mat-option>
+            <mat-select multiple formControlName="authorship">
+              <mat-option value="own">Autorais</mat-option>
+              <mat-option value="other">Não autorais</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Assuntos</mat-label>
-            <mat-select multiple>
+            <mat-select multiple formControlName="subjects">
               <mat-option value="biologia">Biologia</mat-option>
               <mat-option value="fisica">Física</mat-option>
             </mat-select>

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { MatDatepicker } from '@angular/material/datepicker';
 import { ApexChartsService } from '@app/services/apex-charts.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-home',
@@ -7,10 +10,21 @@ import { ApexChartsService } from '@app/services/apex-charts.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private apexCharts: ApexChartsService) {}
+  constructor(
+    private apexCharts: ApexChartsService,
+    private fb: FormBuilder
+  ) {}
 
   loading = false;
   filtering = false;
+  now = moment();
+  form = this.fb.group({
+    start_year: [moment().set('year', 2000)],
+    end_year: [moment()],
+    authorship: [['own', 'other']],
+    subjects: this.fb.control<string[]>([]),
+  });
+
   difficultyChart = this.apexCharts.getDonut({
     title: 'Questões por dificuldade',
     labels: ['Fácil', 'Médio', 'Difícil'],
@@ -48,5 +62,17 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
       this.loading = false;
     }, 600);
+  }
+
+  setYear(
+    normalizedYear: moment.Moment,
+    datepicker: MatDatepicker<moment.Moment>,
+    year: 'start_year' | 'end_year'
+  ) {
+    const ctrlValue = this.form.get(year)?.value;
+    if (!ctrlValue) return;
+    ctrlValue.year(normalizedYear.year());
+    this.form.controls.start_year.setValue(ctrlValue);
+    datepicker.close();
   }
 }

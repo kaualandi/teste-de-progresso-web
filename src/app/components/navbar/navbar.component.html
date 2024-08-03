@@ -69,6 +69,17 @@
           <span class="one-line">{{ item.label }}</span>
         </a>
       </li>
+      <li>
+        <a
+          mat-button
+          href="{{ admin }}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i icon="lock"></i>
+          <span class="one-line">Admin</span>
+        </a>
+      </li>
       <li class="logout">
         <button title="Sair" mat-button (click)="logout()">
           <i icon="logout"></i>
