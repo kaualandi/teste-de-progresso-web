@@ -17,8 +17,10 @@ export class AuthService {
     private router: Router
   ) {}
 
+  formErrorHandler = this.http.formErrorHandler;
+
   login(body: BodyJson) {
-    return this.http.post<IToken>('core/auth/', {
+    return this.http.post<IToken>('/api-token-auth/', {
       ...body,
       password: Md5.init(body['password']).toUpperCase(),
     });

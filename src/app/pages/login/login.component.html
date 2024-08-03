@@ -10,7 +10,7 @@
     </div>
     <div class="col">
       <div class="form">
-        <form (ngSubmit)="loginSubmitHandler()" [formGroup]="login_form">
+        <form (ngSubmit)="loginSubmitHandler()" [formGroup]="form">
           <h1>{{ 'login-register.login-title' | translate }}</h1>
 
           <mat-form-field appearance="outline">
@@ -24,7 +24,7 @@
               autocomplete="username"
             />
             <mat-error>
-              {{ login_form.controls.email.errors | formError | translate }}
+              {{ form.controls.email.errors | formError | translate }}
             </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
@@ -50,7 +50,7 @@
             </button>
 
             <mat-error>
-              {{ login_form.controls.password.errors | formError | translate }}
+              {{ form.controls.password.errors | formError | translate }}
             </mat-error>
           </mat-form-field>
 

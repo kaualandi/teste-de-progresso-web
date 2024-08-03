@@ -4,6 +4,7 @@ import {
   HttpParams,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { environment } from '@env';
 import { StorageService } from '@services/storage.service';
 import { NotifierService } from 'angular-notifier';
@@ -17,6 +18,10 @@ export interface BodyJson {
 
 export interface HttpConfig {
   token: boolean;
+}
+
+export interface HttpError {
+  [key: string]: string | string[];
 }
 
 type ApplicationsTypes = 'json' | 'x-www-form-urlencoded';
@@ -65,12 +70,16 @@ export class HttpService {
   }
 
   private handleError = (error: HttpErrorResponse) => {
-    this.notifier.notify(
-      'error',
-      error.error.detail ||
-        error.error.message ||
-        'Não foi possível completar a ação'
-    );
+    const nonFieldErrors = error.error.non_field_errors;
+    if (Object.keys(error.error).length) {
+      if (nonFieldErrors) {
+        nonFieldErrors.forEach((error: string) => {
+          this.notifier.notify('error', error);
+        });
+      }
+      return throwError(() => error);
+    }
+    this.notifier.notify('error', 'Não foi possível completar a ação');
     return throwError(() => error);
   };
 
@@ -175,5 +184,30 @@ export class HttpService {
     return this.http
       .delete<T>(this.getUrl(url), { headers, params })
       .pipe(retry(this.repeat), catchError(this.handleError));
+  }
+
+  /**
+   * ### Tratamento de erro para formulários
+   * Espera receber um formulario do tipo FormGroup e um erro da requisição.
+   * O erro é tratado e os campos do formulario são marcados como inválidos.
+   *
+   * Não se preocupe se o campo não existir, o erro será ignorado.
+   * Tabém tratamos caso o formato dos erros seja diferente do esperado.
+   *
+   * @param form Formulário do tipo FormGroup
+   * @param error Erro da requisição
+   */
+  formErrorHandler(form: FormGroup, errors: HttpError) {
+    if (!errors) return;
+    for (const key in errors) {
+      if (form.get(key)) {
+        const value = errors[key];
+        if (typeof value === 'string') {
+          form.get(key)?.setErrors({ server: value });
+        } else if (value.length) {
+          form.get(key)?.setErrors({ server: value[0] });
+        }
+      }
+    }
   }
 }

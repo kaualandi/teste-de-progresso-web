@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NavbarComponent } from '@components/navbar/navbar.component';
 import { PageErrorComponent } from '@components/shared/page-error/page-error.component';
+import { authGuard } from './guards/auth.guard';
 
 const SPR = false;
 
@@ -21,7 +22,7 @@ const routes: Routes = [
   {
     path: '',
     component: NavbarComponent,
-    // canActivate: [authGuard],
+    canActivate: [authGuard],
     children: [
       {
         path: '',

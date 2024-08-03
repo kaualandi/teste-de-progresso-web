@@ -12,7 +12,7 @@ import { InputFileDirective } from '@directives/input-file.directive';
 import { PrevPageDirective } from '@directives/prev-page.directive';
 import { ScrollToDirective } from '@directives/scroll-to.directive';
 import { StopPropagDirective } from '@directives/stop-propag.directive';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FilterDataPipe } from '@pipes/filter-data.pipe';
 import { FormErrorPipe } from '@pipes/form-error.pipe';
 import { SafePipe } from '@pipes/safe.pipe';
@@ -74,5 +74,6 @@ const DECLARATIONS = [
   ],
   declarations: [...DECLARATIONS],
   exports: [...IMPORTS, ...DECLARATIONS],
+  providers: [TranslateService],
 })
 export class SharedModule {}

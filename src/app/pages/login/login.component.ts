@@ -30,39 +30,43 @@ export class LoginComponent implements OnInit {
 
   version = environment.version;
 
-  login_form = this.fb.group({
+  form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
+    password: [''],
     remember: [false],
   });
 
   ngOnInit(): void {
+    if (this.storage.token) {
+      this.router.navigate(['/']);
+    }
     this.awaitRemember();
   }
 
   loginSubmitHandler() {
-    if (this.login_form.invalid) {
-      this.login_form.markAllAsTouched();
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
       return;
     }
 
     this.loading = true;
 
-    const body = this.login_form.value as BodyJson;
+    const body = this.form.value as BodyJson;
     this.authService.login(body).subscribe({
       next: (response) => {
         this.loading = false;
         this.authService.setToken(response.token, body['remember'] as boolean);
         this.router.navigate(['/']);
       },
-      error: () => {
+      error: (error) => {
+        this.authService.formErrorHandler(this.form, error.error);
         this.loading = false;
       },
     });
   }
 
   awaitRemember() {
-    this.login_form.get('remember')?.valueChanges.subscribe((value) => {
+    this.form.get('remember')?.valueChanges.subscribe((value) => {
       if (!value) return;
 
       if (!this.storage.cookies) {
@@ -73,7 +77,7 @@ export class LoginComponent implements OnInit {
 
   handleOpenForgotPasswordModal() {
     this.dialog.open(ForgotPasswordComponent, {
-      data: { email: this.login_form.get('email')?.value },
+      data: { email: this.form.get('email')?.value },
     });
   }
 
@@ -87,7 +91,7 @@ export class LoginComponent implements OnInit {
       if (result) {
         this.storage.cookies = true;
       } else {
-        this.login_form.get('remember')?.setValue(false);
+        this.form.get('remember')?.setValue(false);
       }
     });
   }
