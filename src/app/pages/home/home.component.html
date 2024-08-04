@@ -7,18 +7,18 @@
             <mat-label>Ano inicial</mat-label>
             <input
               matInput
-              [matDatepicker]="dp"
+              [matDatepicker]="startYearDp"
               formControlName="start_year"
               [max]="now"
             />
             <mat-datepicker-toggle
               matIconSuffix
-              [for]="dp"
+              [for]="startYearDp"
             ></mat-datepicker-toggle>
             <mat-datepicker
-              #dp
+              #startYearDp
               startView="multi-year"
-              (yearSelected)="setYear($event, dp, 'start_year')"
+              (yearSelected)="setYear($event, startYearDp, 'start_year')"
             >
             </mat-datepicker>
           </mat-form-field>
@@ -27,18 +27,18 @@
             <mat-label>Ano final</mat-label>
             <input
               matInput
-              [matDatepicker]="dp"
+              [matDatepicker]="endYearDp"
               formControlName="end_year"
               [max]="now"
             />
             <mat-datepicker-toggle
               matIconSuffix
-              [for]="dp"
+              [for]="endYearDp"
             ></mat-datepicker-toggle>
             <mat-datepicker
-              #dp
+              #endYearDp
               startView="multi-year"
-              (yearSelected)="setYear($event, dp, 'end_year')"
+              (yearSelected)="setYear($event, endYearDp, 'end_year')"
             >
             </mat-datepicker>
           </mat-form-field>
@@ -52,8 +52,9 @@
           <mat-form-field appearance="outline">
             <mat-label>Assuntos</mat-label>
             <mat-select multiple formControlName="subjects">
-              <mat-option value="biologia">Biologia</mat-option>
-              <mat-option value="fisica">Física</mat-option>
+              <mat-option *ngFor="let subject of subjects" [value]="subject.id">
+                {{ subject.name }}
+              </mat-option>
             </mat-select>
           </mat-form-field>
         </div>

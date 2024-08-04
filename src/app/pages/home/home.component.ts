@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDatepicker } from '@angular/material/datepicker';
+import { Subject } from '@app/models/subject';
 import { ApexChartsService } from '@app/services/apex-charts.service';
+import { SubjectService } from '@app/services/subject.service';
 import * as moment from 'moment';
 
 @Component({
@@ -12,17 +14,19 @@ import * as moment from 'moment';
 export class HomeComponent implements OnInit {
   constructor(
     private apexCharts: ApexChartsService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private subjectService: SubjectService
   ) {}
 
   loading = false;
   filtering = false;
+  subjects: Subject[] = [];
   now = moment();
   form = this.fb.group({
     start_year: [moment().set('year', 2000)],
     end_year: [moment()],
     authorship: [['own', 'other']],
-    subjects: this.fb.control<string[]>([]),
+    subjects: this.fb.control<number[]>([]),
   });
 
   difficultyChart = this.apexCharts.getDonut({
@@ -62,6 +66,18 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
       this.loading = false;
     }, 600);
+
+    this.getSubjects();
+  }
+
+  getSubjects() {
+    this.subjectService.getSubjects().subscribe({
+      next: (response) => {
+        this.subjects = response;
+        const subjectsIds = response.map((subject) => subject.id);
+        this.form.controls.subjects.setValue(subjectsIds);
+      },
+    });
   }
 
   setYear(

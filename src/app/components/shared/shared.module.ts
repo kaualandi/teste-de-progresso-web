@@ -6,6 +6,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterModule } from '@angular/router';
 import { IconDirective } from '@directives/icon.directive';
 import { InitialLettersDirective } from '@directives/initial-letters.directive';
 import { InputFileDirective } from '@directives/input-file.directive';
@@ -71,6 +72,7 @@ const DECLARATIONS = [
     MatDialogModule,
     MatMenuModule,
     MatTooltipModule,
+    RouterModule,
   ],
   declarations: [...DECLARATIONS],
   exports: [...IMPORTS, ...DECLARATIONS],

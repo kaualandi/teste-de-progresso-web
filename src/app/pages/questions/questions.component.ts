@@ -34,8 +34,7 @@ export class QuestionsComponent implements OnInit {
         this.loading = false;
       },
       error: (error) => {
-        // this.error = error.status || 500;
-        this.error = error.status;
+        this.error = error.status || 500;
         this.loading = false;
       },
     });
