@@ -56,15 +56,15 @@
                 </p>
                 <p>
                   Assunto:
-                  <span>{{ question.subject_obj.name }}</span>
+                  <span>{{ question.subject_obj?.name }}</span>
                 </p>
                 <p>
                   Revisor:
-                  <span>{{ question.reported_by_obj.name }}</span>
+                  <span>{{ question.reported_by_obj?.name }}</span>
                 </p>
                 <p>
                   Eixo de formação:
-                  <span>{{ question.subject_obj.axis_obj.name }}</span>
+                  <span>{{ question.subject_obj?.axis_obj?.name }}</span>
                 </p>
               </div>
             </mat-expansion-panel>

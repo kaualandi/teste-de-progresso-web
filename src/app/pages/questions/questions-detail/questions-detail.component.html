@@ -203,9 +203,13 @@
                 <mat-form-field appearance="outline">
                   <mat-label>Dificuldade</mat-label>
                   <mat-select formControlName="difficulty">
-                    <mat-option value="easy">Fácil</mat-option>
-                    <mat-option value="medium">Médio</mat-option>
-                    <mat-option value="hard">Difícil</mat-option>
+                    <mat-option value="">-</mat-option>
+                    <mat-option
+                      *ngFor="let difficulty of difficultyOptions"
+                      [value]="difficulty.value"
+                    >
+                      {{ difficulty.label }}
+                    </mat-option>
                   </mat-select>
                   <mat-error>
                     {{
@@ -220,6 +224,7 @@
                 <mat-form-field appearance="outline">
                   <mat-label>Assunto</mat-label>
                   <mat-select formControlName="subject">
+                    <mat-option value="">-</mat-option>
                     <mat-option
                       *ngFor="let subject of subjects"
                       [value]="subject.id"
@@ -242,6 +247,7 @@
                 <mat-form-field appearance="outline">
                   <mat-label>Tipo</mat-label>
                   <mat-select formControlName="check_type">
+                    <mat-option value="">-</mat-option>
                     <mat-option
                       *ngFor="let type of checkTypes"
                       [value]="type.value"
@@ -270,6 +276,7 @@
                 <mat-form-field appearance="outline">
                   <mat-label>Habilidade cognitiva</mat-label>
                   <mat-select formControlName="bloom_taxonomy">
+                    <mat-option value="">-</mat-option>
                     <mat-option
                       *ngFor="let item of bloomTaxonomy"
                       [value]="item.value"
@@ -290,6 +297,7 @@
                 <mat-form-field appearance="outline">
                   <mat-label>Revisor</mat-label>
                   <mat-select formControlName="reported_by">
+                    <mat-option value="">-</mat-option>
                     <mat-option *ngFor="let user of reports" [value]="user.id">
                       {{ user.name }}
                     </mat-option>
@@ -322,10 +330,19 @@
                 Voltar
               </button>
               <button
+                type="button"
+                mat-flat-button
+                (click)="handleFormSubmit(true)"
+                [disabled]="loadingSubmit || loadingDraft"
+              >
+                Salvar como rascunho
+                <loading *ngIf="loadingDraft" />
+              </button>
+              <button
                 type="submit"
                 mat-flat-button
                 color="primary"
-                [disabled]="loadingSubmit"
+                [disabled]="loadingSubmit || loadingDraft"
               >
                 Finalizar
                 <loading *ngIf="loadingSubmit" />

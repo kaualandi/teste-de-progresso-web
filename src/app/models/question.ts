@@ -53,8 +53,8 @@ export interface Question {
   created_at: string;
   updated_at: string;
   subject: number;
-  subject_obj: Subject;
+  subject_obj?: Subject;
   created_by: number;
   reported_by: number;
-  reported_by_obj: User;
+  reported_by_obj?: User;
 }

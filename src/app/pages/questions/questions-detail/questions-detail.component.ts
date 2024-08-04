@@ -2,7 +2,12 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FROALA_OPTIONS } from '@app/constants/froala';
-import { BLOOM_TAXONOMY, CHECK_TYPES } from '@app/constants/questions';
+import {
+  BLOOM_TAXONOMY,
+  CHECK_TYPES,
+  QUESTION_DIFFICULTIES,
+} from '@app/constants/questions';
+import { QuestionStatus } from '@app/models/question';
 import { Subject } from '@app/models/subject';
 import { User } from '@app/models/user';
 import { BodyJson } from '@app/services/http.service';
@@ -31,6 +36,8 @@ export class QuestionsDetailComponent implements OnInit {
   loading = false;
   error = 0;
   loadingSubmit = false;
+  loadingDraft = false;
+  difficultyOptions = QUESTION_DIFFICULTIES;
   froalaOptions = FROALA_OPTIONS;
   bloomTaxonomy = BLOOM_TAXONOMY;
   checkTypes = CHECK_TYPES;
@@ -118,28 +125,29 @@ export class QuestionsDetailComponent implements OnInit {
   listenerSubject() {
     this.formFeatures.get('subject')?.valueChanges.subscribe((subjectId) => {
       const subject = this.subjects.find((subject) => subject.id === subjectId);
-      if (!subject) return;
-
-      this.formFeatures.controls.axis.setValue(subject.axis_obj.name, {
+      this.formFeatures.controls.axis.setValue(subject?.axis_obj?.name || '', {
         emitEvent: false,
       });
     });
   }
 
-  handleFormSubmit() {
+  handleFormSubmit(draft = false) {
     if (
-      this.formBody.invalid ||
-      this.formCorrectOption.invalid ||
-      this.formDistractor.invalid ||
-      this.formFeatures.invalid
+      !draft &&
+      (this.formBody.invalid ||
+        this.formCorrectOption.invalid ||
+        this.formDistractor.invalid ||
+        this.formFeatures.invalid)
     ) {
       this.formBody.markAllAsTouched();
       this.formCorrectOption.markAllAsTouched();
       this.formDistractor.markAllAsTouched();
       this.formFeatures.markAllAsTouched();
+      this.notifier.notify('error', 'Preencha todos os campos obrigatórios!');
       return;
     }
 
+    const status: QuestionStatus = draft ? 'draft' : 'waiting_review';
     const body = {
       ...this.formBody.getRawValue(),
       ...this.formCorrectOption.getRawValue(),
@@ -149,9 +157,11 @@ export class QuestionsDetailComponent implements OnInit {
         ...this.formCorrectOption.controls.alternatives.getRawValue(),
         ...this.formDistractor.controls.alternatives.getRawValue(),
       ],
+      status,
     } as BodyJson;
 
-    this.loadingSubmit = true;
+    if (draft) this.loadingDraft = true;
+    if (!draft) this.loadingSubmit = true;
     const observable = this.id
       ? this.questionService.updateQuestion(this.id, body)
       : this.questionService.createQuestion(body);
@@ -168,6 +178,7 @@ export class QuestionsDetailComponent implements OnInit {
       error: (error) => {
         console.error(error);
         this.loadingSubmit = false;
+        this.loadingDraft = false;
       },
     });
   }
