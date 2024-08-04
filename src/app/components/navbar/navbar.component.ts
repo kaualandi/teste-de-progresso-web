@@ -44,7 +44,6 @@ export class NavbarComponent implements OnInit {
   isWide = window.innerWidth > 1865;
 
   navbarPages = NAVBAR_PAGES;
-  admin = environment.base_url + '/admin/';
   unreadNotifications = false;
   version = environment.version;
   production = environment.production;
@@ -83,6 +82,10 @@ export class NavbarComponent implements OnInit {
         this.loading = false;
       },
     });
+  }
+
+  openAdminPage() {
+    window.open(environment.base_url + '/admin/', '_blank');
   }
 
   logout() {

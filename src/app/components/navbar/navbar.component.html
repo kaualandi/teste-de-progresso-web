@@ -70,15 +70,10 @@
         </a>
       </li>
       <li>
-        <a
-          mat-button
-          href="{{ admin }}"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <button mat-button (click)="openAdminPage()">
           <i icon="lock"></i>
           <span class="one-line">Admin</span>
-        </a>
+        </button>
       </li>
       <li class="logout">
         <button title="Sair" mat-button (click)="logout()">
