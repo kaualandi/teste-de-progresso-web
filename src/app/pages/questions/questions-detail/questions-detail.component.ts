@@ -1,6 +1,11 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import {
+  ConfirmModalComponent,
+  IConfirmModalData,
+} from '@app/components/modals/confirm-modal/confirm-modal.component';
 import { FROALA_OPTIONS } from '@app/constants/froala';
 import {
   BLOOM_TAXONOMY,
@@ -16,6 +21,7 @@ import { requiredRichTextValidator } from '@app/utils/validators';
 import { NotifierService } from 'angular-notifier';
 import { startWith } from 'rxjs';
 
+type LoadingActions = 'submit' | 'draft' | 'delete';
 @Component({
   selector: 'app-questions-detail',
   templateUrl: './questions-detail.component.html',
@@ -27,7 +33,8 @@ export class QuestionsDetailComponent implements OnInit {
     private questionService: QuestionService,
     private router: Router,
     private route: ActivatedRoute,
-    private notifier: NotifierService
+    private notifier: NotifierService,
+    private dialog: MatDialog
   ) {}
 
   id: string = this.route.snapshot.params['id'];
@@ -35,14 +42,14 @@ export class QuestionsDetailComponent implements OnInit {
 
   loading = false;
   error = 0;
-  loadingSubmit = false;
-  loadingDraft = false;
+  loadingActions?: LoadingActions;
   difficultyOptions = QUESTION_DIFFICULTIES;
   froalaOptions = FROALA_OPTIONS;
   bloomTaxonomy = BLOOM_TAXONOMY;
   checkTypes = CHECK_TYPES;
   subjects: Subject[] = [];
   reports: User[] = [];
+  status?: QuestionStatus;
 
   formBody = this.fb.group({
     instruction: [''],
@@ -164,8 +171,7 @@ export class QuestionsDetailComponent implements OnInit {
       status,
     } as BodyJson;
 
-    if (draft) this.loadingDraft = true;
-    if (!draft) this.loadingSubmit = true;
+    this.loadingActions = draft ? 'draft' : 'submit';
     const observable = this.id
       ? this.questionService.updateQuestion(this.id, body)
       : this.questionService.createQuestion(body);
@@ -181,8 +187,7 @@ export class QuestionsDetailComponent implements OnInit {
       },
       error: (error) => {
         console.error(error);
-        this.loadingSubmit = false;
-        this.loadingDraft = false;
+        this.loadingActions = undefined;
       },
     });
   }
@@ -191,6 +196,7 @@ export class QuestionsDetailComponent implements OnInit {
     this.loading = true;
     this.questionService.getQuestion(this.id).subscribe({
       next: (question) => {
+        this.status = question.status;
         this.formBody.patchValue({
           instruction: question.instruction,
           support: question.support,
@@ -221,6 +227,34 @@ export class QuestionsDetailComponent implements OnInit {
         this.error = error.status || 500;
         this.loading = false;
       },
+    });
+  }
+
+  deleteQuestion() {
+    this.loadingActions = 'delete';
+    this.questionService.deleteQuestion(this.id).subscribe({
+      next: () => {
+        this.router.navigate(['/questions']);
+        this.notifier.notify('success', 'Questão apagada com sucesso.');
+      },
+      error: () => {
+        this.loadingActions = undefined;
+      },
+    });
+  }
+
+  handleDeleteButtonClick() {
+    const dialogRef = this.dialog.open(ConfirmModalComponent, {
+      data: {
+        title: 'Apagar questão?',
+        message: 'Essa ação não poderá ser desfeita.',
+      } as IConfirmModalData,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.deleteQuestion();
+      }
     });
   }
 

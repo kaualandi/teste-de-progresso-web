@@ -332,20 +332,30 @@
               <button
                 type="button"
                 mat-flat-button
+                (click)="handleDeleteButtonClick()"
+                *ngIf="status === 'draft'"
+                [disabled]="loadingActions"
+              >
+                Excluir rascunho
+                <loading *ngIf="loadingActions === 'delete'" />
+              </button>
+              <button
+                type="button"
+                mat-flat-button
                 (click)="handleFormSubmit(true)"
-                [disabled]="loadingSubmit || loadingDraft"
+                [disabled]="loadingActions"
               >
                 Salvar como rascunho
-                <loading *ngIf="loadingDraft" />
+                <loading *ngIf="loadingActions === 'draft'" />
               </button>
               <button
                 type="submit"
                 mat-flat-button
                 color="primary"
-                [disabled]="loadingSubmit || loadingDraft"
+                [disabled]="loadingActions"
               >
                 Finalizar
-                <loading *ngIf="loadingSubmit" />
+                <loading *ngIf="loadingActions === 'submit'" />
               </button>
             </div>
           </form>

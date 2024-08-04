@@ -71,6 +71,7 @@ export class NavbarComponent implements OnInit {
     this.authService.getMe().subscribe({
       next: (data) => {
         this.user = data;
+        // ? Comentado por que usuário não possui permissão (por enquanto)
         // this.navbarPages = NAVBAR_PAGES.filter((page) =>
         //   page.roles.some((role) => this.user.role.includes(role))
         // );
