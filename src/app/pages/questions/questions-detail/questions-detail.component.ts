@@ -47,7 +47,7 @@ export class QuestionsDetailComponent implements OnInit {
   formBody = this.fb.group({
     instruction: [''],
     support: [''],
-    body: ['', [Validators.required, requiredRichTextValidator]],
+    body: ['<p></p>', [Validators.required, requiredRichTextValidator]],
   });
 
   formCorrectOption = this.fb.group({
@@ -96,6 +96,10 @@ export class QuestionsDetailComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.formFeatures.patchValue({
+      reported_by: null,
+      subject: null,
+    });
     this.listenerAuthor();
     this.listenerSubject();
     this.getSubjectsAndReports();
