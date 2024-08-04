@@ -2,15 +2,21 @@
   <ul class="list">
     <li *ngFor="let question of questions">
       <div class="title">
-        <a class="f-16" routerLink="{{ question.id }}"> #{{ question.id }} </a>
+        <a class="f-16" [routerLink]="questionLink(question)">
+          #{{ question.id }}
+        </a>
         <span class="difficulty-badge {{ question.difficulty }}">
           {{ question.difficulty | difficulty }}
         </span>
       </div>
 
       <div class="list-body">
-        <p class="statement"> {{ question.body }} </p>
-        <p class="f-12">Assunto: {{ question.subject }}</p>
+        <p class="statement"> {{ question.body | plaintext }} </p>
+        <p class="f-12">Assunto: {{ question.subject_obj.name }}</p>
+        <p class="f-12"
+          >Eixo de formação: {{ question.subject_obj.axis.name }}</p
+        >
+        <p class="f-12">Revisor: {{ question.reported_by_obj.name }}</p>
       </div>
     </li>
   </ul>

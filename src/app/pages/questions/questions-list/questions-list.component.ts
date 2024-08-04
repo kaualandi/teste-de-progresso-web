@@ -8,4 +8,11 @@ import { Question } from '@app/models/question';
 })
 export class QuestionsListComponent {
   @Input() questions: Question[] = [];
+
+  questionLink(question: Question) {
+    if (question.status === 'draft') {
+      return `${question.id}/edit`;
+    }
+    return `${question}/review`;
+  }
 }

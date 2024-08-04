@@ -1,4 +1,8 @@
-import { BloomTaxonomy, QuestionCheckType } from '@app/models/question';
+import {
+  BloomTaxonomy,
+  QuestionCheckType,
+  QuestionDifficulty,
+} from '@app/models/question';
 
 export const BLOOM_TAXONOMY: {
   value: BloomTaxonomy;
@@ -73,5 +77,23 @@ export const CHECK_TYPES: {
   {
     value: 'constant_alternatives',
     label: 'Alternativas constantes',
+  },
+];
+
+export const QUESTION_DIFFICULTIES: {
+  value: QuestionDifficulty;
+  label: string;
+}[] = [
+  {
+    value: 'easy',
+    label: 'Fácil',
+  },
+  {
+    value: 'medium',
+    label: 'Médio',
+  },
+  {
+    value: 'hard',
+    label: 'Difícil',
   },
 ];

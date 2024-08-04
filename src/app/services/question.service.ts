@@ -13,16 +13,24 @@ export class QuestionService {
   formErrorHandler = this.http.formErrorHandler;
 
   getQuestions() {
-    return this.http.get<Question[]>('/questions/');
+    return this.http.get<Question[]>('/question/');
+  }
+
+  getQuestion(id: string) {
+    return this.http.get<Question>(`/question/${id}`);
   }
 
   createQuestion(body: BodyJson) {
-    return this.http.post<Question>('/questions/', body);
+    return this.http.post<Question>('/question/', body);
+  }
+
+  deleteQuestion(id: string) {
+    return this.http.delete(`/question/${id}`);
   }
 
   getSubjectsAndReports() {
     return forkJoin([
-      this.http.get<Subject[]>('/subjects/'),
+      this.http.get<Subject[]>('/subject/'),
       this.http.get<User[]>('/user/'),
     ]);
   }

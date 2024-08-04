@@ -98,11 +98,11 @@
               <textarea
                 matInput
                 [froalaEditor]="froalaOptions"
-                formControlName="reference"
+                formControlName="references"
               ></textarea>
               <mat-error>
                 {{
-                  formCorrectOption.controls.reference.errors
+                  formCorrectOption.controls.references.errors
                     | formError
                     | translate
                 }}

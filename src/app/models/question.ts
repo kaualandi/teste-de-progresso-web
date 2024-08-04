@@ -1,3 +1,6 @@
+import { Subject } from './subject';
+import { User } from './user';
+
 export interface QuestionAlternative {
   text: string;
   correct: boolean;
@@ -50,6 +53,8 @@ export interface Question {
   created_at: string;
   updated_at: string;
   subject: number;
+  subject_obj: Subject;
   created_by: number;
   reported_by: number;
+  reported_by_obj: User;
 }

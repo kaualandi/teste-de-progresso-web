@@ -46,8 +46,8 @@ export class QuestionsDetailComponent implements OnInit {
         correct: [true],
       }),
     ]),
-    explanation: [],
-    reference: [],
+    explanation: [''],
+    references: [''],
   });
 
   formDistractor = this.fb.group({

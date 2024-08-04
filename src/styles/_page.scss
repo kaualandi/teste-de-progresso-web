@@ -5,6 +5,9 @@ main.page {
 
   header {
     margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     h1,
     p {
       margin: 0;
@@ -42,13 +45,13 @@ main.page {
   display: inline-block;
   border: 1px solid var(--line-color);
   color: var(--primary-bg);
-  &.EASY {
+  &.easy {
     background-color: var(--green-color);
   }
-  &.MEDIUM {
+  &.medium {
     background-color: var(--yellow-color);
   }
-  &.HARD {
+  &.hard {
     background-color: var(--red-color);
   }
 }

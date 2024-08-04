@@ -1,0 +1,221 @@
+<main class="page">
+  <div class="container">
+    <header>
+      <div class="col">
+        <h1>Revisar</h1>
+      </div>
+      <div class="col">
+        <a
+          mat-icon-button
+          color="primary"
+          routerLink="../edit"
+          [disabled]="loading"
+        >
+          <i icon="pen"></i>
+        </a>
+        <button
+          mat-icon-button
+          color="warn"
+          (click)="handleDeleteButtonClick()"
+          [disabled]="loading"
+        >
+          <i icon="trash"></i>
+        </button>
+      </div>
+    </header>
+
+    <div class="content" *ngIf="!loading && !error">
+      <div class="row">
+        <div class="col question-detail">
+          <mat-accordion [multi]="true">
+            <mat-expansion-panel expanded>
+              <mat-expansion-panel-header>
+                Características
+              </mat-expansion-panel-header>
+
+              <div class="features">
+                <p>
+                  Grau de dificuldade:
+                  <span>{{ question.difficulty | difficulty }}</span>
+                </p>
+                <p>
+                  Habilidade cognitiva:
+                  <span>{{ question.bloom_taxonomy | bloomTaxonomy }}</span>
+                </p>
+                <p>
+                  Ano:
+                  <span>{{ question.authorship_year }}</span>
+                </p>
+                <p>
+                  Autoria:
+                  <span>{{ question.authorship }}</span>
+                </p>
+                <p>
+                  Atualizada em:
+                  <span>{{ question.updated_at | date }}</span>
+                </p>
+                <p>
+                  Assunto:
+                  <span>{{ question.subject_obj.name }}</span>
+                </p>
+                <p>
+                  Revisor:
+                  <span>{{ question.reported_by_obj.name }}</span>
+                </p>
+                <p>
+                  Eixo de formação:
+                  <span>{{ question.subject_obj.axis.name }}</span>
+                </p>
+              </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Intenção</mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <div class="intention">
+                <p
+                  [froalaView]="
+                    question.intention || 'Nenhuma intenção expecificada'
+                  "
+                ></p>
+              </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Instrução</mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <div class="instruction">
+                <p
+                  [froalaView]="
+                    question.instruction || 'Nenhuma instrução expecificada'
+                  "
+                ></p>
+              </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Suporte</mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <div class="support">
+                <p
+                  [froalaView]="
+                    question.support || 'Nenhum suporte expecificado'
+                  "
+                ></p>
+              </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Enunciado</mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <div class="body">
+                <p
+                  [froalaView]="
+                    question.body || 'Nenhum enunciado expecificado'
+                  "
+                ></p>
+              </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Resposta correta</mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <div class="correct">
+                <div class="alternative">
+                  <p
+                    [froalaView]="
+                      correctAlternative?.text ||
+                      'Nenhuma resposta correta expecificada'
+                    "
+                  ></p>
+                </div>
+
+                <div class="explanation">
+                  <h4>Explicações</h4>
+                  <p
+                    [froalaView]="
+                      question.explanation || 'Nenhuma explicação expecificada'
+                    "
+                  ></p>
+                </div>
+                <div class="references">
+                  <h4>Referências</h4>
+                  <p
+                    [froalaView]="
+                      question.references || 'Nenhuma referência expecificada'
+                    "
+                  ></p>
+                </div>
+              </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Distratores</mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <div class="alternatives" *ngIf="distractors?.length">
+                <div class="alternative" *ngFor="let distractor of distractors">
+                  <p
+                    [froalaView]="
+                      correctAlternative?.text ||
+                      'Nenhuma resposta correta expecificada'
+                    "
+                  ></p>
+                </div>
+              </div>
+              <div class="alternatives" *ngIf="!distractors?.length">
+                <p>Nenhum distratores expecidfcados</p>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+
+        <div class="col">
+          <mat-accordion [multi]="true">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Histórico de pareceres</mat-panel-title>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel expanded>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Enviar parecer</mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <form>
+                <mat-form-field appearance="outline">
+                  <mat-label>Parecer</mat-label>
+                  <textarea matInput [formControl]="review"></textarea>
+                  <mat-error>
+                    {{ review.errors | formError }}
+                  </mat-error>
+                </mat-form-field>
+                <div class="buttons end">
+                  <button mat-flat-button color="primary" type="submit">
+                    Enviar
+                    <loading *ngIf="loadingReview" />
+                  </button>
+                </div>
+              </form>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
+    </div>
+
+    <page-error *ngIf="error" [code]="error" />
+    <page-loading *ngIf="loading" />
+  </div>
+</main>

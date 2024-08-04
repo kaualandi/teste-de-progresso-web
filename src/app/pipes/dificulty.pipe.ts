@@ -1,13 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { QUESTION_DIFFICULTIES } from '@app/constants/questions';
+import { QuestionDifficulty } from '@app/models/question';
 
 @Pipe({
   name: 'difficulty',
 })
-export class Difficulty implements PipeTransform {
-  transform(value: string) {
-    if (value === 'EASY') return 'Fácil';
-    if (value === 'MEDIUM') return 'Médio';
-    if (value === 'HARD') return 'Difícil';
-    return '';
+export class DifficultyPipe implements PipeTransform {
+  transform(value: QuestionDifficulty | string) {
+    return QUESTION_DIFFICULTIES.find((d) => d.value === value)?.label || '';
   }
 }

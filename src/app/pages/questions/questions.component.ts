@@ -45,7 +45,6 @@ export class QuestionsComponent implements OnInit {
       acc[question.status].push(question);
       return acc;
     }, this.questionsBySection);
-    this.questionsBySection.draft.push({} as Question);
   }
 
   get questionsKeys() {

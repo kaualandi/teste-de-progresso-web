@@ -1,0 +1,50 @@
+main {
+  .container {
+    .content {
+      .row {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        gap: 1rem;
+        .col {
+          .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            p {
+              margin: 0;
+              span {
+                color: var(--text-color);
+              }
+            }
+          }
+          .alternatives {
+            .alternative {
+              & + .alternative {
+                border-top: 1px solid var(--line-color);
+                margin-top: 1rem;
+                padding-top: 1rem;
+              }
+            }
+          }
+          .correct {
+            .alternative {
+              border-bottom: 1px solid var(--line-color);
+              margin-bottom: 1rem;
+              padding-bottom: 1rem;
+            }
+            .references,
+            .explanation {
+              h4 {
+                margin: 0;
+                font-weight: 500;
+              }
+            }
+            .references {
+              margin-top: 1rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
