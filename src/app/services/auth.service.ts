@@ -26,12 +26,8 @@ export class AuthService {
     });
   }
 
-  register(data: BodyJson) {
-    return this.http.post<Token>('core/register/', data);
-  }
-
   getMe() {
-    return this.http.get<User>('core/get-user/');
+    return this.http.get<User>('/api-token-auth/');
   }
 
   get ssl() {

@@ -100,7 +100,8 @@
       <router-outlet #outlet="outlet"></router-outlet>
     </div>
 
-    <page-error [code]="error" *ngIf="error && !loading"></page-error>
+    <page-error [code]="error" *ngIf="error && !loading" />
+    <page-loading *ngIf="loading" />
   </mat-drawer-content>
 </mat-drawer-container>
 

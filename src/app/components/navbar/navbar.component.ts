@@ -50,8 +50,8 @@ export class NavbarComponent implements OnInit {
   production = environment.production;
 
   ngOnInit(): void {
-    // this.loading = true;
-    // this.getMe();
+    this.loading = true;
+    this.getMe();
 
     this.user$.subscribe({
       next: () => {
@@ -68,13 +68,12 @@ export class NavbarComponent implements OnInit {
   }
 
   getMe() {
-    this.error = 0;
     this.authService.getMe().subscribe({
       next: (data) => {
         this.user = data;
-        this.navbarPages = NAVBAR_PAGES.filter((page) =>
-          page.roles.some((role) => this.user.role.includes(role))
-        );
+        // this.navbarPages = NAVBAR_PAGES.filter((page) =>
+        //   page.roles.some((role) => this.user.role.includes(role))
+        // );
         this.storage.myself = data;
         this.loading = false;
       },
