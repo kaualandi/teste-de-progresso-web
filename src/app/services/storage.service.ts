@@ -14,7 +14,7 @@ export class StorageService {
   ) {}
 
   UserSubject = new Subject<void>();
-  myUser: User = {} as User;
+  private myUser: User = {} as User;
 
   get myself() {
     return this.myUser;

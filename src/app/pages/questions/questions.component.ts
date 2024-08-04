@@ -1,21 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { Question, QuestionStatus } from '@app/models/question';
 import { QuestionService } from '@app/services/question.service';
+import { StorageService } from '@app/services/storage.service';
 
-export type QuestionsBySection = Record<QuestionStatus, Question[]>;
+export type QuestionsBySection = Record<
+  QuestionStatus | 'waiting_your_review',
+  Question[]
+>;
 @Component({
   selector: 'app-questions',
   templateUrl: './questions.component.html',
   styleUrls: ['./questions.component.scss'],
 })
 export class QuestionsComponent implements OnInit {
-  constructor(private questionService: QuestionService) {}
+  constructor(
+    private questionService: QuestionService,
+    private storage: StorageService
+  ) {}
 
   loading = false;
   error = 0;
+  user = this.storage.myself;
 
   questionsBySection: QuestionsBySection = {
     draft: [],
+    waiting_your_review: [],
     waiting_review: [],
     with_requested_changes: [],
     approved: [],
@@ -42,6 +51,13 @@ export class QuestionsComponent implements OnInit {
 
   organizeQuestions(questions: Question[]) {
     this.questionsBySection = questions.reduce((acc, question) => {
+      if (
+        question.status === 'waiting_review' &&
+        question.reported_by === this.user.id
+      ) {
+        acc.waiting_your_review.push(question);
+        return acc;
+      }
       acc[question.status].push(question);
       return acc;
     }, this.questionsBySection);
@@ -58,7 +74,7 @@ export class QuestionsComponent implements OnInit {
   getQuestionsTitlesByKey(key: string) {
     return (
       {
-        awaiting_your_opinion: 'Aguardando seu parecer',
+        waiting_your_review: 'Aguardando seu parecer',
         waiting_review: 'Aguardando parecer do revisor',
         with_requested_changes: 'Aguardando alterações',
         draft: 'Rascunhos',
