@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IUser } from '@models/user';
+import { User } from '@models/user';
 import { TranslateService } from '@ngx-translate/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Subject } from 'rxjs';
@@ -14,13 +14,13 @@ export class StorageService {
   ) {}
 
   UserSubject = new Subject<void>();
-  myUser: IUser = {} as IUser;
+  myUser: User = {} as User;
 
   get myself() {
     return this.myUser;
   }
 
-  set myself(user: IUser) {
+  set myself(user: User) {
     this.myUser = user;
   }
 

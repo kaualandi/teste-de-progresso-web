@@ -13,7 +13,7 @@ import {
   slideInAnimation,
 } from '@animations/route-animation';
 import { NAVBAR_PAGES } from '@app/constants/navbar';
-import { IUser } from '@app/models/user';
+import { User } from '@app/models/user';
 import { environment } from '@env';
 import { AuthService } from '@services/auth.service';
 import { StorageService } from '@services/storage.service';
@@ -39,7 +39,7 @@ export class NavbarComponent implements OnInit {
   error = 0;
   navbarStatus = localStorage.getItem('menu');
   user$ = this.storage.watchUser().pipe(takeUntilDestroyed());
-  user = {} as IUser;
+  user = {} as User;
   isMobile = window.innerWidth < 1024;
   isWide = window.innerWidth > 1865;
 

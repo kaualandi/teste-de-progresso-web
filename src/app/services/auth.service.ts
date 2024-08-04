@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { IToken, IUser } from '@models/user';
+import { Token, User } from '@models/user';
 import { Md5 } from 'md5-typescript';
 import { CookieService } from 'ngx-cookie-service';
 import { BodyJson, HttpService } from './http.service';
@@ -20,18 +20,18 @@ export class AuthService {
   formErrorHandler = this.http.formErrorHandler;
 
   login(body: BodyJson) {
-    return this.http.post<IToken>('/api-token-auth/', {
+    return this.http.post<Token>('/api-token-auth/', {
       ...body,
       password: Md5.init(body['password']).toUpperCase(),
     });
   }
 
   register(data: BodyJson) {
-    return this.http.post<IToken>('core/register/', data);
+    return this.http.post<Token>('core/register/', data);
   }
 
   getMe() {
-    return this.http.get<IUser>('core/get-user/');
+    return this.http.get<User>('core/get-user/');
   }
 
   get ssl() {

@@ -1,4 +1,7 @@
-export interface QuestionAlternative {}
+export interface QuestionAlternative {
+  text: string;
+  correct: boolean;
+}
 
 export type BloomTaxonomy =
   | 'remember'

@@ -1,8 +1,14 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { FROALA_OPTIONS } from '@app/constants/froala';
-import { BLOOM_TAXONOMY } from '@app/constants/questions';
+import { BLOOM_TAXONOMY, CHECK_TYPES } from '@app/constants/questions';
+import { Subject } from '@app/models/subject';
+import { User } from '@app/models/user';
+import { BodyJson } from '@app/services/http.service';
+import { QuestionService } from '@app/services/question.service';
 import { requiredRichTextValidator } from '@app/utils/validators';
+import { NotifierService } from 'angular-notifier';
 import { startWith } from 'rxjs';
 
 @Component({
@@ -11,50 +17,55 @@ import { startWith } from 'rxjs';
   styleUrls: ['./questions-detail.component.scss'],
 })
 export class QuestionsDetailComponent implements OnInit {
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private questionService: QuestionService,
+    private router: Router,
+    private notifier: NotifierService
+  ) {}
 
   isTablet = window.innerWidth < 768;
 
+  loadingSubmit = false;
   froalaOptions = FROALA_OPTIONS;
   bloomTaxonomy = BLOOM_TAXONOMY;
+  checkTypes = CHECK_TYPES;
+  subjects: Subject[] = [];
+  reports: User[] = [];
+
   formBody = this.fb.group({
     instruction: [''],
     support: [''],
-    statement: [
-      'Qual é a capital do Brasil?',
-      [Validators.required, requiredRichTextValidator],
-    ],
-    created_at: ['2023-05-01'],
-    updated_at: ['2023-05-15'],
+    body: ['', [Validators.required, requiredRichTextValidator]],
   });
 
   formCorrectOption = this.fb.group({
     alternatives: this.fb.array([
       this.fb.group({
-        text: ['Brasília', Validators.required],
+        text: ['', Validators.required],
         correct: [true],
       }),
     ]),
-    explanation: ['Brasília tornou-se a capital do Brasil em 1960.'],
-    reference: ['IBGE 2024'],
+    explanation: [],
+    reference: [],
   });
 
   formDistractor = this.fb.group({
     alternatives: this.fb.array([
       this.fb.group({
-        text: ['Rio de Janeiro', Validators.required],
+        text: ['', Validators.required],
         correct: [false],
       }),
       this.fb.group({
-        text: ['São Paulo', Validators.required],
+        text: ['', Validators.required],
         correct: [false],
       }),
       this.fb.group({
-        text: ['Belo Horizonte', Validators.required],
+        text: ['', Validators.required],
         correct: [false],
       }),
       this.fb.group({
-        text: ['Curitiba', Validators.required],
+        text: ['', Validators.required],
         correct: [false],
       }),
     ]),
@@ -64,17 +75,18 @@ export class QuestionsDetailComponent implements OnInit {
     author: ['OWN', Validators.required],
     authorship: ['UNIFESO', Validators.required],
     authorship_year: [new Date().getFullYear(), Validators.required],
-    difficulty: ['easy', Validators.required],
-    check_type: [1, Validators.required],
+    difficulty: ['', Validators.required],
+    check_type: ['', Validators.required],
     bloom_taxonomy: ['', Validators.required],
-    subject: [1, Validators.required],
-    axis: ['Geografia'],
-    intention: ['Fazer com que o aluno saiba a capital do Brasil.'],
-    reviewer: [1, Validators.required],
+    subject: [0, Validators.required],
+    axis: [''],
+    intention: [''],
+    reported_by: [0, Validators.required],
   });
 
   ngOnInit(): void {
     this.listenerAuthor();
+    this.getSubjectsAndReports();
   }
 
   listenerAuthor() {
@@ -99,7 +111,7 @@ export class QuestionsDetailComponent implements OnInit {
   }
 
   handleFormSubmit() {
-    console.log({
+    const body = {
       ...this.formBody.getRawValue(),
       ...this.formCorrectOption.getRawValue(),
       ...this.formDistractor.getRawValue(),
@@ -108,6 +120,31 @@ export class QuestionsDetailComponent implements OnInit {
         ...this.formCorrectOption.controls.alternatives.getRawValue(),
         ...this.formDistractor.controls.alternatives.getRawValue(),
       ],
+    } as BodyJson;
+
+    this.loadingSubmit = true;
+    this.questionService.createQuestion(body).subscribe({
+      next: (question) => {
+        console.log(question);
+        this.router.navigate(['/questions']);
+        this.notifier.notify('success', 'Questão cadastrada com sucesso!');
+      },
+      error: (error) => {
+        console.error(error);
+        this.loadingSubmit = false;
+      },
+    });
+  }
+
+  getSubjectsAndReports() {
+    this.questionService.getSubjectsAndReports().subscribe({
+      next: ([subjects, reports]) => {
+        this.subjects = subjects;
+        this.reports = reports;
+      },
+      error: (error) => {
+        console.error(error);
+      },
     });
   }
 

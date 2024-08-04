@@ -1,12 +1,19 @@
 export type Genre = 'M' | 'F' | 'N';
 
 export type RoleUser = 'ADMIN' | 'TEACHER';
-export interface IUser {
+export interface User {
   id: number;
-  role: RoleUser;
+  name: string;
+  email: string;
   profile_image: string;
+  role: RoleUser;
+  last_login: string;
+  is_admin: boolean;
+  is_active: string;
+  created_at: string;
+  updated_at: string;
 }
 
-export interface IToken {
+export interface Token {
   token: string;
 }
