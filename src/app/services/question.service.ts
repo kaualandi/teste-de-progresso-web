@@ -24,6 +24,10 @@ export class QuestionService {
     return this.http.post<Question>('/question/', body);
   }
 
+  updateQuestion(id: string, body: BodyJson) {
+    return this.http.patch<Question>(`/question/${id}/`, body);
+  }
+
   deleteQuestion(id: string) {
     return this.http.delete(`/question/${id}`);
   }
