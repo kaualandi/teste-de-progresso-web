@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatRippleModule } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
@@ -34,6 +35,7 @@ import { QuestionsComponent } from './questions.component';
     MatTabsModule,
     MatBadgeModule,
     MatExpansionModule,
+    MatRippleModule,
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
   ],
