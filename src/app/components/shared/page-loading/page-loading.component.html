@@ -1,4 +1,25 @@
 <section>
-  <img alt="logo" src="../../../../assets/images/logo.png" />
+  <div class="images">
+    <img
+      alt="logo"
+      src="../../../../assets/images/loading/logo-part-1.png"
+      [ngClass]="{ active: activeLogo === 1 }"
+    />
+    <img
+      alt="logo"
+      src="../../../../assets/images/loading/logo-part-2.png"
+      [ngClass]="{ active: activeLogo === 2 }"
+    />
+    <img
+      alt="logo"
+      src="../../../../assets/images/loading/logo-part-3.png"
+      [ngClass]="{ active: activeLogo === 3 }"
+    />
+    <img
+      alt="logo"
+      src="../../../../assets/images/loading/logo-part-4.png"
+      [ngClass]="{ active: activeLogo === 4 }"
+    />
+  </div>
   <h5>Carregando...</h5>
 </section>

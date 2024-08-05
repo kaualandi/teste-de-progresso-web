@@ -1,6 +1,6 @@
 <main class="page">
   <div class="container">
-    <div class="content">
+    <div class="content" *ngIf="!loading && !error">
       <form class="filters" [formGroup]="form">
         <div class="row">
           <mat-form-field appearance="outline" class="year">
@@ -98,5 +98,8 @@
         </div>
       </div>
     </div>
+
+    <page-error *ngIf="error" [code]="error" />
+    <page-loading *ngIf="loading" />
   </div>
 </main>

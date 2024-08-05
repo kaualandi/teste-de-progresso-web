@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   loading = false;
+  error = 0;
   filtering = false;
   subjects: Subject[] = [];
   now = moment();
@@ -62,22 +63,27 @@ export class HomeComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.loading = true;
-    setTimeout(() => {
-      this.loading = false;
-    }, 600);
-
     this.getSubjects();
   }
 
   getSubjects() {
+    this.loading = true;
     this.subjectService.getSubjects().subscribe({
       next: (response) => {
         this.subjects = response;
         const subjectsIds = response.map((subject) => subject.id);
         this.form.controls.subjects.setValue(subjectsIds);
+        this.getCharts();
+      },
+      error: (error) => {
+        this.error = error.status;
+        this.loading = false;
       },
     });
+  }
+
+  getCharts() {
+    this.loading = false;
   }
 
   setYear(
