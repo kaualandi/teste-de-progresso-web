@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ChartOptions } from '@app/models/apex-charts';
+import { ApexAxisChartSeries } from 'ng-apexcharts';
 
 interface DonutChart {
   title?: string;
@@ -9,7 +10,7 @@ interface DonutChart {
 
 interface BarChart {
   title?: string;
-  series?: { data: number[]; name?: string }[];
+  series?: ApexAxisChartSeries;
   xaxis?: string[];
 }
 
@@ -37,7 +38,7 @@ export class ApexChartsService {
       series: series || [],
       chart: {
         type: 'donut',
-        height: 350,
+        height: 300,
       },
       colors: this.colors,
       plotOptions: {
@@ -67,8 +68,9 @@ export class ApexChartsService {
       chart: {
         type: 'bar',
         height: 350,
+        stacked: true,
       },
-      colors: this.colors,
+      colors: ['var(--green-color)', 'var(--yellow-color)', 'var(--red-color)'],
       plotOptions: {
         bar: {
           borderRadius: 4,

@@ -50,15 +50,98 @@ export class HomeComponent implements OnInit {
   });
 
   subjectsChart = this.apexCharts.getColumm({
-    title: 'Questões por assunto',
-    series: [{ data: [44, 55, 41, 17, 15, 12], name: 'Questões' }],
-    xaxis: [
-      'Matemática',
-      'Português',
-      'História',
-      'Geografia',
-      'Biologia',
-      'Química',
+    title: 'Habilidade cognitiva por dificuldade',
+    series: [
+      {
+        data: [
+          {
+            x: 'Recordar',
+            y: 10,
+          },
+          {
+            x: 'Compreender',
+            y: 20,
+          },
+          {
+            x: 'Aplicar',
+            y: 15,
+          },
+          {
+            x: 'Analisar',
+            y: 25,
+          },
+          {
+            x: 'Avaliar',
+            y: 30,
+          },
+          {
+            x: 'Criar',
+            y: 40,
+          },
+        ],
+        color: 'var(--green-color)',
+        name: 'Fácil',
+      },
+      {
+        data: [
+          {
+            x: 'Recordar',
+            y: 20,
+          },
+          {
+            x: 'Compreender',
+            y: 30,
+          },
+          {
+            x: 'Aplicar',
+            y: 25,
+          },
+          {
+            x: 'Analisar',
+            y: 35,
+          },
+          {
+            x: 'Avaliar',
+            y: 40,
+          },
+          {
+            x: 'Criar',
+            y: 50,
+          },
+        ],
+        color: 'var(--yellow-color)',
+        name: 'Médio',
+      },
+      {
+        data: [
+          {
+            x: 'Recordar',
+            y: 30,
+          },
+          {
+            x: 'Compreender',
+            y: 40,
+          },
+          {
+            x: 'Aplicar',
+            y: 35,
+          },
+          {
+            x: 'Analisar',
+            y: 45,
+          },
+          {
+            x: 'Avaliar',
+            y: 50,
+          },
+          {
+            x: 'Criar',
+            y: 60,
+          },
+        ],
+        color: 'var(--red-color)',
+        name: 'Difícil',
+      },
     ],
   });
 
