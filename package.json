@@ -63,6 +63,7 @@
     "@angular/compiler-cli": "^16.2.0",
     "@commitlint/cli": "^18.4.2",
     "@commitlint/config-conventional": "^18.4.2",
+    "@stackbit/types": "^2.0.4",
     "@types/aos": "^3.0.7",
     "@types/jasmine": "~4.3.0",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
