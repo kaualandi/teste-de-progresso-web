@@ -58,3 +58,16 @@ export interface Question {
   reported_by: number;
   reported_by_obj?: User;
 }
+
+export type ReviewFeedbackType = 'request_changes' | 'approve' | 'answer';
+
+export interface ReviewMessage {
+  id: number;
+  feedback_type: ReviewFeedbackType;
+  text: string;
+  created_at: string;
+  updated_at: string;
+  question: number;
+  user: number;
+  user_obj?: User;
+}

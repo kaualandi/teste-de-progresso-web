@@ -10,6 +10,7 @@
           color="primary"
           routerLink="../edit"
           [disabled]="loading"
+          *ngIf="question.status === 'with_requested_changes'"
         >
           <i icon="pen"></i>
         </a>
@@ -18,6 +19,7 @@
           color="warn"
           (click)="handleDeleteButtonClick()"
           [disabled]="loading"
+          *ngIf="question.status === 'with_requested_changes'"
         >
           <i icon="trash"></i>
         </button>
@@ -183,18 +185,54 @@
 
         <div class="col">
           <mat-accordion [multi]="true">
-            <mat-expansion-panel>
+            <mat-expansion-panel class="reviews-history">
               <mat-expansion-panel-header>
                 <mat-panel-title>Histórico de pareceres</mat-panel-title>
               </mat-expansion-panel-header>
+
+              <div class="history-loading" *ngIf="loadingHistoryReview">
+                <loading />
+              </div>
+              <div
+                class="history-empty"
+                *ngIf="!loadingHistoryReview && !reviews.length"
+              >
+                <span>Nenhum parecer encontrado.</span>
+              </div>
+              <div class="reviews">
+                <div class="review" *ngFor="let review of reviews">
+                  <div class="header">
+                    <figure>
+                      <img [src]="'/assets/images/avatar.png'" alt="Avatar" />
+                    </figure>
+                    <div class="details">
+                      <p>{{ review.user_obj?.name || 'Desconhecido' }}</p>
+                      <p class="infors">
+                        <span>{{ review.created_at | date: 'short' }}</span>
+                        <span>{{ review.feedback_type | reviewStatus }}</span>
+                      </p>
+                    </div>
+                  </div>
+                  <div class="body">
+                    <p>{{ review.text }}</p>
+                  </div>
+                </div>
+              </div>
             </mat-expansion-panel>
 
             <mat-expansion-panel expanded>
               <mat-expansion-panel-header>
-                <mat-panel-title>Enviar parecer</mat-panel-title>
+                <mat-panel-title
+                  >{{
+                    question.status === 'with_requested_changes'
+                      ? 'Enviar'
+                      : 'Responder'
+                  }}
+                  parecer</mat-panel-title
+                >
               </mat-expansion-panel-header>
 
-              <form>
+              <form (ngSubmit)="handleReviewFormSubmit()">
                 <mat-form-field appearance="outline">
                   <mat-label>Parecer</mat-label>
                   <textarea matInput [formControl]="review"></textarea>
@@ -203,8 +241,22 @@
                   </mat-error>
                 </mat-form-field>
                 <div class="buttons end">
+                  <button
+                    mat-flat-button
+                    color="warn"
+                    type="button"
+                    *ngIf="question.status === 'waiting_review'"
+                    (click)="handleReviewFormSubmit('request_changes')"
+                  >
+                    Reprovar
+                    <loading *ngIf="loadingReprove" />
+                  </button>
                   <button mat-flat-button color="primary" type="submit">
-                    Enviar
+                    {{
+                      question.status === 'with_requested_changes'
+                        ? 'Enviar'
+                        : 'Aprovar'
+                    }}
                     <loading *ngIf="loadingReview" />
                   </button>
                 </div>

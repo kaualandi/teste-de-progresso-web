@@ -21,6 +21,7 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { BloomTaxonomyPipe } from '../../pipes/bloom-taxonomy.pipe';
 import { DifficultyPipe } from '../../pipes/dificulty.pipe';
 import { PlaintextPipe } from '../../pipes/plaintext.pipe';
+import { ReviewStatusPipe } from '../../pipes/review-status.pipe';
 import { ConfirmModalComponent } from '../modals/confirm-modal/confirm-modal.component';
 import { ForgotPasswordComponent } from '../modals/forgot-password/forgot-password.component';
 import { AvatarComponent } from './avatar/avatar.component';
@@ -65,6 +66,7 @@ const DECLARATIONS = [
   DifficultyPipe,
   PlaintextPipe,
   BloomTaxonomyPipe,
+  ReviewStatusPipe,
 ];
 
 @NgModule({

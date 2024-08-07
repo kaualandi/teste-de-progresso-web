@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  base_url: 'http://localhost:8000',
+  // base_url: 'http://localhost:8000',
+  base_url: 'https://progresstest-21b79dba48c5.herokuapp.com',
   version: '1.0.2',
 };
 

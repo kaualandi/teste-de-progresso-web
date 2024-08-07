@@ -6,7 +6,7 @@ import {
   ConfirmModalComponent,
   IConfirmModalData,
 } from '@app/components/modals/confirm-modal/confirm-modal.component';
-import { Question } from '@app/models/question';
+import { Question, ReviewMessage } from '@app/models/question';
 import { QuestionService } from '@app/services/question.service';
 import { NotifierService } from 'angular-notifier';
 
@@ -27,12 +27,17 @@ export class QuestionReviewComponent implements OnInit {
   id: string = this.route.snapshot.params['id'];
   loading = false;
   loadingReview = false;
+  loadingReprove = false;
+  loadingHistoryReview = false;
   error = 0;
   question = {} as Question;
   review = new FormControl('', Validators.required);
+  reviews: ReviewMessage[] = [];
 
   ngOnInit() {
     this.getQuestion();
+    this.loadingHistoryReview = true;
+    this.listReviewMessages();
   }
 
   getQuestion() {
@@ -45,6 +50,41 @@ export class QuestionReviewComponent implements OnInit {
       error: (error) => {
         this.error = error.status || 500;
         this.loading = false;
+      },
+    });
+  }
+
+  handleReviewFormSubmit(type?: string) {
+    if (!type) {
+      type = this.question.status === 'waiting_review' ? 'approve' : 'answer';
+    }
+
+    const body = {
+      feedback_type: type,
+      text: this.review.value,
+    };
+
+    if (type === 'request_changes') this.loadingReprove = true;
+    if (type !== 'request_changes') this.loadingReview = true;
+    this.questionService.createReviewMessage(this.id, body).subscribe({
+      next: () => {
+        this.loadingReview = false;
+        this.loadingReprove = false;
+        this.router.navigate(['/questions']);
+        this.notifier.notify('success', 'Questão revisada com sucesso.');
+      },
+      error: () => {
+        this.loadingReview = false;
+        this.loadingReprove = false;
+      },
+    });
+  }
+
+  listReviewMessages() {
+    this.questionService.listReviewMessages(this.id).subscribe({
+      next: (response) => {
+        this.reviews = response;
+        this.loadingHistoryReview = false;
       },
     });
   }

@@ -2,6 +2,7 @@ import {
   BloomTaxonomy,
   QuestionCheckType,
   QuestionDifficulty,
+  ReviewFeedbackType,
 } from '@app/models/question';
 
 export const BLOOM_TAXONOMY: {
@@ -95,5 +96,23 @@ export const QUESTION_DIFFICULTIES: {
   {
     value: 'hard',
     label: 'Difícil',
+  },
+];
+
+export const FEEDBACK_TYPES: {
+  value: ReviewFeedbackType;
+  label: string;
+}[] = [
+  {
+    value: 'request_changes',
+    label: 'Reprovado',
+  },
+  {
+    value: 'approve',
+    label: 'Aprovado',
+  },
+  {
+    value: 'answer',
+    label: 'Devolvido',
   },
 ];

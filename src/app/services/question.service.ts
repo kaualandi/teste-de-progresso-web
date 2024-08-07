@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Question } from '@app/models/question';
+import { Question, ReviewMessage } from '@app/models/question';
 import { Subject } from '@app/models/subject';
 import { User } from '@app/models/user';
 import { forkJoin } from 'rxjs';
@@ -37,5 +37,18 @@ export class QuestionService {
       this.http.get<Subject[]>('/subject/'),
       this.http.get<User[]>('/user/'),
     ]);
+  }
+
+  createReviewMessage(id: string, body: BodyJson) {
+    return this.http.post<ReviewMessage>(
+      `/question/${id}/create_review_message/`,
+      body
+    );
+  }
+
+  listReviewMessages(id: string) {
+    return this.http.get<ReviewMessage[]>(
+      `/question/${id}/list_review_message/`
+    );
   }
 }
