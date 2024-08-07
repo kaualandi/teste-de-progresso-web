@@ -128,7 +128,6 @@ mat-drawer-container {
           width: 100%;
           padding-left: 6px;
           color: var(--text-color);
-          border-radius: 100px;
 
           &.active {
             background-color: var(--secondary-bg);
@@ -143,7 +142,7 @@ mat-drawer-container {
               display: inline-flex;
               align-items: center;
               justify-content: center;
-              border-radius: 50%;
+              border-radius: 4px;
               color: var(--main-color);
               background-color: var(--primary-bg);
               width: 32px;
