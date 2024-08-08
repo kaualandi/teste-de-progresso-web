@@ -27,7 +27,7 @@ export class AuthService {
   }
 
   getMe() {
-    return this.http.get<User>('/api-token-auth/');
+    return this.http.get<User>('/user/logged_user/');
   }
 
   get ssl() {
