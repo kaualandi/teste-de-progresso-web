@@ -8,6 +8,7 @@ import {
 } from '@app/components/modals/confirm-modal/confirm-modal.component';
 import { Question, ReviewMessage } from '@app/models/question';
 import { QuestionService } from '@app/services/question.service';
+import { StorageService } from '@app/services/storage.service';
 import { NotifierService } from 'angular-notifier';
 
 @Component({
@@ -21,10 +22,12 @@ export class QuestionReviewComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog,
-    private notifier: NotifierService
+    private notifier: NotifierService,
+    private storage: StorageService
   ) {}
 
   id: string = this.route.snapshot.params['id'];
+  user = this.storage.myself;
   loading = false;
   loadingReview = false;
   loadingReprove = false;
@@ -33,6 +36,7 @@ export class QuestionReviewComponent implements OnInit {
   question = {} as Question;
   review = new FormControl('', Validators.required);
   reviews: ReviewMessage[] = [];
+  canChangeQuestion = false;
 
   ngOnInit() {
     this.getQuestion();
@@ -46,6 +50,7 @@ export class QuestionReviewComponent implements OnInit {
       next: (response) => {
         this.question = response;
         this.loading = false;
+        this.canChangeQuestion = response.created_by === this.user.id;
       },
       error: (error) => {
         this.error = error.status || 500;

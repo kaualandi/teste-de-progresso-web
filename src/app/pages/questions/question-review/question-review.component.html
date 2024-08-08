@@ -10,7 +10,7 @@
           color="primary"
           routerLink="../edit"
           [disabled]="loading"
-          *ngIf="question.status === 'with_requested_changes'"
+          *ngIf="canChangeQuestion"
         >
           <i icon="pen"></i>
         </a>
@@ -19,7 +19,7 @@
           color="warn"
           (click)="handleDeleteButtonClick()"
           [disabled]="loading"
-          *ngIf="question.status === 'with_requested_changes'"
+          *ngIf="canChangeQuestion"
         >
           <i icon="trash"></i>
         </button>
@@ -232,7 +232,10 @@
                 >
               </mat-expansion-panel-header>
 
-              <form (ngSubmit)="handleReviewFormSubmit()">
+              <form
+                (ngSubmit)="handleReviewFormSubmit()"
+                *ngIf="question.status !== 'approved'"
+              >
                 <mat-form-field appearance="outline">
                   <mat-label>Parecer</mat-label>
                   <textarea matInput [formControl]="review"></textarea>
@@ -261,6 +264,15 @@
                   </button>
                 </div>
               </form>
+              <div
+                class="question-approved"
+                *ngIf="question.status === 'approved'"
+              >
+                <span>
+                  Essa questão já foi aprovada, não é necessário enviar ou
+                  responder pareceres.
+                </span>
+              </div>
             </mat-expansion-panel>
           </mat-accordion>
         </div>
