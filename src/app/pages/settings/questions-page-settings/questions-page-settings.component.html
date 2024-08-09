@@ -1,0 +1,23 @@
+<section id="questions-page-settings">
+  <div class="tab-order">
+    <header>
+      <h2>Ordem das guias</h2>
+      <button
+        mat-icon-button
+        color="primary"
+        [disabled]="canRevert"
+        (click)="handleRevertButtonClick()"
+      >
+        <i icon="clock_rotate_left"></i>
+      </button>
+    </header>
+    <div cdkDropList class="tab-order-list" (cdkDropListDropped)="drop($event)">
+      <div class="tab-order-box" cdkDrag *ngFor="let tab of questionTabs">
+        <button mat-icon-button cdkDragHandle>
+          <i icon="angle_up_down"></i>
+        </button>
+        <span>{{ tab.label }}</span>
+      </div>
+    </div>
+  </div>
+</section>

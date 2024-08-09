@@ -74,13 +74,12 @@ export class QuestionsComponent implements OnInit {
   getQuestionsTitlesByKey(key: string) {
     return (
       {
+        draft: 'Rascunhos',
         waiting_your_review: 'Aguardando seu parecer',
         waiting_review: 'Aguardando parecer do revisor',
         with_requested_changes: 'Aguardando alterações',
-        draft: 'Rascunhos',
         approved: 'Aprovadas',
         registered: 'Cadastradas',
-        reviewed_by_you: 'Revisadas por você',
       }[key] || key
     );
   }

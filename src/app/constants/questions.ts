@@ -116,3 +116,30 @@ export const FEEDBACK_TYPES: {
     label: 'Devolvido',
   },
 ];
+
+export const QUESTION_TABS = [
+  {
+    value: 'draft',
+    label: 'Rascunhos',
+  },
+  {
+    value: 'waiting_your_review',
+    label: 'Aguardando seu parecer',
+  },
+  {
+    value: 'waiting_review',
+    label: 'Aguardando parecer do revisor',
+  },
+  {
+    value: 'with_requested_changes',
+    label: 'Aguardando alterações',
+  },
+  {
+    value: 'approved',
+    label: 'Aprovadas',
+  },
+  {
+    value: 'registered',
+    label: 'Cadastradas',
+  },
+];

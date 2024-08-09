@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { Subject } from '@app/models/subject';
 import { ApexChartsService } from '@app/services/apex-charts.service';
+import { HomeService } from '@app/services/home.service';
 import { SubjectService } from '@app/services/subject.service';
 import * as moment from 'moment';
 
@@ -15,7 +16,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private apexCharts: ApexChartsService,
     private fb: FormBuilder,
-    private subjectService: SubjectService
+    private subjectService: SubjectService,
+    private homeService: HomeService
   ) {}
 
   loading = false;
@@ -24,10 +26,12 @@ export class HomeComponent implements OnInit {
   subjects: Subject[] = [];
   now = moment();
   form = this.fb.group({
-    start_year: [moment().set('year', 2000)],
-    end_year: [moment()],
-    authorship: [['own', 'other']],
-    subjects: this.fb.control<number[]>([]),
+    start_year: this.fb.control(moment().set('year', 2000), {
+      nonNullable: true,
+    }),
+    end_year: this.fb.control(moment(), { nonNullable: true }),
+    authorship: this.fb.control(['own', 'other'], { nonNullable: true }),
+    subjects: this.fb.control<number[]>([], { nonNullable: true }),
   });
 
   difficultyChart = this.apexCharts.getDonut({
@@ -166,7 +170,16 @@ export class HomeComponent implements OnInit {
   }
 
   getCharts() {
-    this.loading = false;
+    this.homeService.getDashboard(this.form.getRawValue()).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.loading = false;
+      },
+      error: (error) => {
+        this.error = error.status || 500;
+        this.loading = false;
+      },
+    });
   }
 
   setYear(

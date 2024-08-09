@@ -10,6 +10,8 @@ import { BodyJson, HttpService } from './http.service';
 })
 export class QuestionService {
   constructor(private http: HttpService) {}
+
+  questionTabsOrderStorageKey = 'questionTabsOrder';
   formErrorHandler = this.http.formErrorHandler;
 
   getQuestions() {
@@ -49,6 +51,19 @@ export class QuestionService {
   listReviewMessages(id: string) {
     return this.http.get<ReviewMessage[]>(
       `/question/${id}/list_review_message/`
+    );
+  }
+
+  get questionTabsOrder(): string[] {
+    return JSON.parse(
+      localStorage.getItem(this.questionTabsOrderStorageKey) || '[]'
+    );
+  }
+
+  set questionTabsOrder(value: string[]) {
+    localStorage.setItem(
+      this.questionTabsOrderStorageKey,
+      JSON.stringify(value)
     );
   }
 }
