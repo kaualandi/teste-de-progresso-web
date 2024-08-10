@@ -1,18 +1,11 @@
 <main class="page">
   <div class="container">
-    <header>
-      <div class="col">
-        <h1>Questões</h1>
-        <p>Visualize e gerencie as questões cadastradas e atribuidas a você.</p>
-      </div>
-      <div class="col">
-        <a mat-flat-button color="primary" routerLink="new">
-          <i icon="plus"></i> Adicionar Questão
-        </a>
-      </div>
-    </header>
-
     <div class="content" *ngIf="!loading && !error">
+      <app-questions-filter
+        (filter)="getQuestions($event)"
+        [filtering]="filtering"
+      />
+
       <mat-tab-group #tabGroup dynamicHeight>
         <mat-tab *ngFor="let tabQuestion of questions; let i = index">
           <ng-template mat-tab-label>

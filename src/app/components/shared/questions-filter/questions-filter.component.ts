@@ -1,15 +1,44 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import {
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+  MomentDateAdapter,
+} from '@angular/material-moment-adapter';
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+} from '@angular/material/core';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { QuestionFilter } from '@app/models/question';
 import { Subject } from '@app/models/subject';
 import { SubjectService } from '@app/services/subject.service';
 import * as moment from 'moment';
 
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'YYYY',
+  },
+  display: {
+    dateInput: 'YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
+
 @Component({
   selector: 'app-questions-filter',
   templateUrl: './questions-filter.component.html',
   styleUrls: ['./questions-filter.component.scss'],
+  providers: [
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
+    },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+  ],
 })
 export class QuestionsFilterComponent implements OnInit {
   @Input() filtering = false;
@@ -60,15 +89,25 @@ export class QuestionsFilterComponent implements OnInit {
     });
   }
 
-  setYear(
+  setStartYear(
     normalizedYear: moment.Moment,
-    datepicker: MatDatepicker<moment.Moment>,
-    year: 'start_year' | 'end_year'
+    datepicker: MatDatepicker<moment.Moment>
   ) {
-    const ctrlValue = this.form.get(year)?.value;
+    const ctrlValue = this.form.controls.start_year.value;
     if (!ctrlValue) return;
     ctrlValue.year(normalizedYear.year());
     this.form.controls.start_year.setValue(ctrlValue);
+    datepicker.close();
+  }
+
+  setEndYear(
+    normalizedYear: moment.Moment,
+    datepicker: MatDatepicker<moment.Moment>
+  ) {
+    const ctrlValue = this.form.controls.end_year.value;
+    if (!ctrlValue) return;
+    ctrlValue.year(normalizedYear.year());
+    this.form.controls.end_year.setValue(ctrlValue);
     datepicker.close();
   }
 }

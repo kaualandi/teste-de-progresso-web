@@ -1,6 +1,12 @@
+import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { QUESTION_TABS } from '@app/constants/questions';
-import { Question, QuestionsByTab, ReviewMessage } from '@app/models/question';
+import {
+  Question,
+  QuestionFilter,
+  QuestionsByTab,
+  ReviewMessage,
+} from '@app/models/question';
 import { Subject } from '@app/models/subject';
 import { User } from '@app/models/user';
 import { forkJoin } from 'rxjs';
@@ -21,8 +27,17 @@ export class QuestionService {
   questionTabsOrderStorageKey = 'questionTabsOrder';
   formErrorHandler = this.http.formErrorHandler;
 
-  getQuestions() {
-    return this.http.get<Question[]>('/question/');
+  getQuestions(filters?: QuestionFilter) {
+    let query = new HttpParams();
+    if (filters) {
+      query = query
+        .append('start_year', filters.start_year)
+        .append('end_year', filters.end_year)
+        .append('authorship', filters.authorship.join(','))
+        .append('subjects', filters.subjects.join(','));
+    }
+
+    return this.http.get<Question[]>('/question/', query);
   }
 
   getQuestion(id: string) {

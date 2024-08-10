@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { CHECK_TYPES } from '@app/constants/questions';
+import { SubjectsChart } from '@app/models/home';
 import { QuestionFilter } from '@app/models/question';
 import { ApexChartsService } from '@app/services/apex-charts.service';
 import { HomeService } from '@app/services/home.service';
@@ -21,6 +22,7 @@ export class HomeComponent implements OnInit {
   loading = false;
   error = 0;
   filtering = false;
+  subjectsCharts = {} as SubjectsChart;
 
   barChartType = this.fb.control<'subjects' | 'types'>('subjects', {
     nonNullable: true,
@@ -28,123 +30,25 @@ export class HomeComponent implements OnInit {
 
   difficultyChart = this.apexCharts.getDonut({
     title: 'Questões por dificuldade',
-    labels: ['Fácil', 'Médio', 'Difícil'],
-    series: [44, 55, 41],
+    labels: [],
+    series: [],
   });
 
   cognitiveChart = this.apexCharts.getDonut({
     title: 'Questões por habilidade cognitiva',
-    labels: [
-      'Recordar',
-      'Compreender',
-      'Aplicar',
-      'Analisar',
-      'Avaliar',
-      'Criar',
-    ],
-    series: [44, 55, 41, 17, 15, 12],
+    labels: [],
+    series: [],
   });
 
   typeChart = this.apexCharts.getDonut({
     title: 'Questões por tipo',
-    labels: CHECK_TYPES.map((type) => type.label),
-    series: [44, 55, 41, 17, 15],
+    labels: [],
+    series: [],
   });
 
   subjectsChart = this.apexCharts.getColumm({
     title: 'Habilidade cognitiva por grau dificuldade',
-    series: [
-      {
-        data: [
-          {
-            x: 'Recordar',
-            y: 10,
-          },
-          {
-            x: 'Compreender',
-            y: 20,
-          },
-          {
-            x: 'Aplicar',
-            y: 15,
-          },
-          {
-            x: 'Analisar',
-            y: 25,
-          },
-          {
-            x: 'Avaliar',
-            y: 30,
-          },
-          {
-            x: 'Criar',
-            y: 40,
-          },
-        ],
-        color: 'var(--green-color)',
-        name: 'Fácil',
-      },
-      {
-        data: [
-          {
-            x: 'Recordar',
-            y: 20,
-          },
-          {
-            x: 'Compreender',
-            y: 30,
-          },
-          {
-            x: 'Aplicar',
-            y: 25,
-          },
-          {
-            x: 'Analisar',
-            y: 35,
-          },
-          {
-            x: 'Avaliar',
-            y: 40,
-          },
-          {
-            x: 'Criar',
-            y: 50,
-          },
-        ],
-        color: 'var(--yellow-color)',
-        name: 'Médio',
-      },
-      {
-        data: [
-          {
-            x: 'Recordar',
-            y: 30,
-          },
-          {
-            x: 'Compreender',
-            y: 40,
-          },
-          {
-            x: 'Aplicar',
-            y: 35,
-          },
-          {
-            x: 'Analisar',
-            y: 45,
-          },
-          {
-            x: 'Avaliar',
-            y: 50,
-          },
-          {
-            x: 'Criar',
-            y: 60,
-          },
-        ],
-        color: 'var(--red-color)',
-        name: 'Difícil',
-      },
-    ],
+    series: [],
   });
 
   ngOnInit(): void {
@@ -156,175 +60,40 @@ export class HomeComponent implements OnInit {
       if (value === 'types') {
         this.subjectsChart = this.apexCharts.getColumm({
           title: 'Habilidade cognitiva por tipo',
-          series: [
-            {
-              data: [
-                {
-                  x: 'Recordar',
-                  y: 10,
-                },
-                {
-                  x: 'Compreender',
-                  y: 20,
-                },
-                {
-                  x: 'Aplicar',
-                  y: 15,
-                },
-                {
-                  x: 'Analisar',
-                  y: 25,
-                },
-                {
-                  x: 'Avaliar',
-                  y: 30,
-                },
-                {
-                  x: 'Criar',
-                  y: 40,
-                },
-              ],
-              color: 'var(--green-color)',
-              name: 'Resposta única',
-            },
-            {
-              data: [
-                {
-                  x: 'Recordar',
-                  y: 20,
-                },
-                {
-                  x: 'Compreender',
-                  y: 30,
-                },
-                {
-                  x: 'Aplicar',
-                  y: 25,
-                },
-                {
-                  x: 'Analisar',
-                  y: 35,
-                },
-                {
-                  x: 'Avaliar',
-                  y: 40,
-                },
-                {
-                  x: 'Criar',
-                  y: 50,
-                },
-              ],
-              color: 'var(--yellow-color)',
-              name: 'Afirmação incorreta',
-            },
-            {
-              data: [
-                {
-                  x: 'Recordar',
-                  y: 30,
-                },
-                {
-                  x: 'Compreender',
-                  y: 40,
-                },
-                {
-                  x: 'Aplicar',
-                  y: 35,
-                },
-                {
-                  x: 'Analisar',
-                  y: 45,
-                },
-                {
-                  x: 'Avaliar',
-                  y: 50,
-                },
-                {
-                  x: 'Criar',
-                  y: 60,
-                },
-              ],
-              color: 'var(--red-color)',
-              name: 'Resposta multipla',
-            },
-            {
-              data: [
-                {
-                  x: 'Recordar',
-                  y: 30,
-                },
-                {
-                  x: 'Compreender',
-                  y: 40,
-                },
-                {
-                  x: 'Aplicar',
-                  y: 35,
-                },
-                {
-                  x: 'Analisar',
-                  y: 45,
-                },
-                {
-                  x: 'Avaliar',
-                  y: 50,
-                },
-                {
-                  x: 'Criar',
-                  y: 60,
-                },
-              ],
-              color: 'var(--blue-color)',
-              name: 'Asserção e razão',
-            },
-            {
-              data: [
-                {
-                  x: 'Recordar',
-                  y: 30,
-                },
-                {
-                  x: 'Compreender',
-                  y: 40,
-                },
-                {
-                  x: 'Aplicar',
-                  y: 35,
-                },
-                {
-                  x: 'Analisar',
-                  y: 45,
-                },
-                {
-                  x: 'Avaliar',
-                  y: 50,
-                },
-                {
-                  x: 'Criar',
-                  y: 60,
-                },
-              ],
-              color: 'var(--purple-color)',
-              name: 'Interpretação',
-            },
-          ],
+          series: this.subjectsCharts.tipo,
         });
+        return;
       }
+
+      this.subjectsChart = this.apexCharts.getColumm({
+        title: 'Habilidade cognitiva por grau dificuldade',
+        series: this.subjectsCharts.dificuldade,
+      });
     });
   }
 
   getCharts(form?: QuestionFilter) {
+    if (form) this.filtering = true;
     this.homeService
       .getDashboard(form)
       .pipe(delay(500))
       .subscribe({
         next: (response) => {
-          console.log(response);
+          this.difficultyChart.labels = response.difficulty_chart.label;
+          this.difficultyChart.series = response.difficulty_chart.series;
+          this.cognitiveChart.labels = response.cognitive_chart.label;
+          this.cognitiveChart.series = response.cognitive_chart.series;
+          this.typeChart.labels = response.cognitive_chart.label;
+          this.typeChart.series = response.cognitive_chart.series;
+          this.subjectsCharts = response.subjects_chart;
+          this.subjectsChart.series = this.subjectsCharts.dificuldade;
           this.loading = false;
+          this.filtering = false;
         },
         error: (error) => {
           this.error = error.status || 500;
           this.loading = false;
+          this.filtering = false;
         },
       });
   }

@@ -15,7 +15,7 @@
       <mat-datepicker
         #startYearDp
         startView="multi-year"
-        (yearSelected)="setYear($event, startYearDp, 'start_year')"
+        (yearSelected)="setStartYear($event, startYearDp)"
       >
       </mat-datepicker>
     </mat-form-field>
@@ -35,7 +35,7 @@
       <mat-datepicker
         #endYearDp
         startView="multi-year"
-        (yearSelected)="setYear($event, endYearDp, 'end_year')"
+        (yearSelected)="setEndYear($event, endYearDp)"
       >
       </mat-datepicker>
     </mat-form-field>

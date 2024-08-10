@@ -1,5 +1,6 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Dashboard } from '@app/models/home';
 import { QuestionFilter } from '@app/models/question';
 import { HttpService } from './http.service';
 
@@ -18,6 +19,7 @@ export class HomeService {
         .append('authorship', filters.authorship.join(','))
         .append('subjects', filters.subjects.join(','));
     }
-    return this.http.get('/dashboard/', query);
+
+    return this.http.get<Dashboard>('/dashboard/', query);
   }
 }

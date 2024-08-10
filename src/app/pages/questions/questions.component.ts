@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { QuestionsByTab } from '@app/models/question';
+import { QuestionFilter, QuestionsByTab } from '@app/models/question';
 import { QuestionService } from '@app/services/question.service';
 import { StorageService } from '@app/services/storage.service';
 @Component({
@@ -14,17 +14,19 @@ export class QuestionsComponent implements OnInit {
   ) {}
 
   loading = false;
+  filtering = false;
   error = 0;
   user = this.storage.myself;
   questions: QuestionsByTab[] = [];
 
   ngOnInit() {
+    this.loading = true;
     this.getQuestions();
   }
 
-  getQuestions() {
-    this.loading = true;
-    this.questionService.getQuestions().subscribe({
+  getQuestions(form?: QuestionFilter) {
+    if (form) this.filtering = true;
+    this.questionService.getQuestions(form).subscribe({
       next: (response) => {
         this.questions = this.questionService.organizeQuestions(response);
         this.loading = false;
