@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDatepicker } from '@angular/material/datepicker';
+import { CHECK_TYPES } from '@app/constants/questions';
 import { Subject } from '@app/models/subject';
 import { ApexChartsService } from '@app/services/apex-charts.service';
 import { HomeService } from '@app/services/home.service';
@@ -25,6 +26,7 @@ export class HomeComponent implements OnInit {
   filtering = false;
   subjects: Subject[] = [];
   now = moment();
+
   form = this.fb.group({
     start_year: this.fb.control(moment().set('year', 2000), {
       nonNullable: true,
@@ -32,6 +34,10 @@ export class HomeComponent implements OnInit {
     end_year: this.fb.control(moment(), { nonNullable: true }),
     authorship: this.fb.control(['own', 'other'], { nonNullable: true }),
     subjects: this.fb.control<number[]>([], { nonNullable: true }),
+  });
+
+  barChartType = this.fb.control<'subjects' | 'types'>('subjects', {
+    nonNullable: true,
   });
 
   difficultyChart = this.apexCharts.getDonut({
@@ -53,8 +59,14 @@ export class HomeComponent implements OnInit {
     series: [44, 55, 41, 17, 15, 12],
   });
 
+  typeChart = this.apexCharts.getDonut({
+    title: 'Questões por tipo',
+    labels: CHECK_TYPES.map((type) => type.label),
+    series: [44, 55, 41, 17, 15],
+  });
+
   subjectsChart = this.apexCharts.getColumm({
-    title: 'Habilidade cognitiva por dificuldade',
+    title: 'Habilidade cognitiva por grau dificuldade',
     series: [
       {
         data: [
@@ -151,6 +163,167 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSubjects();
+    console.log(CHECK_TYPES.map((type) => type.label));
+
+    this.barChartType.valueChanges.subscribe((value) => {
+      if (value === 'types') {
+        this.subjectsChart = this.apexCharts.getColumm({
+          title: 'Habilidade cognitiva por tipo',
+          series: [
+            {
+              data: [
+                {
+                  x: 'Recordar',
+                  y: 10,
+                },
+                {
+                  x: 'Compreender',
+                  y: 20,
+                },
+                {
+                  x: 'Aplicar',
+                  y: 15,
+                },
+                {
+                  x: 'Analisar',
+                  y: 25,
+                },
+                {
+                  x: 'Avaliar',
+                  y: 30,
+                },
+                {
+                  x: 'Criar',
+                  y: 40,
+                },
+              ],
+              color: 'var(--green-color)',
+              name: 'Resposta única',
+            },
+            {
+              data: [
+                {
+                  x: 'Recordar',
+                  y: 20,
+                },
+                {
+                  x: 'Compreender',
+                  y: 30,
+                },
+                {
+                  x: 'Aplicar',
+                  y: 25,
+                },
+                {
+                  x: 'Analisar',
+                  y: 35,
+                },
+                {
+                  x: 'Avaliar',
+                  y: 40,
+                },
+                {
+                  x: 'Criar',
+                  y: 50,
+                },
+              ],
+              color: 'var(--yellow-color)',
+              name: 'Afirmação incorreta',
+            },
+            {
+              data: [
+                {
+                  x: 'Recordar',
+                  y: 30,
+                },
+                {
+                  x: 'Compreender',
+                  y: 40,
+                },
+                {
+                  x: 'Aplicar',
+                  y: 35,
+                },
+                {
+                  x: 'Analisar',
+                  y: 45,
+                },
+                {
+                  x: 'Avaliar',
+                  y: 50,
+                },
+                {
+                  x: 'Criar',
+                  y: 60,
+                },
+              ],
+              color: 'var(--red-color)',
+              name: 'Resposta multipla',
+            },
+            {
+              data: [
+                {
+                  x: 'Recordar',
+                  y: 30,
+                },
+                {
+                  x: 'Compreender',
+                  y: 40,
+                },
+                {
+                  x: 'Aplicar',
+                  y: 35,
+                },
+                {
+                  x: 'Analisar',
+                  y: 45,
+                },
+                {
+                  x: 'Avaliar',
+                  y: 50,
+                },
+                {
+                  x: 'Criar',
+                  y: 60,
+                },
+              ],
+              color: 'var(--blue-color)',
+              name: 'Asserção e razão',
+            },
+            {
+              data: [
+                {
+                  x: 'Recordar',
+                  y: 30,
+                },
+                {
+                  x: 'Compreender',
+                  y: 40,
+                },
+                {
+                  x: 'Aplicar',
+                  y: 35,
+                },
+                {
+                  x: 'Analisar',
+                  y: 45,
+                },
+                {
+                  x: 'Avaliar',
+                  y: 50,
+                },
+                {
+                  x: 'Criar',
+                  y: 60,
+                },
+              ],
+              color: 'var(--purple-color)',
+              name: 'Interpretação',
+            },
+          ],
+        });
+      }
+    });
   }
 
   getSubjects() {
@@ -170,9 +343,6 @@ export class HomeComponent implements OnInit {
   }
 
   getCharts() {
-    this.loading = false;
-    return;
-
     this.homeService.getDashboard(this.form.getRawValue()).subscribe({
       next: (response) => {
         console.log(response);

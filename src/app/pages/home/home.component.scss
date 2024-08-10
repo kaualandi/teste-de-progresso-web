@@ -53,12 +53,41 @@ main {
           gap: 1rem;
           margin-bottom: 1rem;
         }
-        apx-chart {
+        .chart-content {
           padding: 0.5rem;
           border-radius: var(--br);
           border: 1px solid var(--line-color);
-          flex: 1;
-          width: calc(50% - 0.5rem);
+          width: 100%;
+
+          mat-radio-button {
+            & + mat-radio-button {
+              margin-left: 1rem;
+            }
+          }
+        }
+        .radio-chart-select {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+        }
+        @include media('<=1580px') {
+          .row {
+            flex-wrap: wrap;
+            .chart-content {
+              width: calc(50% - 0.5rem);
+              &:last-child {
+                width: 100%;
+              }
+            }
+          }
+        }
+
+        @include media('<=840px') {
+          .row {
+            .chart-content {
+              width: 100%;
+            }
+          }
         }
       }
     }

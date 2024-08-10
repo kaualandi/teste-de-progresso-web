@@ -1,24 +1,25 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import {
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+  MomentDateAdapter,
+} from '@angular/material-moment-adapter';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+} from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { SharedModule } from '@components/shared/shared.module';
 import { ZoomableDirective } from '@directives/zoomable.directive';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
-import {
-  MomentDateAdapter,
-  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
-} from '@angular/material-moment-adapter';
-import {
-  DateAdapter,
-  MAT_DATE_LOCALE,
-  MAT_DATE_FORMATS,
-} from '@angular/material/core';
 
 export const MY_FORMATS = {
   parse: {
@@ -43,6 +44,7 @@ export const MY_FORMATS = {
     MatInputModule,
     MatSelectModule,
     NgApexchartsModule,
+    MatRadioModule,
   ],
   declarations: [HomeComponent, ZoomableDirective],
   providers: [

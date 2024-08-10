@@ -70,24 +70,44 @@
 
       <div class="charts-container" *ngIf="!loading">
         <div class="row">
-          <apx-chart
-            [title]="difficultyChart.title"
-            [labels]="difficultyChart.labels"
-            [chart]="difficultyChart.chart"
-            [colors]="difficultyChart.colors"
-            [series]="difficultyChart.series"
-            [plotOptions]="difficultyChart.plotOptions"
-          ></apx-chart>
-          <apx-chart
-            [title]="cognitiveChart.title"
-            [labels]="cognitiveChart.labels"
-            [chart]="cognitiveChart.chart"
-            [colors]="cognitiveChart.colors"
-            [series]="cognitiveChart.series"
-            [plotOptions]="cognitiveChart.plotOptions"
-          ></apx-chart>
+          <div class="chart-content">
+            <apx-chart
+              [title]="difficultyChart.title"
+              [labels]="difficultyChart.labels"
+              [chart]="difficultyChart.chart"
+              [colors]="difficultyChart.colors"
+              [series]="difficultyChart.series"
+              [plotOptions]="difficultyChart.plotOptions"
+            ></apx-chart>
+          </div>
+          <div class="chart-content">
+            <apx-chart
+              [title]="cognitiveChart.title"
+              [labels]="cognitiveChart.labels"
+              [chart]="cognitiveChart.chart"
+              [colors]="cognitiveChart.colors"
+              [series]="cognitiveChart.series"
+              [plotOptions]="cognitiveChart.plotOptions"
+            ></apx-chart>
+          </div>
+          <div class="chart-content">
+            <apx-chart
+              [title]="typeChart.title"
+              [labels]="typeChart.labels"
+              [chart]="typeChart.chart"
+              [colors]="typeChart.colors"
+              [series]="typeChart.series"
+              [plotOptions]="typeChart.plotOptions"
+            ></apx-chart>
+          </div>
         </div>
-        <div class="row">
+        <div class="chart-content">
+          <div class="radio-chart-select">
+            <mat-radio-group [formControl]="barChartType">
+              <mat-radio-button value="subjects">Dificuldade</mat-radio-button>
+              <mat-radio-button value="types">Tipo</mat-radio-button>
+            </mat-radio-group>
+          </div>
           <apx-chart
             [title]="subjectsChart.title"
             [chart]="subjectsChart.chart"

@@ -1,6 +1,7 @@
 import {
   ApexAxisChartSeries,
   ApexChart,
+  ApexLegend,
   ApexNonAxisChartSeries,
   ApexPlotOptions,
   ApexTitleSubtitle,
@@ -15,4 +16,5 @@ export interface ChartOptions {
   chart: ApexChart;
   xaxis: ApexXAxis;
   plotOptions: ApexPlotOptions;
+  legend: ApexLegend;
 }

@@ -33,12 +33,13 @@ export class ApexChartsService {
     return {
       title: title && {
         text: title,
+        align: 'center',
       },
       labels: labels || [],
       series: series || [],
       chart: {
         type: 'donut',
-        height: 300,
+        height: 220,
       },
       colors: this.colors,
       plotOptions: {
@@ -53,6 +54,10 @@ export class ApexChartsService {
           },
         },
       },
+      legend: {
+        show: false,
+        position: 'bottom',
+      },
     } as ChartOptions;
   }
 
@@ -60,6 +65,7 @@ export class ApexChartsService {
     return {
       title: title && {
         text: title,
+        align: 'center',
       },
       series: series || [],
       xaxis: {

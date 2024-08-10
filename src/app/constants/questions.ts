@@ -51,34 +51,34 @@ export const CHECK_TYPES: {
     value: 'multiple_answer',
     label: 'Resposta múltipla',
   },
-  {
-    value: 'negative_focus',
-    label: 'Foco negativo',
-  },
+  // {
+  //   value: 'negative_focus',
+  //   label: 'Foco negativo',
+  // },
   {
     value: 'assertion_and_reason',
-    label: 'Afirmativa e razão',
+    label: 'Asserção e razão',
   },
-  {
-    value: 'gap',
-    label: 'Lacuna',
-  },
+  // {
+  //   value: 'gap',
+  //   label: 'Lacuna',
+  // },
   {
     value: 'interpretation',
     label: 'Interpretação',
   },
-  {
-    value: 'association',
-    label: 'Associação',
-  },
-  {
-    value: 'ordering_or_ranking',
-    label: 'Ordenação ou classificação',
-  },
-  {
-    value: 'constant_alternatives',
-    label: 'Alternativas constantes',
-  },
+  // {
+  //   value: 'association',
+  //   label: 'Associação',
+  // },
+  // {
+  //   value: 'ordering_or_ranking',
+  //   label: 'Ordenação ou classificação',
+  // },
+  // {
+  //   value: 'constant_alternatives',
+  //   label: 'Alternativas constantes',
+  // },
 ];
 
 export const QUESTION_DIFFICULTIES: {
