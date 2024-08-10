@@ -37,6 +37,11 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'exams',
+        loadChildren: () =>
+          import('@pages/exams/exams.module').then((m) => m.ExamsModule),
+      },
+      {
         path: 'settings',
         loadChildren: () =>
           import('@pages/settings/settings.module').then(
