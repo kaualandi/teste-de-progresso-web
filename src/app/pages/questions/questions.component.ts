@@ -26,7 +26,7 @@ export class QuestionsComponent implements OnInit {
 
   getQuestions(form?: QuestionFilter) {
     if (form) this.filtering = true;
-    this.questionService.getQuestions(form).subscribe({
+    this.questionService.getMyQuestions(form).subscribe({
       next: (response) => {
         this.questions = this.questionService.organizeQuestions(response);
         this.loading = false;

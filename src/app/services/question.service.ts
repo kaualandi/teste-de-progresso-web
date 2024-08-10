@@ -27,7 +27,7 @@ export class QuestionService {
   questionTabsOrderStorageKey = 'questionTabsOrder';
   formErrorHandler = this.http.formErrorHandler;
 
-  getQuestions(filters?: QuestionFilter) {
+  getMyQuestions(filters?: QuestionFilter) {
     let query = new HttpParams();
     if (filters) {
       query = query
@@ -38,7 +38,7 @@ export class QuestionService {
         .append('order_by', filters.order_by);
     }
 
-    return this.http.get<Question[]>('/question/', query);
+    return this.http.get<Question[]>('/question/my_questions', query);
   }
 
   getQuestion(id: string) {
