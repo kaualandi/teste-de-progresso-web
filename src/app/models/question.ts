@@ -83,4 +83,5 @@ export interface QuestionFilter {
   end_year: string;
   authorship: string[];
   subjects: number[];
+  using: string[];
 }

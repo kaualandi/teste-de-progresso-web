@@ -17,7 +17,8 @@ export class HomeService {
         .append('start_year', filters.start_year)
         .append('end_year', filters.end_year)
         .append('authorship', filters.authorship.join(','))
-        .append('subjects', filters.subjects.join(','));
+        .append('subjects', filters.subjects.join(','))
+        .append('using', filters.using.join(','));
     }
 
     return this.http.get<Dashboard>('/dashboard/', query);

@@ -10,6 +10,7 @@ import {
   MAT_DATE_LOCALE,
 } from '@angular/material/core';
 import { MatDatepicker } from '@angular/material/datepicker';
+import { Router } from '@angular/router';
 import { QuestionFilter } from '@app/models/question';
 import { Subject } from '@app/models/subject';
 import { SubjectService } from '@app/services/subject.service';
@@ -45,12 +46,14 @@ export class QuestionsFilterComponent implements OnInit {
   @Output() filter = new EventEmitter<QuestionFilter>();
   constructor(
     private fb: FormBuilder,
-    private subjectService: SubjectService
+    private subjectService: SubjectService,
+    private router: Router
   ) {}
 
   loadingSubject = false;
   subjects: Subject[] = [];
   now = moment();
+  route = this.router.url;
 
   form = this.fb.group({
     start_year: this.fb.control(moment().set('year', 2000), {
@@ -59,6 +62,7 @@ export class QuestionsFilterComponent implements OnInit {
     end_year: this.fb.control(moment(), { nonNullable: true }),
     authorship: this.fb.control(['own', 'other'], { nonNullable: true }),
     subjects: this.fb.control<number[]>([], { nonNullable: true }),
+    using: this.fb.control(['used', 'unused'], { nonNullable: true }),
   });
 
   ngOnInit(): void {
@@ -66,6 +70,7 @@ export class QuestionsFilterComponent implements OnInit {
   }
 
   handleFormSubmit() {
+    if (this.filtering) return;
     const value = this.form.getRawValue();
     this.filter.emit({
       ...value,

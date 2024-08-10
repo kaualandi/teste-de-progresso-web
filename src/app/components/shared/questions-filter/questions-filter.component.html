@@ -39,6 +39,7 @@
       >
       </mat-datepicker>
     </mat-form-field>
+
     <mat-form-field appearance="outline">
       <mat-label>Autoria</mat-label>
       <mat-select multiple formControlName="authorship">
@@ -46,6 +47,7 @@
         <mat-option value="other">Não autorais</mat-option>
       </mat-select>
     </mat-form-field>
+
     <mat-form-field appearance="outline">
       <mat-label>
         Assuntos
@@ -57,10 +59,23 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+
+    <mat-form-field appearance="outline" *ngIf="route === '/'">
+      <mat-label>Uso de questões</mat-label>
+      <mat-select multiple formControlName="using">
+        <mat-option value="used">Já usadas</mat-option>
+        <mat-option value="unused">Não usadas</mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
 
   <div class="buttons end">
-    <button type="submit" mat-raised-button color="primary">
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="filtering"
+    >
       Filtrar
       <i *ngIf="!filtering" icon="filter"></i>
       <loading *ngIf="filtering" />

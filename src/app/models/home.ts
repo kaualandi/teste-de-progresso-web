@@ -21,5 +21,6 @@ export interface SubjectsChart {
 export interface Dashboard {
   cognitive_chart: DonutChart;
   difficulty_chart: DonutChart;
+  type_chart: DonutChart;
   subjects_chart: SubjectsChart;
 }

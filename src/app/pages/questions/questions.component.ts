@@ -30,10 +30,12 @@ export class QuestionsComponent implements OnInit {
       next: (response) => {
         this.questions = this.questionService.organizeQuestions(response);
         this.loading = false;
+        this.filtering = false;
       },
       error: (error) => {
         this.error = error.status || 500;
         this.loading = false;
+        this.filtering = false;
       },
     });
   }

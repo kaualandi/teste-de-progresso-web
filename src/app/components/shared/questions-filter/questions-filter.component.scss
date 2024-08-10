@@ -2,7 +2,7 @@
 
 .filters {
   margin-bottom: 1rem;
-  @include media('>=1240px') {
+  @include media('>=1350px') {
     display: flex;
     justify-content: space-between;
     gap: 1rem;
@@ -28,7 +28,7 @@
       }
     }
 
-    @include media('<=tablet') {
+    @include media('<=850px') {
       flex-wrap: wrap;
       mat-form-field {
         max-width: 100%;

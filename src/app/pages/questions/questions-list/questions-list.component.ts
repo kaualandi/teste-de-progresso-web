@@ -8,6 +8,7 @@ import { Question } from '@app/models/question';
 })
 export class QuestionsListComponent {
   @Input() questions: Question[] = [];
+  @Input() canAdd = false;
 
   questionLink(question: Question) {
     return question.id + (question.status === 'draft' ? '/edit/' : '/review/');

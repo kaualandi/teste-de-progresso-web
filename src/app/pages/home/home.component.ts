@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { CHECK_TYPES } from '@app/constants/questions';
 import { SubjectsChart } from '@app/models/home';
 import { QuestionFilter } from '@app/models/question';
 import { ApexChartsService } from '@app/services/apex-charts.service';
@@ -29,13 +28,13 @@ export class HomeComponent implements OnInit {
   });
 
   difficultyChart = this.apexCharts.getDonut({
-    title: 'Questões por dificuldade',
+    title: 'Grau dificuldade',
     labels: [],
     series: [],
   });
 
   cognitiveChart = this.apexCharts.getDonut({
-    title: 'Questões por habilidade cognitiva',
+    title: 'Habilidade cognitiva',
     labels: [],
     series: [],
   });
@@ -47,28 +46,21 @@ export class HomeComponent implements OnInit {
   });
 
   subjectsChart = this.apexCharts.getColumm({
-    title: 'Habilidade cognitiva por grau dificuldade',
+    title: 'Habilidade cognitiva',
     series: [],
   });
 
   ngOnInit(): void {
     this.loading = true;
     this.getCharts();
-    console.log(CHECK_TYPES.map((type) => type.label));
 
     this.barChartType.valueChanges.subscribe((value) => {
       if (value === 'types') {
-        this.subjectsChart = this.apexCharts.getColumm({
-          title: 'Habilidade cognitiva por tipo',
-          series: this.subjectsCharts.tipo,
-        });
+        this.subjectsChart.series = this.subjectsCharts.tipo;
         return;
       }
 
-      this.subjectsChart = this.apexCharts.getColumm({
-        title: 'Habilidade cognitiva por grau dificuldade',
-        series: this.subjectsCharts.dificuldade,
-      });
+      this.subjectsChart.series = this.subjectsCharts.dificuldade;
     });
   }
 
@@ -79,14 +71,18 @@ export class HomeComponent implements OnInit {
       .pipe(delay(500))
       .subscribe({
         next: (response) => {
-          this.difficultyChart.labels = response.difficulty_chart.label;
-          this.difficultyChart.series = response.difficulty_chart.series;
-          this.cognitiveChart.labels = response.cognitive_chart.label;
-          this.cognitiveChart.series = response.cognitive_chart.series;
-          this.typeChart.labels = response.cognitive_chart.label;
-          this.typeChart.series = response.cognitive_chart.series;
           this.subjectsCharts = response.subjects_chart;
+          this.difficultyChart.series = response.difficulty_chart.series;
+          this.cognitiveChart.series = response.cognitive_chart.series;
+          this.typeChart.series = response.type_chart.series;
           this.subjectsChart.series = this.subjectsCharts.dificuldade;
+
+          if (!this.filtering) {
+            this.difficultyChart.labels = response.difficulty_chart.label;
+            this.cognitiveChart.labels = response.cognitive_chart.label;
+            this.typeChart.labels = response.type_chart.label;
+          }
+
           this.loading = false;
           this.filtering = false;
         },

@@ -1,0 +1,170 @@
+[
+  {
+    "dificuldade": [
+      {
+        "name": "Fácil",
+        "data": [
+          {
+            "x": "Analisar",
+            "y": 0
+          },
+          {
+            "x": "Aplicar",
+            "y": 0
+          },
+          {
+            "x": "Criar",
+            "y": 0
+          },
+          {
+            "x": "Avaliar",
+            "y": 0
+          },
+          {
+            "x": "Recordar",
+            "y": 0
+          },
+          {
+            "x": "Compreender",
+            "y": 1
+          }
+        ]
+      },
+      {
+        "name": "Medio",
+        "data": [
+          {
+            "x": "Analisar",
+            "y": 0
+          },
+          {
+            "x": "Aplicar",
+            "y": 0
+          },
+          {
+            "x": "Criar",
+            "y": 0
+          },
+          {
+            "x": "Avaliar",
+            "y": 0
+          },
+          {
+            "x": "Recordar",
+            "y": 0
+          },
+          {
+            "x": "Compreender",
+            "y": 0
+          }
+        ]
+      },
+      {
+        "name": "Difícil",
+        "data": [
+          {
+            "x": "Analisar",
+            "y": 0
+          },
+          {
+            "x": "Aplicar",
+            "y": 0
+          },
+          {
+            "x": "Criar",
+            "y": 0
+          },
+          {
+            "x": "Avaliar",
+            "y": 0
+          },
+          {
+            "x": "Recordar",
+            "y": 0
+          },
+          {
+            "x": "Compreender",
+            "y": 0
+          }
+        ]
+      }
+    ],
+    "tipo": [
+      {
+        "name": "Fácil",
+        "data": [
+          {
+            "x": "Asserção e razão",
+            "y": 0
+          },
+          {
+            "x": "Afirmação incompleta",
+            "y": 0
+          },
+          {
+            "x": "interpretation",
+            "y": 0
+          },
+          {
+            "x": "Resposta múltipla",
+            "y": 0
+          },
+          {
+            "x": "Resposta única",
+            "y": 1
+          }
+        ]
+      },
+      {
+        "name": "Medio",
+        "data": [
+          {
+            "x": "Asserção e razão",
+            "y": 0
+          },
+          {
+            "x": "Afirmação incompleta",
+            "y": 0
+          },
+          {
+            "x": "interpretation",
+            "y": 0
+          },
+          {
+            "x": "Resposta múltipla",
+            "y": 0
+          },
+          {
+            "x": "Resposta única",
+            "y": 0
+          }
+        ]
+      },
+      {
+        "name": "Difícil",
+        "data": [
+          {
+            "x": "Asserção e razão",
+            "y": 0
+          },
+          {
+            "x": "Afirmação incompleta",
+            "y": 0
+          },
+          {
+            "x": "interpretation",
+            "y": 0
+          },
+          {
+            "x": "Resposta múltipla",
+            "y": 0
+          },
+          {
+            "x": "Resposta única",
+            "y": 0
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -19,5 +19,14 @@
         </div>
       </a>
     </li>
+
+    <li *ngIf="canAdd" matRipple class="add">
+      <a routerLink="new">
+        <p class="f-16">
+          <i icon="plus"></i>
+          Adicionar nova questão</p
+        >
+      </a>
+    </li>
   </ul>
 </div>

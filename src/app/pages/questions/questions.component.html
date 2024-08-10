@@ -17,7 +17,10 @@
               {{ tabQuestion.label }}
             </span>
           </ng-template>
-          <app-questions-list [questions]="tabQuestion.questions" />
+          <app-questions-list
+            [questions]="tabQuestion.questions"
+            [canAdd]="tabQuestion.value === 'draft'"
+          />
         </mat-tab>
       </mat-tab-group>
     </div>
