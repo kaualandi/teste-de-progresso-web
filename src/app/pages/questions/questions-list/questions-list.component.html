@@ -12,10 +12,10 @@
         <div class="list-body">
           <p class="statement"> {{ question.body | plaintext }} </p>
           <p class="f-12">Assunto: {{ question.subject_obj?.name }}</p>
-          <p class="f-12"
-            >Eixo de formação: {{ question.subject_obj?.axis_obj?.name }}</p
-          >
-          <p class="f-12">Revisor: {{ question.reported_by_obj?.name }}</p>
+          <p class="f-12">Tipo: {{ question.check_type | checkType }}</p>
+          <p class="f-12">
+            Habilidade cognitiva: {{ question.bloom_taxonomy | bloomTaxonomy }}
+          </p>
         </div>
       </a>
     </li>

@@ -21,7 +21,8 @@ import { FormErrorPipe } from '@pipes/form-error.pipe';
 import { SafePipe } from '@pipes/safe.pipe';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { BloomTaxonomyPipe } from '../../pipes/bloom-taxonomy.pipe';
-import { DifficultyPipe } from '../../pipes/dificulty.pipe';
+import { CheckTypePipe } from '../../pipes/check-type.pipe';
+import { DifficultyPipe } from '../../pipes/difficulty.pipe';
 import { PlaintextPipe } from '../../pipes/plaintext.pipe';
 import { ReviewStatusPipe } from '../../pipes/review-status.pipe';
 import { ConfirmModalComponent } from '../modals/confirm-modal/confirm-modal.component';
@@ -71,6 +72,7 @@ const DECLARATIONS = [
   BloomTaxonomyPipe,
   ReviewStatusPipe,
   QuestionsFilterComponent,
+  CheckTypePipe,
 ];
 
 @NgModule({
