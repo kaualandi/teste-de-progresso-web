@@ -71,3 +71,9 @@ export interface ReviewMessage {
   user: number;
   user_obj?: User;
 }
+
+export interface QuestionsByTab {
+  value: string;
+  label: string;
+  questions: Question[];
+}
