@@ -170,6 +170,9 @@ export class HomeComponent implements OnInit {
   }
 
   getCharts() {
+    this.loading = false;
+    return;
+
     this.homeService.getDashboard(this.form.getRawValue()).subscribe({
       next: (response) => {
         console.log(response);
