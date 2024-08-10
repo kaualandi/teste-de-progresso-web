@@ -77,3 +77,10 @@ export interface QuestionsByTab {
   label: string;
   questions: Question[];
 }
+
+export interface QuestionFilter {
+  start_year: string;
+  end_year: string;
+  authorship: string[];
+  subjects: number[];
+}

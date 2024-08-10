@@ -1,13 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { QuestionFilter } from '@app/models/question';
 import { HttpService } from './http.service';
-
-interface DashFilters {
-  start_year: moment.Moment;
-  end_year: moment.Moment;
-  authorship: string[];
-  subjects: number[];
-}
 
 @Injectable({
   providedIn: 'root',
@@ -15,12 +9,15 @@ interface DashFilters {
 export class HomeService {
   constructor(private http: HttpService) {}
 
-  getDashboard(filters: DashFilters) {
-    const query = new HttpParams()
-      .append('start_year', filters.start_year.format('YYYY'))
-      .append('end_year', filters.end_year.format('YYYY'))
-      .append('authorship', filters.authorship.join(','))
-      .append('subjects', filters.subjects.join(','));
-    return this.http.get('/dashboard', query);
+  getDashboard(filters?: QuestionFilter) {
+    let query = new HttpParams();
+    if (filters) {
+      query = query
+        .append('start_year', filters.start_year)
+        .append('end_year', filters.end_year)
+        .append('authorship', filters.authorship.join(','))
+        .append('subjects', filters.subjects.join(','));
+    }
+    return this.http.get('/dashboard/', query);
   }
 }

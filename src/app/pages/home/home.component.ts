@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { MatDatepicker } from '@angular/material/datepicker';
 import { CHECK_TYPES } from '@app/constants/questions';
-import { Subject } from '@app/models/subject';
+import { QuestionFilter } from '@app/models/question';
 import { ApexChartsService } from '@app/services/apex-charts.service';
 import { HomeService } from '@app/services/home.service';
-import { SubjectService } from '@app/services/subject.service';
-import * as moment from 'moment';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -17,24 +15,12 @@ export class HomeComponent implements OnInit {
   constructor(
     private apexCharts: ApexChartsService,
     private fb: FormBuilder,
-    private subjectService: SubjectService,
     private homeService: HomeService
   ) {}
 
   loading = false;
   error = 0;
   filtering = false;
-  subjects: Subject[] = [];
-  now = moment();
-
-  form = this.fb.group({
-    start_year: this.fb.control(moment().set('year', 2000), {
-      nonNullable: true,
-    }),
-    end_year: this.fb.control(moment(), { nonNullable: true }),
-    authorship: this.fb.control(['own', 'other'], { nonNullable: true }),
-    subjects: this.fb.control<number[]>([], { nonNullable: true }),
-  });
 
   barChartType = this.fb.control<'subjects' | 'types'>('subjects', {
     nonNullable: true,
@@ -162,7 +148,8 @@ export class HomeComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.getSubjects();
+    this.loading = true;
+    this.getCharts();
     console.log(CHECK_TYPES.map((type) => type.label));
 
     this.barChartType.valueChanges.subscribe((value) => {
@@ -326,44 +313,19 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getSubjects() {
-    this.loading = true;
-    this.subjectService.getSubjects().subscribe({
-      next: (response) => {
-        this.subjects = response;
-        const subjectsIds = response.map((subject) => subject.id);
-        this.form.controls.subjects.setValue(subjectsIds);
-        this.getCharts();
-      },
-      error: (error) => {
-        this.error = error.status || 500;
-        this.loading = false;
-      },
-    });
-  }
-
-  getCharts() {
-    this.homeService.getDashboard(this.form.getRawValue()).subscribe({
-      next: (response) => {
-        console.log(response);
-        this.loading = false;
-      },
-      error: (error) => {
-        this.error = error.status || 500;
-        this.loading = false;
-      },
-    });
-  }
-
-  setYear(
-    normalizedYear: moment.Moment,
-    datepicker: MatDatepicker<moment.Moment>,
-    year: 'start_year' | 'end_year'
-  ) {
-    const ctrlValue = this.form.get(year)?.value;
-    if (!ctrlValue) return;
-    ctrlValue.year(normalizedYear.year());
-    this.form.controls.start_year.setValue(ctrlValue);
-    datepicker.close();
+  getCharts(form?: QuestionFilter) {
+    this.homeService
+      .getDashboard(form)
+      .pipe(delay(500))
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          this.loading = false;
+        },
+        error: (error) => {
+          this.error = error.status || 500;
+          this.loading = false;
+        },
+      });
   }
 }

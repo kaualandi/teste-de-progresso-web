@@ -1,72 +1,10 @@
 <main class="page">
   <div class="container">
     <div class="content" *ngIf="!loading && !error">
-      <form class="filters" [formGroup]="form">
-        <div class="row">
-          <mat-form-field appearance="outline" class="year">
-            <mat-label>Ano inicial</mat-label>
-            <input
-              matInput
-              [matDatepicker]="startYearDp"
-              formControlName="start_year"
-              [max]="now"
-            />
-            <mat-datepicker-toggle
-              matIconSuffix
-              [for]="startYearDp"
-            ></mat-datepicker-toggle>
-            <mat-datepicker
-              #startYearDp
-              startView="multi-year"
-              (yearSelected)="setYear($event, startYearDp, 'start_year')"
-            >
-            </mat-datepicker>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="year">
-            <mat-label>Ano final</mat-label>
-            <input
-              matInput
-              [matDatepicker]="endYearDp"
-              formControlName="end_year"
-              [max]="now"
-            />
-            <mat-datepicker-toggle
-              matIconSuffix
-              [for]="endYearDp"
-            ></mat-datepicker-toggle>
-            <mat-datepicker
-              #endYearDp
-              startView="multi-year"
-              (yearSelected)="setYear($event, endYearDp, 'end_year')"
-            >
-            </mat-datepicker>
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Autoria</mat-label>
-            <mat-select multiple formControlName="authorship">
-              <mat-option value="own">Autorais</mat-option>
-              <mat-option value="other">Não autorais</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Assuntos</mat-label>
-            <mat-select multiple formControlName="subjects">
-              <mat-option *ngFor="let subject of subjects" [value]="subject.id">
-                {{ subject.name }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-
-        <div class="buttons end">
-          <button type="submit" mat-raised-button color="primary">
-            Filtrar
-            <i *ngIf="!filtering" icon="filter"></i>
-            <loading *ngIf="filtering" />
-          </button>
-        </div>
-      </form>
+      <app-questions-filter
+        (filter)="getCharts($event)"
+        [filtering]="filtering"
+      />
 
       <div class="charts-container" *ngIf="!loading">
         <div class="row">

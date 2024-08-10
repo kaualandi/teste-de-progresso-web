@@ -2,9 +2,11 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { IconDirective } from '@directives/icon.directive';
@@ -31,6 +33,7 @@ import { PageErrorComponent } from './page-error/page-error.component';
 import { PageLoadingComponent } from './page-loading/page-loading.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { PasswordStregthComponent } from './password-stregth/password-stregth.component';
+import { QuestionsFilterComponent } from './questions-filter/questions-filter.component';
 import { SkeletonLoadingComponent } from './skeleton-loading/skeleton-loading.component';
 
 const IMPORTS = [
@@ -67,6 +70,7 @@ const DECLARATIONS = [
   PlaintextPipe,
   BloomTaxonomyPipe,
   ReviewStatusPipe,
+  QuestionsFilterComponent,
 ];
 
 @NgModule({
@@ -77,6 +81,8 @@ const DECLARATIONS = [
     MatMenuModule,
     MatTooltipModule,
     RouterModule,
+    MatSelectModule,
+    MatDatepickerModule,
   ],
   declarations: [...DECLARATIONS],
   exports: [...IMPORTS, ...DECLARATIONS],

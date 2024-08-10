@@ -3,20 +3,6 @@ main.page {
   background-color: var(--primary-bg);
   padding: 1rem 0;
 
-  header {
-    margin-bottom: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    h1,
-    p {
-      margin: 0;
-    }
-    p {
-      margin-top: 0.5rem;
-    }
-  }
-
   .mat-mdc-tab-group {
     .mat-mdc-tab-body-wrapper {
       .mat-mdc-tab-body {
