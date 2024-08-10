@@ -84,4 +84,5 @@ export interface QuestionFilter {
   authorship: string[];
   subjects: number[];
   using: string[];
+  order_by: string;
 }

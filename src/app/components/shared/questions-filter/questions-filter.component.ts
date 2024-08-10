@@ -63,6 +63,7 @@ export class QuestionsFilterComponent implements OnInit {
     authorship: this.fb.control(['own', 'other'], { nonNullable: true }),
     subjects: this.fb.control<number[]>([], { nonNullable: true }),
     using: this.fb.control(['used', 'unused'], { nonNullable: true }),
+    order_by: this.fb.control('created_at', { nonNullable: true }),
   });
 
   ngOnInit(): void {

@@ -34,7 +34,8 @@ export class QuestionService {
         .append('start_year', filters.start_year)
         .append('end_year', filters.end_year)
         .append('authorship', filters.authorship.join(','))
-        .append('subjects', filters.subjects.join(','));
+        .append('subjects', filters.subjects.join(','))
+        .append('order_by', filters.order_by);
     }
 
     return this.http.get<Question[]>('/question/', query);
