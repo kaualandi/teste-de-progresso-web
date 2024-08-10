@@ -23,8 +23,9 @@ export class QuestionsPageSettingsComponent implements OnInit {
       );
 
       const tabsValues = this.questionTabs.map((tab) => tab.value);
+      const originalValues = QUESTION_TABS.map((tab) => tab.value);
       this.canRevert = !tabsValues.some(
-        (tab, index) => tabsOrder[index] !== tab
+        (tab, index) => originalValues[index] !== tab
       );
     }
   }
