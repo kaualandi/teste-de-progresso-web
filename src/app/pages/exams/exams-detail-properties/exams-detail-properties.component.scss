@@ -1,0 +1,46 @@
+main {
+  .container {
+    .content {
+      ::ng-deep {
+        .mat-horizontal-content-container,
+        .mat-vertical-content {
+          padding-top: 0.3rem;
+        }
+        .mat-mdc-radio-button ~ .mat-mdc-radio-button {
+          margin-left: 1rem;
+        }
+      }
+
+      .new-section {
+        margin-bottom: 1rem;
+        display: flex;
+        gap: 1rem;
+      }
+
+      .axis-list-difficulty {
+        .difficulty {
+          label {
+            width: 3rem;
+            display: inline-block;
+          }
+          .value {
+            width: 1rem;
+            display: inline-block;
+          }
+          .mat-mdc-slider {
+            max-width: 200px;
+            width: 100%;
+          }
+
+          & + .difficulty {
+            margin-top: 0.5rem;
+          }
+        }
+      }
+
+      .buttons {
+        margin-top: 2rem;
+      }
+    }
+  }
+}

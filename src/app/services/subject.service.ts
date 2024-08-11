@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from '@app/models/subject';
+import { Subject, SubjectAxis } from '@app/models/subject';
 import { HttpService } from './http.service';
 
 @Injectable({
@@ -11,5 +11,9 @@ export class SubjectService {
 
   getSubjects() {
     return this.http.get<Subject[]>('/subject/');
+  }
+
+  getAxis() {
+    return this.http.get<SubjectAxis[]>('/axis/');
   }
 }

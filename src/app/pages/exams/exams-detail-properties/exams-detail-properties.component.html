@@ -1,1 +1,143 @@
-<p>exams-detail-properties works!</p>
+<main class="page">
+  <div class="container">
+    <h1 class="one-line">{{ formDetail.value.title || '&nbsp;' }}</h1>
+
+    <div class="content" *ngIf="!loading && !error">
+      <mat-stepper [orientation]="isTablet ? 'vertical' : 'horizontal'">
+        <mat-step [stepControl]="formDetail" label="Detalhes">
+          <form [formGroup]="formDetail">
+            <mat-form-field appearance="outline">
+              <mat-label>Título</mat-label>
+              <input matInput formControlName="title" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Descrição</mat-label>
+              <textarea
+                matInput
+                formControlName="observations"
+                rows="7"
+              ></textarea>
+            </mat-form-field>
+
+            <div class="buttons end">
+              <a mat-flat-button routerLink="..">Cancelar</a>
+              <button
+                type="submit"
+                mat-flat-button
+                color="primary"
+                matStepperNext
+              >
+                Próximo
+              </button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="axesWeightsForm" label="Eixos e pesos">
+          <form
+            [formGroup]="axesWeightsForm"
+            (ngSubmit)="handleAxesWeightsFormSubmit()"
+          >
+            <div class="new-section">
+              <mat-form-field appearance="outline">
+                <mat-label>Eixos</mat-label>
+                <mat-select formControlName="new_axis">
+                  <mat-option *ngFor="let axi of filteredAxis" [value]="axi.id">
+                    {{ axi.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <button mat-flat-button type="submit" color="primary">
+                Adicionar
+              </button>
+            </div>
+          </form>
+
+          <mat-accordion>
+            <mat-expansion-panel
+              *ngFor="let axis of axisList.controls; let i = index"
+              expanded
+            >
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{ axisName(axis.value.axis) }}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <form class="axis-list-difficulty" [formGroup]="axis">
+                <div class="difficulty">
+                  <label> Fácil </label>
+                  <span class="value">{{ axis.value.easy }}</span>
+                  <mat-slider max="10" min="0" [discrete]="true">
+                    <input matSliderThumb formControlName="easy" />
+                  </mat-slider>
+                </div>
+                <div class="difficulty">
+                  <label> Médio </label>
+                  <span class="value">{{ axis.value.medium }}</span>
+                  <mat-slider max="10" min="0" [discrete]="true">
+                    <input matSliderThumb formControlName="medium" />
+                  </mat-slider>
+                </div>
+                <div class="difficulty">
+                  <label> Difícil </label>
+                  <span class="value">{{ axis.value.hard }}</span>
+                  <mat-slider max="10" min="0" [discrete]="true">
+                    <input matSliderThumb formControlName="hard" />
+                  </mat-slider>
+                </div>
+              </form>
+
+              <mat-action-row>
+                <button
+                  mat-button
+                  color="warn"
+                  (click)="handleDeleteAxisClick(i)"
+                >
+                  <i icon="trash"></i> Excluir
+                </button>
+              </mat-action-row>
+            </mat-expansion-panel>
+          </mat-accordion>
+
+          <div class="buttons end">
+            <button type="button" mat-flat-button matStepperPrevious>
+              Voltar
+            </button>
+            <!-- <button
+              type="button"
+              mat-flat-button
+              (click)="handleDeleteButtonClick()"
+              *ngIf="status === 'draft'"
+              [disabled]="loadingActions"
+            >
+              Excluir rascunho
+              <loading *ngIf="loadingActions === 'delete'" />
+            </button> -->
+            <!-- <button
+              type="button"
+              mat-flat-button
+              (click)="handleFormSubmit(true)"
+              [disabled]="loadingActions"
+            >
+              Salvar como rascunho
+              <loading *ngIf="loadingActions === 'draft'" />
+            </button> -->
+            <button mat-flat-button color="primary" disabled>
+              Gerar automaticamente
+              <loading *ngIf="loadingActions === 'automatically'" />
+            </button>
+            <button mat-flat-button color="primary">
+              Gerar manualmente
+              <loading *ngIf="loadingActions === 'manual'" />
+            </button>
+          </div>
+        </mat-step>
+      </mat-stepper>
+    </div>
+
+    <page-error *ngIf="error" [code]="error" />
+    <page-loading *ngIf="loading" />
+  </div>
+</main>
