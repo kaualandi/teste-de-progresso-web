@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { SubjectAxis } from '@app/models/subject';
 import { SubjectService } from '@app/services/subject.service';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-exams-detail-properties',
@@ -13,7 +14,8 @@ export class ExamsDetailPropertiesComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private subjectService: SubjectService
+    private subjectService: SubjectService,
+    private notifier: NotifierService
   ) {}
 
   id = this.route.snapshot.params['id'];
@@ -61,6 +63,20 @@ export class ExamsDetailPropertiesComponent implements OnInit {
     });
   }
 
+  handleFormSubmit(draft: boolean, auto: boolean) {
+    const axisList = this.axisList.getRawValue();
+    if (!draft && axisList.length === 0) {
+      this.notifier.notify('error', 'Deve selecionar pelo menos um eixo.');
+      return;
+    }
+
+    this.notifier.notify('success', `${draft ? 'Com' : 'Sem'} rascunho.`);
+    this.notifier.notify(
+      'success',
+      `Geração ${auto ? 'automática' : 'manual'}`
+    );
+  }
+
   handleAxesWeightsFormSubmit() {
     if (this.axesWeightsForm.controls.new_axis.invalid) {
       this.axesWeightsForm.controls.new_axis.markAsTouched();
@@ -78,10 +94,13 @@ export class ExamsDetailPropertiesComponent implements OnInit {
 
   axisWeights(id: number) {
     return this.fb.group({
-      axis: [id, Validators.required],
-      easy: [5, Validators.min(0)],
-      medium: [5, Validators.min(0)],
-      hard: [5, Validators.min(0)],
+      axis: this.fb.control(id, {
+        validators: [Validators.required],
+        nonNullable: true,
+      }),
+      easy: this.fb.control(5, { nonNullable: true }),
+      medium: this.fb.control(5, { nonNullable: true }),
+      hard: this.fb.control(5, { nonNullable: true }),
     });
   }
 

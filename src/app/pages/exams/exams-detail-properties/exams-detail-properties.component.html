@@ -115,20 +115,30 @@
               Excluir rascunho
               <loading *ngIf="loadingActions === 'delete'" />
             </button> -->
-            <!-- <button
+            <button
               type="button"
               mat-flat-button
-              (click)="handleFormSubmit(true)"
-              [disabled]="loadingActions"
+              (click)="handleFormSubmit(true, false)"
+              [disabled]="!!loadingActions"
             >
               Salvar como rascunho
               <loading *ngIf="loadingActions === 'draft'" />
-            </button> -->
-            <button mat-flat-button color="primary" disabled>
+            </button>
+            <button
+              mat-flat-button
+              color="primary"
+              (click)="handleFormSubmit(false, false)"
+              [disabled]="!!loadingActions"
+            >
               Gerar automaticamente
               <loading *ngIf="loadingActions === 'automatically'" />
             </button>
-            <button mat-flat-button color="primary">
+            <button
+              mat-flat-button
+              color="primary"
+              (click)="handleFormSubmit(false, true)"
+              [disabled]="!!loadingActions"
+            >
               Gerar manualmente
               <loading *ngIf="loadingActions === 'manual'" />
             </button>
