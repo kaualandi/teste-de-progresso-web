@@ -107,8 +107,10 @@ export class QuestionService {
   }
 
   get questionTabsOrder(): string[] {
+    const defaultValue = QUESTION_TABS.map((tab) => tab.value);
     return JSON.parse(
-      localStorage.getItem(this.questionTabsOrderStorageKey) || '[]'
+      localStorage.getItem(this.questionTabsOrderStorageKey) ||
+        JSON.stringify(defaultValue)
     );
   }
 
