@@ -37,6 +37,7 @@ export class QuestionReviewComponent implements OnInit {
   review = new FormControl('', Validators.required);
   reviews: ReviewMessage[] = [];
   canChangeQuestion = false;
+  canSendReview = false;
 
   ngOnInit() {
     this.getQuestion();
@@ -51,6 +52,11 @@ export class QuestionReviewComponent implements OnInit {
         this.question = response;
         this.loading = false;
         this.canChangeQuestion = response.created_by === this.user.id;
+        this.canSendReview =
+          (response.status === 'waiting_review' &&
+            response.reported_by === this.user.id) ||
+          (response.status === 'with_requested_changes' &&
+            response.created_by === this.user.id);
       },
       error: (error) => {
         this.error = error.status || 500;
@@ -71,6 +77,7 @@ export class QuestionReviewComponent implements OnInit {
 
     if (type === 'request_changes') this.loadingReprove = true;
     if (type !== 'request_changes') this.loadingReview = true;
+
     this.questionService.createReviewMessage(this.id, body).subscribe({
       next: () => {
         this.loadingReview = false;
@@ -120,6 +127,21 @@ export class QuestionReviewComponent implements OnInit {
       if (result) {
         this.deleteQuestion();
       }
+    });
+  }
+
+  registerQuestion() {
+    this.loadingReview = true;
+
+    this.questionService.registerQuestion(this.id).subscribe({
+      next: () => {
+        this.loadingReview = false;
+        this.notifier.notify('success', 'Questão registrada com sucesso.');
+        this.router.navigate(['/questions']);
+      },
+      error: () => {
+        this.loadingReview = false;
+      },
     });
   }
 

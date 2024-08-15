@@ -232,10 +232,7 @@
                 >
               </mat-expansion-panel-header>
 
-              <form
-                (ngSubmit)="handleReviewFormSubmit()"
-                *ngIf="question.status !== 'approved'"
-              >
+              <form (ngSubmit)="handleReviewFormSubmit()" *ngIf="canSendReview">
                 <mat-form-field appearance="outline">
                   <mat-label>Parecer</mat-label>
                   <textarea matInput [formControl]="review"></textarea>
@@ -250,11 +247,17 @@
                     type="button"
                     *ngIf="question.status === 'waiting_review'"
                     (click)="handleReviewFormSubmit('request_changes')"
+                    [disabled]="loadingReview || loadingReprove"
                   >
                     Reprovar
                     <loading *ngIf="loadingReprove" />
                   </button>
-                  <button mat-flat-button color="primary" type="submit">
+                  <button
+                    mat-flat-button
+                    color="primary"
+                    type="submit"
+                    [disabled]="loadingReview || loadingReprove"
+                  >
                     {{
                       question.status === 'with_requested_changes'
                         ? 'Enviar'
@@ -265,12 +268,47 @@
                 </div>
               </form>
               <div
-                class="question-approved"
+                class="question-feedback"
                 *ngIf="question.status === 'approved'"
               >
                 <span>
                   Essa questão já foi aprovada, não é necessário enviar ou
                   responder pareceres.
+                </span>
+
+                <button
+                  mat-flat-button
+                  color="primary"
+                  (click)="registerQuestion()"
+                  [disabled]="loadingReview"
+                >
+                  Registrar questão
+                  <loading *ngIf="loadingReview" />
+                </button>
+              </div>
+
+              <div
+                class="question-feedback"
+                *ngIf="
+                  question.status === 'waiting_review' &&
+                  question.reported_by !== user.id
+                "
+              >
+                <span>
+                  Essa questão está aguardando o parecer do revisor.
+                </span>
+              </div>
+
+              <div
+                class="question-feedback"
+                *ngIf="
+                  question.status === 'with_requested_changes' &&
+                  question.created_by !== user.id
+                "
+              >
+                <span>
+                  Essa questão está aguardando as alterações solicitadas pelo
+                  revisor.
                 </span>
               </div>
             </mat-expansion-panel>

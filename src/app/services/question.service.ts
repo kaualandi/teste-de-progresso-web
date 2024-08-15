@@ -77,6 +77,12 @@ export class QuestionService {
     );
   }
 
+  registerQuestion(id: string) {
+    return this.http.patch<Question>(`/question/${id}/`, {
+      status: 'registered',
+    });
+  }
+
   organizeQuestions(questions: Question[]): QuestionsByTab[] {
     const tabsOrganized = this.questionTabsOrder.map((tab) => {
       const tabObj = QUESTION_TABS.find((t) => t.value === tab);

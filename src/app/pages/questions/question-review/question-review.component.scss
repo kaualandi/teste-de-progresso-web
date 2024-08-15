@@ -60,10 +60,11 @@ main {
             }
           }
           .history-empty,
-          .question-approved {
+          .question-feedback {
             text-align: center;
             padding: 1rem;
           }
+
           .reviews {
             .review {
               & + .review {
@@ -123,6 +124,14 @@ main {
               .review-content {
                 margin-top: 1rem;
               }
+            }
+          }
+
+          .question-feedback {
+            button {
+              margin-top: 1rem;
+              width: 100%;
+              display: block;
             }
           }
         }
