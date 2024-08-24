@@ -7,11 +7,11 @@ import {
   QuestionsByTab,
   ReviewMessage,
 } from '@app/models/question';
-import { Subject } from '@app/models/subject';
 import { User } from '@app/models/user';
 import { forkJoin } from 'rxjs';
 import { BodyJson, HttpService } from './http.service';
 import { StorageService } from './storage.service';
+import { SubjectService } from './subject.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +19,8 @@ import { StorageService } from './storage.service';
 export class QuestionService {
   constructor(
     private http: HttpService,
-    private stortage: StorageService
+    private stortage: StorageService,
+    private subjectService: SubjectService
   ) {}
 
   user = this.stortage.myself;
@@ -59,7 +60,7 @@ export class QuestionService {
 
   getSubjectsAndReports() {
     return forkJoin([
-      this.http.get<Subject[]>('/subject/'),
+      this.subjectService.getSubjects(),
       this.http.get<User[]>('/user/'),
     ]);
   }

@@ -1,0 +1,44 @@
+@import '../../../../styles/media';
+
+.page {
+  .container {
+    .content {
+      .filters {
+        margin-bottom: 1rem;
+        .row {
+          display: grid;
+          gap: 0.5rem;
+          flex: 1;
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+
+          mat-form-field {
+            & + mat-form-field {
+              margin: 0;
+            }
+          }
+
+          @include media('<=850px') {
+            flex-wrap: wrap;
+            mat-form-field {
+              max-width: 100%;
+              &.year {
+                max-width: calc(50% - 0.25rem);
+              }
+            }
+          }
+          .buttons {
+            margin: 0;
+            button {
+              flex: none;
+            }
+          }
+        }
+      }
+      .questions {
+        padding: 0.5rem;
+        border: 1px solid var(--line-color);
+        border-radius: calc(var(--br) - 0.2rem);
+      }
+    }
+  }
+}

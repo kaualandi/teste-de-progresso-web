@@ -28,25 +28,25 @@ export class HomeComponent implements OnInit {
   });
 
   difficultyChart = this.apexCharts.getDonut({
-    title: 'Grau dificuldade',
+    title: 'Grau de Dificuldade',
     labels: [],
     series: [],
   });
 
   cognitiveChart = this.apexCharts.getDonut({
-    title: 'Habilidade cognitiva',
+    title: 'Habilidade Cognitiva',
     labels: [],
     series: [],
   });
 
   typeChart = this.apexCharts.getDonut({
-    title: 'Questões por tipo',
+    title: 'Tipo',
     labels: [],
     series: [],
   });
 
   subjectsChart = this.apexCharts.getColumm({
-    title: 'Habilidade cognitiva',
+    title: 'Habilidade Cognitiva',
     series: [],
   });
 

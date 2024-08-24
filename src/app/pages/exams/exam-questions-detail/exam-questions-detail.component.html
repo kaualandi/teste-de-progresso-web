@@ -1,0 +1,127 @@
+<main class="page">
+  <div class="container">
+    <div class="content">
+      <form class="filters" [formGroup]="filters">
+        <div class="row">
+          <mat-form-field appearance="outline" class="year">
+            <mat-label>Ano Inicial</mat-label>
+            <input
+              matInput
+              [matDatepicker]="startYearDp"
+              formControlName="start_year"
+              [max]="now"
+            />
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="startYearDp"
+            ></mat-datepicker-toggle>
+            <mat-datepicker
+              #startYearDp
+              startView="multi-year"
+              (yearSelected)="setStartYear($event, startYearDp)"
+            >
+            </mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="year">
+            <mat-label>Ano Final</mat-label>
+            <input
+              matInput
+              [matDatepicker]="endYearDp"
+              formControlName="end_year"
+              [max]="now"
+            />
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="endYearDp"
+            ></mat-datepicker-toggle>
+            <mat-datepicker
+              #endYearDp
+              startView="multi-year"
+              (yearSelected)="setEndYear($event, endYearDp)"
+            >
+            </mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Grau de Dificuldade</mat-label>
+            <mat-select formControlName="difficulty">
+              <mat-option value="">Todas</mat-option>
+              <mat-option
+                *ngFor="let difficulty of difficultys"
+                [value]="difficulty.value"
+              >
+                {{ difficulty.label }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Eixo de formação</mat-label>
+            <mat-select formControlName="subject">
+              <mat-option value="">Todas</mat-option>
+              <mat-option *ngFor="let axi of axis" [value]="axi.id">
+                {{ axi.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Assunto</mat-label>
+            <mat-select formControlName="subject">
+              <mat-option value="">Todos</mat-option>
+              <mat-option *ngFor="let subject of subjects" [value]="subject.id">
+                {{ subject.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Habilidade Cognitiva</mat-label>
+            <mat-select formControlName="authorship">
+              <mat-option
+                *ngFor="let bloomTaxonomy of bloomTaxonomys"
+                [value]="bloomTaxonomy.value"
+              >
+                {{ bloomTaxonomy.label }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Tipo</mat-label>
+            <mat-select formControlName="authorship">
+              <mat-option
+                *ngFor="let checkType of checkTypes"
+                [value]="checkType.value"
+              >
+                {{ checkType.label }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Autoria</mat-label>
+            <mat-select multiple formControlName="authorship">
+              <mat-option value="own">Autorais</mat-option>
+              <mat-option value="other">Não autorais</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div class="buttons">
+            <button type="submit" mat-raised-button color="primary">
+              Filtrar
+              <i icon="filter"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <div class="questions">
+        <header>
+          <h3>Questões</h3>
+        </header>
+      </div>
+    </div>
+  </div>
+</main>

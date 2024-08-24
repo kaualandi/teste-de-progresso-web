@@ -127,7 +127,7 @@
             <button
               mat-flat-button
               color="primary"
-              (click)="handleFormSubmit(false, false)"
+              (click)="handleFormSubmit(false, true)"
               [disabled]="!!loadingActions"
             >
               Gerar automaticamente
@@ -136,7 +136,7 @@
             <button
               mat-flat-button
               color="primary"
-              (click)="handleFormSubmit(false, true)"
+              (click)="handleFormSubmit(false, false)"
               [disabled]="!!loadingActions"
             >
               Gerar manualmente
