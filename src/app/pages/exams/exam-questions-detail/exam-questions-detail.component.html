@@ -90,12 +90,9 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Tipo</mat-label>
-            <mat-select formControlName="authorship">
-              <mat-option
-                *ngFor="let checkType of checkTypes"
-                [value]="checkType.value"
-              >
-                {{ checkType.label }}
+            <mat-select formControlName="question_type">
+              <mat-option *ngFor="let type of questionTypes" [value]="type.id">
+                {{ type.name }}
               </mat-option>
             </mat-select>
           </mat-form-field>

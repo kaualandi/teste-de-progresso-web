@@ -12,7 +12,8 @@
         <div class="list-body">
           <p class="statement"> {{ question.body | plaintext }} </p>
           <p class="f-12">Assunto: {{ question.subject_obj?.name }}</p>
-          <p class="f-12">Tipo: {{ question.check_type | checkType }}</p>
+          <p class="f-12">Tipo: {{ question.question_type }}</p>
+          <!-- TODO: COLOCAR QUESTION TYPE RELACIONADO ACIMA -->
           <p class="f-12">
             Habilidade cognitiva: {{ question.bloom_taxonomy | bloomTaxonomy }}
           </p>

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Question } from '@app/models/question';
+import { Question, QuestionStatus } from '@app/models/question';
 
 @Component({
   selector: 'app-questions-list',
@@ -11,6 +11,9 @@ export class QuestionsListComponent {
   @Input() canAdd = false;
 
   questionLink(question: Question) {
-    return question.id + (question.status === 'draft' ? '/edit/' : '/review/');
+    return (
+      question.id +
+      (question.status === QuestionStatus.DRAFT ? '/edit/' : '/review/')
+    );
   }
 }

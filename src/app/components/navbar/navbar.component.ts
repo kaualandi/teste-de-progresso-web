@@ -37,7 +37,6 @@ export class NavbarComponent implements OnInit {
 
   loading = false;
   error = 0;
-  navbarStatus = localStorage.getItem('menu');
   user$ = this.storage.watchUser().pipe(takeUntilDestroyed());
   user = {} as User;
   isMobile = window.innerWidth < 1024;

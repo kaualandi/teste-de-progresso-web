@@ -19,7 +19,7 @@
           </ng-template>
           <app-questions-list
             [questions]="tabQuestion.questions"
-            [canAdd]="tabQuestion.value === 'draft'"
+            [canAdd]="tabQuestion.value === QuestionStatus.DRAFT"
           />
         </mat-tab>
       </mat-tab-group>

@@ -6,7 +6,7 @@ import {
   ConfirmModalComponent,
   IConfirmModalData,
 } from '@app/components/modals/confirm-modal/confirm-modal.component';
-import { Question, ReviewMessage } from '@app/models/question';
+import { Question, QuestionStatus, ReviewMessage } from '@app/models/question';
 import { QuestionService } from '@app/services/question.service';
 import { StorageService } from '@app/services/storage.service';
 import { NotifierService } from 'angular-notifier';
@@ -38,6 +38,7 @@ export class QuestionReviewComponent implements OnInit {
   reviews: ReviewMessage[] = [];
   canChangeQuestion = false;
   canSendReview = false;
+  QuestionStatus = QuestionStatus;
 
   ngOnInit() {
     this.getQuestion();
@@ -53,9 +54,9 @@ export class QuestionReviewComponent implements OnInit {
         this.loading = false;
         this.canChangeQuestion = response.created_by === this.user.id;
         this.canSendReview =
-          (response.status === 'waiting_review' &&
+          (response.status === QuestionStatus.WAITING_REVIEW &&
             response.reported_by === this.user.id) ||
-          (response.status === 'with_requested_changes' &&
+          (response.status === QuestionStatus.WITH_REQUESTED_CHANGES &&
             response.created_by === this.user.id);
       },
       error: (error) => {
@@ -67,7 +68,10 @@ export class QuestionReviewComponent implements OnInit {
 
   handleReviewFormSubmit(type?: string) {
     if (!type) {
-      type = this.question.status === 'waiting_review' ? 'approve' : 'answer';
+      type =
+        this.question.status === QuestionStatus.WAITING_REVIEW
+          ? 'approve'
+          : 'answer';
     }
 
     const body = {

@@ -224,7 +224,7 @@
               <mat-expansion-panel-header>
                 <mat-panel-title
                   >{{
-                    question.status === 'with_requested_changes'
+                    question.status === QuestionStatus.WITH_REQUESTED_CHANGES
                       ? 'Enviar'
                       : 'Responder'
                   }}
@@ -245,7 +245,7 @@
                     mat-flat-button
                     color="warn"
                     type="button"
-                    *ngIf="question.status === 'waiting_review'"
+                    *ngIf="question.status === QuestionStatus.WAITING_REVIEW"
                     (click)="handleReviewFormSubmit('request_changes')"
                     [disabled]="loadingReview || loadingReprove"
                   >
@@ -259,7 +259,7 @@
                     [disabled]="loadingReview || loadingReprove"
                   >
                     {{
-                      question.status === 'with_requested_changes'
+                      question.status === QuestionStatus.WITH_REQUESTED_CHANGES
                         ? 'Enviar'
                         : 'Aprovar'
                     }}
@@ -269,7 +269,7 @@
               </form>
               <div
                 class="question-feedback"
-                *ngIf="question.status === 'approved'"
+                *ngIf="question.status === QuestionStatus.APPROVED"
               >
                 <span>
                   Essa questão já foi aprovada, não é necessário enviar ou
@@ -290,7 +290,7 @@
               <div
                 class="question-feedback"
                 *ngIf="
-                  question.status === 'waiting_review' &&
+                  question.status === QuestionStatus.WAITING_REVIEW &&
                   question.reported_by !== user.id
                 "
               >
@@ -302,7 +302,7 @@
               <div
                 class="question-feedback"
                 *ngIf="
-                  question.status === 'with_requested_changes' &&
+                  question.status === QuestionStatus.WITH_REQUESTED_CHANGES &&
                   question.created_by !== user.id
                 "
               >

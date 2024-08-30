@@ -5,6 +5,8 @@ import {
   Question,
   QuestionFilter,
   QuestionsByTab,
+  QuestionStatus,
+  QuestionType,
   ReviewMessage,
 } from '@app/models/question';
 import { User } from '@app/models/user';
@@ -58,11 +60,16 @@ export class QuestionService {
     return this.http.delete(`/question/${id}`);
   }
 
-  getSubjectsAndReports() {
+  getSubjectsReportsAndQuestionTypes() {
     return forkJoin([
       this.subjectService.getSubjects(),
       this.http.get<User[]>('/user/'),
+      this.getQuestionTypes(),
     ]);
+  }
+
+  getQuestionTypes() {
+    return this.http.get<QuestionType[]>('/question-type/');
   }
 
   createReviewMessage(id: string, body: BodyJson) {
@@ -98,12 +105,10 @@ export class QuestionService {
       if (!tab) return acc;
 
       if (
-        question.status === 'waiting_review' &&
+        question.status === QuestionStatus.WAITING_REVIEW &&
         question.reported_by === this.user.id
       ) {
-        const waitingYourReviewTab = tabsOrganized.find(
-          (t) => t.value === 'waiting_your_review'
-        );
+        const waitingYourReviewTab = tabsOrganized.find((t) => t.value === 5);
         waitingYourReviewTab?.questions.push(question);
         return acc;
       }
@@ -113,7 +118,7 @@ export class QuestionService {
     }, tabsOrganized);
   }
 
-  get questionTabsOrder(): string[] {
+  get questionTabsOrder(): number[] {
     const defaultValue = QUESTION_TABS.map((tab) => tab.value);
     return JSON.parse(
       localStorage.getItem(this.questionTabsOrderStorageKey) ||
@@ -121,7 +126,7 @@ export class QuestionService {
     );
   }
 
-  set questionTabsOrder(value: string[]) {
+  set questionTabsOrder(value: number[]) {
     localStorage.setItem(
       this.questionTabsOrderStorageKey,
       JSON.stringify(value)

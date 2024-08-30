@@ -246,18 +246,18 @@
               <div class="col">
                 <mat-form-field appearance="outline">
                   <mat-label>Tipo</mat-label>
-                  <mat-select formControlName="check_type">
+                  <mat-select formControlName="question_type">
                     <mat-option value="">-</mat-option>
                     <mat-option
-                      *ngFor="let type of checkTypes"
-                      [value]="type.value"
+                      *ngFor="let type of questionTypes"
+                      [value]="type.id"
                     >
-                      {{ type.label }}
+                      {{ type.name }}
                     </mat-option>
                   </mat-select>
                   <mat-error>
                     {{
-                      formFeatures.controls.check_type.errors
+                      formFeatures.controls.question_type.errors
                         | formError
                         | translate
                     }}
@@ -333,7 +333,7 @@
                 type="button"
                 mat-flat-button
                 (click)="handleDeleteButtonClick()"
-                *ngIf="status === 'draft'"
+                *ngIf="status === QuestionStatus.DRAFT"
                 [disabled]="loadingActions"
               >
                 Excluir rascunho

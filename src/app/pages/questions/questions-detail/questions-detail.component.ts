@@ -9,10 +9,9 @@ import {
 import { FROALA_OPTIONS } from '@app/constants/froala';
 import {
   BLOOM_TAXONOMY,
-  CHECK_TYPES,
   QUESTION_DIFFICULTIES,
 } from '@app/constants/questions';
-import { QuestionStatus } from '@app/models/question';
+import { QuestionStatus, QuestionType } from '@app/models/question';
 import { Subject } from '@app/models/subject';
 import { User } from '@app/models/user';
 import { BodyJson } from '@app/services/http.service';
@@ -46,10 +45,11 @@ export class QuestionsDetailComponent implements OnInit {
   difficultyOptions = QUESTION_DIFFICULTIES;
   froalaOptions = FROALA_OPTIONS;
   bloomTaxonomy = BLOOM_TAXONOMY;
-  checkTypes = CHECK_TYPES;
+  questionTypes: QuestionType[] = [];
   subjects: Subject[] = [];
   reports: User[] = [];
   status?: QuestionStatus;
+  QuestionStatus = QuestionStatus;
 
   formBody = this.fb.group({
     instruction: [''],
@@ -93,9 +93,9 @@ export class QuestionsDetailComponent implements OnInit {
     author: ['OWN', Validators.required],
     authorship: ['UNIFESO', Validators.required],
     authorship_year: [new Date().getFullYear() + '', Validators.required],
-    difficulty: ['', Validators.required],
-    check_type: ['', Validators.required],
-    bloom_taxonomy: ['', Validators.required],
+    difficulty: [0, Validators.required],
+    question_type: [0, Validators.required],
+    bloom_taxonomy: [0, Validators.required],
     subject: [0, Validators.required],
     axis: [''],
     intention: [''],
@@ -109,7 +109,7 @@ export class QuestionsDetailComponent implements OnInit {
     });
     this.listenerAuthor();
     this.listenerSubject();
-    this.getSubjectsAndReports();
+    this.getSubjectsReportsAndQuestionTypes();
   }
 
   listenerAuthor() {
@@ -158,7 +158,10 @@ export class QuestionsDetailComponent implements OnInit {
       return;
     }
 
-    const status: QuestionStatus = draft ? 'draft' : 'waiting_review';
+    const status: QuestionStatus = draft
+      ? QuestionStatus.DRAFT
+      : QuestionStatus.WAITING_REVIEW;
+
     const body = {
       ...this.formBody.getRawValue(),
       ...this.formCorrectOption.getRawValue(),
@@ -258,12 +261,13 @@ export class QuestionsDetailComponent implements OnInit {
     });
   }
 
-  getSubjectsAndReports() {
+  getSubjectsReportsAndQuestionTypes() {
     this.loading = true;
-    this.questionService.getSubjectsAndReports().subscribe({
-      next: ([subjects, reports]) => {
+    this.questionService.getSubjectsReportsAndQuestionTypes().subscribe({
+      next: ([subjects, reports, questionTypes]) => {
         this.subjects = subjects;
         this.reports = reports;
+        this.questionTypes = questionTypes;
         if (!this.id) {
           this.loading = false;
           return;

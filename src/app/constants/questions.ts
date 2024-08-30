@@ -1,7 +1,7 @@
 import {
   BloomTaxonomy,
-  QuestionCheckType,
   QuestionDifficulty,
+  QuestionStatus,
   ReviewFeedbackType,
 } from '@app/models/question';
 
@@ -10,75 +10,29 @@ export const BLOOM_TAXONOMY: {
   label: string;
 }[] = [
   {
-    value: 'remember',
+    value: BloomTaxonomy.REMEMBER,
     label: 'Lembrar',
   },
   {
-    value: 'understand',
+    value: BloomTaxonomy.UNDERSTAND,
     label: 'Entender',
   },
   {
-    value: 'apply',
+    value: BloomTaxonomy.APPLY,
     label: 'Aplicar',
   },
   {
-    value: 'analyze',
+    value: BloomTaxonomy.ANALYZE,
     label: 'Analisar',
   },
   {
-    value: 'evaluate',
+    value: BloomTaxonomy.EVALUATE,
     label: 'Avaliar',
   },
   {
-    value: 'create',
+    value: BloomTaxonomy.CREATE,
     label: 'Criar',
   },
-];
-
-export const CHECK_TYPES: {
-  value: QuestionCheckType;
-  label: string;
-}[] = [
-  {
-    value: 'unique_answer',
-    label: 'Resposta única',
-  },
-  {
-    value: 'incomplete_affirmation',
-    label: 'Afirmação incompleta',
-  },
-  {
-    value: 'multiple_answer',
-    label: 'Resposta múltipla',
-  },
-  // {
-  //   value: 'negative_focus',
-  //   label: 'Foco negativo',
-  // },
-  {
-    value: 'assertion_and_reason',
-    label: 'Asserção e razão',
-  },
-  // {
-  //   value: 'gap',
-  //   label: 'Lacuna',
-  // },
-  {
-    value: 'interpretation',
-    label: 'Interpretação',
-  },
-  // {
-  //   value: 'association',
-  //   label: 'Associação',
-  // },
-  // {
-  //   value: 'ordering_or_ranking',
-  //   label: 'Ordenação ou classificação',
-  // },
-  // {
-  //   value: 'constant_alternatives',
-  //   label: 'Alternativas constantes',
-  // },
 ];
 
 export const QUESTION_DIFFICULTIES: {
@@ -86,15 +40,15 @@ export const QUESTION_DIFFICULTIES: {
   label: string;
 }[] = [
   {
-    value: 'easy',
+    value: QuestionDifficulty.EASY,
     label: 'Fácil',
   },
   {
-    value: 'medium',
+    value: QuestionDifficulty.MEDIUM,
     label: 'Médio',
   },
   {
-    value: 'hard',
+    value: QuestionDifficulty.HARD,
     label: 'Difícil',
   },
 ];
@@ -104,42 +58,42 @@ export const FEEDBACK_TYPES: {
   label: string;
 }[] = [
   {
-    value: 'request_changes',
+    value: ReviewFeedbackType.REQUEST_CHANGES,
     label: 'Reprovado',
   },
   {
-    value: 'approve',
+    value: ReviewFeedbackType.APPROVE,
     label: 'Aprovado',
   },
   {
-    value: 'answer',
+    value: ReviewFeedbackType.ANSWER,
     label: 'Devolvido',
   },
 ];
 
 export const QUESTION_TABS = [
   {
-    value: 'draft',
+    value: QuestionStatus.DRAFT,
     label: 'Rascunhos',
   },
   {
-    value: 'waiting_your_review',
+    value: 5,
     label: 'Aguardando seu parecer',
   },
   {
-    value: 'waiting_review',
+    value: QuestionStatus.WAITING_REVIEW,
     label: 'Aguardando parecer do revisor',
   },
   {
-    value: 'with_requested_changes',
+    value: QuestionStatus.WITH_REQUESTED_CHANGES,
     label: 'Aguardando alterações',
   },
   {
-    value: 'approved',
+    value: QuestionStatus.APPROVED,
     label: 'Aprovadas',
   },
   {
-    value: 'registered',
+    value: QuestionStatus.REGISTERED,
     label: 'Cadastradas',
   },
 ];

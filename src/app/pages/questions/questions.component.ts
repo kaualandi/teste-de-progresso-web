@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { QuestionFilter, QuestionsByTab } from '@app/models/question';
+import {
+  QuestionFilter,
+  QuestionsByTab,
+  QuestionStatus,
+} from '@app/models/question';
 import { QuestionService } from '@app/services/question.service';
 import { StorageService } from '@app/services/storage.service';
 @Component({
@@ -18,6 +22,7 @@ export class QuestionsComponent implements OnInit {
   error = 0;
   user = this.storage.myself;
   questions: QuestionsByTab[] = [];
+  QuestionStatus = QuestionStatus;
 
   ngOnInit() {
     this.loading = true;

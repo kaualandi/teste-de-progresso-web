@@ -3,10 +3,9 @@ import { FormBuilder } from '@angular/forms';
 import { MatDatepicker } from '@angular/material/datepicker';
 import {
   BLOOM_TAXONOMY,
-  CHECK_TYPES,
   QUESTION_DIFFICULTIES,
 } from '@app/constants/questions';
-import { BloomTaxonomy } from '@app/models/question';
+import { BloomTaxonomy, QuestionType } from '@app/models/question';
 import { Subject, SubjectAxis } from '@app/models/subject';
 import { ExamService } from '@app/services/exam.service';
 import * as moment from 'moment';
@@ -28,7 +27,7 @@ export class ExamQuestionsDetailComponent implements OnInit {
 
   difficultys = QUESTION_DIFFICULTIES;
   bloomTaxonomys = BLOOM_TAXONOMY;
-  checkTypes = CHECK_TYPES;
+  questionTypes: QuestionType[] = [];
   axis: SubjectAxis[] = [];
   subjects: Subject[] = [];
 
@@ -37,7 +36,7 @@ export class ExamQuestionsDetailComponent implements OnInit {
     axis: [0],
     subject: [0],
     bloom_taxonomy: this.fb.control<BloomTaxonomy | ''>(''),
-    check_type: '',
+    question_type: [0],
     authorship: this.fb.control(['own', 'other']),
     start_year: [moment().set('year', 2000)],
     end_year: [moment()],
@@ -45,10 +44,11 @@ export class ExamQuestionsDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-    this.examService.getSubjectsAndAxis().subscribe({
-      next: ([subjects, axis]) => {
+    this.examService.getSubjectsAxisAndQuestionTypes().subscribe({
+      next: ([subjects, axis, questionTypes]) => {
         this.subjects = subjects;
         this.axis = axis;
+        this.questionTypes = questionTypes;
         this.loading = false;
       },
       error: (error) => {

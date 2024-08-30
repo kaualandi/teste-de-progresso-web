@@ -6,34 +6,35 @@ export interface QuestionAlternative {
   correct: boolean;
 }
 
-export type BloomTaxonomy =
-  | 'remember'
-  | 'understand'
-  | 'apply'
-  | 'analyze'
-  | 'evaluate'
-  | 'create';
+export interface QuestionType {
+  id: number;
+  name: string;
+  created_at: string;
+  updated_at: string;
+}
 
-export type QuestionCheckType =
-  | 'unique_answer'
-  | 'incomplete_affirmation'
-  | 'multiple_answer'
-  | 'negative_focus'
-  | 'assertion_and_reason'
-  | 'gap'
-  | 'interpretation'
-  | 'association'
-  | 'ordering_or_ranking'
-  | 'constant_alternatives';
+export enum BloomTaxonomy {
+  REMEMBER = 0,
+  UNDERSTAND = 1,
+  APPLY = 2,
+  ANALYZE = 3,
+  EVALUATE = 4,
+  CREATE = 5,
+}
 
-export type QuestionDifficulty = 'easy' | 'medium' | 'hard';
+export enum QuestionDifficulty {
+  EASY = 0,
+  MEDIUM = 1,
+  HARD = 2,
+}
 
-export type QuestionStatus =
-  | 'draft'
-  | 'waiting_review'
-  | 'with_requested_changes'
-  | 'approved'
-  | 'registered';
+export enum QuestionStatus {
+  DRAFT = 0,
+  WAITING_REVIEW = 1,
+  WITH_REQUESTED_CHANGES = 2,
+  APPROVED = 3,
+  REGISTERED = 4,
+}
 
 export interface Question {
   id: number;
@@ -42,7 +43,7 @@ export interface Question {
   authorship_year: string;
   bloom_taxonomy: BloomTaxonomy;
   body: string;
-  check_type: QuestionCheckType;
+  question_type: number;
   difficulty: QuestionDifficulty;
   explanation: string;
   instruction: string;
@@ -59,7 +60,11 @@ export interface Question {
   reported_by_obj?: User;
 }
 
-export type ReviewFeedbackType = 'request_changes' | 'approve' | 'answer';
+export enum ReviewFeedbackType {
+  REQUEST_CHANGES = 0,
+  APPROVE = 1,
+  ANSWER = 2,
+}
 
 export interface ReviewMessage {
   id: number;
@@ -73,7 +78,7 @@ export interface ReviewMessage {
 }
 
 export interface QuestionsByTab {
-  value: string;
+  value: number;
   label: string;
   questions: Question[];
 }
