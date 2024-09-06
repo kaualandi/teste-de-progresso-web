@@ -1,5 +1,14 @@
 <div class="questions-list">
   <ul class="list">
+    <li *ngIf="canAdd" matRipple class="add">
+      <a routerLink="new">
+        <p class="f-16">
+          <i icon="plus"></i>
+          Adicionar nova questão</p
+        >
+      </a>
+    </li>
+
     <li *ngFor="let question of questions" matRipple>
       <a [routerLink]="questionLink(question)">
         <div class="title">
@@ -18,15 +27,6 @@
             Habilidade cognitiva: {{ question.bloom_taxonomy | bloomTaxonomy }}
           </p>
         </div>
-      </a>
-    </li>
-
-    <li *ngIf="canAdd" matRipple class="add">
-      <a routerLink="new">
-        <p class="f-16">
-          <i icon="plus"></i>
-          Adicionar nova questão</p
-        >
       </a>
     </li>
   </ul>

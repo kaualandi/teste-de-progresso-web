@@ -17,6 +17,12 @@ nav {
     .col {
       display: flex;
     }
+    .toggle-drawer {
+      &.float {
+        position: absolute;
+        left: 0.5rem;
+      }
+    }
     .logo {
       margin-left: 0.5rem;
       height: 48px;
