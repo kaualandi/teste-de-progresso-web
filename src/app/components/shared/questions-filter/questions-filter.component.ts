@@ -11,10 +11,12 @@ import {
 } from '@angular/material/core';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { Router } from '@angular/router';
+import { AUTHORSHIP_OPTIONS } from '@app/constants/questions';
 import { QuestionFilter } from '@app/models/question';
 import { Subject } from '@app/models/subject';
 import { SubjectService } from '@app/services/subject.service';
 import * as moment from 'moment';
+import { debounceTime } from 'rxjs';
 
 export const MY_FORMATS = {
   parse: {
@@ -54,6 +56,7 @@ export class QuestionsFilterComponent implements OnInit {
   subjects: Subject[] = [];
   now = moment();
   route = this.router.url;
+  authorshipOptions = AUTHORSHIP_OPTIONS;
 
   form = this.fb.group({
     start_year: this.fb.control(moment().set('year', 2000), {
@@ -68,10 +71,13 @@ export class QuestionsFilterComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSubjects();
+
+    this.form.valueChanges.pipe(debounceTime(1000)).subscribe(() => {
+      this.handleFormSubmit();
+    });
   }
 
   handleFormSubmit() {
-    if (this.filtering) return;
     const value = this.form.getRawValue();
     this.filter.emit({
       ...value,

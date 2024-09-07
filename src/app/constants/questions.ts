@@ -97,3 +97,14 @@ export const QUESTION_TABS = [
     label: 'Cadastradas',
   },
 ];
+
+export const AUTHORSHIP_OPTIONS = [
+  {
+    value: 'own',
+    label: 'Própria',
+  },
+  {
+    value: 'other',
+    label: 'Outros',
+  },
+];

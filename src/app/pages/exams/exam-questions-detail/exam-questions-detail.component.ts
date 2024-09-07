@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDatepicker } from '@angular/material/datepicker';
 import {
+  AUTHORSHIP_OPTIONS,
   BLOOM_TAXONOMY,
   QUESTION_DIFFICULTIES,
 } from '@app/constants/questions';
@@ -27,6 +28,7 @@ export class ExamQuestionsDetailComponent implements OnInit {
 
   difficultys = QUESTION_DIFFICULTIES;
   bloomTaxonomys = BLOOM_TAXONOMY;
+  authorshipOptions = AUTHORSHIP_OPTIONS;
   questionTypes: QuestionType[] = [];
   axis: SubjectAxis[] = [];
   subjects: Subject[] = [];

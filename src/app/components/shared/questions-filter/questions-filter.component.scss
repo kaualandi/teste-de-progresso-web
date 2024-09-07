@@ -1,7 +1,20 @@
 @import 'src/styles/media';
 
+mat-progress-bar {
+  opacity: 0;
+  transition: var(--ts);
+  &.filtering {
+    opacity: 1;
+  }
+}
 .filters {
   margin-bottom: 1rem;
+  margin-top: 0;
+  transition: var(--ts);
+  &.filtering {
+    margin-top: 1rem;
+  }
+
   @include media('>=1350px') {
     display: flex;
     justify-content: space-between;

@@ -100,8 +100,12 @@
           <mat-form-field appearance="outline">
             <mat-label>Autoria</mat-label>
             <mat-select multiple formControlName="authorship">
-              <mat-option value="own">Autorais</mat-option>
-              <mat-option value="other">Não autorais</mat-option>
+              <mat-option
+                *ngFor="let authorship of authorshipOptions"
+                [value]="authorship.value"
+              >
+                {{ authorship.label }}
+              </mat-option>
             </mat-select>
           </mat-form-field>
 
