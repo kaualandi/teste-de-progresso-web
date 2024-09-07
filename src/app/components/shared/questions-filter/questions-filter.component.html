@@ -85,12 +85,20 @@
     <mat-form-field appearance="outline" *ngIf="route === '/questions'">
       <mat-label>Ordernar por</mat-label>
       <mat-select formControlName="order_by">
-        <mat-option value="created_at">Criação crescente</mat-option>
-        <mat-option value="-created_at">Criação decrescente</mat-option>
-        <mat-option value="updated_at">Atualização crescente</mat-option>
-        <mat-option value="-updated_at">Atualização decrescente</mat-option>
-        <mat-option value="difficulty">Dificuldade crescente</mat-option>
-        <mat-option value="-difficulty">Dificuldade decrescente</mat-option>
+        <mat-option value="updated_at">Atualização Crescente</mat-option>
+        <mat-option value="-updated_at">Atualização Decrescente</mat-option>
+        <mat-option value="difficulty">
+          Grau de Dificuldade Crescente
+        </mat-option>
+        <mat-option value="-difficulty">
+          Grau de Dificuldade Decrescente
+        </mat-option>
+        <mat-option value="bloom_taxonomy">
+          Habilidade Cognitiva Crescente
+        </mat-option>
+        <mat-option value="-bloom_taxonomy">
+          Habilidade Cognitiva Decrescente
+        </mat-option>
         <mat-option value="subject">Assunto crescente</mat-option>
         <mat-option value="-subject">Assunto decrescente</mat-option>
       </mat-select>
