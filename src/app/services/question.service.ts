@@ -1,6 +1,6 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { QUESTION_TABS } from '@app/constants/questions';
+import { QUESTION_STATUS_NAME, QUESTION_TABS } from '@app/constants/questions';
 import {
   Question,
   QuestionFilter,
@@ -131,5 +131,9 @@ export class QuestionService {
       this.questionTabsOrderStorageKey,
       JSON.stringify(value)
     );
+  }
+
+  questionStatusName(question: Question) {
+    return QUESTION_STATUS_NAME[question.status];
   }
 }

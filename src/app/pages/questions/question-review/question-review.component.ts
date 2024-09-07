@@ -33,6 +33,7 @@ export class QuestionReviewComponent implements OnInit {
 
   id: string = this.route.snapshot.params['id'];
   user = this.storage.myself;
+  title = 'Revisar';
   loading = false;
   loadingSubmit = false;
   loadingHistoryReview = false;
@@ -63,7 +64,7 @@ export class QuestionReviewComponent implements OnInit {
     this.questionService.getQuestion(this.id).subscribe({
       next: (response) => {
         this.question = response;
-        this.loading = false;
+        this.setQuestionTitle();
         if (
           (response.status === QuestionStatus.WAITING_REVIEW &&
             response.reported_by === this.user.id) ||
@@ -81,6 +82,8 @@ export class QuestionReviewComponent implements OnInit {
         ) {
           this.canChangeQuestion = true;
         }
+
+        this.loading = false;
       },
       error: (error) => {
         this.error = error.status || 500;
@@ -171,6 +174,10 @@ export class QuestionReviewComponent implements OnInit {
     this.canSendReview = true;
     this.approveStatus.enable();
     this.review.enable();
+  }
+
+  setQuestionTitle() {
+    this.title = this.questionService.questionStatusName(this.question);
   }
 
   get correctAlternative() {

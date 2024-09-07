@@ -98,6 +98,14 @@ export const QUESTION_TABS = [
   },
 ];
 
+export const QUESTION_STATUS_NAME = {
+  [QuestionStatus.DRAFT]: 'Rascunho',
+  [QuestionStatus.WAITING_REVIEW]: 'Aguardando Revisão',
+  [QuestionStatus.WITH_REQUESTED_CHANGES]: 'Com Alterações Pendentes',
+  [QuestionStatus.APPROVED]: 'Aprovada',
+  [QuestionStatus.REGISTERED]: 'Cadastrada',
+};
+
 export const AUTHORSHIP_OPTIONS = [
   {
     value: 'own',
