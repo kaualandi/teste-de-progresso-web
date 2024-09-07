@@ -74,8 +74,10 @@ export class QuestionReviewComponent implements OnInit {
         }
 
         if (
-          response.created_by === this.user.id &&
-          ![QuestionStatus.REGISTERED].includes(response.status)
+          (response.created_by === this.user.id &&
+            ![QuestionStatus.REGISTERED].includes(response.status)) ||
+          (response.status === QuestionStatus.WAITING_REVIEW &&
+            response.reported_by === this.user.id)
         ) {
           this.canChangeQuestion = true;
         }
