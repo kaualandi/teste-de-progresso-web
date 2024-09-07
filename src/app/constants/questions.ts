@@ -11,11 +11,11 @@ export const BLOOM_TAXONOMY: {
 }[] = [
   {
     value: BloomTaxonomy.REMEMBER,
-    label: 'Lembrar',
+    label: 'Recordar',
   },
   {
     value: BloomTaxonomy.UNDERSTAND,
-    label: 'Entender',
+    label: 'Compreender',
   },
   {
     value: BloomTaxonomy.APPLY,
