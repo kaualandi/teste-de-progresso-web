@@ -16,7 +16,7 @@ import { QuestionFilter } from '@app/models/question';
 import { Subject } from '@app/models/subject';
 import { SubjectService } from '@app/services/subject.service';
 import * as moment from 'moment';
-import { debounceTime } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 export const MY_FORMATS = {
   parse: {
@@ -72,9 +72,11 @@ export class QuestionsFilterComponent implements OnInit {
   ngOnInit(): void {
     this.getSubjects();
 
-    this.form.valueChanges.pipe(debounceTime(1000)).subscribe(() => {
-      this.handleFormSubmit();
-    });
+    this.form.valueChanges
+      .pipe(debounceTime(1000), distinctUntilChanged())
+      .subscribe(() => {
+        this.handleFormSubmit();
+      });
   }
 
   handleFormSubmit() {

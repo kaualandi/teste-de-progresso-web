@@ -54,7 +54,7 @@
                 </p>
                 <p>
                   Atualizada em:
-                  <span>{{ question.updated_at | date }}</span>
+                  <span>{{ question.updated_at | date: 'dd/MM/yyyy' }}</span>
                 </p>
                 <p>
                   Assunto:
@@ -187,7 +187,7 @@
           <mat-accordion [multi]="true">
             <mat-expansion-panel class="reviews-history">
               <mat-expansion-panel-header>
-                <mat-panel-title>Histórico de pareceres</mat-panel-title>
+                <mat-panel-title>Histórico de Pareceres</mat-panel-title>
               </mat-expansion-panel-header>
 
               <div class="history-loading" *ngIf="loadingHistoryReview">
@@ -222,17 +222,10 @@
 
             <mat-expansion-panel expanded>
               <mat-expansion-panel-header>
-                <mat-panel-title
-                  >{{
-                    question.status === QuestionStatus.WITH_REQUESTED_CHANGES
-                      ? 'Enviar'
-                      : 'Responder'
-                  }}
-                  parecer</mat-panel-title
-                >
+                <mat-panel-title>Emitir/Comentar Parecer</mat-panel-title>
               </mat-expansion-panel-header>
 
-              <form (ngSubmit)="handleReviewFormSubmit()" *ngIf="canSendReview">
+              <form (ngSubmit)="handleReviewFormSubmit()">
                 <mat-form-field appearance="outline">
                   <mat-label>Parecer</mat-label>
                   <textarea matInput [formControl]="review"></textarea>
@@ -240,75 +233,68 @@
                     {{ review.errors | formError }}
                   </mat-error>
                 </mat-form-field>
+
+                <mat-radio-group
+                  [formControl]="approveStatus"
+                  *ngIf="
+                    question.question_type === questionStatus.WAITING_REVIEW
+                  "
+                >
+                  <mat-radio-button [value]="1"> Aprovada </mat-radio-button>
+                  <mat-radio-button [value]="0">
+                    Pendente de Alterações
+                  </mat-radio-button>
+                </mat-radio-group>
+
                 <div class="buttons end">
-                  <button
-                    mat-flat-button
-                    color="warn"
-                    type="button"
-                    *ngIf="question.status === QuestionStatus.WAITING_REVIEW"
-                    (click)="handleReviewFormSubmit('request_changes')"
-                    [disabled]="loadingReview || loadingReprove"
-                  >
-                    Reprovar
-                    <loading *ngIf="loadingReprove" />
-                  </button>
                   <button
                     mat-flat-button
                     color="primary"
                     type="submit"
-                    [disabled]="loadingReview || loadingReprove"
+                    [disabled]="loadingSubmit || !canSendReview"
                   >
-                    {{
-                      question.status === QuestionStatus.WITH_REQUESTED_CHANGES
-                        ? 'Enviar'
-                        : 'Aprovar'
-                    }}
-                    <loading *ngIf="loadingReview" />
+                    Enviar
+                    <loading *ngIf="loadingSubmit" />
                   </button>
                 </div>
               </form>
               <div
                 class="question-feedback"
-                *ngIf="question.status === QuestionStatus.APPROVED"
+                *ngIf="question.status === questionStatus.APPROVED"
               >
-                <span>
-                  Essa questão já foi aprovada, não é necessário enviar ou
-                  responder pareceres.
-                </span>
-
-                <button
-                  mat-flat-button
-                  color="primary"
-                  (click)="registerQuestion()"
-                  [disabled]="loadingReview"
-                >
-                  Registrar questão
-                  <loading *ngIf="loadingReview" />
-                </button>
+                <div class="buttons full">
+                  <button
+                    mat-flat-button
+                    color="primary"
+                    (click)="registerQuestion()"
+                    [disabled]="loadingSubmit"
+                  >
+                    Cadastrar
+                    <loading *ngIf="loadingSubmit" />
+                  </button>
+                </div>
               </div>
 
               <div
                 class="question-feedback"
                 *ngIf="
-                  question.status === QuestionStatus.WAITING_REVIEW &&
-                  question.reported_by !== user.id
-                "
-              >
-                <span>
-                  Essa questão está aguardando o parecer do revisor.
-                </span>
-              </div>
-
-              <div
-                class="question-feedback"
-                *ngIf="
-                  question.status === QuestionStatus.WITH_REQUESTED_CHANGES &&
+                  question.status === questionStatus.WITH_REQUESTED_CHANGES &&
                   question.created_by !== user.id
                 "
               >
                 <span>
                   Essa questão está aguardando as alterações solicitadas pelo
                   revisor.
+                </span>
+              </div>
+
+              <div
+                class="question-feedback"
+                *ngIf="question.status === questionStatus.DRAFT"
+              >
+                <span>
+                  Essa questão está em rascunho, finalize-a para enviar para
+                  revisão.
                 </span>
               </div>
             </mat-expansion-panel>

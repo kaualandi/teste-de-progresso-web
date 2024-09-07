@@ -6,7 +6,12 @@ import {
   ConfirmModalComponent,
   IConfirmModalData,
 } from '@app/components/modals/confirm-modal/confirm-modal.component';
-import { Question, QuestionStatus, ReviewMessage } from '@app/models/question';
+import {
+  Question,
+  QuestionStatus,
+  ReviewFeedbackType,
+  ReviewMessage,
+} from '@app/models/question';
 import { QuestionService } from '@app/services/question.service';
 import { StorageService } from '@app/services/storage.service';
 import { NotifierService } from 'angular-notifier';
@@ -29,21 +34,28 @@ export class QuestionReviewComponent implements OnInit {
   id: string = this.route.snapshot.params['id'];
   user = this.storage.myself;
   loading = false;
-  loadingReview = false;
-  loadingReprove = false;
+  loadingSubmit = false;
   loadingHistoryReview = false;
   error = 0;
   question = {} as Question;
   review = new FormControl('', Validators.required);
+  approveStatus = new FormControl(ReviewFeedbackType.APPROVE, {
+    nonNullable: true,
+  });
+
   reviews: ReviewMessage[] = [];
   canChangeQuestion = false;
   canSendReview = false;
-  QuestionStatus = QuestionStatus;
+  questionStatus = QuestionStatus;
 
   ngOnInit() {
     this.getQuestion();
     this.loadingHistoryReview = true;
     this.listReviewMessages();
+
+    this.canSendReview = false;
+    this.approveStatus.disable();
+    this.review.disable();
   }
 
   getQuestion() {
@@ -52,12 +64,21 @@ export class QuestionReviewComponent implements OnInit {
       next: (response) => {
         this.question = response;
         this.loading = false;
-        this.canChangeQuestion = response.created_by === this.user.id;
-        this.canSendReview =
+        if (
           (response.status === QuestionStatus.WAITING_REVIEW &&
             response.reported_by === this.user.id) ||
           (response.status === QuestionStatus.WITH_REQUESTED_CHANGES &&
-            response.created_by === this.user.id);
+            response.created_by === this.user.id)
+        ) {
+          this.disableReviewActions();
+        }
+
+        if (
+          response.created_by === this.user.id &&
+          ![QuestionStatus.REGISTERED].includes(response.status)
+        ) {
+          this.canChangeQuestion = true;
+        }
       },
       error: (error) => {
         this.error = error.status || 500;
@@ -66,12 +87,10 @@ export class QuestionReviewComponent implements OnInit {
     });
   }
 
-  handleReviewFormSubmit(type?: string) {
-    if (!type) {
-      type =
-        this.question.status === QuestionStatus.WAITING_REVIEW
-          ? 'approve'
-          : 'answer';
+  handleReviewFormSubmit() {
+    let type = ReviewFeedbackType.ANSWER;
+    if (this.question.status === QuestionStatus.WAITING_REVIEW) {
+      type = this.approveStatus.value;
     }
 
     const body = {
@@ -79,19 +98,16 @@ export class QuestionReviewComponent implements OnInit {
       text: this.review.value,
     };
 
-    if (type === 'request_changes') this.loadingReprove = true;
-    if (type !== 'request_changes') this.loadingReview = true;
+    this.loadingSubmit = true;
 
     this.questionService.createReviewMessage(this.id, body).subscribe({
       next: () => {
-        this.loadingReview = false;
-        this.loadingReprove = false;
+        this.loadingSubmit = false;
         this.router.navigate(['/questions']);
         this.notifier.notify('success', 'Questão revisada com sucesso.');
       },
       error: () => {
-        this.loadingReview = false;
-        this.loadingReprove = false;
+        this.loadingSubmit = false;
       },
     });
   }
@@ -135,18 +151,24 @@ export class QuestionReviewComponent implements OnInit {
   }
 
   registerQuestion() {
-    this.loadingReview = true;
+    this.loadingSubmit = true;
 
     this.questionService.registerQuestion(this.id).subscribe({
       next: () => {
-        this.loadingReview = false;
+        this.loadingSubmit = false;
         this.notifier.notify('success', 'Questão registrada com sucesso.');
         this.router.navigate(['/questions']);
       },
       error: () => {
-        this.loadingReview = false;
+        this.loadingSubmit = false;
       },
     });
+  }
+
+  disableReviewActions() {
+    this.canSendReview = true;
+    this.approveStatus.enable();
+    this.review.enable();
   }
 
   get correctAlternative() {
