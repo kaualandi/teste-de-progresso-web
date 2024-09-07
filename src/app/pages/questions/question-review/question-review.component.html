@@ -41,7 +41,7 @@
                   <span>{{ question.difficulty | difficulty }}</span>
                 </p>
                 <p>
-                  Habilidade cognitiva:
+                  Habilidade Cognitiva:
                   <span>{{ question.bloom_taxonomy | bloomTaxonomy }}</span>
                 </p>
                 <p>
@@ -65,8 +65,13 @@
                   <span>{{ question.reported_by_obj?.name }}</span>
                 </p>
                 <p>
-                  Eixo de formação:
+                  Eixo de Formação:
                   <span>{{ question.subject_obj?.axis_obj?.name }}</span>
+                </p>
+                <p>
+                  Criador:
+                  <span>{{ question.created_by }}</span>
+                  <!-- TODO: COLOCAR O NOME DO CRIADOR -->
                 </p>
               </div>
             </mat-expansion-panel>
