@@ -67,6 +67,7 @@ export class QuestionsFilterComponent implements OnInit {
     subjects: this.fb.control<number[]>([], { nonNullable: true }),
     using: this.fb.control(['used', 'unused'], { nonNullable: true }),
     order_by: this.fb.control('created_at', { nonNullable: true }),
+    order_direction: this.fb.control('desc', { nonNullable: true }),
   });
 
   ngOnInit(): void {
@@ -123,5 +124,11 @@ export class QuestionsFilterComponent implements OnInit {
     ctrlValue.year(normalizedYear.year());
     this.form.controls.end_year.setValue(ctrlValue);
     datepicker.close();
+  }
+
+  changeOrderDirection(e: Event) {
+    e.stopPropagation();
+    const orderDirection = this.form.controls.order_direction;
+    orderDirection.setValue(orderDirection.value === 'asc' ? 'desc' : 'asc');
   }
 }

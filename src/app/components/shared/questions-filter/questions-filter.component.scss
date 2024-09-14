@@ -39,6 +39,17 @@ mat-progress-bar {
       & + mat-form-field {
         margin: 0;
       }
+
+      button {
+        &.order-direction {
+          .icon {
+            transition: var(--ts);
+            &.asc {
+              transform: rotateX(180deg);
+            }
+          }
+        }
+      }
     }
 
     @include media('<=850px') {
