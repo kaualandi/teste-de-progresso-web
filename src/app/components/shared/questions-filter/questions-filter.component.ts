@@ -11,7 +11,11 @@ import {
 } from '@angular/material/core';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { Router } from '@angular/router';
-import { AUTHORSHIP_OPTIONS } from '@app/constants/questions';
+import {
+  AUTHORSHIP_OPTIONS,
+  BLOOM_TAXONOMY,
+  QUESTION_DIFFICULTIES,
+} from '@app/constants/questions';
 import { QuestionFilter } from '@app/models/question';
 import { Subject } from '@app/models/subject';
 import { SubjectService } from '@app/services/subject.service';
@@ -57,8 +61,10 @@ export class QuestionsFilterComponent implements OnInit {
   now = moment();
   route = this.router.url;
   authorshipOptions = AUTHORSHIP_OPTIONS;
+  bloomTaxonomyOptions = BLOOM_TAXONOMY;
+  difficultyOptions = QUESTION_DIFFICULTIES;
 
-  form = this.fb.group({
+  form = this.fb.nonNullable.group({
     start_year: this.fb.control(moment().set('year', 2000), {
       nonNullable: true,
     }),
@@ -66,6 +72,14 @@ export class QuestionsFilterComponent implements OnInit {
     authorship: this.fb.control(['own', 'other'], { nonNullable: true }),
     subjects: this.fb.control<number[]>([], { nonNullable: true }),
     using: this.fb.control(['used', 'unused'], { nonNullable: true }),
+    bloom_taxonomy: this.fb.control<number[]>(
+      BLOOM_TAXONOMY.map((b) => b.value),
+      { nonNullable: true }
+    ),
+    difficulty: this.fb.control<number[]>(
+      QUESTION_DIFFICULTIES.map((d) => d.value),
+      { nonNullable: true }
+    ),
     order_by: this.fb.control('created_at', { nonNullable: true }),
     order_direction: this.fb.control('desc', { nonNullable: true }),
   });

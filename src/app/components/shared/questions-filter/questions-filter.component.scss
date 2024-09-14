@@ -15,27 +15,20 @@ mat-progress-bar {
     margin-top: 1rem;
   }
 
-  @include media('>=1350px') {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-
-    .buttons {
-      width: fit-content;
-    }
-  }
   .row {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
     gap: 0.5rem;
-    flex: 1;
-    mat-form-field {
-      max-width: 300px;
-      min-width: 150px;
 
-      &.year {
-        max-width: 140px;
-        min-width: 140px;
-      }
+    .years {
+      width: 100%;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    mat-form-field {
+      width: 100%;
+
       & + mat-form-field {
         margin: 0;
       }
@@ -48,16 +41,6 @@ mat-progress-bar {
               transform: rotateX(180deg);
             }
           }
-        }
-      }
-    }
-
-    @include media('<=850px') {
-      flex-wrap: wrap;
-      mat-form-field {
-        max-width: 100%;
-        &.year {
-          max-width: calc(50% - 0.25rem);
         }
       }
     }

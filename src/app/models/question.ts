@@ -90,5 +90,8 @@ export interface QuestionFilter {
   authorship: string[];
   subjects: number[];
   using: string[];
+  bloom_taxonomy: number[];
+  difficulty: number[];
   order_by: string;
+  order_direction: string;
 }

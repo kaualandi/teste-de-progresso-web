@@ -38,7 +38,10 @@ export class QuestionService {
         .append('end_year', filters.end_year)
         .append('authorship', filters.authorship.join(','))
         .append('subjects', filters.subjects.join(','))
-        .append('order_by', filters.order_by);
+        .append('bloom_taxonomy', filters.bloom_taxonomy.join(','))
+        .append('difficulty', filters.difficulty.join(','))
+        .append('order_by', filters.order_by)
+        .append('order_direction', filters.order_direction);
     }
 
     return this.http.get<Question[]>('/question/my_questions', query);
