@@ -43,13 +43,13 @@ main.page {
   display: inline-block;
   border: 1px solid var(--line-color);
   color: var(--primary-bg);
-  &.easy {
+  &.badge-0 {
     background-color: var(--green-color);
   }
-  &.medium {
+  &.badge-1 {
     background-color: var(--yellow-color);
   }
-  &.hard {
+  &.badge-2 {
     background-color: var(--red-color);
   }
 }

@@ -6,7 +6,7 @@ import { QuestionDifficulty } from '@app/models/question';
   name: 'difficulty',
 })
 export class DifficultyPipe implements PipeTransform {
-  transform(value: QuestionDifficulty | string) {
+  transform(value: QuestionDifficulty) {
     return QUESTION_DIFFICULTIES.find((d) => d.value === value)?.label || '';
   }
 }
