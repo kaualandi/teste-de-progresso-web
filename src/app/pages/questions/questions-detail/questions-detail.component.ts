@@ -106,6 +106,7 @@ export class QuestionsDetailComponent implements OnInit {
     this.formFeatures.patchValue({
       reported_by: null,
       subject: null,
+      question_type: null,
     });
     this.listenerAuthor();
     this.listenerSubject();

@@ -9,6 +9,7 @@ export interface QuestionAlternative {
 export interface QuestionType {
   id: number;
   name: string;
+  is_deleted: boolean;
   created_at: string;
   updated_at: string;
 }
