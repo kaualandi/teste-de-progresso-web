@@ -1,0 +1,35 @@
+mat-radio-group {
+  mat-radio-button {
+    border: 1px solid var(--line-color);
+    display: block;
+    padding: 1rem 1rem 1rem 8px;
+    border-radius: var(--br);
+
+    ::ng-deep {
+      .mdc-form-field {
+        width: 100%;
+        & > label {
+          width: 100%;
+        }
+      }
+    }
+
+    p {
+      margin: 0;
+      &.role {
+        font-weight: 500;
+        margin-bottom: 1rem;
+      }
+    }
+
+    mat-form-field {
+      ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+        display: none;
+      }
+    }
+
+    & + mat-radio-button {
+      margin-top: 1rem;
+    }
+  }
+}

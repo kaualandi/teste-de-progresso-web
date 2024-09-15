@@ -176,3 +176,12 @@ mat-drawer-container {
     }
   }
 }
+
+.mat-mdc-menu-item {
+  i.icon {
+    width: 20px;
+    display: inline-flex;
+    margin-right: 5px;
+    justify-content: center;
+  }
+}

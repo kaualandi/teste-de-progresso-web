@@ -31,14 +31,18 @@
             </button>
           </div>
 
-          <a mat-icon-button routerLink="/profile" class="profile">
+          <button
+            mat-icon-button
+            [matMenuTriggerFor]="profileMenu"
+            class="profile"
+          >
             <img
               *ngIf="user?.profile_image"
               [src]="user.profile_image"
               alt="avatar"
             />
             <i *ngIf="!user?.profile_image" icon="user" class="bg"></i>
-          </a>
+          </button>
         </div>
       </div>
     </div>
@@ -101,4 +105,14 @@
   </mat-drawer-content>
 </mat-drawer-container>
 
-<div id="canvas"></div>
+<mat-menu #profileMenu="matMenu">
+  <a mat-menu-item routerLink="/profile">
+    <i icon="user"></i>
+    <span>Meu Perfil</span>
+  </a>
+
+  <button mat-menu-item (click)="openChangeRoleModal()">
+    <i icon="graduation_cap"></i>
+    <span>Alterar Curso</span>
+  </button>
+</mat-menu>

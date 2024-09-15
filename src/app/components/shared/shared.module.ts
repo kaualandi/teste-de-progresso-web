@@ -7,6 +7,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
@@ -25,6 +26,7 @@ import { BloomTaxonomyPipe } from '../../pipes/bloom-taxonomy.pipe';
 import { DifficultyPipe } from '../../pipes/difficulty.pipe';
 import { PlaintextPipe } from '../../pipes/plaintext.pipe';
 import { ReviewStatusPipe } from '../../pipes/review-status.pipe';
+import { ChangeRoleModalComponent } from '../modals/change-role-modal/change-role-modal.component';
 import { ConfirmModalComponent } from '../modals/confirm-modal/confirm-modal.component';
 import { ForgotPasswordComponent } from '../modals/forgot-password/forgot-password.component';
 import { AvatarComponent } from './avatar/avatar.component';
@@ -73,6 +75,7 @@ const DECLARATIONS = [
   BloomTaxonomyPipe,
   ReviewStatusPipe,
   QuestionsFilterComponent,
+  ChangeRoleModalComponent,
 ];
 
 @NgModule({
@@ -85,6 +88,8 @@ const DECLARATIONS = [
     RouterModule,
     MatSelectModule,
     MatDatepickerModule,
+    MatRadioModule,
+    ReactiveFormsModule,
   ],
   declarations: [...DECLARATIONS],
   exports: [...IMPORTS, ...DECLARATIONS],

@@ -18,6 +18,10 @@ import { environment } from '@env';
 import { AuthService } from '@services/auth.service';
 import { StorageService } from '@services/storage.service';
 import { ConfirmExitComponent } from '../modals/confirm-exit/confirm-exit.component';
+import {
+  ChangeRoleModalComponent,
+  CONFIG,
+} from './../modals/change-role-modal/change-role-modal.component';
 
 @Component({
   selector: 'app-navbar',
@@ -80,6 +84,16 @@ export class NavbarComponent implements OnInit {
         this.error = error.status;
         this.loading = false;
       },
+    });
+  }
+
+  openChangeRoleModal() {
+    const dialogRef = this.dialog.open(ChangeRoleModalComponent, { ...CONFIG });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.loading = true;
+        this.getMe();
+      }
     });
   }
 
