@@ -14,6 +14,7 @@ import {
 } from '@animations/route-animation';
 import { NAVBAR_PAGES } from '@app/constants/navbar';
 import { User } from '@app/models/user';
+import { ThemeService } from '@app/services/theme.service';
 import { environment } from '@env';
 import { AuthService } from '@services/auth.service';
 import { StorageService } from '@services/storage.service';
@@ -36,7 +37,8 @@ export class NavbarComponent implements OnInit {
   constructor(
     private storage: StorageService,
     private authService: AuthService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private themeService: ThemeService
   ) {}
 
   loading = false;
@@ -79,6 +81,10 @@ export class NavbarComponent implements OnInit {
         // );
         this.storage.myself = data;
         this.loading = false;
+
+        if (data.is_admin) {
+          this.themeService.setAdminTheme(true);
+        }
       },
       error: (error) => {
         this.error = error.status;
@@ -107,6 +113,7 @@ export class NavbarComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
+        this.themeService.setAdminTheme(false);
         this.authService.logout();
       }
     });

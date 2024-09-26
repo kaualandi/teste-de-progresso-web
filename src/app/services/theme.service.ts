@@ -54,4 +54,14 @@ export class ThemeService {
       html?.classList.toggle('dark');
     }
   }
+
+  setAdminTheme(status: boolean) {
+    const html = document.querySelector('html');
+    if (status) {
+      html?.classList.add('is-admin');
+      return;
+    }
+
+    html?.classList.remove('is-admin');
+  }
 }

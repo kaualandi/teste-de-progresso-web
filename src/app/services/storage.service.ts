@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { User } from '@models/user';
-import { TranslateService } from '@ngx-translate/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Subject } from 'rxjs';
 
@@ -8,10 +7,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class StorageService {
-  constructor(
-    private cookieService: CookieService,
-    private translate: TranslateService
-  ) {}
+  constructor(private cookieService: CookieService) {}
 
   UserSubject = new Subject<void>();
   private myUser: User = {} as User;
