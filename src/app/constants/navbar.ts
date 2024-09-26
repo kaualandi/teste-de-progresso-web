@@ -1,33 +1,36 @@
-import { RoleUser } from '@app/models/user';
-
 export const NAVBAR_PAGES: {
   label: string;
   icon: string;
   link: string;
-  roles: RoleUser[];
+  permissions: string[];
+  isAdmin: boolean;
 }[] = [
   {
     label: 'Início',
     icon: 'house',
     link: '/',
-    roles: ['ADMIN', 'TEACHER'],
+    permissions: ['ADMIN', 'TEACHER'],
+    isAdmin: false,
   },
   {
     label: 'Questões',
     icon: 'file',
     link: '/questions',
-    roles: ['ADMIN', 'TEACHER'],
+    permissions: ['ADMIN', 'TEACHER'],
+    isAdmin: false,
   },
   {
     label: 'Provas',
     icon: 'book',
     link: '/exams',
-    roles: ['ADMIN', 'TEACHER'],
+    permissions: ['ADMIN', 'TEACHER'],
+    isAdmin: false,
   },
   {
     label: 'Ajustes',
     icon: 'gear',
     link: '/settings',
-    roles: ['ADMIN', 'TEACHER'],
+    permissions: ['ADMIN', 'TEACHER'],
+    isAdmin: false,
   },
 ];

@@ -75,9 +75,23 @@
         </a>
       </li>
       <li>
-        <button mat-button (click)="openAdminPage()">
+        <button
+          mat-button
+          (click)="openBaseUrlPage('admin')"
+          *ngIf="user.is_admin"
+        >
           <i icon="lock"></i>
-          <span class="one-line">Admin</span>
+          <span class="one-line">Núcleo</span>
+        </button>
+      </li>
+      <li>
+        <button
+          mat-button
+          (click)="openBaseUrlPage('swagger')"
+          *ngIf="user.is_admin"
+        >
+          <i icon="brackets_curly"></i>
+          <span class="one-line">Docs</span>
         </button>
       </li>
       <li class="logout">

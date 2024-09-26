@@ -76,9 +76,9 @@ export class NavbarComponent implements OnInit {
       next: (data) => {
         this.user = data;
         // ? Comentado por que usuário não possui permissão (por enquanto)
-        // this.navbarPages = NAVBAR_PAGES.filter((page) =>
-        //   page.roles.some((role) => this.user.role.includes(role))
-        // );
+        this.navbarPages = NAVBAR_PAGES.filter(
+          (page) => page.isAdmin === data.is_admin
+        );
         this.storage.myself = data;
         this.loading = false;
 
@@ -103,8 +103,8 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  openAdminPage() {
-    window.open(environment.base_url + '/admin/', '_blank');
+  openBaseUrlPage(path: string) {
+    window.open(environment.base_url + `/${path}/`, '_blank');
   }
 
   logout() {
