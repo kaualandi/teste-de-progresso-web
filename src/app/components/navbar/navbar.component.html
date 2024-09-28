@@ -129,4 +129,11 @@
     <i icon="graduation_cap"></i>
     <span>Alterar Curso</span>
   </button>
+
+  <div class="build-status" *ngIf="user.is_admin">
+    <img
+      src="https://api.netlify.com/api/v1/badges/a3734118-f6a2-4621-85a2-64161be0cf24/deploy-status"
+      alt="Netlify Status"
+    />
+  </div>
 </mat-menu>
