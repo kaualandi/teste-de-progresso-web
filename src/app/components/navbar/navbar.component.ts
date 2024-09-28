@@ -87,7 +87,7 @@ export class NavbarComponent implements OnInit {
         }
       },
       error: (error) => {
-        this.error = error.status;
+        this.error = error.status || 500;
         this.loading = false;
       },
     });

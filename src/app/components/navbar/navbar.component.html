@@ -81,7 +81,7 @@
           *ngIf="user.is_admin"
         >
           <i icon="lock"></i>
-          <span class="one-line">Núcleo</span>
+          <span class="one-line">Super-admin</span>
         </button>
       </li>
       <li>
@@ -125,7 +125,7 @@
     <span>Meu Perfil</span>
   </a>
 
-  <button mat-menu-item (click)="openChangeRoleModal()">
+  <button mat-menu-item (click)="openChangeRoleModal()" *ngIf="!user.is_admin">
     <i icon="graduation_cap"></i>
     <span>Alterar Curso</span>
   </button>

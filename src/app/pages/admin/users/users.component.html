@@ -1,0 +1,61 @@
+<main class="page">
+  <div class="container">
+    <header>
+      <h1>Usuários</h1>
+
+      <button mat-flat-button color="primary">
+        <i icon="plus"></i>
+        Adicionar
+      </button>
+    </header>
+
+    <div class="content" *ngIf="loading">
+      <div class="table-container">
+        <table mat-table [dataSource]="users">
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Nome </th>
+            <td mat-cell *matCellDef="let row"> {{ row.name || '-' }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> E-mail </th>
+            <td mat-cell *matCellDef="let row"> {{ row.email || '-' }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="is_admin">
+            <th mat-header-cell *matHeaderCellDef> Admin </th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.is_admin ? 'Sim' : 'Não' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="last_login">
+            <th mat-header-cell *matHeaderCellDef> Último acesso </th>
+            <td mat-cell *matCellDef="let row">
+              {{ (row.last_login | date: 'hh:mm:ss dd/MM/yyyy') || '-' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="is_active">
+            <th mat-header-cell *matHeaderCellDef> Ativo </th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.is_active ? 'Sim' : 'Não' }}
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+              Nenhum usuário.
+              {{ filters.value.name ? 'Tente limpar os filtros' : '' }}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <page-loading *ngIf="loading"></page-loading>
+  </div>
+</main>

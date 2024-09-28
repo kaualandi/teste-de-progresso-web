@@ -33,4 +33,11 @@ export const NAVBAR_PAGES: {
     permissions: ['ADMIN', 'TEACHER'],
     isAdmin: false,
   },
+  {
+    label: 'Usuários',
+    icon: 'users',
+    link: '/admin/users',
+    permissions: [],
+    isAdmin: true,
+  },
 ];
