@@ -9,8 +9,12 @@
       </button>
     </header>
 
-    <div class="content" *ngIf="loading">
-      <div class="table-container">
+    <div class="content" *ngIf="!loading">
+      <div class="table-filters">
+        <form [formGroup]="filters"></form>
+      </div>
+
+      <div class="table-container" *ngIf="!loadingTable">
         <table mat-table [dataSource]="users">
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Nome </th>
@@ -56,6 +60,6 @@
       </div>
     </div>
 
-    <page-loading *ngIf="loading"></page-loading>
+    <page-loading *ngIf="loading || loadingTable"></page-loading>
   </div>
 </main>
