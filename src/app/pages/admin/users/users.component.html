@@ -11,7 +11,16 @@
 
     <div class="content" *ngIf="!loading">
       <div class="table-filters">
-        <form [formGroup]="filters"></form>
+        <form [formGroup]="filters">
+          <mat-form-field>
+            <mat-label>Busca</mat-label>
+            <input
+              matInput
+              formControlName="search"
+              placeholder="Nome ou E-mail"
+            />
+          </mat-form-field>
+        </form>
       </div>
 
       <div class="table-container" *ngIf="!loadingTable">
@@ -53,7 +62,7 @@
           <tr class="mat-row" *matNoDataRow>
             <td class="mat-cell" [attr.colspan]="displayedColumns.length">
               Nenhum usuário.
-              {{ filters.value.name ? 'Tente limpar os filtros' : '' }}
+              {{ filters.value.search ? 'Tente limpar os filtros' : '' }}
             </td>
           </tr>
         </table>

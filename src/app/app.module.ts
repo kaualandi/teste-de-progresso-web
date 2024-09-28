@@ -10,6 +10,7 @@ import {
   MatNativeDateModule,
 } from '@angular/material/core';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserModule } from '@angular/platform-browser';
@@ -89,6 +90,10 @@ const MY_DATE_FORMAT = {
     {
       provide: MatDialogRef,
       useValue: {},
+    },
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'outline' },
     },
     provideEnvironmentNgxMask(),
   ],

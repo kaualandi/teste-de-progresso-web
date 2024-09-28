@@ -21,7 +21,7 @@ export class UsersComponent implements OnInit {
   displayedColumns = ['name', 'email', 'is_admin', 'last_login', 'is_active'];
 
   filters = this.fb.nonNullable.group({
-    name: [''],
+    search: [''],
   });
 
   ngOnInit() {
