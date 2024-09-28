@@ -14,9 +14,9 @@ export interface Subject {
   id: number;
   name: string;
   axis: number;
-  axis_obj: SubjectAxis;
+  axis_instance: SubjectAxis;
   category: number;
-  category_obj: SubjectCategory;
+  category_instance: SubjectCategory;
   created_at: string;
   updated_at: string;
 }

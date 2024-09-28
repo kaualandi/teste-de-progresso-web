@@ -45,6 +45,7 @@ export interface Question {
   bloom_taxonomy: BloomTaxonomy;
   body: string;
   question_type: number;
+  question_type_instance?: QuestionType;
   difficulty: QuestionDifficulty;
   explanation: string;
   instruction: string;
@@ -55,10 +56,10 @@ export interface Question {
   created_at: string;
   updated_at: string;
   subject: number;
-  subject_obj?: Subject;
+  subject_instance?: Subject;
   created_by: number;
   reported_by: number;
-  reported_by_obj?: User;
+  reported_by_instance?: User;
 }
 
 export enum ReviewFeedbackType {
@@ -75,7 +76,7 @@ export interface ReviewMessage {
   updated_at: string;
   question: number;
   user: number;
-  user_obj?: User;
+  user_instance?: User;
 }
 
 export interface QuestionsByTab {

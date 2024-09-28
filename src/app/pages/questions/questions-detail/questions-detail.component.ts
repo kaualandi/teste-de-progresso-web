@@ -137,9 +137,12 @@ export class QuestionsDetailComponent implements OnInit {
   listenerSubject() {
     this.formFeatures.get('subject')?.valueChanges.subscribe((subjectId) => {
       const subject = this.subjects.find((subject) => subject.id === subjectId);
-      this.formFeatures.controls.axis.setValue(subject?.axis_obj?.name || '', {
-        emitEvent: false,
-      });
+      this.formFeatures.controls.axis.setValue(
+        subject?.axis_instance?.name || '',
+        {
+          emitEvent: false,
+        }
+      );
     });
   }
 

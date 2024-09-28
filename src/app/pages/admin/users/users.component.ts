@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { User } from '@app/models/user';
 import { UserService } from '@app/services/user.service';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -27,10 +28,16 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.getUsers();
+
+    this.filters.valueChanges
+      .pipe(debounceTime(1000), distinctUntilChanged())
+      .subscribe(() => {
+        this.loadingTable = true;
+        this.getUsers();
+      });
   }
 
   getUsers() {
-    this.loadingTable = true;
     this.error = 0;
     this.userService.getUsers(this.filters.value).subscribe({
       next: (response) => {

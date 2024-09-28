@@ -1,5 +1,10 @@
 <main class="page">
   <div class="container">
+    <mat-progress-bar
+      [ngClass]="{ filtering: loadingTable }"
+      mode="indeterminate"
+    ></mat-progress-bar>
+
     <header>
       <h1>Usuários</h1>
 
@@ -17,13 +22,13 @@
             <input
               matInput
               formControlName="search"
-              placeholder="Nome ou E-mail"
+              placeholder="Nome ou e-mail"
             />
           </mat-form-field>
         </form>
       </div>
 
-      <div class="table-container" *ngIf="!loadingTable">
+      <div class="table-container">
         <table mat-table [dataSource]="users">
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Nome </th>
@@ -62,13 +67,17 @@
           <tr class="mat-row" *matNoDataRow>
             <td class="mat-cell" [attr.colspan]="displayedColumns.length">
               Nenhum usuário.
-              {{ filters.value.search ? 'Tente limpar os filtros' : '' }}
+              {{
+                filters.value.search
+                  ? 'Tente limpar os filtros'
+                  : 'Tente adicionar um'
+              }}
             </td>
           </tr>
         </table>
       </div>
     </div>
 
-    <page-loading *ngIf="loading || loadingTable"></page-loading>
+    <page-loading *ngIf="loading"></page-loading>
   </div>
 </main>

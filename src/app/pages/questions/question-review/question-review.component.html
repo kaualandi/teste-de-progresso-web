@@ -58,15 +58,17 @@
                 </p>
                 <p>
                   Assunto:
-                  <span>{{ question.subject_obj?.name }}</span>
+                  <span>{{ question.subject_instance?.name }}</span>
                 </p>
                 <p>
                   Revisor:
-                  <span>{{ question.reported_by_obj?.name }}</span>
+                  <span>{{ question.reported_by_instance?.name }}</span>
                 </p>
                 <p>
                   Eixo de Formação:
-                  <span>{{ question.subject_obj?.axis_obj?.name }}</span>
+                  <span>{{
+                    question.subject_instance?.axis_instance?.name
+                  }}</span>
                 </p>
                 <p>
                   Criador:
@@ -211,7 +213,7 @@
                       <img [src]="'/assets/images/avatar.png'" alt="Avatar" />
                     </figure>
                     <div class="details">
-                      <p>{{ review.user_obj?.name || 'Desconhecido' }}</p>
+                      <p>{{ review.user_instance?.name || 'Desconhecido' }}</p>
                       <p class="infors">
                         <span>{{ review.created_at | date: 'short' }}</span>
                         <span>{{ review.feedback_type | reviewStatus }}</span>
