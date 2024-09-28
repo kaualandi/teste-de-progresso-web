@@ -243,9 +243,7 @@
 
                 <mat-radio-group
                   [formControl]="approveStatus"
-                  *ngIf="
-                    question.question_type === questionStatus.WAITING_REVIEW
-                  "
+                  *ngIf="question.status === questionStatus.WAITING_REVIEW"
                 >
                   <mat-radio-button [value]="1"> Aprovada </mat-radio-button>
                   <mat-radio-button [value]="0">
@@ -280,29 +278,6 @@
                     <loading *ngIf="loadingSubmit" />
                   </button>
                 </div>
-              </div>
-
-              <div
-                class="question-feedback"
-                *ngIf="
-                  question.status === questionStatus.WITH_REQUESTED_CHANGES &&
-                  question.created_by !== user.id
-                "
-              >
-                <span>
-                  Essa questão está aguardando as alterações solicitadas pelo
-                  revisor.
-                </span>
-              </div>
-
-              <div
-                class="question-feedback"
-                *ngIf="question.status === questionStatus.DRAFT"
-              >
-                <span>
-                  Essa questão está em rascunho, finalize-a para enviar para
-                  revisão.
-                </span>
               </div>
             </mat-expansion-panel>
           </mat-accordion>
