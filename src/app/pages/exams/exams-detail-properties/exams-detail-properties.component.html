@@ -6,12 +6,12 @@
       <mat-stepper [orientation]="isTablet ? 'vertical' : 'horizontal'">
         <mat-step [stepControl]="formDetail" label="Detalhes">
           <form [formGroup]="formDetail">
-            <mat-form-field appearance="outline">
+            <mat-form-field>
               <mat-label>Título</mat-label>
               <input matInput formControlName="title" />
             </mat-form-field>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field>
               <mat-label>Descrição</mat-label>
               <textarea
                 matInput
@@ -39,7 +39,7 @@
             (ngSubmit)="handleAxesWeightsFormSubmit()"
           >
             <div class="new-section">
-              <mat-form-field appearance="outline">
+              <mat-form-field>
                 <mat-label>Eixos</mat-label>
                 <mat-select formControlName="new_axis">
                   <mat-option *ngFor="let axi of filteredAxis" [value]="axi.id">

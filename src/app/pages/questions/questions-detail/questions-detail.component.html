@@ -11,7 +11,7 @@
       <mat-stepper [orientation]="isTablet ? 'vertical' : 'horizontal'">
         <mat-step [stepControl]="formBody" label="Corpo da questão">
           <form [formGroup]="formBody">
-            <mat-form-field appearance="outline" class="froala">
+            <mat-form-field class="froala">
               <mat-label>Instrução</mat-label>
               <textarea
                 matInput
@@ -25,7 +25,7 @@
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="froala">
+            <mat-form-field class="froala">
               <mat-label>Suporte</mat-label>
               <textarea
                 matInput
@@ -37,7 +37,7 @@
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="froala">
+            <mat-form-field class="froala">
               <mat-label>Enunciado</mat-label>
               <textarea
                 matInput
@@ -65,7 +65,7 @@
 
         <mat-step [stepControl]="formCorrectOption" label="Resposta correta">
           <form [formGroup]="formCorrectOption">
-            <mat-form-field appearance="outline" class="froala">
+            <mat-form-field class="froala">
               <mat-label>Opção correta</mat-label>
               <textarea
                 matInput
@@ -77,7 +77,7 @@
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="froala">
+            <mat-form-field class="froala">
               <mat-label>Explicação</mat-label>
               <textarea
                 matInput
@@ -93,7 +93,7 @@
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="froala">
+            <mat-form-field class="froala">
               <mat-label>Referência</mat-label>
               <textarea
                 matInput
@@ -127,7 +127,6 @@
         <mat-step [stepControl]="formDistractor" label="Distratores">
           <form [formGroup]="formDistractor">
             <mat-form-field
-              appearance="outline"
               class="froala"
               *ngFor="let distractor of distractorAlternatives; let i = index"
               [formGroup]="distractor"
@@ -169,7 +168,7 @@
                 </mat-radio-group>
               </div>
               <div class="col source-year">
-                <mat-form-field appearance="outline" class="source">
+                <mat-form-field class="source">
                   <mat-label>Fonte</mat-label>
                   <input matInput formControlName="authorship" />
                   <mat-error>
@@ -180,7 +179,7 @@
                     }}
                   </mat-error>
                 </mat-form-field>
-                <mat-form-field appearance="outline" class="year">
+                <mat-form-field class="year">
                   <mat-label>Ano</mat-label>
                   <input
                     matInput
@@ -200,7 +199,7 @@
             </div>
             <div class="row">
               <div class="col">
-                <mat-form-field appearance="outline">
+                <mat-form-field>
                   <mat-label>Dificuldade</mat-label>
                   <mat-select formControlName="difficulty">
                     <mat-option value="">-</mat-option>
@@ -221,7 +220,7 @@
                 </mat-form-field>
               </div>
               <div class="col">
-                <mat-form-field appearance="outline">
+                <mat-form-field>
                   <mat-label>Assunto</mat-label>
                   <mat-select formControlName="subject">
                     <mat-option value="">-</mat-option>
@@ -244,7 +243,7 @@
             </div>
             <div class="row">
               <div class="col">
-                <mat-form-field appearance="outline">
+                <mat-form-field>
                   <mat-label>Tipo</mat-label>
                   <mat-select formControlName="question_type">
                     <mat-option [value]="">-</mat-option>
@@ -265,7 +264,7 @@
                 </mat-form-field>
               </div>
               <div class="col">
-                <mat-form-field appearance="outline">
+                <mat-form-field>
                   <mat-label>Eixo de Formação</mat-label>
                   <input matInput formControlName="axis" readonly />
                 </mat-form-field>
@@ -273,7 +272,7 @@
             </div>
             <div class="row">
               <div class="col">
-                <mat-form-field appearance="outline">
+                <mat-form-field>
                   <mat-label>Habilidade Cognitiva</mat-label>
                   <mat-select formControlName="bloom_taxonomy">
                     <mat-option value="">-</mat-option>
@@ -294,7 +293,7 @@
                 </mat-form-field>
               </div>
               <div class="col">
-                <mat-form-field appearance="outline">
+                <mat-form-field>
                   <mat-label>Revisor</mat-label>
                   <mat-select formControlName="reported_by">
                     <mat-option value="">-</mat-option>
@@ -312,7 +311,7 @@
                 </mat-form-field>
               </div>
             </div>
-            <mat-form-field appearance="outline">
+            <mat-form-field>
               <mat-label>Intenção</mat-label>
               <textarea
                 matInput

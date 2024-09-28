@@ -13,7 +13,7 @@
         <form (ngSubmit)="loginSubmitHandler()" [formGroup]="form">
           <h1>{{ 'login-register.login-title' | translate }}</h1>
 
-          <mat-form-field appearance="outline">
+          <mat-form-field>
             <mat-label>
               {{ 'login-register.email' | translate }}
             </mat-label>
@@ -27,7 +27,7 @@
               {{ form.controls.email.errors | formError | translate }}
             </mat-error>
           </mat-form-field>
-          <mat-form-field appearance="outline">
+          <mat-form-field>
             <mat-label>
               {{ 'login-register.password' | translate }}
             </mat-label>

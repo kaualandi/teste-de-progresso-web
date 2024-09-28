@@ -11,7 +11,7 @@
 >
   <div class="row">
     <div class="years">
-      <mat-form-field appearance="outline">
+      <mat-form-field>
         <mat-label>Ano Inicial</mat-label>
         <input
           matInput
@@ -31,7 +31,7 @@
         </mat-datepicker>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field>
         <mat-label>Ano Final</mat-label>
         <input
           matInput
@@ -52,7 +52,7 @@
       </mat-form-field>
     </div>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field>
       <mat-label>Autoria</mat-label>
       <mat-select multiple formControlName="authorship">
         <mat-option
@@ -64,7 +64,7 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field>
       <mat-label>
         Assuntos
         <loading *ngIf="loadingSubject" />
@@ -76,7 +76,7 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" *ngIf="route === '/'">
+    <mat-form-field *ngIf="route === '/'">
       <mat-label>Uso de Questões</mat-label>
       <mat-select multiple formControlName="using">
         <mat-option value="used">Novas</mat-option>
@@ -84,7 +84,7 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" *ngIf="route === '/questions'">
+    <mat-form-field *ngIf="route === '/questions'">
       <mat-label>Habilidade Cognitiva</mat-label>
       <mat-select multiple formControlName="bloom_taxonomy">
         <mat-option
@@ -96,7 +96,7 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" *ngIf="route === '/questions'">
+    <mat-form-field *ngIf="route === '/questions'">
       <mat-label>Grau de Dificuldade</mat-label>
       <mat-select multiple formControlName="difficulty">
         <mat-option *ngFor="let item of difficultyOptions" [value]="item.value">
@@ -105,7 +105,7 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" *ngIf="route === '/questions'">
+    <mat-form-field *ngIf="route === '/questions'">
       <mat-label>Ordernar por</mat-label>
       <mat-select formControlName="order_by">
         <mat-option value="updated_at">Atualização</mat-option>

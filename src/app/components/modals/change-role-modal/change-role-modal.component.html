@@ -7,7 +7,7 @@
       <p class="curses" *ngIf="role.multipleCurses">
         {{ getCursesList(role.curses) }}
       </p>
-      <mat-form-field appearance="outline" *ngIf="!role.multipleCurses">
+      <mat-form-field *ngIf="!role.multipleCurses">
         <mat-label>Curso</mat-label>
         <mat-select [formControl]="getCurseControl(i)">
           <mat-option *ngFor="let curse of role.curses" [value]="curse.id">
