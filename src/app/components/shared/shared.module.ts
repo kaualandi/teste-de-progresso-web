@@ -48,6 +48,7 @@ const IMPORTS = [
   ReactiveFormsModule,
   MatInputModule,
   MatProgressBarModule,
+  MatDialogModule,
 ];
 
 const DECLARATIONS = [
@@ -82,7 +83,6 @@ const DECLARATIONS = [
   imports: [
     ...IMPORTS,
     CommonModule,
-    MatDialogModule,
     MatMenuModule,
     MatTooltipModule,
     RouterModule,

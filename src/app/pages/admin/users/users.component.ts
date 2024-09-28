@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateUserComponent } from '@app/components/modals/create-user/create-user.component';
 import { User } from '@app/models/user';
 import { UserService } from '@app/services/user.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
@@ -12,7 +14,8 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 export class UsersComponent implements OnInit {
   constructor(
     private userService: UserService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dialog: MatDialog
   ) {}
 
   loading = false;
@@ -50,6 +53,13 @@ export class UsersComponent implements OnInit {
         this.loadingTable = false;
         this.error = error.status || 500;
       },
+    });
+  }
+
+  handleAddUserButton() {
+    const dialogRef = this.dialog.open(CreateUserComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) this.getUsers();
     });
   }
 }

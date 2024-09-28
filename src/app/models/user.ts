@@ -12,6 +12,10 @@ export interface User {
   updated_at: string;
 }
 
+export interface UserCreate extends User {
+  password: string;
+}
+
 export interface Token {
   token: string;
   user: User;
