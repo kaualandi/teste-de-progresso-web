@@ -58,6 +58,7 @@ export interface Question {
   subject: number;
   subject_instance?: Subject;
   created_by: number;
+  created_by_instance?: User;
   reported_by: number;
   reported_by_instance?: User;
 }

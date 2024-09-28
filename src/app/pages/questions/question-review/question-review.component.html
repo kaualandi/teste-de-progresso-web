@@ -72,8 +72,7 @@
                 </p>
                 <p>
                   Criador:
-                  <span>{{ question.created_by }}</span>
-                  <!-- TODO: COLOCAR O NOME DO CRIADOR -->
+                  <span>{{ question.created_by_instance?.name }}</span>
                 </p>
               </div>
             </mat-expansion-panel>
@@ -213,7 +212,7 @@
                       <img [src]="'/assets/images/avatar.png'" alt="Avatar" />
                     </figure>
                     <div class="details">
-                      <p>{{ review.user_instance?.name || 'Desconhecido' }}</p>
+                      <p>{{ review.user_instance?.name }}</p>
                       <p class="infors">
                         <span>{{ review.created_at | date: 'short' }}</span>
                         <span>{{ review.feedback_type | reviewStatus }}</span>
