@@ -7,6 +7,28 @@ main {
         }
       }
 
+      .list-courses {
+        .course-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .course-info {
+            p {
+              margin: 0;
+              &.role {
+                opacity: 0.8;
+              }
+            }
+          }
+
+          & + .course-item {
+            margin-top: 0.2rem;
+            padding-top: 0.2rem;
+            border-top: 1px solid var(--line-color);
+          }
+        }
+      }
+
       .row {
         display: flex;
         gap: 1rem;

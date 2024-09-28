@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { SharedModule } from '@app/components/shared/shared.module';
@@ -21,6 +22,7 @@ import { UsersComponent } from './users/users.component';
     MatCheckboxModule,
     MatTooltipModule,
     MatExpansionModule,
+    MatSelectModule,
   ],
 })
 export class AdminModule {}

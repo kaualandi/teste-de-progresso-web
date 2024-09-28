@@ -7,7 +7,7 @@
     <div class="content" *ngIf="!loading && !error">
       <div class="row">
         <div class="col">
-          <mat-accordion>
+          <mat-accordion multi>
             <mat-expansion-panel expanded>
               <mat-expansion-panel-header>
                 <mat-panel-title>Informações</mat-panel-title>
@@ -63,7 +63,7 @@
               </form>
             </mat-expansion-panel>
 
-            <mat-expansion-panel>
+            <mat-expansion-panel expanded>
               <mat-expansion-panel-header>
                 <mat-panel-title>Senha</mat-panel-title>
               </mat-expansion-panel-header>
@@ -146,31 +146,82 @@
         </div>
 
         <div class="col">
-          <mat-accordion>
+          <mat-accordion multi>
             <mat-expansion-panel expanded>
               <mat-expansion-panel-header>
-                <mat-panel-title>Permissões</mat-panel-title>
+                <mat-panel-title>Vincular curso</mat-panel-title>
               </mat-expansion-panel-header>
-              Content that gets shown when expanded
 
-              <mat-action-row>
-                <button
-                  type="button"
-                  mat-button
-                  (click)="resetUserPermissions()"
-                >
-                  Resetar
-                </button>
-                <button
-                  type="submit"
-                  mat-flat-button
-                  color="primary"
-                  [disabled]="!!loadingSave"
-                >
-                  Salvar
-                  <loading *ngIf="loadingSave === 3" />
-                </button>
-              </mat-action-row>
+              <form [formGroup]="formNewCourse">
+                <mat-form-field>
+                  <mat-label>Curso</mat-label>
+                  <mat-select formControlName="course_id">
+                    <mat-option
+                      *ngFor="let course of courses"
+                      [value]="course.id"
+                    >
+                      {{ course.name }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error>
+                    {{
+                      formNewCourse.controls.course_id.errors
+                        | formError
+                        | translate
+                    }}
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                  <mat-label>Perfil</mat-label>
+                  <mat-select formControlName="role_id">
+                    <mat-option *ngFor="let role of roles" [value]="role.id">
+                      {{ role.name }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error>
+                    {{
+                      formNewCourse.controls.role_id.errors
+                        | formError
+                        | translate
+                    }}
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-action-row>
+                  <button type="reset" mat-button> Resetar </button>
+                  <button
+                    type="submit"
+                    mat-flat-button
+                    color="primary"
+                    [disabled]="!!loadingSave"
+                  >
+                    Salvar
+                    <loading *ngIf="loadingSave === 3" />
+                  </button>
+                </mat-action-row>
+              </form>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel expanded>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Cursos vinculados</mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <div class="list-courses">
+                <div class="course-item" *ngFor="let course of linkedCourses">
+                  <div class="course-info">
+                    <p>{{ course.course }}</p>
+                    <p class="role f-12">{{ course.role }}</p>
+                  </div>
+                  <div class="course-actions">
+                    <button mat-icon-button color="warn">
+                      <!-- (click)="handleRemoveCourse(course)" -->
+                      <i icon="trash"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </mat-expansion-panel>
           </mat-accordion>
         </div>
