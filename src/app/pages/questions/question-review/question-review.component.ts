@@ -40,7 +40,7 @@ export class QuestionReviewComponent implements OnInit {
   error = 0;
   question = {} as Question;
   review = new FormControl('', Validators.required);
-  approveStatus = new FormControl(ReviewFeedbackType.APPROVE, {
+  approveStatus = new FormControl(ReviewFeedbackType.ANSWER, {
     nonNullable: true,
   });
 
@@ -173,6 +173,7 @@ export class QuestionReviewComponent implements OnInit {
   disableReviewActions() {
     this.canSendReview = true;
     this.approveStatus.enable();
+    this.approveStatus.setValue(ReviewFeedbackType.APPROVE);
     this.review.enable();
   }
 
