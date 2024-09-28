@@ -18,7 +18,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field>
       <mat-label>Senha</mat-label>
       <input
         matInput
@@ -36,16 +36,12 @@
         <i [icon]="viewPass ? 'hide_pass' : 'view_pass'"></i>
       </button>
 
-      <mat-error [matTooltip]="passwordWarning">
-        {{
-          this.passwordWarning ||
-            this.passwordSuggestions[0] ||
-            (form.controls.password.errors | formError | translate)
-        }}
+      <mat-error>
+        {{ form.controls.password.errors | formError | translate }}
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field>
       <mat-label>Repetir senha</mat-label>
       <input
         matInput

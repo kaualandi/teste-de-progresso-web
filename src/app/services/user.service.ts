@@ -10,6 +10,8 @@ import { HttpService } from './http.service';
 export class UserService {
   constructor(private http: HttpService) {}
 
+  formErrorHandler = this.http.formErrorHandler;
+
   getUsers(filters: Record<string, string>) {
     const query = new HttpParams({ fromObject: filters });
     return this.http.get<User[]>('/user', query);
@@ -20,5 +22,23 @@ export class UserService {
       ...user,
       password: Md5.init(user.password).toUpperCase(),
     });
+  }
+
+  updateUserAdmin(id: number, user: Partial<User>) {
+    return this.http.patch<User>(`/user/${id}/`, user);
+  }
+
+  updateUserAdminPassword(id: number, user: Partial<UserCreate>) {
+    return this.http.patch<User>(`/user/${id}/`, {
+      password: Md5.init(user.password).toUpperCase(),
+    });
+  }
+
+  getUser(id: number) {
+    return this.http.get<User>(`/user/${id}`);
+  }
+
+  deleteUser(id: number) {
+    return this.http.delete(`/user/${id}`);
   }
 }

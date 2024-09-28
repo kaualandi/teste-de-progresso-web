@@ -7,7 +7,7 @@ export interface User {
   profile_image: string;
   last_login: string;
   is_admin: boolean;
-  is_active: string;
+  is_active: boolean;
   created_at: string;
   updated_at: string;
 }

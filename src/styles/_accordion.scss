@@ -1,0 +1,24 @@
+html {
+  .mat-expansion-panel {
+    --mat-expansion-container-shape: var(--br);
+
+    &:not([class*='mat-elevation-z']) {
+      box-shadow: none;
+      border: 1px solid var(--line-color);
+    }
+
+    .mat-expansion-panel-body {
+      &:has(.mat-action-row) {
+        padding-bottom: 0;
+      }
+
+      .mat-action-row {
+        padding: 8px 0;
+      }
+    }
+
+    .mat-action-row {
+      padding: 8px;
+    }
+  }
+}

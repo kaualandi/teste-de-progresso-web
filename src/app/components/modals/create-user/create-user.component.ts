@@ -3,7 +3,6 @@ import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UserService } from '@app/services/user.service';
-import { Score } from '@zxcvbn-ts/core';
 import { NotifierService } from 'angular-notifier';
 
 @Component({
@@ -25,10 +24,6 @@ export class CreateUserComponent {
   loading = false;
   viewPass = false;
   viewRepass = false;
-  score: Score = 0;
-  passwordWarning = '';
-  passwordSuggestions: string[] = [];
-
   form = this.fb.nonNullable.group({
     name: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],

@@ -1,0 +1,19 @@
+main {
+  .container {
+    .content {
+      form {
+        mat-checkbox {
+          display: block;
+        }
+      }
+
+      .row {
+        display: flex;
+        gap: 1rem;
+        .col {
+          width: calc(50% - 0.5rem);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,183 @@
+<main class="page">
+  <div class="container">
+    <header>
+      <h1>Editar {{ user.name || 'Usuário' }}</h1>
+    </header>
+
+    <div class="content" *ngIf="!loading && !error">
+      <div class="row">
+        <div class="col">
+          <mat-accordion>
+            <mat-expansion-panel expanded>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Informações</mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <form
+                [formGroup]="formInfors"
+                (ngSubmit)="handleFormInforsSubmit()"
+              >
+                <mat-dialog-content>
+                  <mat-form-field>
+                    <mat-label>Nome</mat-label>
+                    <input matInput formControlName="name" />
+                    <mat-error>
+                      {{
+                        formInfors.controls.name.errors | formError | translate
+                      }}
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" />
+                    <mat-error>
+                      {{
+                        formInfors.controls.email.errors | formError | translate
+                      }}
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-checkbox formControlName="is_admin">
+                    Administrador
+                  </mat-checkbox>
+                  <mat-checkbox formControlName="is_active">
+                    Ativo
+                  </mat-checkbox>
+                </mat-dialog-content>
+
+                <mat-action-row>
+                  <button type="button" mat-button (click)="resetUserInfors()"
+                    >Resetar</button
+                  >
+                  <button
+                    type="submit"
+                    mat-flat-button
+                    color="primary"
+                    [disabled]="!!loadingSave"
+                  >
+                    Salvar
+                    <loading *ngIf="loadingSave === 1" />
+                  </button>
+                </mat-action-row>
+              </form>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Senha</mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <form
+                [formGroup]="formPassword"
+                (ngSubmit)="handleFormPasswordSubmit()"
+              >
+                <mat-dialog-content>
+                  <mat-form-field>
+                    <mat-label>Senha</mat-label>
+                    <input
+                      matInput
+                      [type]="viewPass ? 'text' : 'password'"
+                      autocomplete="new-password"
+                      formControlName="password"
+                    />
+                    <button
+                      type="button"
+                      mat-icon-button
+                      matSuffix
+                      aria-label="Ver senha"
+                      (click)="viewPass = !viewPass"
+                    >
+                      <i [icon]="viewPass ? 'hide_pass' : 'view_pass'"></i>
+                    </button>
+
+                    <mat-error>
+                      {{
+                        formPassword.controls.password.errors
+                          | formError
+                          | translate
+                      }}
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Repetir senha</mat-label>
+                    <input
+                      matInput
+                      [type]="viewRepass ? 'text' : 'password'"
+                      autocomplete="new-password"
+                      formControlName="re_password"
+                    />
+                    <button
+                      type="button"
+                      mat-icon-button
+                      matSuffix
+                      aria-label="Ver senha"
+                      (click)="viewRepass = !viewRepass"
+                    >
+                      <i [icon]="viewRepass ? 'hide_pass' : 'view_pass'"></i>
+                    </button>
+
+                    <mat-error>
+                      {{
+                        formPassword.controls.re_password.errors
+                          | formError
+                          | translate
+                      }}
+                    </mat-error>
+                  </mat-form-field>
+                </mat-dialog-content>
+
+                <mat-action-row>
+                  <button type="reset" mat-button>Resetar</button>
+                  <button
+                    type="submit"
+                    mat-flat-button
+                    color="primary"
+                    [disabled]="!!loadingSave"
+                  >
+                    Alterar
+                    <loading *ngIf="loadingSave === 2" />
+                  </button>
+                </mat-action-row>
+              </form>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+
+        <div class="col">
+          <mat-accordion>
+            <mat-expansion-panel expanded>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Permissões</mat-panel-title>
+              </mat-expansion-panel-header>
+              Content that gets shown when expanded
+
+              <mat-action-row>
+                <button
+                  type="button"
+                  mat-button
+                  (click)="resetUserPermissions()"
+                >
+                  Resetar
+                </button>
+                <button
+                  type="submit"
+                  mat-flat-button
+                  color="primary"
+                  [disabled]="!!loadingSave"
+                >
+                  Salvar
+                  <loading *ngIf="loadingSave === 3" />
+                </button>
+              </mat-action-row>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
+    </div>
+
+    <page-loading *ngIf="loading" />
+    <page-error *ngIf="error" [code]="error" />
+  </div>
+</main>
