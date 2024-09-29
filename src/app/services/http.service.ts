@@ -70,6 +70,12 @@ export class HttpService {
   }
 
   private handleError = (error: HttpErrorResponse) => {
+    const status = (error.status || 500) + '';
+    if (status.startsWith('5')) {
+      this.notifier.notify('error', 'Erro interno no servidor');
+      return throwError(() => error);
+    }
+
     const nonFieldErrors = error.error.non_field_errors;
     if (Object.keys(error.error).length) {
       if (nonFieldErrors) {

@@ -1,1 +1,74 @@
-<p>role-detail works!</p>
+<main class="page">
+  <div class="container">
+    <header>
+      <button mat-icon-button prevPage>
+        <i icon="angle_left"></i>
+      </button>
+      <h1> Editar {{ role.name || 'Perfil' }} </h1>
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="handleFormSubmit()"
+        [disabled]="loadingSave"
+      >
+        Salvar
+        <i *ngIf="loadingSave" icon="loading"></i>
+      </button>
+    </header>
+
+    <div class="content" *ngIf="!loading && !error">
+      <form [formGroup]="roleForm" (ngSubmit)="handleFormSubmit()">
+        <mat-form-field>
+          <mat-label>Nome</mat-label>
+          <input matInput formControlName="name" />
+        </mat-form-field>
+      </form>
+
+      <div class="permissions-container">
+        <h2>Permissões</h2>
+
+        <div class="permissions-list">
+          <div class="permission-group" *ngFor="let perm of permissions">
+            <header>
+              <p>{{ perm.model | roleDict }}</p>
+            </header>
+            <mat-checkbox
+              *ngIf="perm.view"
+              [checked]="checkedPermissions.includes(perm.view)"
+              (change)="toggleViewPermissions(perm)"
+            >
+              Ver
+            </mat-checkbox>
+            <mat-checkbox
+              *ngIf="perm.add"
+              [checked]="checkedPermissions.includes(perm.add)"
+              (change)="togglePermission(perm.add)"
+              [disabled]="!checkedPermissions.includes(perm.view)"
+            >
+              Adicionar
+            </mat-checkbox>
+            <mat-checkbox
+              *ngIf="perm.change"
+              [checked]="checkedPermissions.includes(perm.change)"
+              (change)="togglePermission(perm.change)"
+              [disabled]="!checkedPermissions.includes(perm.view)"
+            >
+              Atualizar
+            </mat-checkbox>
+            <mat-checkbox
+              *ngIf="perm.delete"
+              [checked]="checkedPermissions.includes(perm.delete)"
+              (change)="togglePermission(perm.delete)"
+              [disabled]="!checkedPermissions.includes(perm.view)"
+            >
+              Apagar
+            </mat-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <page-loading *ngIf="loading" />
+    <page-error *ngIf="error" [code]="error" />
+  </div>
+</main>

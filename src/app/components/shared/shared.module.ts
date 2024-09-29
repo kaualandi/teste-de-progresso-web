@@ -26,6 +26,7 @@ import { BloomTaxonomyPipe } from '../../pipes/bloom-taxonomy.pipe';
 import { DifficultyPipe } from '../../pipes/difficulty.pipe';
 import { PlaintextPipe } from '../../pipes/plaintext.pipe';
 import { ReviewStatusPipe } from '../../pipes/review-status.pipe';
+import { RoleDictPipe } from '../../pipes/role-dict.pipe';
 import { ChangeRoleModalComponent } from '../modals/change-role-modal/change-role-modal.component';
 import { ConfirmModalComponent } from '../modals/confirm-modal/confirm-modal.component';
 import { ForgotPasswordComponent } from '../modals/forgot-password/forgot-password.component';
@@ -77,6 +78,7 @@ const DECLARATIONS = [
   ReviewStatusPipe,
   QuestionsFilterComponent,
   ChangeRoleModalComponent,
+  RoleDictPipe,
 ];
 
 @NgModule({

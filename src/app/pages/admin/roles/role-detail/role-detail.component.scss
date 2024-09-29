@@ -1,0 +1,43 @@
+main {
+  .container {
+    .content {
+      form {
+        mat-form-field {
+          max-width: 250px;
+        }
+      }
+
+      .permissions-container {
+        margin-top: 1rem;
+
+        .permissions-list {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          grid-gap: 1rem;
+
+          .permission-group {
+            padding: 1rem 1rem;
+            border-radius: var(--br);
+            border: 1px solid var(--line-color);
+
+            header {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 0.2rem;
+              p {
+                margin: 0;
+              }
+            }
+            mat-checkbox {
+              &:not(.all) {
+                margin-left: 1rem;
+              }
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+}
