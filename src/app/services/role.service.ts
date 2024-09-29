@@ -14,6 +14,14 @@ export class RoleService {
     return this.http.get<Role[]>('/role', query);
   }
 
+  getRole(id: number) {
+    return this.http.get<Role>(`/role/${id}`);
+  }
+
+  createRole(role: Partial<Role>) {
+    return this.http.post<Role>('/role/', role);
+  }
+
   deleteRole(id: number) {
     return this.http.delete(`/role/${id}`);
   }
