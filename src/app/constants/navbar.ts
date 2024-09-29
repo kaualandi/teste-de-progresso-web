@@ -40,4 +40,11 @@ export const NAVBAR_PAGES: {
     permissions: [],
     isAdmin: true,
   },
+  {
+    label: 'Perfis',
+    icon: 'user_shield',
+    link: '/admin/roles',
+    permissions: [],
+    isAdmin: true,
+  },
 ];

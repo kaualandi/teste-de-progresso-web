@@ -11,9 +11,12 @@ import { CreateUserComponent } from '../../components/modals/create-user/create-
 import { AdminRoutingModule } from './admin-routing.module';
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
 import { UsersComponent } from './users/users.component';
+import { RolesComponent } from './roles/roles.component';
+import { RoleDetailComponent } from './roles/role-detail/role-detail.component';
+import { CreateRoleComponent } from '../../components/modals/create-role/create-role.component';
 
 @NgModule({
-  declarations: [UsersComponent, CreateUserComponent, UserDetailComponent],
+  declarations: [UsersComponent, CreateUserComponent, UserDetailComponent, RolesComponent, RoleDetailComponent, CreateRoleComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

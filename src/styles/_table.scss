@@ -37,6 +37,13 @@
       .mat-mdc-no-data-row {
         height: var(--mat-table-row-item-container-height, 52px);
       }
+
+      .mat-column-actions {
+        .buttons {
+          justify-content: flex-end;
+          gap: 0;
+        }
+      }
     }
   }
 }

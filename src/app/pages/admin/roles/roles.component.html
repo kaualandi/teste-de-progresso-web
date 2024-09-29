@@ -1,0 +1,91 @@
+<main class="page">
+  <div class="container">
+    <mat-progress-bar
+      [ngClass]="{ filtering: loadingTable }"
+      mode="indeterminate"
+    ></mat-progress-bar>
+
+    <header>
+      <h1>Perfis</h1>
+
+      <button mat-flat-button color="primary" (click)="handleAddRoleButton()">
+        <i icon="plus"></i>
+        Adicionar
+      </button>
+    </header>
+
+    <div class="content" *ngIf="!loading">
+      <div class="table-filters">
+        <form [formGroup]="filters">
+          <mat-form-field>
+            <mat-label>Busca</mat-label>
+            <input
+              matInput
+              formControlName="search"
+              placeholder="Nome ou e-mail"
+            />
+          </mat-form-field>
+        </form>
+      </div>
+
+      <div class="table-container">
+        <table mat-table [dataSource]="roles">
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Nome </th>
+            <td mat-cell *matCellDef="let row"> {{ row.name || '-' }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="permissions">
+            <th mat-header-cell *matHeaderCellDef> Permissões </th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.permissions.length || '-' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="created_at">
+            <th mat-header-cell *matHeaderCellDef> Criado em </th>
+            <td mat-cell *matCellDef="let row">
+              {{ (row.created_at | date: 'HH:mm:ss dd/MM/yyyy') || '-' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let row">
+              <div class="buttons">
+                <a mat-icon-button color="primary" [routerLink]="row.id">
+                  <i icon="pen"></i>
+                </a>
+
+                <button
+                  mat-icon-button
+                  color="warn"
+                  (click)="handleDeleteRoleButton(row)"
+                >
+                  <i icon="trash"></i>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+              Nenhum perfil.
+              {{
+                filters.value.search
+                  ? 'Tente limpar os filtros'
+                  : 'Tente adicionar um novo perfil'
+              }}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <page-loading *ngIf="loading" />
+    <page-error *ngIf="error" [code]="error" />
+  </div>
+</main>
