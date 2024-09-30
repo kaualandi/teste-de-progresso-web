@@ -41,6 +41,13 @@ export const NAVBAR_PAGES: {
     isAdmin: true,
   },
   {
+    label: 'Cursos',
+    icon: 'graduation_cap',
+    link: '/admin/courses',
+    permissions: [],
+    isAdmin: true,
+  },
+  {
     label: 'Perfis',
     icon: 'user_shield',
     link: '/admin/roles',

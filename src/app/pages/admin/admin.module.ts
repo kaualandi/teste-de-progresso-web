@@ -14,9 +14,12 @@ import { UsersComponent } from './users/users.component';
 import { RolesComponent } from './roles/roles.component';
 import { RoleDetailComponent } from './roles/role-detail/role-detail.component';
 import { CreateRoleComponent } from '../../components/modals/create-role/create-role.component';
+import { CoursesComponent } from './courses/courses.component';
+import { CourseDetailComponent } from './courses/course-detail/course-detail.component';
+import { CreateCourseComponent } from '../../components/modals/create-course/create-course.component';
 
 @NgModule({
-  declarations: [UsersComponent, CreateUserComponent, UserDetailComponent, RolesComponent, RoleDetailComponent, CreateRoleComponent],
+  declarations: [UsersComponent, CreateUserComponent, UserDetailComponent, RolesComponent, RoleDetailComponent, CreateRoleComponent, CoursesComponent, CourseDetailComponent, CreateCourseComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

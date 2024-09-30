@@ -22,8 +22,6 @@ export class CreateRoleComponent {
   }
 
   loading = false;
-  viewPass = false;
-  viewRepass = false;
   form = this.fb.nonNullable.group({
     name: ['', [Validators.required]],
   });

@@ -1,0 +1,49 @@
+<main class="page">
+  <div class="container">
+    <header>
+      <button mat-icon-button prevPage>
+        <i icon="angle_left"></i>
+      </button>
+      <h1> Editar {{ course.name || 'Curso' }} </h1>
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="handleFormSubmit()"
+        [disabled]="loadingSave"
+      >
+        Salvar
+        <i *ngIf="loadingSave" icon="loading"></i>
+      </button>
+    </header>
+
+    <div class="content" *ngIf="!loading && !error">
+      <form [formGroup]="courseForm" (ngSubmit)="handleFormSubmit()">
+        <mat-form-field>
+          <mat-label>Nome</mat-label>
+          <input matInput formControlName="name" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Coordenador</mat-label>
+          <mat-select formControlName="coordinator">
+            <mat-option *ngFor="let user of users" [value]="user.id">
+              {{ user.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Pró-reitor</mat-label>
+          <mat-select formControlName="pro_rector">
+            <mat-option *ngFor="let user of users" [value]="user.id">
+              {{ user.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </div>
+
+    <page-loading *ngIf="loading" />
+    <page-error *ngIf="error" [code]="error" />
+  </div>
+</main>
