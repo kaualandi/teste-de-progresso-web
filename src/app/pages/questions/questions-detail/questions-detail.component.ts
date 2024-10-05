@@ -14,6 +14,7 @@ import {
 import { QuestionStatus, QuestionType } from '@app/models/question';
 import { Subject } from '@app/models/subject';
 import { User } from '@app/models/user';
+import { PlaintextPipe } from '@app/pipes/plaintext.pipe';
 import { BodyJson } from '@app/services/http.service';
 import { QuestionService } from '@app/services/question.service';
 import { requiredRichTextValidator } from '@app/utils/validators';
@@ -33,7 +34,8 @@ export class QuestionsDetailComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private notifier: NotifierService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private plainTextPipe: PlaintextPipe
   ) {}
 
   id: string = this.route.snapshot.params['id'];
@@ -297,5 +299,12 @@ export class QuestionsDetailComponent implements OnInit {
 
   get distractorAlternatives() {
     return this.formDistractor.controls.alternatives.controls;
+  }
+
+  get headerTitle() {
+    let title = '';
+    if (this.id) title += `#${this.id} `;
+    title += this.plainTextPipe.transform(this.formBody.value.body) || '&nbsp;';
+    return title;
   }
 }

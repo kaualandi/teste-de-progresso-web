@@ -10,6 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SharedModule } from '@app/components/shared/shared.module';
+import { PlaintextPipe } from '@app/pipes/plaintext.pipe';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import 'froala-editor/js/languages/pt_br.js';
 import { QuestionReviewComponent } from './question-review/question-review.component';
@@ -44,6 +45,7 @@ import { QuestionsComponent } from './questions.component';
       provide: STEPPER_GLOBAL_OPTIONS,
       useValue: { showError: true, displayDefaultIndicatorType: false },
     },
+    PlaintextPipe,
   ],
 })
 export class QuestionsModule {}

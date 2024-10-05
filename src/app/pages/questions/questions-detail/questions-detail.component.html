@@ -1,10 +1,7 @@
 <main class="page" id="question-detail">
   <div class="container">
     <header>
-      <h1
-        class="one-line"
-        [innerHTML]="(formBody.value.body | plaintext) || '&nbsp;'"
-      ></h1>
+      <h1 class="one-line" [innerHTML]="headerTitle"></h1>
     </header>
 
     <div class="content" *ngIf="!loading && !error">
