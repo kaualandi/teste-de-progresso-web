@@ -122,12 +122,12 @@
 <mat-menu #profileMenu="matMenu">
   <a mat-menu-item routerLink="/profile">
     <i icon="user"></i>
-    <span>Meu Perfil</span>
+    <span>Minha Conta</span>
   </a>
 
   <button mat-menu-item (click)="openChangeRoleModal()" *ngIf="!user.is_admin">
     <i icon="graduation_cap"></i>
-    <span>Alterar Curso</span>
+    <span>Alterar Perfil</span>
   </button>
 
   <div class="build-status" *ngIf="user.is_admin">
