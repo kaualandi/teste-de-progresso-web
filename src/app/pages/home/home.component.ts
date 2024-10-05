@@ -83,6 +83,8 @@ export class HomeComponent implements OnInit {
             this.typeChart.labels = response.type_chart.label;
           }
 
+          console.log(this.typeChart);
+
           this.loading = false;
           this.filtering = false;
         },

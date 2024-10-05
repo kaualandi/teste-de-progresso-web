@@ -78,7 +78,7 @@ export const QUESTION_TABS = [
   },
   {
     value: 5,
-    label: 'Aguardando seu Parecer',
+    label: 'Aguardando meu Parecer',
   },
   {
     value: QuestionStatus.WAITING_REVIEW,
@@ -100,8 +100,8 @@ export const QUESTION_TABS = [
 
 export const QUESTION_STATUS_NAME = {
   [QuestionStatus.DRAFT]: 'Rascunho',
-  [QuestionStatus.WAITING_REVIEW]: 'Aguardando Revisão',
-  [QuestionStatus.WITH_REQUESTED_CHANGES]: 'Com Alterações Pendentes',
+  [QuestionStatus.WAITING_REVIEW]: 'Aguardando Parecer do Revisor',
+  [QuestionStatus.WITH_REQUESTED_CHANGES]: 'Pendente de Alterações',
   [QuestionStatus.APPROVED]: 'Aprovada',
   [QuestionStatus.REGISTERED]: 'Cadastrada',
 };
