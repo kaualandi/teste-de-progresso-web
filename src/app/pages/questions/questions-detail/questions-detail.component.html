@@ -49,12 +49,21 @@
             <div class="buttons end">
               <a mat-flat-button routerLink="..">Cancelar</a>
               <button
+                type="button"
+                mat-flat-button
+                (click)="handleFormSubmit(true)"
+                [disabled]="loadingActions"
+              >
+                Salvar Rascunho
+                <loading *ngIf="loadingActions === 'draft'" />
+              </button>
+              <button
                 type="submit"
                 mat-flat-button
                 color="primary"
                 matStepperNext
               >
-                Próximo
+                Avançar
               </button>
             </div>
           </form>
@@ -111,12 +120,22 @@
                 Voltar
               </button>
               <button
+                type="button"
+                mat-flat-button
+                (click)="handleFormSubmit(true)"
+                [disabled]="loadingActions"
+              >
+                Salvar Rascunho
+                <loading *ngIf="loadingActions === 'draft'" />
+              </button>
+              <button
                 type="submit"
                 mat-flat-button
                 matStepperNext
                 color="primary"
-                >Próximo</button
               >
+                Avançar
+              </button>
             </div>
           </form>
         </mat-step>
@@ -144,12 +163,21 @@
                 Voltar
               </button>
               <button
+                type="button"
+                mat-flat-button
+                (click)="handleFormSubmit(true)"
+                [disabled]="loadingActions"
+              >
+                Salvar Rascunho
+                <loading *ngIf="loadingActions === 'draft'" />
+              </button>
+              <button
                 type="submit"
                 mat-flat-button
                 matStepperNext
                 color="primary"
               >
-                Próximo
+                Avançar
               </button>
             </div>
           </form>
@@ -341,7 +369,7 @@
                 (click)="handleFormSubmit(true)"
                 [disabled]="loadingActions"
               >
-                Salvar como rascunho
+                Salvar Rascunho
                 <loading *ngIf="loadingActions === 'draft'" />
               </button>
               <button
