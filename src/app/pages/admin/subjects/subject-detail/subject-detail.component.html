@@ -1,1 +1,52 @@
-<p>subject-detail works!</p>
+<main class="page">
+  <div class="container">
+    <header>
+      <button mat-icon-button prevPage>
+        <i icon="angle_left"></i>
+      </button>
+      <h1> Editar {{ subject.name || 'Assunto' }} </h1>
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="handleFormSubmit()"
+        [disabled]="loadingSave"
+      >
+        Salvar
+        <i *ngIf="loadingSave" icon="loading"></i>
+      </button>
+    </header>
+
+    <div class="content" *ngIf="!loading && !error">
+      <form [formGroup]="subjectForm" (ngSubmit)="handleFormSubmit()">
+        <mat-form-field>
+          <mat-label>Nome</mat-label>
+          <input matInput formControlName="name" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Eixo de Formação</mat-label>
+          <mat-select formControlName="axis">
+            <mat-option *ngFor="let axis of axes" [value]="axis.id">
+              {{ axis.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Categoria</mat-label>
+          <mat-select formControlName="category">
+            <mat-option
+              *ngFor="let category of categories"
+              [value]="category.id"
+            >
+              {{ category.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </div>
+
+    <page-loading *ngIf="loading" />
+    <page-error *ngIf="error" [code]="error" />
+  </div>
+</main>

@@ -22,6 +22,7 @@ import { AxesComponent } from './axes/axes.component';
 import { CreateAxisComponent } from '../../components/modals/create-axis/create-axis.component';
 import { SubjectsComponent } from './subjects/subjects.component';
 import { SubjectDetailComponent } from './subjects/subject-detail/subject-detail.component';
+import { CreateSubjectComponent } from '../../components/modals/create-subject/create-subject.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { SubjectDetailComponent } from './subjects/subject-detail/subject-detail
     CreateAxisComponent,
     SubjectsComponent,
     SubjectDetailComponent,
+    CreateSubjectComponent,
   ],
   imports: [
     CommonModule,

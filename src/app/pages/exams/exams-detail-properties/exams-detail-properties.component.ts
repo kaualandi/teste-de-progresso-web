@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { SubjectAxis } from '@app/models/subject';
-import { SubjectService } from '@app/services/subject.service';
+import { AxisService } from '@app/services/axis.service';
 import { NotifierService } from 'angular-notifier';
 
 @Component({
@@ -14,7 +14,7 @@ export class ExamsDetailPropertiesComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private subjectService: SubjectService,
+    private axisService: AxisService,
     private notifier: NotifierService
   ) {}
 
@@ -23,7 +23,7 @@ export class ExamsDetailPropertiesComponent implements OnInit {
   loading = false;
   loadingActions = '';
   error = 0;
-  axis: SubjectAxis[] = [];
+  axes: SubjectAxis[] = [];
 
   formDetail = this.fb.group({
     title: ['', Validators.required],
@@ -46,9 +46,9 @@ export class ExamsDetailPropertiesComponent implements OnInit {
   }
 
   getAxis() {
-    this.subjectService.getAxis().subscribe({
+    this.axisService.getAxes().subscribe({
       next: (response) => {
-        this.axis = response;
+        this.axes = response;
         if (this.id) {
           this.getExam();
           return;
@@ -89,7 +89,7 @@ export class ExamsDetailPropertiesComponent implements OnInit {
   }
 
   axisName(id?: number | null) {
-    return this.axis.find((axis) => axis.id === id)?.name;
+    return this.axes.find((axis) => axis.id === id)?.name;
   }
 
   axisWeights(id: number) {
@@ -115,7 +115,7 @@ export class ExamsDetailPropertiesComponent implements OnInit {
 
   get filteredAxis() {
     const usedAxis = this.axisList.value.map((axis) => axis.axis);
-    return this.axis.filter((axis) => !usedAxis.includes(axis.id));
+    return this.axes.filter((axis) => !usedAxis.includes(axis.id));
   }
 
   get axisList() {

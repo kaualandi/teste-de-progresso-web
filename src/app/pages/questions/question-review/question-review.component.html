@@ -19,7 +19,7 @@
           color="warn"
           (click)="handleDeleteButtonClick()"
           [disabled]="loading"
-          *ngIf="canChangeQuestion && question.id === user.id"
+          *ngIf="canChangeQuestion && question.created_by === user.id"
         >
           <i icon="trash"></i>
         </button>

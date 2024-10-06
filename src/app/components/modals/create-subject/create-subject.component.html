@@ -1,4 +1,4 @@
-<h1 matDialogTitle>Adicionar Curso</h1>
+<h1 matDialogTitle>Adicionar Assunto</h1>
 
 <form [formGroup]="form" (ngSubmit)="handleFormSubmit()">
   <mat-dialog-content>
@@ -12,22 +12,22 @@
 
     <mat-form-field>
       <mat-label
-        >Coordenador<i icon="loading" *ngIf="loadingUsers"></i
+        >Eixos de Formação<i icon="loading" *ngIf="loadingAxes"></i
       ></mat-label>
-      <mat-select formControlName="coordinator">
-        <mat-option *ngFor="let user of users" [value]="user.id">
-          {{ user.name }}
+      <mat-select formControlName="axis">
+        <mat-option *ngFor="let axis of axes" [value]="axis.id">
+          {{ axis.name }}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label
-        >Pró-reitor<i icon="loading" *ngIf="loadingUsers"></i
+        >Categoria<i icon="loading" *ngIf="loadingCategories"></i
       ></mat-label>
-      <mat-select formControlName="pro_rector">
-        <mat-option *ngFor="let user of users" [value]="user.id">
-          {{ user.name }}
+      <mat-select formControlName="category">
+        <mat-option *ngFor="let category of categories" [value]="category.id">
+          {{ category.name }}
         </mat-option>
       </mat-select>
     </mat-form-field>

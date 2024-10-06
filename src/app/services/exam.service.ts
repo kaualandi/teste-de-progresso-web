@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { forkJoin } from 'rxjs';
+import { AxisService } from './axis.service';
 import { QuestionService } from './question.service';
 import { SubjectService } from './subject.service';
 
@@ -9,13 +10,14 @@ import { SubjectService } from './subject.service';
 export class ExamService {
   constructor(
     private subjectService: SubjectService,
-    private questionService: QuestionService
+    private questionService: QuestionService,
+    private axisService: AxisService
   ) {}
 
   getSubjectsAxisAndQuestionTypes() {
     return forkJoin([
       this.subjectService.getSubjects(),
-      this.subjectService.getAxis(),
+      this.axisService.getAxes(),
       this.questionService.getQuestionTypes(),
     ]);
   }
