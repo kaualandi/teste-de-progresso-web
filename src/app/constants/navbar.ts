@@ -54,4 +54,18 @@ export const NAVBAR_PAGES: {
     permissions: [],
     isAdmin: true,
   },
+  {
+    label: 'Assuntos',
+    icon: 'tag',
+    link: '/admin/subjects',
+    permissions: [],
+    isAdmin: true,
+  },
+  {
+    label: 'Eixos',
+    icon: 'diagram_project',
+    link: '/admin/axes',
+    permissions: [],
+    isAdmin: true,
+  },
 ];

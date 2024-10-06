@@ -1,0 +1,31 @@
+<main class="page">
+  <div class="container">
+    <header>
+      <button mat-icon-button prevPage>
+        <i icon="angle_left"></i>
+      </button>
+      <h1> Editar {{ axis.name || 'Eixo de Formação' }} </h1>
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="handleFormSubmit()"
+        [disabled]="loadingSave"
+      >
+        Salvar
+        <i *ngIf="loadingSave" icon="loading"></i>
+      </button>
+    </header>
+
+    <div class="content" *ngIf="!loading && !error">
+      <form [formGroup]="axisForm" (ngSubmit)="handleFormSubmit()">
+        <mat-form-field>
+          <mat-label>Nome</mat-label>
+          <input matInput formControlName="name" />
+        </mat-form-field>
+      </form>
+    </div>
+
+    <page-loading *ngIf="loading" />
+    <page-error *ngIf="error" [code]="error" />
+  </div>
+</main>
