@@ -82,9 +82,14 @@ export class UsersComponent implements OnInit {
   }
 
   deleteUser(id: number) {
-    this.userService.deleteUser(id).subscribe(() => {
-      this.notifier.notify('success', 'Usuário excluído com sucesso');
-      this.getUsers();
+    this.userService.deleteUser(id).subscribe({
+      next: () => {
+        this.notifier.notify('success', 'Usuário excluído com sucesso');
+        this.getUsers();
+      },
+      error: () => {
+        this.loadingTable = false;
+      },
     });
   }
 

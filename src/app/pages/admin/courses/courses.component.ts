@@ -75,9 +75,14 @@ export class CoursesComponent implements OnInit {
   }
 
   deleteCourse(id: number) {
-    this.courseService.deleteCourse(id).subscribe(() => {
-      this.notifier.notify('success', 'Curso excluído com sucesso');
-      this.getCourses();
+    this.courseService.deleteCourse(id).subscribe({
+      next: () => {
+        this.notifier.notify('success', 'Curso excluído com sucesso');
+        this.getCourses();
+      },
+      error: () => {
+        this.loadingTable = false;
+      },
     });
   }
 

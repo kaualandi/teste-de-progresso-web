@@ -75,9 +75,14 @@ export class AxesComponent implements OnInit {
   }
 
   deleteAxis(id: number) {
-    this.axisService.deleteAxis(id).subscribe(() => {
-      this.notifier.notify('success', 'Eixo excluído com sucesso');
-      this.getAxes();
+    this.axisService.deleteAxis(id).subscribe({
+      next: () => {
+        this.notifier.notify('success', 'Eixo excluído com sucesso');
+        this.getAxes();
+      },
+      error: () => {
+        this.loadingTable = false;
+      },
     });
   }
 

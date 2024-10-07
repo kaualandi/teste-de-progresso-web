@@ -50,7 +50,7 @@ export class CreateSubjectComponent implements OnInit {
         this.loadingAxes = false;
       },
       error: () => {
-        this.loading = false;
+        this.loadingAxes = false;
       },
     });
   }
@@ -63,7 +63,7 @@ export class CreateSubjectComponent implements OnInit {
         this.loadingCategories = false;
       },
       error: () => {
-        this.loading = false;
+        this.loadingCategories = false;
       },
     });
   }

@@ -75,9 +75,14 @@ export class RolesComponent implements OnInit {
   }
 
   deleteRole(id: number) {
-    this.roleService.deleteRole(id).subscribe(() => {
-      this.notifier.notify('success', 'Perfil excluído com sucesso');
-      this.getRoles();
+    this.roleService.deleteRole(id).subscribe({
+      next: () => {
+        this.notifier.notify('success', 'Perfil excluído com sucesso');
+        this.getRoles();
+      },
+      error: () => {
+        this.loadingTable = false;
+      },
     });
   }
 

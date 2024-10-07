@@ -75,9 +75,14 @@ export class SubjectsComponent implements OnInit {
   }
 
   deleteSubject(id: number) {
-    this.subjectService.deleteSubject(id).subscribe(() => {
-      this.notifier.notify('success', 'Assunto excluído com sucesso');
-      this.getSubjects();
+    this.subjectService.deleteSubject(id).subscribe({
+      next: () => {
+        this.notifier.notify('success', 'Assunto excluído com sucesso');
+        this.getSubjects();
+      },
+      error: () => {
+        this.loadingTable = false;
+      },
     });
   }
 
