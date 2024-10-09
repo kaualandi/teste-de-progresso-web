@@ -10,7 +10,7 @@ import {
   ReviewMessage,
 } from '@app/models/question';
 import { User } from '@app/models/user';
-import { forkJoin } from 'rxjs';
+import { forkJoin, map } from 'rxjs';
 import { BodyJson, HttpService } from './http.service';
 import { StorageService } from './storage.service';
 import { SubjectService } from './subject.service';
@@ -21,11 +21,11 @@ import { SubjectService } from './subject.service';
 export class QuestionService {
   constructor(
     private http: HttpService,
-    private stortage: StorageService,
+    private storage: StorageService,
     private subjectService: SubjectService
   ) {}
 
-  user = this.stortage.myself;
+  user = this.storage.myself;
 
   questionTabsOrderStorageKey = 'questionTabsOrder';
   formErrorHandler = this.http.formErrorHandler;
@@ -64,9 +64,16 @@ export class QuestionService {
   }
 
   getSubjectsReportsAndQuestionTypes() {
+    const reports = this.http
+      .get<User[]>('/user/')
+      .pipe(
+        map((users) =>
+          users.filter((u) => !u.is_admin && u.id !== this.user.id)
+        )
+      );
     return forkJoin([
       this.subjectService.getSubjects(),
-      this.http.get<User[]>('/user/'),
+      reports,
       this.getQuestionTypes(),
     ]);
   }
