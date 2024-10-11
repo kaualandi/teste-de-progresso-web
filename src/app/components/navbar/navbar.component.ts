@@ -87,7 +87,7 @@ export class NavbarComponent implements OnInit {
         }
       },
       error: (error) => {
-        this.error = error.status || 500;
+        // this.error = error.status || 500; // TODO: REMOVER ESSA DROGA
         this.loading = false;
       },
     });

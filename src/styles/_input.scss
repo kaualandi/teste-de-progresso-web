@@ -1,4 +1,5 @@
 @import './animations';
+@import './animations';
 
 mat-form-field {
   width: 100%;
@@ -75,25 +76,48 @@ form {
   }
 }
 
-mat-form-field {
-  &.froala {
-    .mdc-text-field--outlined {
-      padding-left: 1px;
-      padding-right: 1px;
-    }
-  }
-}
-
-.fr-second-toolbar {
-  display: none;
-}
-
-.fr-toolbar.fr-top,
-.fr-box.fr-basic.fr-top .fr-wrapper {
-  border: none;
-}
-
 .mat-mdc-checkbox-touch-target {
   width: 40px;
   height: 40px;
+}
+
+.ckeditor-field {
+  mat-label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    display: inline-block;
+  }
+
+  ckeditor {
+    .ck.ck-toolbar,
+    .ck.ck-editor__main > .ck-editor__editable {
+      transition: var(--ts);
+    }
+
+    &.ng-touched.ng-invalid,
+    &.ng-dirty.ng-invalid {
+      --ck-color-base-border: var(
+        --mdc-outlined-text-field-error-outline-color
+      );
+      & + mat-error {
+        opacity: 1;
+      }
+    }
+  }
+
+  mat-error {
+    opacity: 0;
+    transition: var(--ts);
+  }
+}
+
+:root {
+  --ck-color-button-on-background: var(--main-color-20);
+  --ck-color-button-on-hover-background: var(--main-color-20);
+  --ck-color-button-on-color: var(--main-color);
+  --ck-color-focus-outer-shadow: var(--main-color);
+  --ck-color-focus-disabled-shadow: var(--main-color-20);
+  --ck-color-focus-border: var(--main-color);
+  --ck-border-radius: 4px;
+  --ck-color-base-focus: var(--main-color-20);
 }

@@ -49,9 +49,7 @@
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss",
-              "node_modules/aos/dist/aos.css",
-              "./node_modules/froala-editor/css/froala_editor.pkgd.min.css",
-              "./node_modules/froala-editor/css/froala_style.min.css"
+              "node_modules/aos/dist/aos.css"
             ],
             "scripts": ["node_modules/apexcharts/dist/apexcharts.min.js"],
             "serviceWorker": true,

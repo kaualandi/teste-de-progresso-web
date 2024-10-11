@@ -9,6 +9,7 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
+    "typeRoots": ["./node_modules/@types", "./src/@types"],
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,

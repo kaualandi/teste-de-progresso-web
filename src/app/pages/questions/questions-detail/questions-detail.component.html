@@ -8,43 +8,40 @@
       <mat-stepper [orientation]="isTablet ? 'vertical' : 'horizontal'">
         <mat-step [stepControl]="formBody" label="Corpo da questão">
           <form [formGroup]="formBody">
-            <mat-form-field class="froala">
+            <div class="ckeditor-field">
               <mat-label>Instrução</mat-label>
-              <textarea
-                matInput
-                [froalaEditor]="froalaOptions"
+              <ckeditor
+                [editor]="ckEditor"
+                [config]="ckEditorConfig"
                 formControlName="instruction"
-              ></textarea>
+              ></ckeditor>
               <mat-error>
                 {{
                   formBody.controls.instruction.errors | formError | translate
                 }}
               </mat-error>
-            </mat-form-field>
+            </div>
 
             <mat-form-field class="froala">
               <mat-label>Suporte</mat-label>
-              <textarea
-                matInput
-                [froalaEditor]="froalaOptions"
-                formControlName="support"
-              ></textarea>
+              <textarea matInput formControlName="support"></textarea>
+              <!-- [froalaEditor]="froalaOptions" -->
               <mat-error>
                 {{ formBody.controls.support.errors | formError | translate }}
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field class="froala">
+            <div class="ckeditor-field">
               <mat-label>Enunciado</mat-label>
-              <textarea
-                matInput
-                [froalaEditor]="froalaOptions"
+              <ckeditor
+                [editor]="ckEditor"
+                [config]="ckEditorConfig"
                 formControlName="body"
-              ></textarea>
+              ></ckeditor>
               <mat-error>
                 {{ formBody.controls.body.errors | formError | translate }}
               </mat-error>
-            </mat-form-field>
+            </div>
 
             <div class="buttons end">
               <a mat-flat-button routerLink="..">Cancelar</a>
@@ -73,11 +70,8 @@
           <form [formGroup]="formCorrectOption">
             <mat-form-field class="froala">
               <mat-label>Opção correta</mat-label>
-              <textarea
-                matInput
-                [froalaEditor]="froalaOptions"
-                [formControl]="correctAlternative"
-              ></textarea>
+              <textarea matInput [formControl]="correctAlternative"></textarea>
+              <!-- [froalaEditor]="froalaOptions" -->
               <mat-error>
                 {{ correctAlternative.errors | formError | translate }}
               </mat-error>
@@ -85,11 +79,8 @@
 
             <mat-form-field class="froala">
               <mat-label>Explicação</mat-label>
-              <textarea
-                matInput
-                [froalaEditor]="froalaOptions"
-                formControlName="explanation"
-              ></textarea>
+              <textarea matInput formControlName="explanation"></textarea>
+              <!-- [froalaEditor]="froalaOptions" -->
               <mat-error>
                 {{
                   formCorrectOption.controls.explanation.errors
@@ -101,11 +92,8 @@
 
             <mat-form-field class="froala">
               <mat-label>Referência</mat-label>
-              <textarea
-                matInput
-                [froalaEditor]="froalaOptions"
-                formControlName="references"
-              ></textarea>
+              <textarea matInput formControlName="references"></textarea>
+              <!-- [froalaEditor]="froalaOptions" -->
               <mat-error>
                 {{
                   formCorrectOption.controls.references.errors
@@ -148,11 +136,8 @@
               [formGroup]="distractor"
             >
               <mat-label>Distrator {{ i + 1 }}</mat-label>
-              <textarea
-                matInput
-                [froalaEditor]="froalaOptions"
-                formControlName="text"
-              ></textarea>
+              <textarea matInput formControlName="text"></textarea>
+              <!-- [froalaEditor]="froalaOptions" -->
               <mat-error>
                 {{ distractor.controls.text.errors | formError | translate }}
               </mat-error>

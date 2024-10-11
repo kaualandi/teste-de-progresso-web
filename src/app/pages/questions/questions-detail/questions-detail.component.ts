@@ -6,7 +6,7 @@ import {
   ConfirmModalComponent,
   IConfirmModalData,
 } from '@app/components/modals/confirm-modal/confirm-modal.component';
-import { FROALA_OPTIONS } from '@app/constants/froala';
+import { CKEDITOR_CONFIG } from '@app/constants/ckeditor';
 import {
   BLOOM_TAXONOMY,
   QUESTION_DIFFICULTIES,
@@ -19,6 +19,7 @@ import { BodyJson } from '@app/services/http.service';
 import { QuestionService } from '@app/services/question.service';
 import { requiredRichTextValidator } from '@app/utils/validators';
 import { NotifierService } from 'angular-notifier';
+import { ClassicEditor } from 'ckeditor5';
 import { startWith } from 'rxjs';
 
 type LoadingActions = 'submit' | 'draft' | 'delete';
@@ -44,8 +45,9 @@ export class QuestionsDetailComponent implements OnInit {
   loading = false;
   error = 0;
   loadingActions?: LoadingActions;
+  public ckEditor = ClassicEditor;
+  ckEditorConfig = CKEDITOR_CONFIG;
   difficultyOptions = QUESTION_DIFFICULTIES;
-  froalaOptions = FROALA_OPTIONS;
   bloomTaxonomy = BLOOM_TAXONOMY;
   questionTypes: QuestionType[] = [];
   subjects: Subject[] = [];
@@ -281,7 +283,7 @@ export class QuestionsDetailComponent implements OnInit {
         this.getQuestion();
       },
       error: (error) => {
-        this.error = error.status || 500;
+        // this.error = error.status || 500; // TODO: Remover essa merda
         this.loading = false;
       },
     });

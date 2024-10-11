@@ -11,8 +11,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SharedModule } from '@app/components/shared/shared.module';
 import { PlaintextPipe } from '@app/pipes/plaintext.pipe';
-import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
-import 'froala-editor/js/languages/pt_br.js';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { QuestionReviewComponent } from './question-review/question-review.component';
 import { QuestionsDetailComponent } from './questions-detail/questions-detail.component';
 import { QuestionsListComponent } from './questions-list/questions-list.component';
@@ -37,8 +36,7 @@ import { QuestionsComponent } from './questions.component';
     MatBadgeModule,
     MatExpansionModule,
     MatRippleModule,
-    FroalaEditorModule.forRoot(),
-    FroalaViewModule.forRoot(),
+    CKEditorModule,
   ],
   providers: [
     {
