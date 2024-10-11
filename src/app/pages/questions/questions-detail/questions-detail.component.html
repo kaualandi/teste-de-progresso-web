@@ -22,14 +22,17 @@
               </mat-error>
             </div>
 
-            <mat-form-field class="froala">
+            <div class="ckeditor-field">
               <mat-label>Suporte</mat-label>
-              <textarea matInput formControlName="support"></textarea>
-              <!-- [froalaEditor]="froalaOptions" -->
+              <ckeditor
+                [editor]="ckEditor"
+                [config]="ckEditorConfig"
+                formControlName="support"
+              ></ckeditor>
               <mat-error>
                 {{ formBody.controls.support.errors | formError | translate }}
               </mat-error>
-            </mat-form-field>
+            </div>
 
             <div class="ckeditor-field">
               <mat-label>Enunciado</mat-label>
@@ -68,19 +71,25 @@
 
         <mat-step [stepControl]="formCorrectOption" label="Resposta correta">
           <form [formGroup]="formCorrectOption">
-            <mat-form-field class="froala">
+            <div class="ckeditor-field">
               <mat-label>Opção correta</mat-label>
-              <textarea matInput [formControl]="correctAlternative"></textarea>
-              <!-- [froalaEditor]="froalaOptions" -->
+              <ckeditor
+                [editor]="ckEditor"
+                [config]="ckEditorConfig"
+                [formControl]="correctAlternative"
+              ></ckeditor>
               <mat-error>
                 {{ correctAlternative.errors | formError | translate }}
               </mat-error>
-            </mat-form-field>
+            </div>
 
-            <mat-form-field class="froala">
+            <div class="ckeditor-field">
               <mat-label>Explicação</mat-label>
-              <textarea matInput formControlName="explanation"></textarea>
-              <!-- [froalaEditor]="froalaOptions" -->
+              <ckeditor
+                [editor]="ckEditor"
+                [config]="ckEditorConfig"
+                formControlName="explanation"
+              ></ckeditor>
               <mat-error>
                 {{
                   formCorrectOption.controls.explanation.errors
@@ -88,12 +97,15 @@
                     | translate
                 }}
               </mat-error>
-            </mat-form-field>
+            </div>
 
-            <mat-form-field class="froala">
+            <div class="ckeditor-field">
               <mat-label>Referência</mat-label>
-              <textarea matInput formControlName="references"></textarea>
-              <!-- [froalaEditor]="froalaOptions" -->
+              <ckeditor
+                [editor]="ckEditor"
+                [config]="ckEditorConfig"
+                formControlName="references"
+              ></ckeditor>
               <mat-error>
                 {{
                   formCorrectOption.controls.references.errors
@@ -101,7 +113,7 @@
                     | translate
                 }}
               </mat-error>
-            </mat-form-field>
+            </div>
 
             <div class="buttons end">
               <button type="button" mat-flat-button matStepperPrevious>
@@ -130,18 +142,21 @@
 
         <mat-step [stepControl]="formDistractor" label="Distratores">
           <form [formGroup]="formDistractor">
-            <mat-form-field
-              class="froala"
+            <div
+              class="ckeditor-field"
               *ngFor="let distractor of distractorAlternatives; let i = index"
               [formGroup]="distractor"
             >
               <mat-label>Distrator {{ i + 1 }}</mat-label>
-              <textarea matInput formControlName="text"></textarea>
-              <!-- [froalaEditor]="froalaOptions" -->
+              <ckeditor
+                [editor]="ckEditor"
+                [config]="ckEditorConfig"
+                formControlName="text"
+              ></ckeditor>
               <mat-error>
                 {{ distractor.controls.text.errors | formError | translate }}
               </mat-error>
-            </mat-form-field>
+            </div>
 
             <div class="buttons end">
               <button type="button" mat-flat-button matStepperPrevious>

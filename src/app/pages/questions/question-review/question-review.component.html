@@ -83,11 +83,11 @@
               </mat-expansion-panel-header>
 
               <div class="intention">
-                <!-- <p
-                  [froalaView]="
+                <p
+                  [innerHTML]="
                     question.intention || 'Nenhuma intenção expecificada'
                   "
-                ></p> -->
+                ></p>
               </div>
             </mat-expansion-panel>
 
@@ -97,11 +97,11 @@
               </mat-expansion-panel-header>
 
               <div class="instruction">
-                <!-- <p
-                  [froalaView]="
+                <p
+                  [innerHTML]="
                     question.instruction || 'Nenhuma instrução expecificada'
                   "
-                ></p> -->
+                ></p>
               </div>
             </mat-expansion-panel>
 
@@ -111,11 +111,11 @@
               </mat-expansion-panel-header>
 
               <div class="support">
-                <!-- <p
-                  [froalaView]="
+                <p
+                  [innerHTML]="
                     question.support || 'Nenhum suporte expecificado'
                   "
-                ></p> -->
+                ></p>
               </div>
             </mat-expansion-panel>
 
@@ -125,11 +125,9 @@
               </mat-expansion-panel-header>
 
               <div class="body">
-                <!-- <p
-                  [froalaView]="
-                    question.body || 'Nenhum enunciado expecificado'
-                  "
-                ></p> -->
+                <p
+                  [innerHTML]="question.body || 'Nenhum enunciado expecificado'"
+                ></p>
               </div>
             </mat-expansion-panel>
 
@@ -140,29 +138,29 @@
 
               <div class="correct">
                 <div class="alternative">
-                  <!-- <p
-                    [froalaView]="
+                  <p
+                    [innerHTML]="
                       correctAlternative?.text ||
                       'Nenhuma resposta correta expecificada'
                     "
-                  ></p> -->
+                  ></p>
                 </div>
 
                 <div class="explanation">
                   <h4>Explicações</h4>
-                  <!-- <p
-                    [froalaView]="
+                  <p
+                    [innerHTML]="
                       question.explanation || 'Nenhuma explicação expecificada'
                     "
-                  ></p> -->
+                  ></p>
                 </div>
                 <div class="references">
                   <h4>Referências</h4>
-                  <!-- <p
-                    [froalaView]="
+                  <p
+                    [innerHTML]="
                       question.references || 'Nenhuma referência expecificada'
                     "
-                  ></p> -->
+                  ></p>
                 </div>
               </div>
             </mat-expansion-panel>
@@ -174,12 +172,12 @@
 
               <div class="alternatives" *ngIf="distractors?.length">
                 <div class="alternative" *ngFor="let distractor of distractors">
-                  <!-- <p
-                    [froalaView]="
+                  <p
+                    [innerHTML]="
                       correctAlternative?.text ||
                       'Nenhuma resposta correta expecificada'
                     "
-                  ></p> -->
+                  ></p>
                 </div>
               </div>
               <div class="alternatives" *ngIf="!distractors?.length">

@@ -6,7 +6,6 @@ import {
   ConfirmModalComponent,
   IConfirmModalData,
 } from '@app/components/modals/confirm-modal/confirm-modal.component';
-import { CKEDITOR_CONFIG } from '@app/constants/ckeditor';
 import {
   BLOOM_TAXONOMY,
   QUESTION_DIFFICULTIES,
@@ -15,6 +14,7 @@ import { QuestionStatus, QuestionType } from '@app/models/question';
 import { Subject } from '@app/models/subject';
 import { User } from '@app/models/user';
 import { PlaintextPipe } from '@app/pipes/plaintext.pipe';
+import { CkeditorService } from '@app/services/ckeditor.service';
 import { BodyJson } from '@app/services/http.service';
 import { QuestionService } from '@app/services/question.service';
 import { requiredRichTextValidator } from '@app/utils/validators';
@@ -36,7 +36,8 @@ export class QuestionsDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private notifier: NotifierService,
     private dialog: MatDialog,
-    private plainTextPipe: PlaintextPipe
+    private plainTextPipe: PlaintextPipe,
+    private ckeditor: CkeditorService
   ) {}
 
   id: string = this.route.snapshot.params['id'];
@@ -46,7 +47,7 @@ export class QuestionsDetailComponent implements OnInit {
   error = 0;
   loadingActions?: LoadingActions;
   public ckEditor = ClassicEditor;
-  ckEditorConfig = CKEDITOR_CONFIG;
+  ckEditorConfig = this.ckeditor.config;
   difficultyOptions = QUESTION_DIFFICULTIES;
   bloomTaxonomy = BLOOM_TAXONOMY;
   questionTypes: QuestionType[] = [];
@@ -283,7 +284,7 @@ export class QuestionsDetailComponent implements OnInit {
         this.getQuestion();
       },
       error: (error) => {
-        // this.error = error.status || 500; // TODO: Remover essa merda
+        this.error = error.status || 500;
         this.loading = false;
       },
     });

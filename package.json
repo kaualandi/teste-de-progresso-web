@@ -35,7 +35,6 @@
     "@ckeditor/ckeditor5-angular": "^9.0.0",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
-    "@wiris/mathtype-ckeditor5": "^8.11.1",
     "@zxcvbn-ts/core": "^3.0.4",
     "@zxcvbn-ts/language-common": "^3.0.4",
     "@zxcvbn-ts/language-pt-br": "^3.0.2",
