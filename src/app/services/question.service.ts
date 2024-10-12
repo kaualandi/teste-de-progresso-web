@@ -144,6 +144,12 @@ export class QuestionService {
   }
 
   questionStatusName(question: Question) {
+    if (
+      QuestionStatus.WAITING_REVIEW === question.status &&
+      question.reported_by === this.user.id
+    ) {
+      return 'Aguardando meu Parecer';
+    }
     return QUESTION_STATUS_NAME[question.status];
   }
 }

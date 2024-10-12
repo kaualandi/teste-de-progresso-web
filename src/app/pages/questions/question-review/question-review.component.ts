@@ -33,7 +33,7 @@ export class QuestionReviewComponent implements OnInit {
 
   id: string = this.route.snapshot.params['id'];
   user = this.storage.myself;
-  title = 'Revisar';
+  title = '';
   loading = false;
   loadingSubmit = false;
   loadingHistoryReview = false;
