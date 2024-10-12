@@ -4,10 +4,7 @@
   <mat-radio-group [formControl]="role">
     <mat-radio-button *ngFor="let role of roles; index as i" [value]="role.id">
       <p class="role f-18"> {{ role.role }} </p>
-      <p class="curses" *ngIf="role.multipleCurses">
-        {{ getCursesList(role.curses) }}
-      </p>
-      <mat-form-field *ngIf="!role.multipleCurses">
+      <mat-form-field>
         <mat-label>Curso</mat-label>
         <mat-select [formControl]="getCurseControl(i)">
           <mat-option *ngFor="let curse of role.curses" [value]="curse.id">
@@ -21,5 +18,7 @@
 
 <mat-dialog-actions align="end">
   <button mat-button matDialogClose>Cancelar</button>
-  <button mat-flat-button color="primary">Confirmar alteração</button>
+  <button mat-flat-button color="primary" (click)="confirmUserCourse()"
+    >Confirmar alteração</button
+  >
 </mat-dialog-actions>

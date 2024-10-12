@@ -71,4 +71,8 @@ export class AuthService {
     body['new_password'] = Md5.init(body['new_password']).toUpperCase();
     return this.http.post('core/change-password-forgot-password/', body);
   }
+
+  changeUserCourse(body: BodyJson) {
+    return this.http.post('role/link_course_role/', body);
+  }
 }
