@@ -22,8 +22,9 @@ export class ChangeRoleModalComponent implements OnInit {
     private dialogRef: MatDialogRef<ChangeRoleModalComponent>
   ) {}
 
-  role = this.fb.control(this.storage.myself.users_course_active);
+  loading = false;
   curseOfRoles = this.fb.array([this.fb.control(1)]);
+  role = this.fb.control(this.storage.myself.users_course_active);
 
   roles = [
     {
@@ -61,6 +62,7 @@ export class ChangeRoleModalComponent implements OnInit {
 
     if (curseIndex === -1) return;
 
+    this.loading = true;
     this.authService
       .changeUserCourse({
         user_course: this.roles[roleIndex].curses[curseIndex].id,
@@ -69,6 +71,7 @@ export class ChangeRoleModalComponent implements OnInit {
         this.storage.myself.users_course_active =
           this.roles[roleIndex].curses[curseIndex].id;
         this.storage.changeUser();
+        this.loading = false;
         this.dialogRef.close();
       });
   }

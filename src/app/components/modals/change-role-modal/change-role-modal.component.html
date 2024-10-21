@@ -18,7 +18,13 @@
 
 <mat-dialog-actions align="end">
   <button mat-button matDialogClose>Cancelar</button>
-  <button mat-flat-button color="primary" (click)="confirmUserCourse()"
-    >Confirmar alteração</button
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="confirmUserCourse()"
+    [disabled]="loading"
   >
+    Confirmar alteração
+    <loading *ngIf="loading" />
+  </button>
 </mat-dialog-actions>
