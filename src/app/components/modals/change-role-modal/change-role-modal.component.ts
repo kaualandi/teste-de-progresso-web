@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from '@app/services/auth.service';
 import { StorageService } from '@app/services/storage.service';
 
@@ -17,7 +18,8 @@ export class ChangeRoleModalComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private storage: StorageService,
-    private authService: AuthService
+    private authService: AuthService,
+    private dialogRef: MatDialogRef<ChangeRoleModalComponent>
   ) {}
 
   role = this.fb.control(this.storage.myself.users_course_active);
@@ -67,6 +69,7 @@ export class ChangeRoleModalComponent implements OnInit {
         this.storage.myself.users_course_active =
           this.roles[roleIndex].curses[curseIndex].id;
         this.storage.changeUser();
+        this.dialogRef.close();
       });
   }
 

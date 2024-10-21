@@ -134,6 +134,8 @@ export class UserDetailComponent implements OnInit {
     this.formInfors.patchValue(this.user);
   }
 
+  handleLinkCourseRole() {}
+
   resetUserPassword() {}
   resetUserPermissions() {}
 

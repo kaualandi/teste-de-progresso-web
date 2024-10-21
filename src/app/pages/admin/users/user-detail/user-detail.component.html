@@ -155,7 +155,10 @@
                 <mat-panel-title>Vincular curso</mat-panel-title>
               </mat-expansion-panel-header>
 
-              <form [formGroup]="formNewCourse">
+              <form
+                [formGroup]="formNewCourse"
+                (ngSubmit)="handleLinkCourseRole()"
+              >
                 <mat-form-field>
                   <mat-label>Curso</mat-label>
                   <mat-select formControlName="course_id">

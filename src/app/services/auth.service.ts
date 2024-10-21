@@ -64,15 +64,15 @@ export class AuthService {
   }
 
   forgotPassword(email: string) {
-    return this.http.post('core/forgot-password/', { email });
+    return this.http.post('/core/forgot-password/', { email });
   }
 
   rescurePassword(body: BodyJson) {
     body['new_password'] = Md5.init(body['new_password']).toUpperCase();
-    return this.http.post('core/change-password-forgot-password/', body);
+    return this.http.post('/core/change-password-forgot-password/', body);
   }
 
   changeUserCourse(body: BodyJson) {
-    return this.http.post('role/link_course_role/', body);
+    return this.http.patch('/role/role_active/', body);
   }
 }
