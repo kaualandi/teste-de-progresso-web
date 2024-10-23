@@ -17,7 +17,7 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button matDialogClose>Cancelar</button>
+  <button mat-button matDialogClose [disabled]="loading">Cancelar</button>
   <button
     mat-flat-button
     color="primary"
