@@ -49,8 +49,8 @@ export class UserDetailComponent implements OnInit {
   });
 
   formNewCourse = this.fb.nonNullable.group({
-    course_id: ['', [Validators.required]],
-    role_id: ['', [Validators.required]],
+    course: [0, [Validators.required]],
+    role: [0, [Validators.required]],
   });
 
   ngOnInit(): void {
@@ -134,7 +134,27 @@ export class UserDetailComponent implements OnInit {
     this.formInfors.patchValue(this.user);
   }
 
-  handleLinkCourseRole() {}
+  handleLinkCourseRole() {
+    if (this.formNewCourse.invalid) {
+      this.formNewCourse.markAllAsTouched();
+      return;
+    }
+
+    this.loadingSave = 3;
+    this.userService
+      .linkCourseRole(this.id, this.formNewCourse.getRawValue())
+      .subscribe({
+        next: () => {
+          this.loadingSave = 0;
+          this.getUser();
+          this.notifier.notify('success', 'Curso vinculado com sucesso!');
+        },
+        error: (error) => {
+          this.userService.formErrorHandler(this.formNewCourse, error.error);
+          this.loadingSave = 0;
+        },
+      });
+  }
 
   resetUserPassword() {}
   resetUserPermissions() {}

@@ -1,6 +1,6 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User, UserCreate } from '@app/models/user';
+import { ILinkUserCourse, User, UserCreate } from '@app/models/user';
 import { Md5 } from 'md5-typescript';
 import { forkJoin } from 'rxjs';
 import { CourseService } from './course.service';
@@ -54,5 +54,12 @@ export class UserService {
       this.courseService.getCourses(),
       this.roleService.getRoles(),
     ]);
+  }
+
+  linkCourseRole(userId: number, body: ILinkUserCourse) {
+    return this.http.post(`/user/link_course_role/`, {
+      ...body,
+      user: userId,
+    });
   }
 }

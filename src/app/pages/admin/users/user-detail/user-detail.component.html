@@ -161,7 +161,7 @@
               >
                 <mat-form-field>
                   <mat-label>Curso</mat-label>
-                  <mat-select formControlName="course_id">
+                  <mat-select formControlName="course">
                     <mat-option
                       *ngFor="let course of courses"
                       [value]="course.id"
@@ -171,7 +171,7 @@
                   </mat-select>
                   <mat-error>
                     {{
-                      formNewCourse.controls.course_id.errors
+                      formNewCourse.controls.course.errors
                         | formError
                         | translate
                     }}
@@ -180,16 +180,14 @@
 
                 <mat-form-field>
                   <mat-label>Perfil</mat-label>
-                  <mat-select formControlName="role_id">
+                  <mat-select formControlName="role">
                     <mat-option *ngFor="let role of roles" [value]="role.id">
                       {{ role.name }}
                     </mat-option>
                   </mat-select>
                   <mat-error>
                     {{
-                      formNewCourse.controls.role_id.errors
-                        | formError
-                        | translate
+                      formNewCourse.controls.role.errors | formError | translate
                     }}
                   </mat-error>
                 </mat-form-field>

@@ -4,8 +4,10 @@ export interface UserCourse {
   id: number;
   course: number;
   role: number;
+  center: number;
   role_name: string;
   course_name: string;
+  center_name: string;
   user: number;
 }
 
@@ -31,3 +33,5 @@ export interface Token {
   token: string;
   user: User;
 }
+
+export type ILinkUserCourse = Pick<UserCourse, 'course' | 'role'>;
