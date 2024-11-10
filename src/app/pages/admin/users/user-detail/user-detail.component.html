@@ -213,18 +213,26 @@
               </mat-expansion-panel-header>
 
               <div class="list-courses">
-                <div class="course-item" *ngFor="let course of linkedCourses">
+                <div
+                  class="course-item"
+                  *ngFor="let course of user.user_course"
+                >
                   <div class="course-info">
-                    <p>{{ course.course }}</p>
-                    <p class="role f-12">{{ course.role }}</p>
+                    <p>{{ course.course_name }}</p>
+                    <p class="role f-12">{{ course.role_name }}</p>
                   </div>
                   <div class="course-actions">
-                    <button mat-icon-button color="warn">
-                      <!-- (click)="handleRemoveCourse(course)" -->
+                    <button
+                      mat-icon-button
+                      color="warn"
+                      (click)="handleRemoveCourse(course)"
+                    >
                       <i icon="trash"></i>
                     </button>
                   </div>
                 </div>
+
+                <p *ngIf="!user.user_course?.length">Nenhum curso vinculado</p>
               </div>
             </mat-expansion-panel>
           </mat-accordion>

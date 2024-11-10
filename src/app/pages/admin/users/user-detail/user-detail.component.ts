@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { ConfirmModalComponent } from '@app/components/modals/confirm-modal/confirm-modal.component';
 import { Course } from '@app/models/course';
 import { Role } from '@app/models/role';
-import { User } from '@app/models/user';
+import { User, UserCourse } from '@app/models/user';
 import { UserService } from '@app/services/user.service';
 import { NotifierService } from 'angular-notifier';
 
@@ -17,7 +19,8 @@ export class UserDetailComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private userService: UserService,
-    private notifier: NotifierService
+    private notifier: NotifierService,
+    private dialog: MatDialog
   ) {}
 
   id = this.route.snapshot.params['id'];
@@ -27,11 +30,6 @@ export class UserDetailComponent implements OnInit {
   error = 0;
   courses: Course[] = [];
   roles: Role[] = [];
-  linkedCourses = [
-    { course: 'CCOMP', role: 'Professor' },
-    { course: 'Engenharia', role: 'NDE' },
-    { course: 'Medicina', role: 'Diretor de Centro' },
-  ];
 
   formInfors = this.fb.nonNullable.group({
     profile_image: [''],
@@ -154,6 +152,32 @@ export class UserDetailComponent implements OnInit {
           this.loadingSave = 0;
         },
       });
+  }
+
+  handleRemoveCourse(course: UserCourse) {
+    const dialogRef = this.dialog.open(ConfirmModalComponent, {
+      data: {
+        title: 'Remover curso',
+        message: 'Deseja realmente remover este curso?',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.loadingSave = 4;
+        this.userService.removeCourseRole(course.id).subscribe({
+          next: () => {
+            this.loadingSave = 0;
+            this.getUser();
+            this.notifier.notify('success', 'Curso desvinculado com sucesso!');
+          },
+          error: () => {
+            this.loadingSave = 0;
+            this.notifier.notify('error', 'Erro ao remover curso!');
+          },
+        });
+      }
+    });
   }
 
   resetUserPassword() {}

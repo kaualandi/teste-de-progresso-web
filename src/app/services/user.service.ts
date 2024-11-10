@@ -57,9 +57,13 @@ export class UserService {
   }
 
   linkCourseRole(userId: number, body: ILinkUserCourse) {
-    return this.http.post(`/user/link_course_role/`, {
+    return this.http.post(`/role/binding_course_role/`, {
       ...body,
       user: userId,
     });
+  }
+
+  removeCourseRole(id: number) {
+    return this.http.delete(`/role/unbinding_course_role/${id}/`);
   }
 }

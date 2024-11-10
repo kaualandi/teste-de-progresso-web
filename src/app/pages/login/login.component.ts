@@ -3,6 +3,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { zoomInAnimation } from '@animations/route-animation';
+import {
+  ChangeRoleModalComponent,
+  CONFIG,
+} from '@app/components/modals/change-role-modal/change-role-modal.component';
 import { ForgotPasswordComponent } from '@app/components/modals/forgot-password/forgot-password.component';
 import { CookiesLoginComponent } from '@components/modals/cookies-login/cookies-login.component';
 import { environment } from '@env';
@@ -56,7 +60,14 @@ export class LoginComponent implements OnInit {
       next: (response) => {
         this.loading = false;
         this.authService.setToken(response.token, body['remember'] as boolean);
-        this.router.navigate(['/']);
+
+        if (response.user.users_course_active) {
+          this.router.navigate(['/']);
+        }
+
+        if (!response.user.users_course_active) {
+          this.openChangeRoleModal();
+        }
       },
       error: (error) => {
         this.authService.formErrorHandler(this.form, error.error);
@@ -71,6 +82,18 @@ export class LoginComponent implements OnInit {
 
       if (!this.storage.cookies) {
         this.openCookieDialog();
+      }
+    });
+  }
+
+  openChangeRoleModal() {
+    const dialogRef = this.dialog.open(ChangeRoleModalComponent, {
+      ...CONFIG,
+      disableClose: true,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.router.navigate(['/']);
       }
     });
   }
