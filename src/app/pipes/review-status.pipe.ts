@@ -6,7 +6,7 @@ import { ReviewFeedbackType } from '@app/models/question';
   name: 'reviewStatus',
 })
 export class ReviewStatusPipe implements PipeTransform {
-  transform(value: ReviewFeedbackType) {
-    return FEEDBACK_TYPES.find((t) => t.value === value)?.label;
+  transform(value?: ReviewFeedbackType) {
+    return FEEDBACK_TYPES.find((t) => t.value === value)?.label || '';
   }
 }

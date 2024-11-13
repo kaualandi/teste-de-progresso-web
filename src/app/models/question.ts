@@ -79,7 +79,7 @@ export enum ReviewFeedbackType {
 
 export interface ReviewMessage {
   id: number;
-  feedback_type: ReviewFeedbackType;
+  feedback_type?: ReviewFeedbackType;
   text: string;
   created_at: string;
   updated_at: string;
