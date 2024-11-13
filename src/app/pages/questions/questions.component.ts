@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   QuestionFilter,
   QuestionsByTab,
@@ -14,7 +15,9 @@ import { StorageService } from '@app/services/storage.service';
 export class QuestionsComponent implements OnInit {
   constructor(
     private questionService: QuestionService,
-    private storage: StorageService
+    private storage: StorageService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   loading = false;
@@ -23,6 +26,7 @@ export class QuestionsComponent implements OnInit {
   user = this.storage.myself;
   questions: QuestionsByTab[] = [];
   QuestionStatus = QuestionStatus;
+  selectedIndex = 0;
 
   ngOnInit() {
     this.loading = true;
@@ -36,6 +40,11 @@ export class QuestionsComponent implements OnInit {
         this.questions = this.questionService.organizeQuestions(response);
         this.loading = false;
         this.filtering = false;
+
+        const routerTabIndex = this.route.snapshot.queryParams['tab'];
+        if (routerTabIndex) {
+          this.selectedIndex = +routerTabIndex;
+        }
       },
       error: (error) => {
         this.error = error.status || 500;
@@ -53,5 +62,14 @@ export class QuestionsComponent implements OnInit {
     if (keyIndex === tabIndex) return undefined;
     const length = questionsTab.questions.length;
     return length || undefined;
+  }
+
+  selectedIndexChange(index: number) {
+    this.selectedIndex = index;
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { tab: index },
+      queryParamsHandling: 'merge',
+    });
   }
 }

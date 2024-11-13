@@ -3,6 +3,11 @@ main {
     header {
       .col {
         width: 100%;
+        &.title {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
       }
     }
     .content {

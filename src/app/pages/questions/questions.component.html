@@ -6,7 +6,12 @@
         [filtering]="filtering"
       />
 
-      <mat-tab-group #tabGroup dynamicHeight>
+      <mat-tab-group
+        #tabGroup
+        dynamicHeight
+        [selectedIndex]="selectedIndex"
+        (selectedIndexChange)="selectedIndexChange($event)"
+      >
         <mat-tab *ngFor="let tabQuestion of questions; let i = index">
           <ng-template mat-tab-label>
             <span
