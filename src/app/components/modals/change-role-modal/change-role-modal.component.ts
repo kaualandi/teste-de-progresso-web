@@ -23,14 +23,14 @@ export class ChangeRoleModalComponent implements OnInit {
   ) {}
 
   loading = false;
-  curseOfRoles = this.fb.array([this.fb.control(1)]);
+  courseOfRoles = this.fb.array([this.fb.control(1)]);
   role = this.fb.control(this.storage.myself.users_course_active);
 
   roles = [
     {
       id: 1,
       role: 'NDE',
-      curses: [
+      courses: [
         {
           id: 1,
           name: 'Administração',
@@ -40,12 +40,12 @@ export class ChangeRoleModalComponent implements OnInit {
   ];
 
   ngOnInit() {
-    this.curseOfRoles.clear();
+    this.courseOfRoles.clear();
     this.roles = [];
     this.organizeRoles();
 
     this.roles.forEach((role) => {
-      this.curseOfRoles.push(this.fb.control(role.curses[0].id));
+      this.courseOfRoles.push(this.fb.control(role.courses[0].id));
     });
   }
 
@@ -56,23 +56,23 @@ export class ChangeRoleModalComponent implements OnInit {
 
     if (roleIndex === -1) return;
 
-    const curseIndex = this.roles[roleIndex].curses.findIndex(
-      (curse) => curse.id === this.getCurseControl(roleIndex).value
+    const courseIndex = this.roles[roleIndex].courses.findIndex(
+      (c) => c.id === this.getCourseControl(roleIndex).value
     );
 
-    if (curseIndex === -1) return;
+    if (courseIndex === -1) return;
 
     this.loading = true;
     this.authService
       .changeUserCourse({
-        user_course: this.roles[roleIndex].curses[curseIndex].id,
+        user_course: this.roles[roleIndex].courses[courseIndex].id,
       })
       .subscribe(() => {
         this.storage.myself.users_course_active =
-          this.roles[roleIndex].curses[curseIndex].id;
+          this.roles[roleIndex].courses[courseIndex].id;
         this.storage.changeUser();
         this.loading = false;
-        this.dialogRef.close();
+        this.dialogRef.close(true);
       });
   }
 
@@ -87,7 +87,7 @@ export class ChangeRoleModalComponent implements OnInit {
       );
 
       if (roleIndex !== -1) {
-        this.roles[roleIndex].curses.push({
+        this.roles[roleIndex].courses.push({
           id: userCourse.id,
           name: userCourse.course_name,
         });
@@ -97,7 +97,7 @@ export class ChangeRoleModalComponent implements OnInit {
       this.roles.push({
         id: userCourse.role,
         role: userCourse.role_name,
-        curses: [
+        courses: [
           {
             id: userCourse.id,
             name: userCourse.course_name,
@@ -107,7 +107,7 @@ export class ChangeRoleModalComponent implements OnInit {
     });
   }
 
-  getCurseControl(index: number) {
-    return this.curseOfRoles.at(index);
+  getCourseControl(index: number) {
+    return this.courseOfRoles.at(index);
   }
 }

@@ -60,6 +60,7 @@ export class LoginComponent implements OnInit {
       next: (response) => {
         this.loading = false;
         this.authService.setToken(response.token, body['remember'] as boolean);
+        this.storage.myself = response.user;
 
         if (response.user.users_course_active || response.user.is_admin) {
           this.router.navigate(['/']);
