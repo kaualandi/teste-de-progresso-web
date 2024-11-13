@@ -50,7 +50,6 @@
             </div>
 
             <div class="buttons end">
-              <a mat-flat-button routerLink="..">Cancelar</a>
               <button
                 type="button"
                 mat-flat-button
@@ -60,11 +59,12 @@
                 Salvar Rascunho
                 <loading *ngIf="loadingActions === 'draft'" />
               </button>
+              <a mat-flat-button routerLink="..">Cancelar</a>
               <button
                 type="submit"
                 mat-flat-button
+                matStepperNext
                 color="primary"
-                matSteppxerNext
               >
                 Avançar
               </button>
@@ -119,9 +119,6 @@
             </div>
 
             <div class="buttons end">
-              <button type="button" mat-flat-button matStepperPrevious>
-                Voltar
-              </button>
               <button
                 type="button"
                 mat-flat-button
@@ -130,6 +127,9 @@
               >
                 Salvar Rascunho
                 <loading *ngIf="loadingActions === 'draft'" />
+              </button>
+              <button type="button" mat-flat-button matStepperPrevious>
+                Voltar
               </button>
               <button
                 type="submit"
@@ -162,9 +162,6 @@
             </div>
 
             <div class="buttons end">
-              <button type="button" mat-flat-button matStepperPrevious>
-                Voltar
-              </button>
               <button
                 type="button"
                 mat-flat-button
@@ -173,6 +170,9 @@
               >
                 Salvar Rascunho
                 <loading *ngIf="loadingActions === 'draft'" />
+              </button>
+              <button type="button" mat-flat-button matStepperPrevious>
+                Voltar
               </button>
               <button
                 type="submit"
@@ -353,9 +353,6 @@
               </mat-error>
             </mat-form-field>
             <div class="buttons end">
-              <button type="button" mat-flat-button matStepperPrevious>
-                Voltar
-              </button>
               <button
                 type="button"
                 mat-flat-button
@@ -365,6 +362,9 @@
               >
                 Excluir rascunho
                 <loading *ngIf="loadingActions === 'delete'" />
+              </button>
+              <button type="button" mat-flat-button matStepperPrevious>
+                Voltar
               </button>
               <button
                 type="button"
