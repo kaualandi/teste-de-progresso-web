@@ -4,6 +4,7 @@ import { QUESTION_STATUS_NAME, QUESTION_TABS } from '@app/constants/questions';
 import {
   Question,
   QuestionFilter,
+  QuestionFromList,
   QuestionsByTab,
   QuestionStatus,
   QuestionType,
@@ -44,7 +45,7 @@ export class QuestionService {
         .append('order_direction', filters.order_direction);
     }
 
-    return this.http.get<Question[]>('/question/my_questions', query);
+    return this.http.get<QuestionFromList[]>('/question/my_questions', query);
   }
 
   getQuestion(id: string) {
@@ -101,12 +102,12 @@ export class QuestionService {
     });
   }
 
-  organizeQuestions(questions: Question[]): QuestionsByTab[] {
+  organizeQuestions(questions: QuestionFromList[]): QuestionsByTab[] {
     const tabsOrganized = this.questionTabsOrder.map((tab) => {
       const tabObj = QUESTION_TABS.find((t) => t.value === tab);
       return {
         ...tabObj!,
-        questions: [] as Question[],
+        questions: [] as QuestionFromList[],
       };
     });
 

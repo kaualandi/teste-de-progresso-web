@@ -20,8 +20,8 @@
 
         <div class="list-body">
           <p class="statement"> {{ question.body | plaintext }} </p>
-          <p class="f-12">Assunto: {{ question.subject_instance?.name }}</p>
-          <p class="f-12">Tipo: {{ question.question_type_instance?.name }}</p>
+          <p class="f-12">Assunto: {{ question.subject_name }}</p>
+          <p class="f-12">Tipo: {{ question.question_type_name }}</p>
           <p class="f-12">
             Habilidade Cognitiva: {{ question.bloom_taxonomy | bloomTaxonomy }}
           </p>

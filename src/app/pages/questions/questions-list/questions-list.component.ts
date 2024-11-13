@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Question } from '@app/models/question';
+import { QuestionFromList } from '@app/models/question';
 
 @Component({
   selector: 'app-questions-list',
@@ -7,6 +7,6 @@ import { Question } from '@app/models/question';
   styleUrls: ['./questions-list.component.scss'],
 })
 export class QuestionsListComponent {
-  @Input() questions: Question[] = [];
+  @Input() questions: QuestionFromList[] = [];
   @Input() canAdd = false;
 }

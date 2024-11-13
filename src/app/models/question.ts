@@ -63,6 +63,14 @@ export interface Question {
   reported_by_instance?: User;
 }
 
+export type QuestionFromList = Pick<
+  Question,
+  'id' | 'body' | 'difficulty' | 'status' | 'reported_by' | 'bloom_taxonomy'
+> & {
+  subject_name: string;
+  question_type_name: string;
+};
+
 export enum ReviewFeedbackType {
   REQUEST_CHANGES = 0,
   APPROVE = 1,
@@ -83,7 +91,7 @@ export interface ReviewMessage {
 export interface QuestionsByTab {
   value: number;
   label: string;
-  questions: Question[];
+  questions: QuestionFromList[];
 }
 
 export interface QuestionFilter {
