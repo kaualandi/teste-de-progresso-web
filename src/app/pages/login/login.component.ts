@@ -61,11 +61,11 @@ export class LoginComponent implements OnInit {
         this.loading = false;
         this.authService.setToken(response.token, body['remember'] as boolean);
 
-        if (response.user.users_course_active && !response.user.is_admin) {
+        if (response.user.users_course_active || response.user.is_admin) {
           this.router.navigate(['/']);
         }
 
-        if (!response.user.users_course_active) {
+        if (!response.user.users_course_active && !response.user.is_admin) {
           this.openChangeRoleModal();
         }
       },

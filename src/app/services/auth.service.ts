@@ -27,7 +27,7 @@ export class AuthService {
   }
 
   getMe() {
-    return this.http.get<User>('/user/logged_user/');
+    return this.http.get<User>('/user/logged-user/');
   }
 
   get ssl() {
