@@ -17,6 +17,7 @@ import { PlaintextPipe } from '@app/pipes/plaintext.pipe';
 import { CkeditorService } from '@app/services/ckeditor.service';
 import { BodyJson } from '@app/services/http.service';
 import { QuestionService } from '@app/services/question.service';
+import { StorageService } from '@app/services/storage.service';
 import { requiredRichTextValidator } from '@app/utils/validators';
 import { NotifierService } from 'angular-notifier';
 import { ClassicEditor } from 'ckeditor5';
@@ -37,7 +38,8 @@ export class QuestionsDetailComponent implements OnInit {
     private notifier: NotifierService,
     private dialog: MatDialog,
     private plainTextPipe: PlaintextPipe,
-    private ckeditor: CkeditorService
+    private ckeditor: CkeditorService,
+    private storage: StorageService
   ) {}
 
   id: string = this.route.snapshot.params['id'];
@@ -55,6 +57,7 @@ export class QuestionsDetailComponent implements OnInit {
   reports: User[] = [];
   status?: QuestionStatus;
   QuestionStatus = QuestionStatus;
+  showReportedBySelection = true;
 
   formBody = this.fb.group({
     instruction: [''],
@@ -232,6 +235,10 @@ export class QuestionsDetailComponent implements OnInit {
           ...question,
           author: question.authorship === 'UNIFESO' ? 'OWN' : 'OTHER',
         });
+
+        if (question.created_by !== this.storage.myself.id) {
+          this.showReportedBySelection = false;
+        }
         this.loading = false;
       },
       error: (error) => {

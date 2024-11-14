@@ -6,6 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '@app/services/auth.service';
 
 @Component({
   selector: 'page-error',
@@ -14,7 +15,10 @@ import { ActivatedRoute } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PageErrorComponent implements OnInit, OnChanges {
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private authService: AuthService
+  ) {}
 
   @Input() code = 0;
 
@@ -29,5 +33,9 @@ export class PageErrorComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.ngOnInit();
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

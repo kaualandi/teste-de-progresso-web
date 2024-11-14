@@ -320,7 +320,7 @@
                   </mat-error>
                 </mat-form-field>
               </div>
-              <div class="col">
+              <div class="col" *ngIf="showReportedBySelection">
                 <mat-form-field>
                   <mat-label>Revisor</mat-label>
                   <mat-select formControlName="reported_by">

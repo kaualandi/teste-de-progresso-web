@@ -8,7 +8,7 @@
     <a mat-flat-button color="primary" routerLink="/" *ngIf="code !== 401">
       {{ 'navbar.home' | translate }}
     </a>
-    <a mat-flat-button color="primary" routerLink="/login" *ngIf="code === 401">
+    <a mat-flat-button color="primary" (click)="logout()" *ngIf="code === 401">
       {{ 'navbar.login' | translate }}
     </a>
     <a mat-button routerLink="/help">Ajuda</a>

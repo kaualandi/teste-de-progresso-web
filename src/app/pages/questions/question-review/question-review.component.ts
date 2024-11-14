@@ -93,6 +93,11 @@ export class QuestionReviewComponent implements OnInit {
   }
 
   handleReviewFormSubmit() {
+    if (this.review.invalid) {
+      this.review.markAllAsTouched();
+      return;
+    }
+
     let type = ReviewFeedbackType.ANSWER;
     if (this.question.status === QuestionStatus.WAITING_REVIEW) {
       type = this.approveStatus.value;
