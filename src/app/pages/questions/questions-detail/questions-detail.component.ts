@@ -190,8 +190,7 @@ export class QuestionsDetailComponent implements OnInit {
 
     observable.subscribe({
       next: (question) => {
-        console.log(question);
-        this.router.navigate(['/questions']);
+        this.router.navigate(['/questions', question.id, 'review']);
         this.notifier.notify(
           'success',
           `Questão ${this.id ? 'atualizada' : 'cadastrada'} com sucesso!`
@@ -246,7 +245,7 @@ export class QuestionsDetailComponent implements OnInit {
     this.loadingActions = 'delete';
     this.questionService.deleteQuestion(this.id).subscribe({
       next: () => {
-        this.router.navigate(['/questions']);
+        this.router.navigate(['/questions/']);
         this.notifier.notify('success', 'Questão apagada com sucesso.');
       },
       error: () => {
