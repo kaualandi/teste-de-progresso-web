@@ -14,12 +14,25 @@ export const permissionGuard: CanActivateFn = async (route) => {
     storage.myself = user;
   }
 
-  const path = route.routeConfig?.path;
-  const access = storage.myself.level_access.find(
-    (level) => level.router === path
+  const activeRole = storage.myself.user_course.find(
+    (uc) => uc.id === storage.myself.users_course_active
   );
 
-  if (access && access.read) {
+  if (!activeRole && !storage.myself.is_admin) {
+    authService.logout();
+    return false;
+  }
+
+  if (route.data['isAdmin'] === storage.myself.is_admin) {
+    return true;
+  }
+
+  const roles = route.data['roles'] as number[] | undefined;
+  if (!roles) {
+    return true;
+  }
+
+  if (activeRole && roles.includes(activeRole.role)) {
     return true;
   }
 

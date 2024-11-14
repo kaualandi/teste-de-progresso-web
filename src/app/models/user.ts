@@ -22,7 +22,7 @@ export interface User {
   created_at: string;
   updated_at: string;
   user_course: UserCourse[];
-  users_course_active: number;
+  users_course_active: number | null;
 }
 
 export interface UserCreate extends User {

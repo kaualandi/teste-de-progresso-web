@@ -6,10 +6,10 @@ import { CourseDetailComponent } from './courses/course-detail/course-detail.com
 import { CoursesComponent } from './courses/courses.component';
 import { RoleDetailComponent } from './roles/role-detail/role-detail.component';
 import { RolesComponent } from './roles/roles.component';
-import { UserDetailComponent } from './users/user-detail/user-detail.component';
-import { UsersComponent } from './users/users.component';
 import { SubjectDetailComponent } from './subjects/subject-detail/subject-detail.component';
 import { SubjectsComponent } from './subjects/subjects.component';
+import { UserDetailComponent } from './users/user-detail/user-detail.component';
+import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
   {

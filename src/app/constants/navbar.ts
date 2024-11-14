@@ -1,71 +1,75 @@
+const ALL_ROLES = [1, 2, 3, 4, 5, 6];
+
 export const NAVBAR_PAGES: {
   label: string;
   icon: string;
   link: string;
-  permissions: string[];
+  roles: number[];
   isAdmin: boolean;
 }[] = [
   {
     label: 'Início',
     icon: 'house',
     link: '/',
-    permissions: ['ADMIN', 'TEACHER'],
+    roles: ALL_ROLES,
     isAdmin: false,
   },
   {
     label: 'Questões',
     icon: 'file',
     link: '/questions',
-    permissions: ['ADMIN', 'TEACHER'],
+    roles: [1, 2, 3],
     isAdmin: false,
   },
   {
     label: 'Provas',
     icon: 'book',
     link: '/exams',
-    permissions: ['ADMIN', 'TEACHER'],
+    roles: [1, 3, 4],
     isAdmin: false,
   },
   {
     label: 'Ajustes',
     icon: 'gear',
     link: '/settings',
-    permissions: ['ADMIN', 'TEACHER'],
+    roles: ALL_ROLES,
     isAdmin: false,
   },
+
+  // ! ---- ADMIN PAGES ---- !
   {
     label: 'Usuários',
     icon: 'users',
     link: '/admin/users',
-    permissions: [],
+    roles: [],
     isAdmin: true,
   },
   {
     label: 'Cursos',
     icon: 'graduation_cap',
     link: '/admin/courses',
-    permissions: [],
+    roles: [],
     isAdmin: true,
   },
   {
     label: 'Perfis',
     icon: 'user_shield',
     link: '/admin/roles',
-    permissions: [],
+    roles: [],
     isAdmin: true,
   },
   {
     label: 'Assuntos',
     icon: 'tag',
     link: '/admin/subjects',
-    permissions: [],
+    roles: [],
     isAdmin: true,
   },
   {
     label: 'Eixos',
     icon: 'diagram_project',
     link: '/admin/axes',
-    permissions: [],
+    roles: [],
     isAdmin: true,
   },
 ];

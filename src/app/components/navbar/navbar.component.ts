@@ -55,7 +55,9 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-    this.getMe();
+
+    if (!this.storage.myself.id) this.getMe();
+    if (this.storage.myself.id) this.loadUserPreferencesAndLinksByRole();
 
     this.user$.subscribe({
       next: () => {
@@ -74,23 +76,42 @@ export class NavbarComponent implements OnInit {
   getMe() {
     this.authService.getMe().subscribe({
       next: (data) => {
-        this.user = data;
-        // ? Comentado por que usuário não possui permissão (por enquanto)
-        this.navbarPages = NAVBAR_PAGES.filter(
-          (page) => page.isAdmin === data.is_admin
-        );
         this.storage.myself = data;
-        this.loading = false;
-
-        if (data.is_admin) {
-          this.themeService.setAdminTheme(true);
-        }
+        this.loadUserPreferencesAndLinksByRole();
       },
       error: (error) => {
         this.error = error.status || 500;
         this.loading = false;
       },
     });
+  }
+
+  loadUserPreferencesAndLinksByRole() {
+    this.user = this.storage.myself;
+    this.navbarPages = NAVBAR_PAGES.filter(
+      (page) => page.isAdmin === this.user.is_admin
+    );
+
+    const activeRole = this.user.user_course.find(
+      (uc) => uc.id === this.user.users_course_active
+    );
+
+    if (!activeRole && !this.user.is_admin) {
+      this.authService.logout();
+      return;
+    }
+
+    if (activeRole && !this.user.is_admin) {
+      this.navbarPages = this.navbarPages.filter((page) =>
+        page.roles.includes(activeRole.role)
+      );
+    }
+
+    if (this.user.is_admin) {
+      this.themeService.setAdminTheme(true);
+    }
+
+    this.loading = false;
   }
 
   openChangeRoleModal() {
