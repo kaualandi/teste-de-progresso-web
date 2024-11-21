@@ -20,17 +20,6 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-
-    <mat-form-field>
-      <mat-label
-        >Categoria<i icon="loading" *ngIf="loadingCategories"></i
-      ></mat-label>
-      <mat-select formControlName="category">
-        <mat-option *ngFor="let category of categories" [value]="category.id">
-          {{ category.name }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
   </mat-dialog-content>
 
   <mat-dialog-actions align="end">

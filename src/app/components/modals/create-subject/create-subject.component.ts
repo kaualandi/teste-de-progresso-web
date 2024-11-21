@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { SubjectAxis, SubjectCategory } from '@app/models/subject';
+import { SubjectAxis } from '@app/models/subject';
 import { AxisService } from '@app/services/axis.service';
-import { CategoryService } from '@app/services/category.service';
 import { SubjectService } from '@app/services/subject.service';
 import { NotifierService } from 'angular-notifier';
 
@@ -19,7 +18,6 @@ export class CreateSubjectComponent implements OnInit {
     private fb: FormBuilder,
     private subjectService: SubjectService,
     private axisService: AxisService,
-    private categoryService: CategoryService,
     private notifier: NotifierService,
     private router: Router
   ) {
@@ -28,18 +26,14 @@ export class CreateSubjectComponent implements OnInit {
 
   loading = false;
   loadingAxes = false;
-  loadingCategories = false;
   axes: SubjectAxis[] = [];
-  categories: SubjectCategory[] = [];
   form = this.fb.nonNullable.group({
     name: ['', [Validators.required]],
     axis: [0, [Validators.required]],
-    category: [0, [Validators.required]],
   });
 
   ngOnInit(): void {
     this.getAxes();
-    this.getCategories();
   }
 
   getAxes() {
@@ -51,19 +45,6 @@ export class CreateSubjectComponent implements OnInit {
       },
       error: () => {
         this.loadingAxes = false;
-      },
-    });
-  }
-
-  getCategories() {
-    this.loadingCategories = true;
-    this.categoryService.getCategories().subscribe({
-      next: (response) => {
-        this.categories = response;
-        this.loadingCategories = false;
-      },
-      error: () => {
-        this.loadingCategories = false;
       },
     });
   }

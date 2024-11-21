@@ -7,7 +7,6 @@ export const ROLE_DICTIONARY = {
   'auth.permission': 'Permissão',
   'auth.group': 'Grupo',
   'questions.questiontype': 'Tipo de Questão',
-  'questions.category': 'Categoria',
   'authtoken.tokenproxy': 'Token Proxy',
   'questions.subject': 'Assunto',
   'users.user': 'Usuário',

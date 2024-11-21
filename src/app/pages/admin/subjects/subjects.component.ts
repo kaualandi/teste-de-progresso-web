@@ -25,7 +25,7 @@ export class SubjectsComponent implements OnInit {
   loadingTable = false;
   error = 0;
   subjects: Subject[] = [];
-  displayedColumns = ['name', 'axis', 'category', 'created_at', 'actions'];
+  displayedColumns = ['name', 'axis', 'created_at', 'actions'];
 
   filters = this.fb.nonNullable.group({
     search: [''],
