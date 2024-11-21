@@ -21,13 +21,14 @@
   </p>
 </mat-dialog-content>
 
-<mat-dialog-actions align="end" *ngIf="roles.length">
+<mat-dialog-actions align="end">
   <button mat-button matDialogClose [disabled]="loading">Cancelar</button>
   <button
     mat-flat-button
     color="primary"
     (click)="confirmUserCourse()"
     [disabled]="loading"
+    *ngIf="roles.length"
   >
     Confirmar alteração
     <loading *ngIf="loading" />
