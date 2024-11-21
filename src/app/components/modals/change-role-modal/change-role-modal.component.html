@@ -1,7 +1,7 @@
 <h1 matDialogTitle>Alterar Permissão e Cursos</h1>
 
 <mat-dialog-content>
-  <mat-radio-group [formControl]="role">
+  <mat-radio-group [formControl]="role" *ngIf="roles.length">
     <mat-radio-button *ngFor="let role of roles; index as i" [value]="role.id">
       <p class="role f-18"> {{ role.role }} </p>
       <mat-form-field>
@@ -14,9 +14,14 @@
       </mat-form-field>
     </mat-radio-button>
   </mat-radio-group>
+
+  <p class="empty-roles" *ngIf="!roles.length">
+    Não existe nenhum curso atribuido a você, por favor, entre em contato com o
+    administrador e solicite a atribuição de seus cursos.
+  </p>
 </mat-dialog-content>
 
-<mat-dialog-actions align="end">
+<mat-dialog-actions align="end" *ngIf="roles.length">
   <button mat-button matDialogClose [disabled]="loading">Cancelar</button>
   <button
     mat-flat-button
