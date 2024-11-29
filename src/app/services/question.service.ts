@@ -98,7 +98,7 @@ export class QuestionService {
 
   registerQuestion(id: string) {
     return this.http.patch<Question>(`/question/${id}/`, {
-      status: 'registered',
+      status: QuestionStatus.REGISTERED,
     });
   }
 
