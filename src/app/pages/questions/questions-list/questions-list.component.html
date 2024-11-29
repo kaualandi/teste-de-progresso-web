@@ -10,7 +10,10 @@
     </li>
 
     <li *ngFor="let question of questions" matRipple>
-      <a routerLink="{{ question.id }}/review">
+      <a
+        routerLink="{{ question.id }}/review"
+        [state]="{ data: { questions } }"
+      >
         <div class="title">
           <p class="f-16"> #{{ question.id }} </p>
           <span class="difficulty-badge badge-{{ question.difficulty }}">

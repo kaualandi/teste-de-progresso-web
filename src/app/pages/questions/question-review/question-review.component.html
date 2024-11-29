@@ -2,7 +2,7 @@
   <div class="container">
     <header>
       <div class="col title">
-        <button mat-icon-button prevPage>
+        <button mat-icon-button prevPage (click)="selectQuestion()">
           <i icon="angle_left"></i>
         </button>
         <h1> {{ title }} </h1>
@@ -287,5 +287,30 @@
 
     <page-error *ngIf="error" [code]="error" />
     <page-loading *ngIf="loading" />
+
+    <footer *ngIf="questions.length">
+      <div class="buttons between">
+        <a
+          mat-stroked-button
+          color="primary"
+          routerLink="/questions/{{ previousQuestion }}/review"
+          (click)="selectQuestion()"
+          [disabled]="!previousQuestion"
+          [state]="{ data: { questions } }"
+        >
+          Questão anterior
+        </a>
+        <a
+          mat-stroked-button
+          color="primary"
+          routerLink="/questions/{{ nextQuestion }}/review"
+          (click)="selectQuestion()"
+          [disabled]="!nextQuestion"
+          [state]="{ data: { questions } }"
+        >
+          Próxima questão
+        </a>
+      </div>
+    </footer>
   </div>
 </main>

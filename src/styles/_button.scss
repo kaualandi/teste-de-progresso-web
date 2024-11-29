@@ -1,9 +1,5 @@
 .mat-mdc-button-base {
   text-decoration: none;
-
-  &.mdc-button {
-    // border-radius: var(--br);
-  }
 }
 
 .buttons {
@@ -15,6 +11,9 @@
   }
   &.center {
     justify-content: center;
+  }
+  &.between {
+    justify-content: space-between;
   }
   &.wrap {
     flex-wrap: wrap;

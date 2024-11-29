@@ -16,6 +16,9 @@ import { QuestionService } from '@app/services/question.service';
 import { StorageService } from '@app/services/storage.service';
 import { NotifierService } from 'angular-notifier';
 
+interface ExtraData {
+  questions: Question[];
+}
 @Component({
   selector: 'app-question-review',
   templateUrl: './question-review.component.html',
@@ -29,7 +32,12 @@ export class QuestionReviewComponent implements OnInit {
     private dialog: MatDialog,
     private notifier: NotifierService,
     private storage: StorageService
-  ) {}
+  ) {
+    const data = this.router.getCurrentNavigation()?.extras.state?.['data'] as
+      | ExtraData
+      | undefined;
+    this.questions = data?.questions || [];
+  }
 
   id: string = this.route.snapshot.params['id'];
   user = this.storage.myself;
@@ -38,6 +46,7 @@ export class QuestionReviewComponent implements OnInit {
   loadingSubmit = false;
   loadingHistoryReview = false;
   error = 0;
+  questions: Question[] = [];
   question = {} as Question;
   review = new FormControl('', Validators.required);
   approveStatus = new FormControl(ReviewFeedbackType.ANSWER, {
@@ -186,11 +195,29 @@ export class QuestionReviewComponent implements OnInit {
     this.title = this.questionService.questionStatusName(this.question);
   }
 
+  selectQuestion() {
+    this.loading = true;
+    setTimeout(() => {
+      this.id = this.route.snapshot.params['id'];
+      this.ngOnInit();
+    }, 500);
+  }
+
   get correctAlternative() {
     return this.question.alternatives?.find((a) => a.correct);
   }
 
   get distractors() {
     return this.question.alternatives?.filter((a) => !a.correct);
+  }
+
+  get nextQuestion() {
+    const index = this.questions.findIndex((q) => q.id === +this.id);
+    return this.questions[index + 1]?.id;
+  }
+
+  get previousQuestion() {
+    const index = this.questions.findIndex((q) => q.id === +this.id);
+    return this.questions[index - 1]?.id;
   }
 }
