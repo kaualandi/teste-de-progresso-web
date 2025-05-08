@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  // base_url: 'https://teste-de-progresso-api.kaualf.com',
-  base_url: 'http://89.116.27.32:8000',
+  base_url: 'https://teste-de-progresso-api.kaualf.com',
   version: '1.0.3',
 };
 
