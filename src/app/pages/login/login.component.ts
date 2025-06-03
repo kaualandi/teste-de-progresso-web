@@ -67,14 +67,16 @@ export class LoginComponent implements OnInit {
           return;
         }
 
-        if (response.user.users_course_active) {
-          this.router.navigate(['/']);
+        const userCourseActive = response.user.user_course.find(
+          (uc) => uc.id === response.user.users_course_active
+        );
+
+        if (!userCourseActive) {
+          this.openChangeRoleModal();
           return;
         }
 
-        if (!response.user.users_course_active) {
-          this.openChangeRoleModal();
-        }
+        this.router.navigate(['/']);
       },
       error: (error) => {
         this.authService.formErrorHandler(this.form, error.error);

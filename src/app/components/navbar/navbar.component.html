@@ -120,10 +120,10 @@
 </mat-drawer-container>
 
 <mat-menu #profileMenu="matMenu">
-  <a mat-menu-item routerLink="/profile">
+  <!-- <a mat-menu-item routerLink="/profile">
     <i icon="user"></i>
     <span>Minha Conta</span>
-  </a>
+  </a> -->
 
   <button mat-menu-item (click)="openChangeRoleModal()" *ngIf="!user.is_admin">
     <i icon="graduation_cap"></i>

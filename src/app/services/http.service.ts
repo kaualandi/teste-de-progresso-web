@@ -9,6 +9,7 @@ import { environment } from '@env';
 import { StorageService } from '@services/storage.service';
 import { NotifierService } from 'angular-notifier';
 import { catchError, retry, throwError } from 'rxjs';
+
 import { LanguageService } from './language.service';
 import { ObjectService } from './object.service';
 
@@ -83,8 +84,12 @@ export class HttpService {
           this.notifier.notify('error', error);
         });
       }
+      if (error.error.detail) {
+        this.notifier.notify('error', error.error.detail);
+      }
       return throwError(() => error);
     }
+
     this.notifier.notify('error', 'Não foi possível completar a ação');
     return throwError(() => error);
   };
