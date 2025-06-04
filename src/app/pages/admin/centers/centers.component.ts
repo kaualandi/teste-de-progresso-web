@@ -2,18 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmModalComponent } from '@app/components/modals/confirm-modal/confirm-modal.component';
-import { CreateCourseComponent } from '@app/components/modals/create-course/create-course.component';
-import { Course } from '@app/models/course';
+import { CreateCenterComponent } from '@app/components/modals/create-center/create-center.component';
+import { Center } from '@app/models/course';
 import { CourseService } from '@app/services/course.service';
 import { NotifierService } from 'angular-notifier';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
-  selector: 'app-courses',
-  templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.scss'],
+  selector: 'app-centers',
+  templateUrl: './centers.component.html',
+  styleUrls: ['./centers.component.scss'],
 })
-export class CoursesComponent implements OnInit {
+export class CentersComponent implements OnInit {
   constructor(
     private courseService: CourseService,
     private fb: FormBuilder,
@@ -24,8 +24,8 @@ export class CoursesComponent implements OnInit {
   loading = false;
   loadingTable = false;
   error = 0;
-  courses: Course[] = [];
-  displayedColumns = ['name', 'coordinator', 'center', 'actions'];
+  centers: Center[] = [];
+  displayedColumns = ['name', 'director', 'created_at', 'actions'];
 
   filters = this.fb.nonNullable.group({
     search: [''],
@@ -33,21 +33,21 @@ export class CoursesComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    this.getCourses();
+    this.getCenters();
 
     this.filters.valueChanges
       .pipe(debounceTime(1000), distinctUntilChanged())
       .subscribe(() => {
         this.loadingTable = true;
-        this.getCourses();
+        this.getCenters();
       });
   }
 
-  getCourses() {
+  getCenters() {
     this.error = 0;
-    this.courseService.getCourses(this.filters.value).subscribe({
+    this.courseService.getCenters(this.filters.value).subscribe({
       next: (response) => {
-        this.courses = response;
+        this.centers = response;
         this.loading = false;
         this.loadingTable = false;
       },
@@ -59,26 +59,26 @@ export class CoursesComponent implements OnInit {
     });
   }
 
-  handleDeleteCourseButton(course: Course) {
+  handleDeleteCenterButton(center: Center) {
     const dialogRef = this.dialog.open(ConfirmModalComponent, {
       data: {
-        title: 'Excluir curso',
-        message: `Tem certeza que deseja excluir ${course.name}?`,
+        title: 'Excluir centro',
+        message: `Tem certeza que deseja excluir ${center.name}?`,
       },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (!result) return;
       this.loadingTable = true;
-      this.deleteCourse(course.id);
+      this.deleteCenter(center.id);
     });
   }
 
-  deleteCourse(id: number) {
-    this.courseService.deleteCourse(id).subscribe({
+  deleteCenter(id: number) {
+    this.courseService.deleteCenter(id).subscribe({
       next: () => {
-        this.notifier.notify('success', 'Curso excluído com sucesso');
-        this.getCourses();
+        this.notifier.notify('success', 'Centro excluído com sucesso');
+        this.getCenters();
       },
       error: () => {
         this.loadingTable = false;
@@ -86,7 +86,7 @@ export class CoursesComponent implements OnInit {
     });
   }
 
-  handleAddCourseButton() {
-    this.dialog.open(CreateCourseComponent);
+  handleAddCenterButton() {
+    this.dialog.open(CreateCenterComponent);
   }
 }

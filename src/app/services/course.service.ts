@@ -1,6 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Course } from '@app/models/course';
+import { Center, Course } from '@app/models/course';
+
 import { HttpService } from './http.service';
 
 @Injectable({
@@ -30,5 +31,26 @@ export class CourseService {
 
   deleteCourse(id: number) {
     return this.http.delete(`/courses/${id}/`);
+  }
+
+  getCenters(filters?: Record<string, string>) {
+    const query = new HttpParams({ fromObject: filters });
+    return this.http.get<Center[]>('/center/', query);
+  }
+
+  getCenter(id: number) {
+    return this.http.get<Center>(`/center/${id}/`);
+  }
+
+  createCenter(center: Partial<Center>) {
+    return this.http.post<Center>('/center/', center);
+  }
+
+  updateCenter(id: number, center: Partial<Center>) {
+    return this.http.patch<Center>(`/center/${id}/`, center);
+  }
+
+  deleteCenter(id: number) {
+    return this.http.delete(`/center/${id}/`);
   }
 }

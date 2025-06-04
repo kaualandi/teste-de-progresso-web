@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Center, Course } from '@app/models/course';
+import { Center } from '@app/models/course';
 import { User } from '@app/models/user';
 import { CourseService } from '@app/services/course.service';
 import { UserService } from '@app/services/user.service';
 import { NotifierService } from 'angular-notifier';
 
 @Component({
-  selector: 'app-course-detail',
-  templateUrl: './course-detail.component.html',
-  styleUrls: ['./course-detail.component.scss'],
+  selector: 'app-center-detail',
+  templateUrl: './center-detail.component.html',
+  styleUrls: ['./center-detail.component.scss'],
 })
-export class CourseDetailComponent implements OnInit {
+export class CenterDetailComponent implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
@@ -23,17 +23,15 @@ export class CourseDetailComponent implements OnInit {
   ) {}
 
   id = this.route.snapshot.params['id'];
-  course = {} as Course;
-  centers = [] as Center[];
+  center = {} as Center;
   loading = false;
   loadingSave = false;
   error = 0;
   users: User[] = [];
 
-  courseForm = this.fb.nonNullable.group({
+  centerForm = this.fb.nonNullable.group({
     name: ['', [Validators.required]],
-    coordinator: [0, [Validators.required]],
-    center: [0, [Validators.required]],
+    director: [0, [Validators.required]],
   });
 
   ngOnInit(): void {
@@ -45,7 +43,7 @@ export class CourseDetailComponent implements OnInit {
     this.userService.getUsers({}).subscribe({
       next: (response) => {
         this.users = response.filter((u) => !u.is_admin);
-        this.getCenters();
+        this.getCenter();
       },
       error: (error) => {
         this.error = error.status || 500;
@@ -54,24 +52,11 @@ export class CourseDetailComponent implements OnInit {
     });
   }
 
-  getCenters() {
-    this.courseService.getCenters().subscribe({
+  getCenter() {
+    this.courseService.getCenter(this.id).subscribe({
       next: (response) => {
-        this.centers = response;
-        this.getCourse();
-      },
-      error: (error) => {
-        this.loading = false;
-        this.error = error.status || 500;
-      },
-    });
-  }
-
-  getCourse() {
-    this.courseService.getCourse(this.id).subscribe({
-      next: (response) => {
-        this.course = response;
-        this.courseForm.patchValue(response);
+        this.center = response;
+        this.centerForm.patchValue(response);
         this.loading = false;
       },
       error: (error) => {
@@ -82,20 +67,20 @@ export class CourseDetailComponent implements OnInit {
   }
 
   handleFormSubmit() {
-    if (this.courseForm.invalid) {
-      this.courseForm.markAllAsTouched();
+    if (this.centerForm.invalid) {
+      this.centerForm.markAllAsTouched();
       return;
     }
 
     this.loadingSave = true;
-    this.courseService.updateCourse(this.id, this.courseForm.value).subscribe({
+    this.courseService.updateCenter(this.id, this.centerForm.value).subscribe({
       next: () => {
-        this.notifier.notify('success', 'Curso salvo com sucesso');
+        this.notifier.notify('success', 'Centro salvo com sucesso');
         this.loadingSave = false;
-        this.router.navigate(['/admin/courses']);
+        this.router.navigate(['/admin/centers']);
       },
       error: (error) => {
-        this.courseService.formErrorHandler(this.courseForm, error.error);
+        this.courseService.formErrorHandler(this.centerForm, error.error);
         this.loadingSave = false;
       },
     });

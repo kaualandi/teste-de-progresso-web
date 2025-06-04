@@ -52,6 +52,13 @@ export const NAVBAR_PAGES: {
     isAdmin: true,
   },
   {
+    label: 'Direção',
+    icon: 'user_tie',
+    link: '/admin/centers',
+    roles: [],
+    isAdmin: true,
+  },
+  {
     label: 'Perfis',
     icon: 'user_shield',
     link: '/admin/roles',

@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { AxesComponent } from './axes/axes.component';
 import { AxisDetailComponent } from './axes/axis-detail/axis-detail.component';
+import { CenterDetailComponent } from './centers/center-detail/center-detail.component';
+import { CentersComponent } from './centers/centers.component';
 import { CourseDetailComponent } from './courses/course-detail/course-detail.component';
 import { CoursesComponent } from './courses/courses.component';
 import { RoleDetailComponent } from './roles/role-detail/role-detail.component';
@@ -27,6 +30,14 @@ const routes: Routes = [
   {
     path: 'courses/:id',
     component: CourseDetailComponent,
+  },
+  {
+    path: 'centers',
+    component: CentersComponent,
+  },
+  {
+    path: 'centers/:id',
+    component: CenterDetailComponent,
   },
   {
     path: 'roles',

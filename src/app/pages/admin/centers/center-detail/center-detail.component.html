@@ -4,7 +4,7 @@
       <button mat-icon-button prevPage>
         <i icon="angle_left"></i>
       </button>
-      <h1> Editar {{ course.name || 'Curso' }} </h1>
+      <h1> Editar {{ center.name || 'Centro' }} </h1>
       <button
         mat-flat-button
         color="primary"
@@ -17,26 +17,17 @@
     </header>
 
     <div class="content" *ngIf="!loading && !error">
-      <form [formGroup]="courseForm" (ngSubmit)="handleFormSubmit()">
+      <form [formGroup]="centerForm" (ngSubmit)="handleFormSubmit()">
         <mat-form-field>
           <mat-label>Nome</mat-label>
           <input matInput formControlName="name" />
         </mat-form-field>
 
         <mat-form-field>
-          <mat-label>Coordenador</mat-label>
-          <mat-select formControlName="coordinator">
+          <mat-label>Diretor</mat-label>
+          <mat-select formControlName="director">
             <mat-option *ngFor="let user of users" [value]="user.id">
               {{ user.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field>
-          <mat-label>Direção</mat-label>
-          <mat-select formControlName="center">
-            <mat-option *ngFor="let center of centers" [value]="center.id">
-              {{ center.name }}
             </mat-option>
           </mat-select>
         </mat-form-field>
