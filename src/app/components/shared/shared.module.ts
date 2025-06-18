@@ -22,6 +22,7 @@ import { FilterDataPipe } from '@pipes/filter-data.pipe';
 import { FormErrorPipe } from '@pipes/form-error.pipe';
 import { SafePipe } from '@pipes/safe.pipe';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
+
 import { BloomTaxonomyPipe } from '../../pipes/bloom-taxonomy.pipe';
 import { DifficultyPipe } from '../../pipes/difficulty.pipe';
 import { PlaintextPipe } from '../../pipes/plaintext.pipe';

@@ -12,6 +12,7 @@ import {
 } from '@app/models/question';
 import { User } from '@app/models/user';
 import { forkJoin, map } from 'rxjs';
+
 import { BodyJson, HttpService } from './http.service';
 import { StorageService } from './storage.service';
 import { SubjectService } from './subject.service';
@@ -50,6 +51,23 @@ export class QuestionService {
 
   getQuestion(id: string) {
     return this.http.get<Question>(`/question/${id}`);
+  }
+
+  getQuestions(filters?: QuestionFilter) {
+    let query = new HttpParams();
+    if (filters) {
+      query = query
+        .append('start_year', filters.start_year)
+        .append('end_year', filters.end_year)
+        .append('authorship', filters.authorship.join(','))
+        .append('subjects', filters.subjects.join(','))
+        .append('bloom_taxonomy', filters.bloom_taxonomy.join(','))
+        .append('difficulty', filters.difficulty.join(','))
+        .append('order_by', filters.order_by)
+        .append('order_direction', filters.order_direction);
+    }
+
+    return this.http.get<Question[]>('/question/', query);
   }
 
   createQuestion(body: BodyJson) {

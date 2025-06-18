@@ -1,7 +1,7 @@
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-
-import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import {
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
   MomentDateAdapter,
@@ -18,6 +18,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SharedModule } from '@app/components/shared/shared.module';
+
 import { ExamQuestionsDetailComponent } from './exam-questions-detail/exam-questions-detail.component';
 import { ExamsDetailPropertiesComponent } from './exams-detail-properties/exams-detail-properties.component';
 import { ExamsRoutingModule } from './exams-routing.module';
@@ -51,6 +52,7 @@ export const MY_FORMATS = {
     MatExpansionModule,
     MatSliderModule,
     MatDatepickerModule,
+    DragDropModule,
   ],
   providers: [
     {

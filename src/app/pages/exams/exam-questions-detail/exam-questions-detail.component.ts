@@ -1,3 +1,8 @@
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDatepicker } from '@angular/material/datepicker';
@@ -6,9 +11,10 @@ import {
   BLOOM_TAXONOMY,
   QUESTION_DIFFICULTIES,
 } from '@app/constants/questions';
-import { BloomTaxonomy, QuestionType } from '@app/models/question';
+import { BloomTaxonomy, Question, QuestionType } from '@app/models/question';
 import { Subject, SubjectAxis } from '@app/models/subject';
 import { ExamService } from '@app/services/exam.service';
+import { QuestionService } from '@app/services/question.service';
 import * as moment from 'moment';
 
 @Component({
@@ -19,7 +25,8 @@ import * as moment from 'moment';
 export class ExamQuestionsDetailComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
-    private examService: ExamService
+    private examService: ExamService,
+    private questionService: QuestionService
   ) {}
 
   loading = false;
@@ -32,6 +39,9 @@ export class ExamQuestionsDetailComponent implements OnInit {
   questionTypes: QuestionType[] = [];
   axis: SubjectAxis[] = [];
   subjects: Subject[] = [];
+
+  availableQuestions: Question[] = [];
+  selectedQuestions: Question[] = [];
 
   filters = this.fb.group({
     difficulty: [''],
@@ -46,12 +56,29 @@ export class ExamQuestionsDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
+    this.getSubjectsAxisAndQuestionTypes();
+  }
+
+  getQuestions() {
+    this.questionService.getQuestions().subscribe({
+      next: (questions) => {
+        this.availableQuestions = questions;
+        this.loading = false;
+      },
+      error: (error) => {
+        this.error = error.status || 500;
+        this.loading = false;
+      },
+    });
+  }
+
+  getSubjectsAxisAndQuestionTypes() {
     this.examService.getSubjectsAxisAndQuestionTypes().subscribe({
       next: ([subjects, axis, questionTypes]) => {
         this.subjects = subjects;
         this.axis = axis;
         this.questionTypes = questionTypes;
-        this.loading = false;
+        this.getQuestions();
       },
       error: (error) => {
         this.error = error.status || 500;
@@ -80,5 +107,22 @@ export class ExamQuestionsDetailComponent implements OnInit {
     ctrlValue.year(normalizedYear.year());
     this.filters.controls.end_year.setValue(ctrlValue);
     datepicker.close();
+  }
+
+  handleDropList(event: CdkDragDrop<Question[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
   }
 }

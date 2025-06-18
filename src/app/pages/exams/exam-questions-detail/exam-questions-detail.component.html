@@ -1,7 +1,11 @@
 <main class="page">
   <div class="container">
-    <div class="content">
-      <form class="filters" [formGroup]="filters">
+    <div class="content" *ngIf="!loading && !error">
+      <form class="card filters" [formGroup]="filters">
+        <header>
+          <h3>Filtros</h3>
+        </header>
+
         <div class="row">
           <mat-form-field class="year">
             <mat-label>Ano Inicial</mat-label>
@@ -42,87 +46,164 @@
             >
             </mat-datepicker>
           </mat-form-field>
+        </div>
 
-          <mat-form-field>
-            <mat-label>Grau de Dificuldade</mat-label>
-            <mat-select formControlName="difficulty">
-              <mat-option value="">Todas</mat-option>
-              <mat-option
-                *ngFor="let difficulty of difficultys"
-                [value]="difficulty.value"
-              >
-                {{ difficulty.label }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+        <mat-form-field>
+          <mat-label>Grau de Dificuldade</mat-label>
+          <mat-select formControlName="difficulty">
+            <mat-option value="">Todas</mat-option>
+            <mat-option
+              *ngFor="let difficulty of difficultys"
+              [value]="difficulty.value"
+            >
+              {{ difficulty.label }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-          <mat-form-field>
-            <mat-label>Eixo de Formação</mat-label>
-            <mat-select formControlName="subject">
-              <mat-option value="">Todas</mat-option>
-              <mat-option *ngFor="let axi of axis" [value]="axi.id">
-                {{ axi.name }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+        <mat-form-field>
+          <mat-label>Eixo de Formação</mat-label>
+          <mat-select formControlName="subject">
+            <mat-option value="">Todas</mat-option>
+            <mat-option *ngFor="let axi of axis" [value]="axi.id">
+              {{ axi.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-          <mat-form-field>
-            <mat-label>Assunto</mat-label>
-            <mat-select formControlName="subject">
-              <mat-option value="">Todos</mat-option>
-              <mat-option *ngFor="let subject of subjects" [value]="subject.id">
-                {{ subject.name }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+        <mat-form-field>
+          <mat-label>Assunto</mat-label>
+          <mat-select formControlName="subject">
+            <mat-option value="">Todos</mat-option>
+            <mat-option *ngFor="let subject of subjects" [value]="subject.id">
+              {{ subject.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-          <mat-form-field>
-            <mat-label>Habilidade Cognitiva</mat-label>
-            <mat-select formControlName="authorship">
-              <mat-option
-                *ngFor="let bloomTaxonomy of bloomTaxonomys"
-                [value]="bloomTaxonomy.value"
-              >
-                {{ bloomTaxonomy.label }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+        <mat-form-field>
+          <mat-label>Habilidade Cognitiva</mat-label>
+          <mat-select formControlName="authorship">
+            <mat-option
+              *ngFor="let bloomTaxonomy of bloomTaxonomys"
+              [value]="bloomTaxonomy.value"
+            >
+              {{ bloomTaxonomy.label }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-          <mat-form-field>
-            <mat-label>Tipo</mat-label>
-            <mat-select formControlName="question_type">
-              <mat-option *ngFor="let type of questionTypes" [value]="type.id">
-                {{ type.name }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+        <mat-form-field>
+          <mat-label>Tipo</mat-label>
+          <mat-select formControlName="question_type">
+            <mat-option *ngFor="let type of questionTypes" [value]="type.id">
+              {{ type.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-          <mat-form-field>
-            <mat-label>Autoria</mat-label>
-            <mat-select multiple formControlName="authorship">
-              <mat-option
-                *ngFor="let authorship of authorshipOptions"
-                [value]="authorship.value"
-              >
-                {{ authorship.label }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+        <mat-form-field>
+          <mat-label>Autoria</mat-label>
+          <mat-select multiple formControlName="authorship">
+            <mat-option
+              *ngFor="let authorship of authorshipOptions"
+              [value]="authorship.value"
+            >
+              {{ authorship.label }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-          <div class="buttons">
-            <button type="submit" mat-raised-button color="primary">
-              Filtrar
-              <i icon="filter"></i>
-            </button>
-          </div>
+        <div class="buttons">
+          <button type="submit" mat-raised-button color="primary">
+            Filtrar
+            <i icon="filter"></i>
+          </button>
         </div>
       </form>
 
-      <div class="questions">
+      <div class="card available-questions">
         <header>
           <h3>Questões</h3>
         </header>
+
+        <div
+          class="questions-list"
+          cdkDropList
+          #availableQuestionsList="cdkDropList"
+          [cdkDropListData]="availableQuestions"
+          [cdkDropListConnectedTo]="[selectedQuestionsList]"
+          (cdkDropListDropped)="handleDropList($event)"
+        >
+          <div
+            class="question-box"
+            *ngFor="let question of availableQuestions"
+            cdkDrag
+          >
+            <div class="title">
+              <p class="f-16"> #{{ question.id }} </p>
+              <span class="difficulty-badge badge-{{ question.difficulty }}">
+                {{ question.difficulty | difficulty }}
+              </span>
+            </div>
+
+            <div class="list-body">
+              <p class="statement"> {{ question.body | plaintext }} </p>
+              <p class="f-12">Assunto: {{ question.subject_instance?.name }}</p>
+              <p class="f-12"
+                >Tipo: {{ question.question_type_instance?.name }}</p
+              >
+              <p class="f-12">
+                Habilidade Cognitiva:
+                {{ question.bloom_taxonomy | bloomTaxonomy }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card selected-questions">
+        <header>
+          <h3>Questões Selecionadas</h3>
+        </header>
+
+        <div
+          cdkDropList
+          #selectedQuestionsList="cdkDropList"
+          [cdkDropListData]="selectedQuestions"
+          [cdkDropListConnectedTo]="[availableQuestionsList]"
+          class="questions-list"
+          (cdkDropListDropped)="handleDropList($event)"
+        >
+          <div
+            class="question-box"
+            *ngFor="let question of selectedQuestions"
+            cdkDrag
+          >
+            <div class="title">
+              <p class="f-16"> #{{ question.id }} </p>
+              <span class="difficulty-badge badge-{{ question.difficulty }}">
+                {{ question.difficulty | difficulty }}
+              </span>
+            </div>
+
+            <div class="list-body">
+              <p class="statement"> {{ question.body | plaintext }} </p>
+              <p class="f-12">Assunto: {{ question.subject_instance?.name }}</p>
+              <p class="f-12"
+                >Tipo: {{ question.question_type_instance?.name }}</p
+              >
+              <p class="f-12">
+                Habilidade Cognitiva:
+                {{ question.bloom_taxonomy | bloomTaxonomy }}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <page-error *ngIf="error" [code]="error" />
+    <page-loading *ngIf="loading" />
   </div>
 </main>

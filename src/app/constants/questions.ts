@@ -59,7 +59,7 @@ export const FEEDBACK_TYPES: {
 }[] = [
   {
     value: ReviewFeedbackType.REQUEST_CHANGES,
-    label: 'Reprovado',
+    label: 'Retorno', // Formally: Reprovado
   },
   {
     value: ReviewFeedbackType.APPROVE,
@@ -67,7 +67,7 @@ export const FEEDBACK_TYPES: {
   },
   {
     value: ReviewFeedbackType.ANSWER,
-    label: 'Devolvido',
+    label: 'Réplica', // Formally: Devolvido
   },
 ];
 
