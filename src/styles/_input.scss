@@ -4,8 +4,14 @@
 mat-form-field {
   width: 100%;
   .mat-mdc-text-field-wrapper {
-    .mat-mdc-form-field-flex .mat-mdc-floating-label {
-      top: 21px;
+    .mat-mdc-form-field-flex {
+      .mat-mdc-floating-label {
+        top: 21px;
+      }
+
+      .mdc-notched-outline__notch {
+        border-right: 0;
+      }
     }
     .mat-mdc-form-field-infix {
       min-height: 44px;

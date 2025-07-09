@@ -1,4 +1,6 @@
 @import '@angular/material/theming';
+@import 'tailwindcss';
+
 @include mat-core();
 
 @import 'styles/theming';
@@ -9,6 +11,7 @@
 @import 'styles/animations';
 @import 'styles/button';
 @import 'styles/dialog';
+@import 'styles/gauge';
 @import 'styles/hotfixes';
 @import 'styles/input';
 @import 'styles/media';

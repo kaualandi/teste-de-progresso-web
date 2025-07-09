@@ -33,10 +33,551 @@
             </div>
           </form>
         </mat-step>
-        <mat-step [stepControl]="axesWeightsForm" label="Eixos e pesos">
+        <mat-step [stepControl]="requirementsForm" label="Critérios">
           <form
-            [formGroup]="axesWeightsForm"
-            (ngSubmit)="handleAxesWeightsFormSubmit()"
+            [formGroup]="requirementsForm"
+            (ngSubmit)="handleRequirementsFormSubmit()"
+          >
+            <!-- Número total de questões -->
+            <div class="section card">
+              <h3 class="!m-0">Configuração Geral</h3>
+              <mat-form-field>
+                <mat-label>Número total de questões (n)</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  formControlName="totalQuestions"
+                  min="1"
+                  required
+                />
+              </mat-form-field>
+            </div>
+
+            <!-- 1. Grau de Dificuldade -->
+            <div class="section card">
+              <div class="section-header">
+                <mat-checkbox formControlName="useDifficulty">
+                  <h3 class="!m-0">Grau de Dificuldade</h3>
+                </mat-checkbox>
+              </div>
+
+              <div
+                class="criteria-content"
+                *ngIf="requirementsForm.get('useDifficulty')?.value"
+              >
+                <div class="percentage-grid">
+                  <mat-form-field>
+                    <mat-label>Questões Fáceis (%)</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="easyPercentage"
+                      mask="percent"
+                      suffix="%"
+                      thousandSeparator=","
+                      decimalMarker="."
+                      suffix="%"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Questões Médias (%)</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="mediumPercentage"
+                      mask="percent"
+                      suffix="%"
+                      thousandSeparator=","
+                      decimalMarker="."
+                      suffix="%"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Questões Difíceis (%)</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="hardPercentage"
+                      mask="percent"
+                      suffix="%"
+                      thousandSeparator=","
+                      decimalMarker="."
+                      suffix="%"
+                    />
+                  </mat-form-field>
+                </div>
+
+                <div
+                  class="total-indicator"
+                  [class.warning]="
+                    getDifficultyTotal() !== 100 &&
+                    requirementsForm.get('useDifficulty')?.value
+                  "
+                >
+                  Total: {{ getDifficultyTotal() }}%
+                  <span
+                    *ngIf="getDifficultyTotal() !== 100"
+                    class="warning-text"
+                  >
+                    (deve somar 100%)
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Tipo de Questão Objetiva -->
+            <div class="section card">
+              <div class="section-header">
+                <mat-checkbox formControlName="useQuestionType">
+                  <h3 class="!m-0">Tipo de Questão Objetiva</h3>
+                </mat-checkbox>
+              </div>
+
+              <div
+                class="criteria-content"
+                *ngIf="requirementsForm.get('useQuestionType')?.value"
+              >
+                <div class="percentage-grid">
+                  <mat-form-field>
+                    <mat-label>Resposta Única (%)</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="singleAnswerPercentage"
+                      mask="percent"
+                      suffix="%"
+                      thousandSeparator=","
+                      decimalMarker="."
+                      suffix="%"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Afirmação Incompleta (%)</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="incompleteStatementPercentage"
+                      mask="percent"
+                      suffix="%"
+                      thousandSeparator=","
+                      decimalMarker="."
+                      suffix="%"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Resposta Múltipla (%)</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="multipleAnswerPercentage"
+                      mask="percent"
+                      suffix="%"
+                      thousandSeparator=","
+                      decimalMarker="."
+                      suffix="%"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Interpretação (%)</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="interpretationPercentage"
+                      mask="percent"
+                      suffix="%"
+                      thousandSeparator=","
+                      decimalMarker="."
+                      suffix="%"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Asserção e Razão (%)</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="assertionReasonPercentage"
+                      mask="percent"
+                      suffix="%"
+                      thousandSeparator=","
+                      decimalMarker="."
+                      suffix="%"
+                    />
+                  </mat-form-field>
+                </div>
+
+                <div
+                  class="total-indicator"
+                  [class.warning]="
+                    getQuestionTypeTotal() !== 100 &&
+                    requirementsForm.get('useQuestionType')?.value
+                  "
+                >
+                  Total: {{ getQuestionTypeTotal() }}%
+                  <span
+                    *ngIf="getQuestionTypeTotal() !== 100"
+                    class="warning-text"
+                  >
+                    (deve somar 100%)
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Habilidade Cognitiva -->
+            <div class="section card">
+              <div class="section-header">
+                <mat-checkbox formControlName="useCognitiveSkill">
+                  <h3 class="!m-0">Habilidade Cognitiva</h3>
+                </mat-checkbox>
+              </div>
+
+              <div
+                class="criteria-content"
+                *ngIf="requirementsForm.get('useCognitiveSkill')?.value"
+              >
+                <div class="percentage-grid">
+                  <mat-form-field>
+                    <mat-label>Recordar (%)</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="rememberPercentage"
+                      mask="percent"
+                      suffix="%"
+                      thousandSeparator=","
+                      decimalMarker="."
+                      suffix="%"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Compreender (%)</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="understandPercentage"
+                      mask="percent"
+                      suffix="%"
+                      thousandSeparator=","
+                      decimalMarker="."
+                      suffix="%"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Aplicar (%)</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="applyPercentage"
+                      mask="percent"
+                      suffix="%"
+                      thousandSeparator=","
+                      decimalMarker="."
+                      suffix="%"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Analisar (%)</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="analyzePercentage"
+                      mask="percent"
+                      suffix="%"
+                      thousandSeparator=","
+                      decimalMarker="."
+                      suffix="%"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Avaliar (%)</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="evaluatePercentage"
+                      mask="percent"
+                      suffix="%"
+                      thousandSeparator=","
+                      decimalMarker="."
+                      suffix="%"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Criar (%)</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="createPercentage"
+                      mask="percent"
+                      suffix="%"
+                      thousandSeparator=","
+                      decimalMarker="."
+                      suffix="%"
+                    />
+                  </mat-form-field>
+                </div>
+
+                <div
+                  class="total-indicator"
+                  [class.warning]="
+                    getCognitiveSkillTotal() !== 100 &&
+                    requirementsForm.get('useCognitiveSkill')?.value
+                  "
+                >
+                  Total: {{ getCognitiveSkillTotal() }}%
+                  <span
+                    *ngIf="getCognitiveSkillTotal() !== 100"
+                    class="warning-text"
+                  >
+                    (deve somar 100%)
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. Eixo de Formação -->
+            <div class="section card">
+              <div class="section-header">
+                <mat-checkbox formControlName="useFormationAxis">
+                  <h3 class="!m-0">Eixo de Formação</h3>
+                </mat-checkbox>
+              </div>
+
+              <div
+                class="criteria-content"
+                *ngIf="requirementsForm.get('useFormationAxis')?.value"
+              >
+                <div class="percentage-grid">
+                  <mat-form-field>
+                    <mat-label
+                      >Infraestrutura de Sistemas Computacionais (%)</mat-label
+                    >
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="infrastructurePercentage"
+                      mask="percent"
+                      suffix="%"
+                      thousandSeparator=","
+                      decimalMarker="."
+                      suffix="%"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Sistemas de Software (%)</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="softwareSystemsPercentage"
+                      mask="percent"
+                      suffix="%"
+                      thousandSeparator=","
+                      decimalMarker="."
+                      suffix="%"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Computação Avançada (%)</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="advancedComputingPercentage"
+                      mask="percent"
+                      suffix="%"
+                      thousandSeparator=","
+                      decimalMarker="."
+                      suffix="%"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Ciência, Tecnologia e Sociedade (%)</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="scienceTechSocietyPercentage"
+                      mask="percent"
+                      suffix="%"
+                      thousandSeparator=","
+                      decimalMarker="."
+                      suffix="%"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Integração Profissional e Prática (%)</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="professionalIntegrationPercentage"
+                      mask="percent"
+                      suffix="%"
+                      thousandSeparator=","
+                      decimalMarker="."
+                      suffix="%"
+                    />
+                  </mat-form-field>
+                </div>
+
+                <div
+                  class="total-indicator"
+                  [class.warning]="
+                    getFormationAxisTotal() !== 100 &&
+                    requirementsForm.get('useFormationAxis')?.value
+                  "
+                >
+                  Total: {{ getFormationAxisTotal() }}%
+                  <span
+                    *ngIf="getFormationAxisTotal() !== 100"
+                    class="warning-text"
+                  >
+                    (deve somar 100%)
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. Reaproveitamento -->
+            <div class="section card">
+              <div class="section-header">
+                <mat-checkbox formControlName="useReuse">
+                  <h3 class="!m-0">Reaproveitamento</h3>
+                </mat-checkbox>
+              </div>
+
+              <div
+                class="criteria-content"
+                *ngIf="requirementsForm.get('useReuse')?.value"
+              >
+                <div class="date-range-section">
+                  <h4>Período para Questões Novas</h4>
+                  <div class="date-range">
+                    <mat-form-field>
+                      <mat-label>Data Inicial</mat-label>
+                      <input
+                        matInput
+                        [matDatepicker]="newQuestionsStartPicker"
+                        formControlName="newQuestionsStartDate"
+                      />
+                      <mat-datepicker-toggle
+                        matIconSuffix
+                        [for]="newQuestionsStartPicker"
+                      ></mat-datepicker-toggle>
+                      <mat-datepicker #newQuestionsStartPicker></mat-datepicker>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                      <mat-label>Data Final</mat-label>
+                      <input
+                        matInput
+                        [matDatepicker]="newQuestionsEndPicker"
+                        formControlName="newQuestionsEndDate"
+                      />
+                      <mat-datepicker-toggle
+                        matIconSuffix
+                        [for]="newQuestionsEndPicker"
+                      ></mat-datepicker-toggle>
+                      <mat-datepicker #newQuestionsEndPicker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="date-range-section">
+                  <h4>Período para Questões Usadas</h4>
+                  <div class="date-range">
+                    <mat-form-field>
+                      <mat-label>Data Inicial</mat-label>
+                      <input
+                        matInput
+                        [matDatepicker]="usedQuestionsStartPicker"
+                        formControlName="usedQuestionsStartDate"
+                      />
+                      <mat-datepicker-toggle
+                        matIconSuffix
+                        [for]="usedQuestionsStartPicker"
+                      ></mat-datepicker-toggle>
+                      <mat-datepicker
+                        #usedQuestionsStartPicker
+                      ></mat-datepicker>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                      <mat-label>Data Final</mat-label>
+                      <input
+                        matInput
+                        [matDatepicker]="usedQuestionsEndPicker"
+                        formControlName="usedQuestionsEndDate"
+                      />
+                      <mat-datepicker-toggle
+                        matIconSuffix
+                        [for]="usedQuestionsEndPicker"
+                      ></mat-datepicker-toggle>
+                      <mat-datepicker #usedQuestionsEndPicker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="percentage-grid">
+                  <mat-form-field>
+                    <mat-label>Questões Novas (%)</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="newQuestionsPercentage"
+                      mask="percent"
+                      suffix="%"
+                      thousandSeparator=","
+                      decimalMarker="."
+                      suffix="%"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Questões Usadas (%)</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="usedQuestionsPercentage"
+                      mask="percent"
+                      suffix="%"
+                      thousandSeparator=","
+                      decimalMarker="."
+                      suffix="%"
+                    />
+                  </mat-form-field>
+                </div>
+
+                <div
+                  class="total-indicator"
+                  [class.warning]="
+                    getReuseTotal() !== 100 &&
+                    requirementsForm.get('useReuse')?.value
+                  "
+                >
+                  Total: {{ getReuseTotal() }}%
+                  <span *ngIf="getReuseTotal() !== 100" class="warning-text">
+                    (deve somar 100%)
+                  </span>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <!-- <form
+            [formGroup]="requirementsForm"
+            (ngSubmit)="handleRequirementsFormSubmit()"
           >
             <div class="new-section">
               <mat-form-field>
@@ -52,9 +593,9 @@
                 Adicionar
               </button>
             </div>
-          </form>
+          </form> -->
 
-          <mat-accordion>
+          <!-- <mat-accordion>
             <mat-expansion-panel
               *ngFor="let axis of axisList.controls; let i = index"
               expanded
@@ -99,7 +640,7 @@
                 </button>
               </mat-action-row>
             </mat-expansion-panel>
-          </mat-accordion>
+          </mat-accordion> -->
 
           <div class="buttons end">
             <button type="button" mat-flat-button matStepperPrevious>

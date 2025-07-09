@@ -54,6 +54,12 @@ export class ExamQuestionsDetailComponent implements OnInit {
     end_year: [moment()],
   });
 
+  thresholdConfig = {
+    '0': { color: 'red' },
+    '60': { color: 'orange' },
+    '80': { color: 'green' },
+  };
+
   ngOnInit(): void {
     this.loading = true;
     this.getSubjectsAxisAndQuestionTypes();

@@ -11,10 +11,24 @@ main {
         }
       }
 
-      .new-section {
-        margin-bottom: 1rem;
-        display: flex;
-        gap: 1rem;
+      .section {
+        padding: 0.5rem;
+        border-radius: var(--br);
+        border: 1px solid var(--line-color);
+
+        .section-header {
+          h3 {
+            margin: 0;
+          }
+        }
+
+        .criteria-content {
+          margin-top: 0.5rem;
+        }
+
+        & + .section {
+          margin-top: 1rem;
+        }
       }
 
       .axis-list-difficulty {

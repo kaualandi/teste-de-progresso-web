@@ -6,6 +6,7 @@ import {
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
   MomentDateAdapter,
 } from '@angular/material-moment-adapter';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import {
   DateAdapter,
   MAT_DATE_FORMATS,
@@ -18,6 +19,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SharedModule } from '@app/components/shared/shared.module';
+import { NgxGaugeModule } from 'ngx-gauge';
 
 import { ExamQuestionsDetailComponent } from './exam-questions-detail/exam-questions-detail.component';
 import { ExamsDetailPropertiesComponent } from './exams-detail-properties/exams-detail-properties.component';
@@ -50,9 +52,11 @@ export const MY_FORMATS = {
     MatStepperModule,
     MatSelectModule,
     MatExpansionModule,
+    MatCheckboxModule,
     MatSliderModule,
     MatDatepickerModule,
     DragDropModule,
+    NgxGaugeModule,
   ],
   providers: [
     {

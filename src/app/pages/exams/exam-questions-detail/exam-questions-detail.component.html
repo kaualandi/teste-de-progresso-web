@@ -2,6 +2,18 @@
   <div class="container">
     <div class="content" *ngIf="!loading && !error">
       <form class="card filters" [formGroup]="filters">
+        <div class="gauge-container">
+          <ngx-gauge
+            type="arch"
+            [value]="90"
+            label="Objetivo"
+            append="%"
+            [thick]="14"
+            [thresholds]="thresholdConfig"
+          >
+          </ngx-gauge>
+        </div>
+
         <header>
           <h3>Filtros</h3>
         </header>

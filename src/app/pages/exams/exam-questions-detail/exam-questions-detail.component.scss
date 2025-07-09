@@ -17,6 +17,13 @@
       }
 
       .filters {
+        .gauge-container {
+          display: flex;
+          justify-content: center;
+          padding-top: 1rem;
+          padding-bottom: 1rem;
+        }
+
         .row {
           display: flex;
           gap: 0.5rem;
